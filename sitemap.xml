@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://your-website-url.example.com/about.html</loc>
+    <loc>https://shengrong-wu.github.io/about.html</loc>
     <lastmod>2026-03-11T05:29:59.905Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/posts/modern_proof_of_PMT/index.html</loc>
+    <loc>https://shengrong-wu.github.io/posts/modern_proof_of_PMT/index.html</loc>
     <lastmod>2026-03-11T06:29:35.614Z</lastmod>
   </url>
   <url>
-    <loc>https://your-website-url.example.com/index.html</loc>
-    <lastmod>2026-03-11T06:30:51.742Z</lastmod>
+    <loc>https://shengrong-wu.github.io/index.html</loc>
+    <lastmod>2026-03-11T06:44:08.614Z</lastmod>
   </url>
 </urlset>
