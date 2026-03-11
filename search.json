@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html",
+    "href": "posts/modern_proof_of_PMT/index.html",
+    "title": "A Modern Proof of PMT",
+    "section": "",
+    "text": "Geometric Measure Theory (GMT) is a fantastic branch of modern geometric analysis. The Compactness Theorem of integer multiplicity rectifiable has always been my favourite theorem throughout my mathematics study. It is quite difficult to understand the complex definitions and condition dependency for a normal mathematical student and using it properly is also challenging. However, the latest model ChatGPT 5.4, even not pro, can handle the theory easily and provide practical suggestions to researchers.\nUsing ChatGPT 5.4 Thinking model, I prompted a modern version of Schoen-Yau’s famous result on positive mass theorem using GMT arguments."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#the-regularized-jang-equation",
+    "href": "posts/modern_proof_of_PMT/index.html#the-regularized-jang-equation",
+    "title": "A Modern Proof of PMT",
+    "section": "1. The regularized Jang equation",
+    "text": "1. The regularized Jang equation\nFor \\(\\tau&gt;0\\), consider the capillarity-regularized Jang equation \\[H(f_\\tau)-\\operatorname{tr}_{G(f_\\tau)}k=\\tau f_\\tau,\\] where \\(H(f_\\tau)\\) is the scalar mean curvature of the graph \\[\\Sigma_\\tau:=G(f_\\tau)=\\{(x,f_\\tau(x)):x\\in M\\}\\subset (M\\times \\mathbb R,g+dt^2),\\] computed with respect to the downward unit normal, and \\(\\operatorname{tr}_{G(f_\\tau)}k\\) denotes the trace of \\(k\\) over the tangent space of the graph, with \\(k\\) extended trivially in the vertical direction.\nAs in Schoen–Yau, one solves this equation with decay \\(f_\\tau\\to 0\\) in the asymptotically flat end. The idea is then to study the geometric limit of \\(\\Sigma_\\tau\\) as \\(\\tau\\downarrow 0\\)."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#why-the-graphs-have-uniformly-bounded-mean-curvature",
+    "href": "posts/modern_proof_of_PMT/index.html#why-the-graphs-have-uniformly-bounded-mean-curvature",
+    "title": "A Modern Proof of PMT",
+    "section": "2. Why the graphs have uniformly bounded mean curvature",
+    "text": "2. Why the graphs have uniformly bounded mean curvature\nThis is the first place where it is worth being explicit. From the regularized equation, \\[H(f_\\tau)=\\operatorname{tr}_{G(f_\\tau)}k+\\tau f_\\tau.\\] Hence the mean curvature of \\(\\Sigma_\\tau\\) satisfies \\[|H_{\\Sigma_\\tau}| \\le \\bigl|\\operatorname{tr}_{\\Sigma_\\tau}k\\bigr|+\\tau |f_\\tau|.\\]\nNow \\(\\operatorname{tr}_{\\Sigma_\\tau}k\\) is the trace of \\(k\\) over an \\(n\\)-dimensional tangent plane in \\(TM\\), so it is bounded pointwise by a dimensional constant times \\(|k|_g\\). Since the initial data are asymptotically flat and \\(k\\) is continuous on \\(M\\), we have \\[\\sup_M |k|_g &lt;\\infty\\] after possibly enlarging the compact core used in the asymptotic description. Thus there is a constant \\(C_0\\) such that \\[\\bigl|\\operatorname{tr}_{\\Sigma_\\tau}k\\bigr|\\le C_0 \\qquad\\text{for all }\\tau.\\]\nThe remaining term is \\(\\tau |f_\\tau|\\). This is controlled by the barrier argument. The asymptotic barriers imply a uniform estimate of the form \\[|f_\\tau(x)|\\le \\frac{C}{\\tau}\\] globally, after fixing the asymptotic setup. The regularization term is exactly why this is useful: multiplying by \\(\\tau\\) gives a \\(\\tau\\)-independent bound \\[\\tau |f_\\tau(x)|\\le C_1.\\] Combining the two estimates, \\[|H_{\\Sigma_\\tau}|\\le C_0+C_1=:2C.\\]\n\nKey point. The factor \\(1/\\tau\\) in the height estimate is harmless because the equation contains \\(\\tau f_\\tau\\), not \\(f_\\tau\\) itself. This is exactly why the regularization is compatible with a uniform bounded-mean-curvature estimate."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#from-bounded-mean-curvature-to-almost-minimization",
+    "href": "posts/modern_proof_of_PMT/index.html#from-bounded-mean-curvature-to-almost-minimization",
+    "title": "A Modern Proof of PMT",
+    "section": "3. From bounded mean curvature to almost minimization",
+    "text": "3. From bounded mean curvature to almost minimization\nA graph with uniformly bounded mean curvature can be viewed as the boundary of its epigraph in \\(M\\times\\mathbb R\\). The correct modern formulation is: if \\(\\Sigma_\\tau\\) is an oriented boundary with \\(|H_{\\Sigma_\\tau}|\\le 2C\\), then \\(\\Sigma_\\tau\\) is a \\(2C\\)-almost minimizing boundary. This converts bounded mean curvature into an almost-minimizing inequality for the associated Caccioppoli set.\nConcretely, the almost-minimizing property means that for every relatively compact open set \\(W\\subset M\\times \\mathbb R\\) and every local variation supported in \\(W\\), the area of \\(\\Sigma_\\tau\\) in \\(W\\) cannot be lowered except by paying an error term proportional to the volume swept out, with constant \\(2C\\).\nThis single observation packages several things at once: a local mass bound, current compactness, varifold compactness, and regularity of the limit."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#why-local-mass-bounds-hold",
+    "href": "posts/modern_proof_of_PMT/index.html#why-local-mass-bounds-hold",
+    "title": "A Modern Proof of PMT",
+    "section": "4. Why local mass bounds hold",
+    "text": "4. Why local mass bounds hold\nFix a relatively compact set \\(W\\subset M\\times\\mathbb R\\). We want to show \\[\\sup_{\\tau\\in (0,1)} \\|\\Sigma_\\tau\\|(W)&lt;\\infty.\\] This is a standard consequence of the almost-minimizing inequality. One works in a small geodesic ball \\(B_\\rho(y)\\Subset W\\) and compares the epigraph \\(E_\\tau\\) of \\(f_\\tau\\) with either \\(E_\\tau\\cup B_\\rho(y)\\) or \\(E_\\tau\\setminus B_\\rho(y)\\). The almost-minimizing inequality then gives a perimeter bound in \\(B_\\rho(y)\\): \\[\\|\\Sigma_\\tau\\|(B_\\rho(y)) \\le \\mathcal H^n(\\partial B_\\rho(y)) + 2C\\,|B_\\rho(y)|.\\] The right-hand side depends only on the ambient geometry, the radius \\(\\rho\\), and the constant \\(2C\\), but not on \\(\\tau\\).\nCovering \\(W\\) by finitely many such balls yields \\[\\sup_{\\tau\\in(0,1)} \\|\\Sigma_\\tau\\|(W)&lt;\\infty.\\]"
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#which-compactness-theorem-is-being-used",
+    "href": "posts/modern_proof_of_PMT/index.html#which-compactness-theorem-is-being-used",
+    "title": "A Modern Proof of PMT",
+    "section": "5. Which compactness theorem is being used?",
+    "text": "5. Which compactness theorem is being used?\nThere are really two compactness statements. First, the local mass bound above implies compactness in the sense of currents, because the \\(\\Sigma_\\tau\\) are boundaries of locally finite perimeter sets. Second, once one also has locally bounded first variation, Allard’s integral compactness theorem gives varifold compactness.\nSo one must check not only \\[\\sup_\\tau \\|\\Sigma_\\tau\\|(W)&lt;\\infty,\\] but also \\[\\sup_\\tau \\|\\delta \\Sigma_\\tau\\|(W)&lt;\\infty.\\]\nThe second bound follows from the mean curvature estimate. For a smooth hypersurface with bounded mean curvature, \\[|\\delta \\Sigma_\\tau(X)| = \\left|\\int_{\\Sigma_\\tau} H_{\\Sigma_\\tau}\\,\\langle \\nu_\\tau,X\\rangle\\, d\\mu_{\\Sigma_\\tau}\\right| \\le \\|H_{\\Sigma_\\tau}\\|_{L^\\infty(W)}\\,\\|X\\|_\\infty\\,\\|\\Sigma_\\tau\\|(W)\\] for every compactly supported vector field \\(X\\) in \\(W\\). Since \\(|H_{\\Sigma_\\tau}|\\le 2C\\) and the masses in \\(W\\) are uniformly bounded, the first variations are uniformly bounded as Radon measures on \\(W\\). Thus the hypotheses of Allard compactness are satisfied.\n\nCompactness checklist. The relevant hypotheses are: \\[\\begin{aligned} &\\text{(i) } \\Sigma_\\tau \\text{ are integral hypersurfaces (indeed boundaries of finite-perimeter sets),}\\\\ &\\text{(ii) } \\sup_\\tau \\|\\Sigma_\\tau\\|(W)&lt;\\infty,\\\\ &\\text{(iii) } \\sup_\\tau \\|\\delta\\Sigma_\\tau\\|(W)&lt;\\infty. \\end{aligned}\\] Once these are checked on every relatively compact \\(W\\subset M\\times\\mathbb R\\), the sequence is precompact in the local varifold sense, and the current compactness statement is available as well."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#the-geometric-limit",
+    "href": "posts/modern_proof_of_PMT/index.html#the-geometric-limit",
+    "title": "A Modern Proof of PMT",
+    "section": "6. The geometric limit",
+    "text": "6. The geometric limit\nNow let \\(\\tau_j\\downarrow 0\\). By the compactness just discussed, a subsequence of \\(\\Sigma_{\\tau_j}\\) converges locally as varifolds and currents to a limit hypersurface \\(\\Sigma\\subset M\\times \\mathbb R\\). The almost-minimizing property is closed under this convergence, so the limit is again an almost-minimizing boundary.\nBecause \\(3\\le n&lt;8\\), the regularity theory for almost-minimizing boundaries implies that the limit is smooth: there is no singular set in these dimensions. Thus the limit is a smooth embedded hypersurface in \\(M\\times \\mathbb R\\).\nThe Harnack principle for limits of graphs then implies the familiar dichotomy: each connected component of the regular limit is either graphical over a domain in \\(M\\) or is a vertical cylinder. Therefore the subsequential limit consists of a graphical component \\[G(f_\\Sigma,U_\\Sigma)\\] over an exterior domain \\(U_\\Sigma\\subset M\\), where \\(f_\\Sigma\\) solves the unregularized Jang equation \\[H(f_\\Sigma)-\\operatorname{tr}_{G(f_\\Sigma)}k=0,\\] together with vertical cylinders over boundary components of \\(U_\\Sigma\\)."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#the-schoenyau-scalar-curvature-identity",
+    "href": "posts/modern_proof_of_PMT/index.html#the-schoenyau-scalar-curvature-identity",
+    "title": "A Modern Proof of PMT",
+    "section": "7. The Schoen–Yau scalar-curvature identity",
+    "text": "7. The Schoen–Yau scalar-curvature identity\nAt this stage one returns to the classical core of the argument, which modern GMT does not replace. On the graphical Jang component \\(\\Sigma\\), equipped with its induced metric \\[\\bar g = g + df_\\Sigma\\otimes df_\\Sigma,\\] Schoen and Yau discovered the fundamental identity \\[\\mu - J\\!\\left(\\frac{\\nabla_g f_\\Sigma}{\\sqrt{1+|df_\\Sigma|_g^2}}\\right) = \\frac12 R_{\\bar g} -\\frac12 |h-k|_{\\bar g}^2 -|X|_{\\bar g}^2 +\\operatorname{div}_{\\bar g}X,\\] where \\(h\\) is the second fundamental form of the graph and \\(X\\) is a tangent vector field determined by the geometry of the graph.\nIntegrating by parts against a test function \\(\\phi\\) gives \\[\\int_\\Sigma \\Bigl(2(\\mu-|J|_g)\\phi^2 + |h-k|_{\\bar g}^2\\phi^2\\Bigr)\\,d\\mu_{\\bar g} \\le \\int_\\Sigma \\Bigl(R_{\\bar g}\\phi^2 + 2|\\nabla \\phi|_{\\bar g}^2\\Bigr)\\,d\\mu_{\\bar g}.\\] Under the dominant energy condition, the left-hand side is nonnegative. This inequality is the bridge from the Jang graph to scalar curvature."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#cylindrical-ends-and-positive-yamabe-type",
+    "href": "posts/modern_proof_of_PMT/index.html#cylindrical-ends-and-positive-yamabe-type",
+    "title": "A Modern Proof of PMT",
+    "section": "8. Cylindrical ends and positive Yamabe type",
+    "text": "8. Cylindrical ends and positive Yamabe type\nIf the dominant energy condition is strict near the blow-up set, then the cross-sections of the cylindrical ends have positive Yamabe type. In practice this means that on each cross-section \\(\\Sigma_i^0\\), the conformal Laplacian \\[-\\Delta_{\\Sigma_i^0}+c_n R_{\\Sigma_i^0}, \\qquad c_n=\\frac{n-2}{4(n-1)},\\] has positive first eigenvalue.\nThis allows one to modify the asymptotically cylindrical ends and then solve a conformal Laplacian equation that produces a scalar-flat metric on the Jang graph, with one asymptotically flat end and the cylindrical ends conformally compactified in a controlled way."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#conformal-deformation-and-reduction-to-the-riemannian-pmt",
+    "href": "posts/modern_proof_of_PMT/index.html#conformal-deformation-and-reduction-to-the-riemannian-pmt",
+    "title": "A Modern Proof of PMT",
+    "section": "9. Conformal deformation and reduction to the Riemannian PMT",
+    "text": "9. Conformal deformation and reduction to the Riemannian PMT\nUsing the positive eigenfunctions on the cylindrical cross-sections, one builds a complete metric \\(\\tilde g\\) on the Jang graph with one asymptotically flat end and good scalar-curvature control. One then solves \\[-\\Delta_{\\tilde g}u + c_n R_{\\tilde g}u =0,\\] with \\(u\\to 1\\) on the asymptotically flat end and \\(u\\to 0\\) down the cylindrical ends, and sets \\[\\hat g=(u\\Psi)^{4/(n-2)}\\tilde g.\\] The new metric \\(\\hat g\\) is scalar flat.\nAfter a small further perturbation to make the scalar curvature positive somewhere near infinity, one can apply the Riemannian positive mass theorem. The extra cylindrical ends do not obstruct the minimal-hypersurface argument in the Riemannian PMT: an area-minimizing hypersurface cannot escape arbitrarily far down a cylindrical end without violating the usual lower area growth estimates.\nThe resulting mass comparison yields \\[E\\ge 0.\\]"
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#final-approximation-step",
+    "href": "posts/modern_proof_of_PMT/index.html#final-approximation-step",
+    "title": "A Modern Proof of PMT",
+    "section": "10. Final approximation step",
+    "text": "10. Final approximation step\nIf one assumes only the weak dominant energy condition \\[\\mu\\ge |J|_g,\\] one approximates the data by asymptotically flat initial data satisfying the strict dominant energy condition and converging ADM energy. Passing to the limit preserves the inequality, so one still concludes \\[E\\ge 0.\\] That finishes the proof."
+  },
+  {
+    "objectID": "posts/modern_proof_of_PMT/index.html#references",
+    "href": "posts/modern_proof_of_PMT/index.html#references",
+    "title": "A Modern Proof of PMT",
+    "section": "References",
+    "text": "References\n\nR. Schoen and S.-T. Yau, Proof of the Positive Mass Theorem II, Communications in Mathematical Physics 79 (1981), 231–260. https://scispace.com/pdf/proof-of-the-positive-mass-theorem-ii-3q355vtp66.pdf\nM. Eichmair, The Plateau Problem for Marginally Outer Trapped Surfaces (2007). https://arxiv.org/pdf/0711.4139\nM. Eichmair, The Spacetime Positive Mass Theorem in Dimensions Less Than Eight (2013). https://arxiv.org/pdf/1206.2553\nW. K. Allard, On the First Variation of a Varifold, Annals of Mathematics 95 (1972), 417–491.\nL. Simon, Lectures on Geometric Measure Theory, Proceedings of the Centre for Mathematical Analysis, ANU 3 (1983)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Shengrong Wu’s Blog",
+    "section": "",
+    "text": "I am a Ph.D. Candidate in Mathematics at the National University of Singapore (NUS), specializing in Geometric Analysis and Partial Differential Equations (PDEs), particularly within the context of General Relativity. I am advised by Prof. An Xinliang. My background is rooted in rigorous theoretical mathematics, complemented by computational skills using Python.\nIn this page, I will post some small projects which I complete with AI. More information about me can be found in my Google site.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA Modern Proof of PMT\n\n\n\n\n\nMar 10, 2026\n\n\nShengrong Wu\n\n8 min\n\n\n\n\nNo matching items"
+  }
+]

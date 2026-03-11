@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-10">
+
+<title>A Modern Proof of PMT – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Modern Proof of PMT</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">analysis</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 10, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Geometric Measure Theory (GMT) is a fantastic branch of modern geometric analysis. The Compactness Theorem of integer multiplicity rectifiable has always been my favourite theorem throughout my mathematics study. It is quite difficult to understand the complex definitions and condition dependency for a normal mathematical student and using it properly is also challenging. However, the latest model ChatGPT 5.4, even not pro, can handle the theory easily and provide practical suggestions to researchers.</p>
+<p>Using ChatGPT 5.4 Thinking model, I prompted a modern version of Schoen-Yau’s famous result on positive mass theorem using GMT arguments.</p>
+<section id="a-modern-gmt-version-of-the-schoenyau-jang-equation-proof" class="level1">
+<h1>A Modern GMT Version of the Schoen–Yau Jang Equation Proof</h1>
+<p>The classical paper of Schoen and Yau, <em>Proof of the Positive Mass Theorem II</em> (1981), reduces the spacetime positive energy theorem to the Riemannian positive mass theorem by means of Jang’s equation. The geometric picture is elegant: solve a regularized version of Jang’s equation, let the regularization parameter tend to zero, and extract a limiting hypersurface that is partly graphical and partly cylindrical. The cylindrical pieces encode marginally trapped geometry, and the graphical piece carries the scalar-curvature identity that drives the argument.</p>
+<p>What looks old-fashioned today is not the strategy, but the compactness and blow-up analysis. In the original proof, those steps are expressed in the language available at the time: curvature estimates, blow-up arguments, and a careful limit analysis that is technically hard to parse from a modern perspective. A much cleaner route is now available through geometric measure theory, especially through the theory of boundaries with bounded mean curvature and almost-minimizing boundaries. Michael Eichmair’s later work recasts exactly this part of the proof in a way that is conceptually sharper and dimensionally more robust. In particular, he extends the argument to all dimensions <span class="math inline">\(3\le n&lt;8\)</span>, replacing the old stability-based curvature estimate machinery by modern GMT compactness and regularity.</p>
+<blockquote class="blockquote">
+<p><strong>Theorem.</strong> Let <span class="math inline">\((M^n,g,k)\)</span>, <span class="math inline">\(3\le n&lt;8\)</span>, be an asymptotically flat initial data set satisfying the dominant energy condition <span class="math inline">\(\mu\ge |J|_g.\)</span> Then the ADM energy satisfies <span class="math inline">\(E\ge 0.\)</span></p>
+</blockquote>
+<section id="the-regularized-jang-equation" class="level2">
+<h2 class="anchored" data-anchor-id="the-regularized-jang-equation">1. The regularized Jang equation</h2>
+<p>For <span class="math inline">\(\tau&gt;0\)</span>, consider the capillarity-regularized Jang equation <span class="math display">\[H(f_\tau)-\operatorname{tr}_{G(f_\tau)}k=\tau f_\tau,\]</span> where <span class="math inline">\(H(f_\tau)\)</span> is the scalar mean curvature of the graph <span class="math display">\[\Sigma_\tau:=G(f_\tau)=\{(x,f_\tau(x)):x\in M\}\subset (M\times \mathbb R,g+dt^2),\]</span> computed with respect to the downward unit normal, and <span class="math inline">\(\operatorname{tr}_{G(f_\tau)}k\)</span> denotes the trace of <span class="math inline">\(k\)</span> over the tangent space of the graph, with <span class="math inline">\(k\)</span> extended trivially in the vertical direction.</p>
+<p>As in Schoen–Yau, one solves this equation with decay <span class="math inline">\(f_\tau\to 0\)</span> in the asymptotically flat end. The idea is then to study the geometric limit of <span class="math inline">\(\Sigma_\tau\)</span> as <span class="math inline">\(\tau\downarrow 0\)</span>.</p>
+</section>
+<section id="why-the-graphs-have-uniformly-bounded-mean-curvature" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-graphs-have-uniformly-bounded-mean-curvature">2. Why the graphs have uniformly bounded mean curvature</h2>
+<p>This is the first place where it is worth being explicit. From the regularized equation, <span class="math display">\[H(f_\tau)=\operatorname{tr}_{G(f_\tau)}k+\tau f_\tau.\]</span> Hence the mean curvature of <span class="math inline">\(\Sigma_\tau\)</span> satisfies <span class="math display">\[|H_{\Sigma_\tau}| \le \bigl|\operatorname{tr}_{\Sigma_\tau}k\bigr|+\tau |f_\tau|.\]</span></p>
+<p>Now <span class="math inline">\(\operatorname{tr}_{\Sigma_\tau}k\)</span> is the trace of <span class="math inline">\(k\)</span> over an <span class="math inline">\(n\)</span>-dimensional tangent plane in <span class="math inline">\(TM\)</span>, so it is bounded pointwise by a dimensional constant times <span class="math inline">\(|k|_g\)</span>. Since the initial data are asymptotically flat and <span class="math inline">\(k\)</span> is continuous on <span class="math inline">\(M\)</span>, we have <span class="math display">\[\sup_M |k|_g &lt;\infty\]</span> after possibly enlarging the compact core used in the asymptotic description. Thus there is a constant <span class="math inline">\(C_0\)</span> such that <span class="math display">\[\bigl|\operatorname{tr}_{\Sigma_\tau}k\bigr|\le C_0 \qquad\text{for all }\tau.\]</span></p>
+<p>The remaining term is <span class="math inline">\(\tau |f_\tau|\)</span>. This is controlled by the barrier argument. The asymptotic barriers imply a uniform estimate of the form <span class="math display">\[|f_\tau(x)|\le \frac{C}{\tau}\]</span> globally, after fixing the asymptotic setup. The regularization term is exactly why this is useful: multiplying by <span class="math inline">\(\tau\)</span> gives a <span class="math inline">\(\tau\)</span>-independent bound <span class="math display">\[\tau |f_\tau(x)|\le C_1.\]</span> Combining the two estimates, <span class="math display">\[|H_{\Sigma_\tau}|\le C_0+C_1=:2C.\]</span></p>
+<blockquote class="blockquote">
+<p><strong>Key point.</strong> The factor <span class="math inline">\(1/\tau\)</span> in the height estimate is harmless because the equation contains <span class="math inline">\(\tau f_\tau\)</span>, not <span class="math inline">\(f_\tau\)</span> itself. This is exactly why the regularization is compatible with a uniform bounded-mean-curvature estimate.</p>
+</blockquote>
+</section>
+<section id="from-bounded-mean-curvature-to-almost-minimization" class="level2">
+<h2 class="anchored" data-anchor-id="from-bounded-mean-curvature-to-almost-minimization">3. From bounded mean curvature to almost minimization</h2>
+<p>A graph with uniformly bounded mean curvature can be viewed as the boundary of its epigraph in <span class="math inline">\(M\times\mathbb R\)</span>. The correct modern formulation is: if <span class="math inline">\(\Sigma_\tau\)</span> is an oriented boundary with <span class="math inline">\(|H_{\Sigma_\tau}|\le 2C\)</span>, then <span class="math inline">\(\Sigma_\tau\)</span> is a <span class="math inline">\(2C\)</span>-almost minimizing boundary. This converts bounded mean curvature into an almost-minimizing inequality for the associated Caccioppoli set.</p>
+<p>Concretely, the almost-minimizing property means that for every relatively compact open set <span class="math inline">\(W\subset M\times \mathbb R\)</span> and every local variation supported in <span class="math inline">\(W\)</span>, the area of <span class="math inline">\(\Sigma_\tau\)</span> in <span class="math inline">\(W\)</span> cannot be lowered except by paying an error term proportional to the volume swept out, with constant <span class="math inline">\(2C\)</span>.</p>
+<p>This single observation packages several things at once: a local mass bound, current compactness, varifold compactness, and regularity of the limit.</p>
+</section>
+<section id="why-local-mass-bounds-hold" class="level2">
+<h2 class="anchored" data-anchor-id="why-local-mass-bounds-hold">4. Why local mass bounds hold</h2>
+<p>Fix a relatively compact set <span class="math inline">\(W\subset M\times\mathbb R\)</span>. We want to show <span class="math display">\[\sup_{\tau\in (0,1)} \|\Sigma_\tau\|(W)&lt;\infty.\]</span> This is a standard consequence of the almost-minimizing inequality. One works in a small geodesic ball <span class="math inline">\(B_\rho(y)\Subset W\)</span> and compares the epigraph <span class="math inline">\(E_\tau\)</span> of <span class="math inline">\(f_\tau\)</span> with either <span class="math inline">\(E_\tau\cup B_\rho(y)\)</span> or <span class="math inline">\(E_\tau\setminus B_\rho(y)\)</span>. The almost-minimizing inequality then gives a perimeter bound in <span class="math inline">\(B_\rho(y)\)</span>: <span class="math display">\[\|\Sigma_\tau\|(B_\rho(y)) \le \mathcal H^n(\partial B_\rho(y)) + 2C\,|B_\rho(y)|.\]</span> The right-hand side depends only on the ambient geometry, the radius <span class="math inline">\(\rho\)</span>, and the constant <span class="math inline">\(2C\)</span>, but not on <span class="math inline">\(\tau\)</span>.</p>
+<p>Covering <span class="math inline">\(W\)</span> by finitely many such balls yields <span class="math display">\[\sup_{\tau\in(0,1)} \|\Sigma_\tau\|(W)&lt;\infty.\]</span></p>
+</section>
+<section id="which-compactness-theorem-is-being-used" class="level2">
+<h2 class="anchored" data-anchor-id="which-compactness-theorem-is-being-used">5. Which compactness theorem is being used?</h2>
+<p>There are really two compactness statements. First, the local mass bound above implies compactness in the sense of currents, because the <span class="math inline">\(\Sigma_\tau\)</span> are boundaries of locally finite perimeter sets. Second, once one also has locally bounded first variation, Allard’s integral compactness theorem gives varifold compactness.</p>
+<p>So one must check not only <span class="math display">\[\sup_\tau \|\Sigma_\tau\|(W)&lt;\infty,\]</span> but also <span class="math display">\[\sup_\tau \|\delta \Sigma_\tau\|(W)&lt;\infty.\]</span></p>
+<p>The second bound follows from the mean curvature estimate. For a smooth hypersurface with bounded mean curvature, <span class="math display">\[|\delta \Sigma_\tau(X)| = \left|\int_{\Sigma_\tau} H_{\Sigma_\tau}\,\langle \nu_\tau,X\rangle\, d\mu_{\Sigma_\tau}\right| \le \|H_{\Sigma_\tau}\|_{L^\infty(W)}\,\|X\|_\infty\,\|\Sigma_\tau\|(W)\]</span> for every compactly supported vector field <span class="math inline">\(X\)</span> in <span class="math inline">\(W\)</span>. Since <span class="math inline">\(|H_{\Sigma_\tau}|\le 2C\)</span> and the masses in <span class="math inline">\(W\)</span> are uniformly bounded, the first variations are uniformly bounded as Radon measures on <span class="math inline">\(W\)</span>. Thus the hypotheses of Allard compactness are satisfied.</p>
+<blockquote class="blockquote">
+<p><strong>Compactness checklist.</strong> The relevant hypotheses are: <span class="math display">\[\begin{aligned} &amp;\text{(i) } \Sigma_\tau \text{ are integral hypersurfaces (indeed boundaries of finite-perimeter sets),}\\ &amp;\text{(ii) } \sup_\tau \|\Sigma_\tau\|(W)&lt;\infty,\\ &amp;\text{(iii) } \sup_\tau \|\delta\Sigma_\tau\|(W)&lt;\infty. \end{aligned}\]</span> Once these are checked on every relatively compact <span class="math inline">\(W\subset M\times\mathbb R\)</span>, the sequence is precompact in the local varifold sense, and the current compactness statement is available as well.</p>
+</blockquote>
+</section>
+<section id="the-geometric-limit" class="level2">
+<h2 class="anchored" data-anchor-id="the-geometric-limit">6. The geometric limit</h2>
+<p>Now let <span class="math inline">\(\tau_j\downarrow 0\)</span>. By the compactness just discussed, a subsequence of <span class="math inline">\(\Sigma_{\tau_j}\)</span> converges locally as varifolds and currents to a limit hypersurface <span class="math inline">\(\Sigma\subset M\times \mathbb R\)</span>. The almost-minimizing property is closed under this convergence, so the limit is again an almost-minimizing boundary.</p>
+<p>Because <span class="math inline">\(3\le n&lt;8\)</span>, the regularity theory for almost-minimizing boundaries implies that the limit is smooth: there is no singular set in these dimensions. Thus the limit is a smooth embedded hypersurface in <span class="math inline">\(M\times \mathbb R\)</span>.</p>
+<p>The Harnack principle for limits of graphs then implies the familiar dichotomy: each connected component of the regular limit is either graphical over a domain in <span class="math inline">\(M\)</span> or is a vertical cylinder. Therefore the subsequential limit consists of a graphical component <span class="math display">\[G(f_\Sigma,U_\Sigma)\]</span> over an exterior domain <span class="math inline">\(U_\Sigma\subset M\)</span>, where <span class="math inline">\(f_\Sigma\)</span> solves the unregularized Jang equation <span class="math display">\[H(f_\Sigma)-\operatorname{tr}_{G(f_\Sigma)}k=0,\]</span> together with vertical cylinders over boundary components of <span class="math inline">\(U_\Sigma\)</span>.</p>
+</section>
+<section id="the-schoenyau-scalar-curvature-identity" class="level2">
+<h2 class="anchored" data-anchor-id="the-schoenyau-scalar-curvature-identity">7. The Schoen–Yau scalar-curvature identity</h2>
+<p>At this stage one returns to the classical core of the argument, which modern GMT does not replace. On the graphical Jang component <span class="math inline">\(\Sigma\)</span>, equipped with its induced metric <span class="math display">\[\bar g = g + df_\Sigma\otimes df_\Sigma,\]</span> Schoen and Yau discovered the fundamental identity <span class="math display">\[\mu - J\!\left(\frac{\nabla_g f_\Sigma}{\sqrt{1+|df_\Sigma|_g^2}}\right) = \frac12 R_{\bar g} -\frac12 |h-k|_{\bar g}^2 -|X|_{\bar g}^2 +\operatorname{div}_{\bar g}X,\]</span> where <span class="math inline">\(h\)</span> is the second fundamental form of the graph and <span class="math inline">\(X\)</span> is a tangent vector field determined by the geometry of the graph.</p>
+<p>Integrating by parts against a test function <span class="math inline">\(\phi\)</span> gives <span class="math display">\[\int_\Sigma \Bigl(2(\mu-|J|_g)\phi^2 + |h-k|_{\bar g}^2\phi^2\Bigr)\,d\mu_{\bar g} \le \int_\Sigma \Bigl(R_{\bar g}\phi^2 + 2|\nabla \phi|_{\bar g}^2\Bigr)\,d\mu_{\bar g}.\]</span> Under the dominant energy condition, the left-hand side is nonnegative. This inequality is the bridge from the Jang graph to scalar curvature.</p>
+</section>
+<section id="cylindrical-ends-and-positive-yamabe-type" class="level2">
+<h2 class="anchored" data-anchor-id="cylindrical-ends-and-positive-yamabe-type">8. Cylindrical ends and positive Yamabe type</h2>
+<p>If the dominant energy condition is strict near the blow-up set, then the cross-sections of the cylindrical ends have positive Yamabe type. In practice this means that on each cross-section <span class="math inline">\(\Sigma_i^0\)</span>, the conformal Laplacian <span class="math display">\[-\Delta_{\Sigma_i^0}+c_n R_{\Sigma_i^0}, \qquad c_n=\frac{n-2}{4(n-1)},\]</span> has positive first eigenvalue.</p>
+<p>This allows one to modify the asymptotically cylindrical ends and then solve a conformal Laplacian equation that produces a scalar-flat metric on the Jang graph, with one asymptotically flat end and the cylindrical ends conformally compactified in a controlled way.</p>
+</section>
+<section id="conformal-deformation-and-reduction-to-the-riemannian-pmt" class="level2">
+<h2 class="anchored" data-anchor-id="conformal-deformation-and-reduction-to-the-riemannian-pmt">9. Conformal deformation and reduction to the Riemannian PMT</h2>
+<p>Using the positive eigenfunctions on the cylindrical cross-sections, one builds a complete metric <span class="math inline">\(\tilde g\)</span> on the Jang graph with one asymptotically flat end and good scalar-curvature control. One then solves <span class="math display">\[-\Delta_{\tilde g}u + c_n R_{\tilde g}u =0,\]</span> with <span class="math inline">\(u\to 1\)</span> on the asymptotically flat end and <span class="math inline">\(u\to 0\)</span> down the cylindrical ends, and sets <span class="math display">\[\hat g=(u\Psi)^{4/(n-2)}\tilde g.\]</span> The new metric <span class="math inline">\(\hat g\)</span> is scalar flat.</p>
+<p>After a small further perturbation to make the scalar curvature positive somewhere near infinity, one can apply the Riemannian positive mass theorem. The extra cylindrical ends do not obstruct the minimal-hypersurface argument in the Riemannian PMT: an area-minimizing hypersurface cannot escape arbitrarily far down a cylindrical end without violating the usual lower area growth estimates.</p>
+<p>The resulting mass comparison yields <span class="math display">\[E\ge 0.\]</span></p>
+</section>
+<section id="final-approximation-step" class="level2">
+<h2 class="anchored" data-anchor-id="final-approximation-step">10. Final approximation step</h2>
+<p>If one assumes only the weak dominant energy condition <span class="math display">\[\mu\ge |J|_g,\]</span> one approximates the data by asymptotically flat initial data satisfying the strict dominant energy condition and converging ADM energy. Passing to the limit preserves the inequality, so one still concludes <span class="math display">\[E\ge 0.\]</span> That finishes the proof.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>R. Schoen and S.-T. Yau, <em>Proof of the Positive Mass Theorem II</em>, Communications in Mathematical Physics 79 (1981), 231–260. <a href="https://scispace.com/pdf/proof-of-the-positive-mass-theorem-ii-3q355vtp66.pdf" class="uri">https://scispace.com/pdf/proof-of-the-positive-mass-theorem-ii-3q355vtp66.pdf</a></p></li>
+<li><p>M. Eichmair, <em>The Plateau Problem for Marginally Outer Trapped Surfaces</em> (2007). <a href="https://arxiv.org/pdf/0711.4139" class="uri">https://arxiv.org/pdf/0711.4139</a></p></li>
+<li><p>M. Eichmair, <em>The Spacetime Positive Mass Theorem in Dimensions Less Than Eight</em> (2013). <a href="https://arxiv.org/pdf/1206.2553" class="uri">https://arxiv.org/pdf/1206.2553</a></p></li>
+<li><p>W. K. Allard, <em>On the First Variation of a Varifold</em>, Annals of Mathematics 95 (1972), 417–491.</p></li>
+<li><p>L. Simon, <em>Lectures on Geometric Measure Theory</em>, Proceedings of the Centre for Mathematical Analysis, ANU 3 (1983).</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
