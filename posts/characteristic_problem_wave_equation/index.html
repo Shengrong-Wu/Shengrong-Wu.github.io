@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-12">
+<meta name="description" content="The foundation of modern wave equations.">
+
+<title>Characteristic Local Well-Posedness for Quasilinear Wave Equations – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Characteristic Local Well-Posedness for Quasilinear Wave Equations</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">analysis</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    The foundation of modern wave equations.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="local-well-posedness-for-quasilinear-wave-equations-near-intersecting-null-hypersurfaces" class="level1">
+<h1>Local Well-Posedness for Quasilinear Wave Equations Near Intersecting Null Hypersurfaces</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>The model equation in this note is [ g^{}(u,u),<em></em>u = F(u,u), ] where (u) is a scalar unknown, (g^{}) is a symmetric Lorentzian coefficient matrix depending on (u) and its first derivatives, and (F) is a lower-order nonlinearity.</p>
+<p>This is a <strong>quasilinear wave equation</strong>. It belongs to one of the central classes of nonlinear hyperbolic PDE. The basic local question is:</p>
+<blockquote class="blockquote">
+<p>Given suitable initial data, does there exist a unique solution for short time, and does the solution depend continuously on the data?</p>
+</blockquote>
+<p>For standard Cauchy data on a spacelike hypersurface, the answer is classical: one reduces the equation to a first-order symmetric hyperbolic system and applies energy estimates. This theory was built in the modern PDE framework by Kato, Hughes–Kato–Marsden, Hörmander, Taylor, and many others.</p>
+<p>A second, more geometric problem is the <strong>characteristic initial value problem</strong>: instead of prescribing data on a spacelike slice, one prescribes data on one or two null hypersurfaces. This problem is fundamental in general relativity, geometric optics, and shock formation. For the double-null problem, the foundational local existence theorem is due to Rendall, who reduced the characteristic problem to a spacelike Cauchy problem. In general relativity, Luk later extended the existence region beyond the tiny corner neighborhood produced by Rendall’s method.</p>
+<p>Broadly speaking, modern wave equation theory has several major directions:</p>
+<ul>
+<li><strong>Local well-posedness for quasilinear hyperbolic equations</strong>, via symmetric hyperbolic reduction and energy estimates.</li>
+<li><strong>Dispersive and Strichartz estimates</strong>, used for low-regularity theory and semilinear/critical equations.</li>
+<li><strong>Null structure and vector field methods</strong>, central in small-data global existence and Einstein equations.</li>
+<li><strong>Shock formation</strong>, where one proves the finite-time breakdown of classical solutions for quasilinear waves.</li>
+<li><strong>Geometric wave equations</strong>, such as wave maps, Yang–Mills, Maxwell–Klein–Gordon, and Einstein equations.</li>
+<li><strong>Wave equations on black hole backgrounds</strong>, including decay, scattering, and nonlinear stability questions.</li>
+</ul>
+<p>Some representative modern developments include:</p>
+<ul>
+<li>large-data/global regularity results for geometric wave equations such as wave maps;</li>
+<li>sharp estimates for waves on rough backgrounds and black hole spacetimes;</li>
+<li>nonlinear stability theory for the Einstein equations;</li>
+<li>stable shock formation for quasilinear wave equations;</li>
+<li>renewed work on characteristic and null-boundary formulations for Einstein-type systems.</li>
+</ul>
+<p>The goal of this note is narrower: I will explain a clean local theorem near the corner [ S = N_1 N_2 ] for the characteristic problem on two intersecting null hypersurfaces (N_1) and (N_2), following the classical strategy of Rendall and later geometric PDE expositions.</p>
+<hr>
+</section>
+<section id="the-theorem-and-the-proof-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="the-theorem-and-the-proof-strategy">2. The theorem and the proof strategy</h2>
+<section id="geometric-setup" class="level3">
+<h3 class="anchored" data-anchor-id="geometric-setup">2.1. Geometric setup</h3>
+<p>Let [ N_1 = {u=0,&nbsp;v}, N_2 = {v=0,&nbsp;u}, ] be two smooth null hypersurfaces intersecting transversely at [ S = {u=v=0}. ] We use local coordinates [ (u,v,^A),A=2,,n, ] near (S). The unknown is a scalar function (z), and we study [ g^{}(z,z),<em></em>z = F(z,z). ]</p>
+<p>We assume:</p>
+<ol type="1">
+<li>(g^{}(z,p)) and (F(z,p)) are smooth in ((z,p)).</li>
+<li>(g<sup>{}=g</sup>{}).</li>
+<li>In a neighborhood of the range of the data, (g^{}) is Lorentzian.</li>
+<li>(N_1) and (N_2) are characteristic, i.e. [ g^{uu}=0 N_1, g^{vv}=0 N_2. ]</li>
+</ol>
+</section>
+<section id="what-data-should-be-prescribed" class="level3">
+<h3 class="anchored" data-anchor-id="what-data-should-be-prescribed">2.2. What data should be prescribed?</h3>
+<p>For a generic equation with principal coefficients depending on (z), the safest rigorous formulation is not “prescribe arbitrary traces of (z)”. Instead one prescribes a <strong>reduced characteristic data set</strong> that determines a full formal jet on (N_1N_2).</p>
+<p>A convenient reduced data set is: [ z|_{N_1}=<em>1, z|</em>{N_2}=_2, <em>u z|</em>{N_1}=_1, <em>v z|</em>{N_2}=_2, ] subject to:</p>
+<ul>
+<li>the corner compatibility conditions [ _1|_S = _2|_S, _A_1|_S = _A_2|_S, _v_1|_S = _2|_S, _1|_S = _u_2|_S, ]</li>
+<li>the characteristic constraints [ g^{uu}(_1,_1,_v_1,_A_1)=0 N_1, ] [ g^{vv}(_2,_u_2,_2,_A_2)=0 N_2, ]</li>
+<li>and all higher-order compatibility relations obtained by formally differentiating the equation.</li>
+</ul>
+<p>This is the correct smooth data class in Rendall-style characteristic existence theorems.</p>
+</section>
+<section id="main-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="main-theorem">2.3. Main theorem</h3>
+<p>We now state the local corner theorem.</p>
+<blockquote class="blockquote">
+<p><strong>Theorem (local existence near (N_1N_2)).</strong><br>
+Consider [ g^{}(z,z),<em></em>z = F(z,z) ] in a neighborhood of (S=N_1N_2), where (g,F) are smooth and (g) is Lorentzian.<br>
+Assume a smooth reduced characteristic data set on (N_1N_2) is given, satisfying the null constraints and all compatibility conditions, and assume these data determine a smooth formal jet on (N_1N_2).<br>
+Then there exists (&gt;0) and a unique smooth solution [ z C^(<em>), </em>={0u,&nbsp;0v}, ] which realizes the prescribed characteristic data.</p>
+</blockquote>
+</section>
+<section id="what-this-article-will-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-article-will-do">2.4. What this article will do</h3>
+<p>The proof has four main steps:</p>
+<ol type="1">
+<li>Rewrite the scalar second-order equation as a first-order <strong>symmetric hyperbolic system</strong>.</li>
+<li>Derive the basic <strong>(H^s) energy estimate</strong> for the corresponding spacelike Cauchy problem.</li>
+<li>Explain how the characteristic data determine all formal derivatives along (N_1N_2).</li>
+<li>Invoke Rendall’s reduction of the characteristic problem to a standard Cauchy problem, then recover the scalar solution and prove uniqueness.</li>
+</ol>
+</section>
+<section id="main-references" class="level3">
+<h3 class="anchored" data-anchor-id="main-references">2.5. Main references</h3>
+<p>The proof strategy is based primarily on:</p>
+<ul>
+<li>A. D. Rendall, <em>Reduction of the characteristic initial value problem to the Cauchy problem and its applications to the Einstein equations</em>, Proc. Roy. Soc. Lond. A <strong>427</strong> (1990), 221–239.</li>
+<li>J. Luk, <em>On the Local Existence for the Characteristic Initial Value Problem in General Relativity</em>, IMRN <strong>2012</strong>.</li>
+<li>Standard local theory for symmetric hyperbolic systems: Kato, Hughes–Kato–Marsden, Hörmander, Taylor.</li>
+<li>For direct characteristic estimates at finite regularity: Dossa, Tadmon, Müller zum Hagen, etc.</li>
+</ul>
+<p>For a blog article, the cleanest viewpoint is:</p>
+<p>[ N_1N_2 . ]</p>
+<hr>
+</section>
+</section>
+<section id="estimates" class="level2">
+<h2 class="anchored" data-anchor-id="estimates">3. Estimates</h2>
+<p>In this section we derive the energy estimate needed for the spacelike Cauchy problem.</p>
+<section id="first-order-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="first-order-reduction">3.1. First-order reduction</h3>
+<p>Introduce a spacelike time function [ t = u+v, ] and spatial variables [ x=(x<sup>1,,x</sup>n). ] Rewrite the equation as [ a^{}(z,z),<em></em>z = F(z,z), ] where (,,1,,n), (x^0=t), and (a^{}) is symmetric.</p>
+<p>Define [ q := _t z, w_i := _i z, V := (q,w_1,,w_n). ] Then [ _t z = q, ] and the second-order equation becomes [ a^{00}(z,q,w),_t q + 2a^{0j}(z,q,w),_j q + a^{ij}(z,q,w),_i w_j = F(z,q,w). ] Moreover, [ _t w_i - _i q = 0. ]</p>
+So ((z,V)) satisfies a first-order quasilinear system [ A^0(z,V),_t V + A^j(z,V),_j V = G(z,V), ] where the coefficient matrices can be chosen as [ A^0=
+<span class="math display">\[\begin{pmatrix}
+-a^{00} &amp; 0\\[1mm]
+0 &amp; (a^{ij})
+\end{pmatrix}\]</span>
+, A^k=
+<span class="math display">\[\begin{pmatrix}
+-2a^{0k} &amp; -(a^{k1},\dots,a^{kn})\\[1mm]
+-(a^{1k},\dots,a^{nk})^T &amp; 0
+\end{pmatrix}\]</span>
+<p>, ] and [ G(z,V)=(-F(z,V),0,,0)^T. ]</p>
+<p>If the slices (t=) are spacelike, then [ -a^{00} &gt;0, a^{ij}_i_j ||^2, ] so (A^0) is positive definite. Since (a<sup>{ij}=a</sup>{ji}), the matrices (A^k) are symmetric. Thus (3.5) is a <strong>symmetric hyperbolic system</strong>.</p>
+</section>
+<section id="energy-for-the-linearized-problem" class="level3">
+<h3 class="anchored" data-anchor-id="energy-for-the-linearized-problem">3.2. Energy for the linearized problem</h3>
+<p>Consider the linear system [ A^0(t,x)_t U + A^j(t,x)_j U = H(t,x), ] with (A^0,A^j) smooth, symmetric, and [ A^0 I. ]</p>
+<p>For (sN), define [ E_s(t) := <em>{||s} </em>{_t} A<sup>0,</sup>U,^U,dx, ] where (_t={x^0=t}).</p>
+<p>Differentiate (3.8): [ A^0 _t ^U + A^j _j ^U = ^H - [^,A^0]_t U - [^,A^j]<em>j U. ] Multiply by (^U), integrate over (<em>t), and sum over (||s). By symmetry and integration by parts, [ E_s(t) C( |<em>tA<sup>0|_{L</sup>} + <em>j |<em>jA<sup>j|_{L</sup>} )E_s(t) + C </em>{||s}|R</em>|</em>{L^2} + C|H|</em>{H^s}, ] where [ R</em> = [^,A^0]_t U + [^,A^j]_j U. ]</p>
+</section>
+<section id="commutator-estimate" class="level3">
+<h3 class="anchored" data-anchor-id="commutator-estimate">3.3. Commutator estimate</h3>
+<p>If (s&gt;n2+1), then by Moser estimates, [ <em>{||s}|R</em>|<em>{L^2} C( |A<sup>0|_{H</sup>s} + <em>j|A<sup>j|_{H</sup>s} )|U|</em>{H^s}. ] Hence [ E_s(t) C( 1+|A<sup>0|_{H</sup>s}+<em>j|A<sup>j|_{H</sup>s} )E_s(t) + C|H|</em>{H<sup>s}</sup>2. ] Since (E_s(t)|U(t)|</em>{H<sup>s}</sup>2), Grönwall yields [ |U(t)|<em>{H<sup>s}</sup>2 C_T ( |U(0)|</em>{H<sup>s}</sup>2 + <em>0^t |H()|</em>{H<sup>s}</sup>2,d ). ]</p>
+<p>This is the key a priori estimate.</p>
+</section>
+<section id="nonlinear-estimate" class="level3">
+<h3 class="anchored" data-anchor-id="nonlinear-estimate">3.4. Nonlinear estimate</h3>
+<p>For the nonlinear system (3.5), the matrices (A^(z,V)) and source term (G(z,V)) depend smoothly on ((z,V)). Therefore, again by Moser estimates, [ |A<sup>(z,V)|_{H</sup>s}+|G(z,V)|<em>{H^s} P(|z|</em>{H<sup>s}+|V|_{H</sup>s}), ] for some polynomial (P).</p>
+<p>Thus the nonlinear energy satisfies [ E_s(t) P(E_s(t)). ] This gives short-time control of the (H^s)-norm, provided (s) is large enough. For a principal part depending on (z), one usually takes [ s&gt;n2+2, ] so that the coefficients are at least (C^1) by Sobolev embedding.</p>
+<hr>
+</section>
+</section>
+<section id="proof-of-the-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-the-theorem">4. Proof of the theorem</h2>
+<p>We now prove the local characteristic existence theorem.</p>
+<section id="step-1-characteristic-transport-identities" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-characteristic-transport-identities">4.1. Step 1: characteristic transport identities</h3>
+<p>Write [ p_u=_u z, p_v=_v z, p_A=_A z. ] Then the equation becomes [ g^{uu}_u p_u + 2g^{uv}_u p_v + 2g^{uA}_A p_u + g^{vv}_v p_v + 2g^{vA}_A p_v + g^{AB}_A p_B = F(z,p). ]</p>
+<p>On (N_1={u=0}), since (g^{uu}=0), [ 2g^{uv},_u p_v = F - g^{vv}_v p_v - 2g^{vA}_A p_v - g^{AB}_A p_B - 2g^{uA}<em>A p_u. ] All terms on the right are known from the reduced data on (N_1), namely [ z|</em>{N_1}=<em>1, p_u|</em>{N_1}=<em>1, p_v|</em>{N_1}=_v<em>1, p_A|</em>{N_1}=_A_1. ] Therefore (<em>u p_v|</em>{N_1}) is determined.</p>
+<p>Similarly, on (N_2={v=0}), since (g^{vv}=0), [ 2g^{uv},_v p_u = F - g^{uu}_u p_u - 2g^{uA}_A p_u - g^{AB}_A p_B - 2g^{vA}_A p_v. ] Hence (<em>v p_u|</em>{N_2}) is determined.</p>
+<p>By repeatedly differentiating (4.2) and (4.4) tangentially and commuting derivatives, one recursively determines all higher formal derivatives along (N_1N_2), provided the compatibility conditions hold.</p>
+<p>This is exactly why the theorem is stated in terms of a reduced characteristic data set that determines a smooth formal jet.</p>
+</section>
+<section id="step-2-reduction-to-a-symmetric-hyperbolic-system" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-reduction-to-a-symmetric-hyperbolic-system">4.2. Step 2: reduction to a symmetric hyperbolic system</h3>
+<p>By Section 3, the scalar equation is equivalent to the symmetric hyperbolic system [ A^0(z,V)_t V + A^j(z,V)_j V = G(z,V), ] together with [ _t z = q. ]</p>
+<p>Thus the original problem is reduced to a first-order quasilinear symmetric hyperbolic problem.</p>
+</section>
+<section id="step-3-spacelike-auxiliary-problem" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-spacelike-auxiliary-problem">4.3. Step 3: spacelike auxiliary problem</h3>
+<p>Rendall’s key idea is to replace the characteristic problem by an auxiliary Cauchy problem on spacelike hypersurfaces approaching (N_1N_2).</p>
+<p>Very schematically: - use the formal jet on (N_1N_2), - extend it smoothly to a spacelike hypersurface (_0) through the corner (S), - solve the standard spacelike Cauchy problem, - then show the resulting solution has the prescribed characteristic traces.</p>
+<p>This step uses Whitney-type extension of the formal jet and the standard (H^s) local existence theorem for symmetric hyperbolic systems.</p>
+<p>Because the symmetric hyperbolic Cauchy problem is locally well posed by the estimate (3.15), one obtains a smooth solution [ (z,V)C^(_) ] for some (&gt;0).</p>
+</section>
+<section id="step-4-recover-the-scalar-wave-equation" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-recover-the-scalar-wave-equation">4.4. Step 4: recover the scalar wave equation</h3>
+<p>We must check that the first-order unknowns really come from derivatives of (z). Define [ C_i := w_i - _i z. ] Using [ _t z=q, _t w_i-_i q=0, ] we compute [ _t C_i = _t w_i - _i_t z = _i q - _i q = 0. ] If the spacelike initial data on (<em>0) are chosen consistently, then [ C_i|</em>{<em>0}=0. ] Therefore [ C_i </em>. ] So (w_i=<em>i z), (q=<em>t z), and substituting back into the first-order system yields the original second-order equation [ g^{}(z,z),</em></em>z = F(z,z). ]</p>
+</section>
+<section id="step-5-uniqueness" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-uniqueness">4.5. Step 5: uniqueness</h3>
+<p>Suppose (z,z) are two smooth solutions with the same characteristic data. Their first-order variables satisfy the same symmetric hyperbolic system. The difference (W) then solves a linear symmetric hyperbolic equation of the form [ A^0 _t W + A^j _j W = C W, ] with zero data. The energy estimate implies [ W. ] Hence [ z=z. ]</p>
+<p>This proves existence and uniqueness.</p>
+<hr>
+</section>
+</section>
+<section id="open-problems-and-the-relation-with-einstein-equations" class="level2">
+<h2 class="anchored" data-anchor-id="open-problems-and-the-relation-with-einstein-equations">5. Open problems and the relation with Einstein equations</h2>
+<section id="open-problems-in-wave-equations" class="level3">
+<h3 class="anchored" data-anchor-id="open-problems-in-wave-equations">5.1. Open problems in wave equations</h3>
+<p>Even though local well-posedness is classical in smooth settings, many major questions remain open.</p>
+<section id="a-low-regularity-characteristic-theory" class="level4">
+<h4 class="anchored" data-anchor-id="a-low-regularity-characteristic-theory">(a) Low-regularity characteristic theory</h4>
+<p>For spacelike Cauchy data, low-regularity well-posedness is highly developed. For characteristic data, especially for fully quasilinear systems, the optimal regularity threshold is still much less understood.</p>
+</section>
+<section id="b-direct-null-energy-methods-for-quasilinear-systems" class="level4">
+<h4 class="anchored" data-anchor-id="b-direct-null-energy-methods-for-quasilinear-systems">(b) Direct null energy methods for quasilinear systems</h4>
+<p>Rendall’s theorem reduces the null problem to a spacelike one. A more intrinsic theory would prove well-posedness directly in null geometry with optimal estimates and minimal derivative loss.</p>
+</section>
+<section id="c-sharp-continuation-criteria" class="level4">
+<h4 class="anchored" data-anchor-id="c-sharp-continuation-criteria">(c) Sharp continuation criteria</h4>
+<p>For quasilinear waves, one wants precise geometric criteria telling exactly when a smooth solution can be continued. In many problems the breakdown mechanism is either: - blow-up of (u), - loss of hyperbolicity, - or shock formation.</p>
+<p>A sharp theorem distinguishing these mechanisms remains difficult in general settings.</p>
+</section>
+<section id="d-shock-formation-beyond-small-data-models" class="level4">
+<h4 class="anchored" data-anchor-id="d-shock-formation-beyond-small-data-models">(d) Shock formation beyond small-data models</h4>
+<p>Shock formation is now understood in several important quasilinear settings, but there is still much to do for systems, nontrivial backgrounds, and large-data regimes.</p>
+</section>
+<section id="e-quasilinear-wave-equations-on-curved-backgrounds" class="level4">
+<h4 class="anchored" data-anchor-id="e-quasilinear-wave-equations-on-curved-backgrounds">(e) Quasilinear wave equations on curved backgrounds</h4>
+<p>One wants local and global theories adapted to rough Lorentzian metrics, black hole backgrounds, or spacetimes generated by Einstein equations themselves.</p>
+</section>
+<section id="f-characteristic-boundary-value-problems" class="level4">
+<h4 class="anchored" data-anchor-id="f-characteristic-boundary-value-problems">(f) Characteristic boundary value problems</h4>
+<p>Null-timelike and null-initial-boundary value problems are important in numerical relativity and geometric analysis, but the general well-posedness theory is subtler than the pure double-null problem.</p>
+</section>
+</section>
+<section id="why-this-theorem-matters-for-einstein-equations" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-theorem-matters-for-einstein-equations">5.2. Why this theorem matters for Einstein equations</h3>
+<p>Einstein’s equations in a suitable gauge reduce schematically to a system of quasilinear wave equations: [ g^{}(h,h),<em></em>h_{} = N_{}(h,h). ] Thus the theorem proved above is the local model for the <strong>double-null characteristic initial value problem</strong> in general relativity.</p>
+<p>This is important because:</p>
+<ol type="1">
+<li><strong>Gravitational radiation is naturally described along null hypersurfaces.</strong></li>
+<li>Many geometric constructions in relativity use double-null coordinates.</li>
+<li>Characteristic data are central in black hole formation, impulsive waves, and scattering theory.</li>
+<li>Large parts of modern Einstein analysis combine:
+<ul>
+<li>local quasilinear wave theory,</li>
+<li>null transport equations,</li>
+<li>geometric energy estimates,</li>
+<li>and delicate structure such as null forms.</li>
+</ul></li>
+</ol>
+<p>In the Einstein setting, the free data are not arbitrary scalar traces: they consist of geometric quantities such as induced conformal geometry and null second fundamental forms, subject to null constraint equations. Still, the local existence philosophy is exactly the same: [ . ]</p>
+</section>
+<section id="a-practical-lesson-for-beginners" class="level3">
+<h3 class="anchored" data-anchor-id="a-practical-lesson-for-beginners">5.3. A practical lesson for beginners</h3>
+<p>If you are learning Einstein equations or geometric wave equations, this theorem is worth mastering because it teaches three universal ideas:</p>
+<ul>
+<li>reduce a second-order geometric equation to a first-order hyperbolic system;</li>
+<li>derive robust energy estimates in Sobolev spaces;</li>
+<li>understand how geometric initial data determine analytic compatibility conditions.</li>
+</ul>
+<p>Those three themes appear everywhere in nonlinear wave analysis.</p>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p><strong>A. D. Rendall</strong>, <em>Reduction of the characteristic initial value problem to the Cauchy problem and its applications to the Einstein equations</em>, Proc. Roy. Soc. Lond. A 427 (1990), 221–239.<br>
+<a href="https://royalsocietypublishing.org/doi/10.1098/rspa.1990.0016" class="uri">https://royalsocietypublishing.org/doi/10.1098/rspa.1990.0016</a></p></li>
+<li><p><strong>J. Luk</strong>, <em>On the Local Existence for the Characteristic Initial Value Problem in General Relativity</em>, IMRN 2012, no. 20, 4625–4678.<br>
+<a href="https://arxiv.org/abs/1107.0898" class="uri">https://arxiv.org/abs/1107.0898</a></p></li>
+<li><p><strong>L. Hörmander</strong>, <em>Lectures on Nonlinear Hyperbolic Differential Equations</em>, Springer.</p></li>
+<li><p><strong>M. E. Taylor</strong>, <em>Partial Differential Equations III: Nonlinear Equations</em>, Springer.</p></li>
+<li><p><strong>T. Tao</strong>, <em>Global regularity of wave maps III. Large energy from (R^{1+2}) to hyperbolic spaces</em>.<br>
+<a href="https://arxiv.org/abs/0805.4666" class="uri">https://arxiv.org/abs/0805.4666</a></p></li>
+<li><p><strong>S. Klainerman, E. Giorgi, J. Szeftel</strong>, <em>Wave equations estimates and the nonlinear stability of slowly rotating Kerr black holes</em>.<br>
+<a href="https://arxiv.org/abs/2205.14808" class="uri">https://arxiv.org/abs/2205.14808</a></p></li>
+<li><p><strong>J. Speck</strong>, <em>Shock Formation in Small-Data Solutions to 3D Quasilinear Wave Equations</em>.<br>
+<a href="https://bookstore.ams.org/surv-214/" class="uri">https://bookstore.ams.org/surv-214/</a></p></li>
+<li><p><strong>S. Ma, J. Szeftel</strong>, <em>Energy-Morawetz estimates for the wave equation in perturbations of Kerr</em> (2024 preprint).<br>
+<a href="https://arxiv.org/abs/2410.02341" class="uri">https://arxiv.org/abs/2410.02341</a></p></li>
+<li><p><strong>R. Donninger et al.</strong>, <em>Geometric wave equations</em> / recent review literature on wave maps and Yang–Mills (2025 review).<br>
+<a href="https://arxiv.org/abs/2409.14733" class="uri">https://arxiv.org/abs/2409.14733</a></p></li>
+</ol>
+<hr>
+</section>
+<section id="closing-remark" class="level2">
+<h2 class="anchored" data-anchor-id="closing-remark">Closing remark</h2>
+<p>The theorem proved here is local and corner-based. It is the natural starting point for more ambitious results: - extending the solution farther along null hypersurfaces, - proving global existence under smallness assumptions, - describing singularity formation, - and applying the entire framework to Einstein’s equations.</p>
+<p>For a first blog post on quasilinear wave equations, this is the right level of theorem: geometric, rigorous, and already rich enough to connect directly with modern relativity.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -2,9 +2,65 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Me",
     "section": "",
-    "text": "About this blog"
+    "text": "I am Shengrong Wu, a Ph.D. Candidate in Mathematics at the National University of Singapore (NUS), specializing in Geometric Analysis and Partial Differential Equations (PDEs),particularly within the context of General Relativity. I am advised by Prof. An Xinliang. My background is rooted in rigorous theoretical mathematics, complemented by computational skills using Python."
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html",
+    "href": "posts/singular_wave_equation/index.html",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "",
+    "text": "This article is finished by ChatGPT 5.4 Thinking with prompt engineering by Shengrong Wu."
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#abstract",
+    "href": "posts/singular_wave_equation/index.html#abstract",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "Abstract",
+    "text": "Abstract\nWe study the singular radial wave equation \\[\nu_{tt}-u_{rr}-\\frac{n-1}{r}u_r+\\frac{f(u)}{r^2}=0\n\\] from two complementary viewpoints. First, we analyze self-similar solutions \\[\nu(t,r)=U\\!\\left(\\frac{t}{r}\\right),\n\\] derive the singular profile equation \\[\n(1-a^2)U''+(n-3)aU'+f(U)=0,\n\\qquad a=\\frac{t}{r},\n\\] and study the two distinguished limits \\(a=1\\) and \\(a=\\infty\\), corresponding respectively to the null cone \\(r=t\\) and the axis \\(r=0\\). For finite-trace cone branches, we obtain sharp expansions at \\(a=1\\); in particular, for \\(n=3\\) bounded profiles are generically continuous but not \\(C^1\\) at the cone, whereas for \\(n&gt;3\\) bounded profiles are generically \\(C^1\\) there. At the axis, bounded limits must lie at zeros of \\(f\\), and linearization at such a zero yields the indicial equation \\[\n\\beta^2+(n-2)\\beta-f'(\\ell)=0,\n\\] which determines the radial regularity near \\(r=0\\). This gives the Hölder exponent \\[\n\\beta_+=\\frac{\\sqrt5-1}{2}\n\\] for the bounded \\(\\sinh\\) branch in dimension three.\nSecond, in the three-dimensional case we study stability of a bounded background solution in an exterior characteristic domain. After linearizing the difference equation and introducing the transformation \\(z=rw\\), the perturbation reduces to a \\((1+1)\\)-dimensional wave equation with inverse-square potential. In null coordinates this becomes a Volterra-type integral equation, from which we prove an \\(L^\\infty\\) stability estimate on every truncated region away from \\(r=0\\). Thus small outgoing Goursat perturbations produce small interior perturbations, and if the solutions extend continuously to the axis in a larger region, then the perturbation also vanishes at the axis in the limit. The same mechanism extends to all spatial dimensions after the standard conjugation by \\(r^{(n-1)/2}\\)."
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#the-case-n4",
+    "href": "posts/singular_wave_equation/index.html#the-case-n4",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "5.1 The case \\(n<4\\)",
+    "text": "5.1 The case \\(n&lt;4\\)\nAmong integer dimensions, this means \\(n=3\\). The profile equation becomes \\[\n(1-a^2)U''+f(U)=0.\n\\] Within the class of finite-trace branches, bounded profiles are continuous at the cone and satisfy \\[\nU(a)=U_1+\\frac12 f(U_1)(a-1)\\log(a-1)+O(a-1).\n\\] Thus the cone is generically continuous but not \\(C^1\\). At the axis, if \\(f(\\ell)=0\\) and \\(c=f'(\\ell)&gt;0\\), then \\[\n\\beta_+=\\frac{-1+\\sqrt{1+4c}}{2}.\n\\] For \\(c=1\\), \\[\n\\beta_+=\\frac{\\sqrt5-1}{2}\\approx 0.618.\n\\]"
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#the-case-n4-1",
+    "href": "posts/singular_wave_equation/index.html#the-case-n4-1",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "5.2 The case \\(n=4\\)",
+    "text": "5.2 The case \\(n=4\\)\nThis is the energy-critical dimension for the full PDE. At the cone one has \\[\nU'(1^+)=-f(U_1),\n\\] so bounded finite-trace branches are already \\(C^1\\) there. At the axis, \\[\n\\beta_+=-1+\\sqrt{1+c}.\n\\] For \\(c=1\\), \\[\n\\beta_+=\\sqrt2-1\\approx 0.414.\n\\]"
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#the-case-n4-2",
+    "href": "posts/singular_wave_equation/index.html#the-case-n4-2",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "5.3 The case \\(n>4\\)",
+    "text": "5.3 The case \\(n&gt;4\\)\nThe cone behavior remains \\(C^1\\) for finite-trace branches, with \\[\nU'(1^+)=-\\frac{f(U_1)}{n-3}.\n\\] At the axis the exponent is still given by \\[\n\\beta_+=\\frac{-(n-2)+\\sqrt{(n-2)^2+4c}}{2},\n\\] which decreases with \\(n\\) when \\(c\\) is fixed. For \\(c=1\\):\n\n\n\ndimension\nexponent \\(\\beta_+\\)\n\n\n\n\n\\(5\\)\n\\(\\dfrac{\\sqrt{13}-3}{2}\\approx 0.303\\)\n\n\n\\(6\\)\n\\(\\sqrt5-2\\approx 0.236\\)\n\n\n\\(7\\)\n\\(\\dfrac{\\sqrt{29}-5}{2}\\approx 0.193\\)\n\n\n\nThus higher dimension does not improve axis regularity for fixed linearized potential strength \\(f'(\\ell)\\)."
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#example-fusinh-u",
+    "href": "posts/singular_wave_equation/index.html#example-fusinh-u",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "5.4 Example: \\(f(u)=\\sinh u\\)",
+    "text": "5.4 Example: \\(f(u)=\\sinh u\\)\nThe nonlinearity \\(\\sinh u\\) has a simple zero at \\(u=0\\), with \\[\nf'(0)=1.\n\\] Hence the only bounded axis state is \\[\n\\ell=0.\n\\] In dimension three this gives \\[\n\\beta_+=\\frac{\\sqrt5-1}{2},\n\\] so the bounded self-similar branch is Hölder but not \\(C^1\\) at the axis.\nAt the cone:\n\nsingular branches are possible because \\(\\sinh u\\) is unbounded;\namong finite-trace branches, the expansion in Proposition 3.1 applies;\nin dimension three, a \\(C^1\\) cone crossing requires \\[\n\\sinh(U_1)=0,\n\\] hence \\(U_1=0\\)."
+  },
+  {
+    "objectID": "posts/singular_wave_equation/index.html#example-fucosh-u",
+    "href": "posts/singular_wave_equation/index.html#example-fucosh-u",
+    "title": "Analysis of Singular Wave Equation",
+    "section": "5.5 Example: \\(f(u)=\\cosh u\\)",
+    "text": "5.5 Example: \\(f(u)=\\cosh u\\)\nSince \\[\n\\cosh u&gt;0\n\\qquad \\text{for all } u\\in \\mathbb R,\n\\] the equation \\[\nf(\\ell)=0\n\\] has no solution. Therefore no bounded self-similar profile can converge to a finite axis value.\nAt the cone, finite-trace branches can still exist, and Proposition 3.1 describes them. Thus for \\(\\cosh u\\) the obstruction is not the cone but the axis."
+  },
+  {
+    "objectID": "posts/math_reading_agent/index.html",
+    "href": "posts/math_reading_agent/index.html",
+    "title": "A Math Reading Agent with Visualization",
+    "section": "",
+    "text": "GenAI can help mathematicians read articles. However, LLM can not generate good visualization between the text output. If readers ask AI to summarize the articles and generate images separately, the learning process will be disturbed. Therefore, I vibe coded the agentic AI workflow to do these simultaneously, with a refinement feature so that user can prompt a specialized summary.\nThe Github page. The streamlit app"
   },
   {
     "objectID": "posts/modern_proof_of_PMT/index.html",
@@ -95,6 +151,6 @@
     "href": "index.html",
     "title": "Shengrong Wu’s Blog",
     "section": "",
-    "text": "I am a Ph.D. Candidate in Mathematics at the National University of Singapore (NUS), specializing in Geometric Analysis and Partial Differential Equations (PDEs), particularly within the context of General Relativity. I am advised by Prof. An Xinliang. My background is rooted in rigorous theoretical mathematics, complemented by computational skills using Python.\nIn this page, I will post some small projects which I complete with AI. More information about me can be found in my Google site.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA Modern Proof of PMT\n\n\n\n\n\nMar 10, 2026\n\n\nShengrong Wu\n\n8 min\n\n\n\n\nNo matching items"
+    "text": "In this page, I will post some small projects which I complete with AI. More information about me can be found in my Google site.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA Math Reading Agent with Visualization\n\n\nVibe code a mathematical article reading agent.\n\n\n\n\n\nMar 12, 2026\n\n\nShengrong Wu\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of Singular Wave Equation\n\n\nSolve a quasi-linear singular wave equation within self-similarity and spherical symmetry, and the stability of the solution.\n\n\n\n\n\nMar 11, 2026\n\n\nShengrong Wu\n\n11 min\n\n\n\n\n\n\n\n\n\n\n\nA Modern Proof of PMT\n\n\nUse AI to rewrite proof of positive mass theorem using modern geometric measure theory.\n\n\n\n\n\nMar 10, 2026\n\n\nShengrong Wu\n\n8 min\n\n\n\n\nNo matching items"
   }
 ]
