@@ -192,7 +192,7 @@ window.Quarto = {
 </header>
 
 
-<p>This research is finished by ChatGPT 5.4 Pro, prompting by Shengrong Wu.</p>
+<p>This research is finished by ChatGPT 5.4 Pro, prompting by Shengrong Wu. To see project details, refer to the last section <code>Appendix: Prompt Engineering</code>.</p>
 <section id="a-weighted-mode-stability-theorem-for-hermitian-alf-gravitational-instantons" class="level1">
 <h1>A weighted mode-stability theorem for Hermitian ALF gravitational instantons</h1>
 <p><strong>Shengrong Wu</strong><br>
@@ -626,6 +626,7 @@ O(R^{1-2\gamma}),
 <li><strong>[Li]</strong> M. Li, <em>Classification results for conformally Kähler gravitational instantons</em>, preprint, arXiv:2310.13197.</li>
 <li><strong>[LS25]</strong> X. Li and S. Sun, <em>Gravitational instantons and harmonic maps</em>, preprint, arXiv:2507.15284.</li>
 </ul>
+<hr>
 </section>
 </section>
 <section id="appendix-comments-from-ai" class="level1">
@@ -702,8 +703,97 @@ O(R^{1-2\gamma}),
 <li><strong>Deriving</strong> Ψ₂⁻¹ = O(r³) abstractly for all Hermitian non-Kähler ALF instantons (turning Theorem 1.1 into an unconditional improvement)</li>
 <li>Treating the <strong>endpoint</strong> γ = 1/2 via renormalization or logarithmic corrections</li>
 <li>Proving the <strong>energy version</strong> (finite weighted energy ⟹ χ ≡ 0)</li>
-<li></li>
 </ul>
+</section>
+</section>
+</section>
+<section id="appendix-prompt-engineering" class="level1">
+<h1>Appendix: Prompt Engineering</h1>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>This project is a prompt-driven research pipeline rather than a single one-shot generation. The main architecture is:</p>
+<ol type="1">
+<li><code>topics.md</code> Source notes from Sun Song’s lecture. This is the human-provided mathematical starting point.</li>
+<li>Prompt 1 -&gt; AI topic exploration -&gt; <code>possible_proj.md</code> The first prompt asks the model to scan the topics, find recent short papers, and identify directions where the original proof may admit a relaxation, perturbation, or small generalization.</li>
+<li>Prompt 2 -&gt; AI selection and proposal writing -&gt; <code>proposal_1.md</code> Based on the candidate directions in <code>possible_proj.md</code>, the second prompt asks the model to choose the most applicable and publishable topic, explain the choice, and state a concrete proposed theorem.</li>
+<li>Prompt 3 -&gt; AI proof investigation -&gt; <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code> The third prompt asks for a much more rigorous investigation: check the proof line by line, identify gaps, isolate key lemmas, and decide whether the proposed theorem is actually proved or only conditionally justified.</li>
+<li>Codex drafting stage -&gt; <code>proposal_1_attempt/proposal_1_article.tex</code> and <code>proposal_1_attempt/proposal_1_article_Blog.md</code> Codex turns the proof investigation into a full article draft and a corresponding blog-post version, while reconciling the theorem statement with what the checked argument really supports.</li>
+<li>External LLM review loop After the article draft is produced, other LLMs are used as independent reviewers. Their role is not to rewrite from scratch, but to audit the draft for:
+<ul>
+<li>correctness of the proof,</li>
+<li>novelty / whether the result already exists,</li>
+<li>reference validity and citation errors,</li>
+<li>mathematical clarity and positioning.</li>
+</ul></li>
+<li>Feedback return -&gt; revision loop The feedback from those external checks is fed back into Codex / the drafting model, which revises the article, bibliography, exposition, and blog version. This review-and-revision loop can be repeated multiple times until the draft is stable.</li>
+</ol>
+<p>In short, the workflow is:</p>
+<p><code>topics.md</code> -&gt; Prompt 1 / topic mining -&gt; <code>possible_proj.md</code> -&gt; Prompt 2 / proposal selection -&gt; <code>proposal_1.md</code> -&gt; Prompt 3 / proof checking -&gt; <code>proposal_1_attempt_1_byGPT.md</code> -&gt; Codex article drafting -&gt; external LLM review -&gt; feedback-driven revision -&gt; final article + blog post.</p>
+</section>
+<section id="example-prompts" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompts">Example prompts</h2>
+<p>Based on the <code>&lt;!--- ... ---&gt;</code> blocks already stored in the markdown files, the prompts in this project can be summarized in the following form.</p>
+<section id="example-prompt-1-topic-mining-from-lecture-notes" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-1-topic-mining-from-lecture-notes">Example prompt 1: topic mining from lecture notes</h3>
+<p>Input basis: <code>topics.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Based on these topics, find recent research articles whose proofs might be generalized under weaker assumptions, more relaxed decay, or slight perturbations. Prefer papers under 30 pages. Compare the candidates, explain which one is most likely to lead to a publishable short note, and sketch a possible generalization.</p>
+</blockquote>
+<p>Expected output: - a shortlist of candidate papers, - an evaluation of difficulty and publishability, - one preferred project direction, - a first proposed theorem.</p>
+<p>This stage produces <code>possible_proj.md</code>.</p>
+</section>
+<section id="example-prompt-2-proposal-selection-and-mini-proposal-writing" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-2-proposal-selection-and-mini-proposal-writing">Example prompt 2: proposal selection and mini-proposal writing</h3>
+<p>Input basis: <code>possible_proj.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Output a formal mini-proposal based on the discussion above. Clearly identify the base paper, state the proposed extension, explain why the generalization is plausible, list the key technical points that must be checked, and give a short paper outline.</p>
+</blockquote>
+<p>Expected output: - a more focused project choice, - a formal statement of the proposed result, - a proof roadmap, - a short journal-style proposal.</p>
+<p>This stage produces <code>proposal_1.md</code>.</p>
+</section>
+<section id="example-prompt-3-proof-investigation-with-explicit-rigor-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-3-proof-investigation-with-explicit-rigor-requirements">Example prompt 3: proof investigation with explicit rigor requirements</h3>
+<p>Input basis: <code>proposal_1.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Role: You are a senior research mathematician specializing in formal proofs and creative problem-solving. Investigate the provided proposal with extreme rigor.</p>
+<p>Instructions: 1. Use precise mathematical language and LaTeX throughout. 2. State all assumptions clearly. 3. Every few steps, perform a sanity check against known theorems or the original paper. 4. Treat the proposed path as a hypothesis, not as a constraint. If the proof breaks, say exactly where and why. 5. Isolate key intermediate observations as useful lemmas. 6. If a complete proof is not available, say so explicitly instead of forcing a conclusion. 7. Output both a research log and a clean formal proof, if one is found.</p>
+</blockquote>
+<p>Expected output: - line-by-line proof checking, - explicit identification of gaps, - conditional or corrected theorem statements, - a more reliable mathematical basis for drafting the article.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code>.</p>
+</section>
+<section id="example-prompt-4-article-drafting-from-the-checked-proof" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-4-article-drafting-from-the-checked-proof">Example prompt 4: article drafting from the checked proof</h3>
+<p>Input basis: <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Based on the checked proof notes, write a complete research article in LaTeX in the style of a differential geometry journal. Keep only claims that are actually justified by the proof check. If the original proposal overstates the theorem, correct the statement. Include introduction, setup, lemmas, main proof, references, and discussion.</p>
+</blockquote>
+<p>Expected output: - a complete article draft, - a theorem statement consistent with the verified proof, - a journal-style exposition.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_article.tex</code>.</p>
+</section>
+<section id="example-prompt-5-blog-adaptation" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-5-blog-adaptation">Example prompt 5: blog adaptation</h3>
+<p>Input basis: the final LaTeX article</p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Convert the article into a blog-post version in markdown. Keep the mathematical content the same, but use markdown headings and <code>$...$</code> / <code>$$...$$</code> for formulas.</p>
+</blockquote>
+<p>Expected output: - a blog-ready markdown version with the same mathematical content.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_article_Blog.md</code>.</p>
+</section>
+<section id="example-prompt-6-external-review-revision-loop" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-6-external-review-revision-loop">Example prompt 6: external review / revision loop</h3>
+<p>Input basis: article draft plus bibliography</p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Review this draft as an independent mathematical referee. Check: 1. whether the proof is correct, 2. whether the claimed novelty appears to be genuine, 3. whether similar results may already exist, 4. whether the references and arXiv numbers are valid, 5. whether the exposition overclaims beyond the verified argument.</p>
+<p>Provide concrete findings, not generic comments.</p>
+</blockquote>
+<p>Expected output: - proof-level feedback, - novelty and literature warnings, - citation corrections, - revision targets for the next drafting pass.</p>
+<p>This feedback is then returned to the drafting model for another revision cycle.</p>
 
 
 </section>
