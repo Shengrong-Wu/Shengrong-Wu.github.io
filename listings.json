@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/hermitian_ALF_gravitational_instantons/index.html",
       "/posts/math_reading_agent/index.html",
       "/posts/singular_wave_equation/index.html",
       "/posts/modern_proof_of_PMT/index.html"
