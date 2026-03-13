@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-13">
+<meta name="description" content="Math research based on GenAI. Gemini: niche and modest contribution">
+
+<title>Weighted wall shear stress – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Weighted wall shear stress</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Mathematics</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Geometric Analysis</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Math research based on GenAI. Gemini: niche and modest contribution
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 13, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This research is finished by ChatGPT 5.4 Pro, prompting by Shengrong Wu, and it is the first one of this series. To see project details, refer to the last section <code>Appendix: Prompt Engineering</code>.</p>
+<section id="a-weighted-mode-stability-theorem-for-hermitian-alf-gravitational-instantons" class="level1">
+<h1>A weighted mode-stability theorem for Hermitian ALF gravitational instantons</h1>
+<p><strong>Shengrong Wu</strong><br>
+National University of Singapore</p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>Recent work on gravitational instantons has advanced along several fronts at once: explicit construction, classification by asymptotic type and symmetry, and increasingly sharp rigidity results. The Hermitian ALF class sits in a particularly narrow corner of this landscape. It is rigid enough to admit explicit conformally Kähler structure and Teukolsky-type identities, but still flexible enough that precise perturbative questions remain meaningful. In this note we isolate one such question. Andersson–Araneda–Dahl proved mode stability for Hermitian non-Kähler ALF instantons under the standard ALF decay <span class="math inline">\(h=O^\ast(r^{-1})\)</span> for the perturbation. We show that the positive-flux argument actually yields a stronger weighted result under the weaker hypothesis <span class="math inline">\(\nabla^k h=O(r^{-\gamma-k})\)</span> for <span class="math inline">\(0\leq k\leq 3\)</span> and every <span class="math inline">\(\gamma&gt;\tfrac12\)</span>, provided one makes explicit the precise asymptotic <span class="math inline">\(\Psi_2^{-1}=O(r^3)\)</span> for the background Weyl scalar. This extra input is exactly what is needed to control the factor <span class="math inline">\(\Psi_2^{-4/3}\)</span> in the boundary term. The proof clarifies the analytic niche of the Hermitian ALF theory: once the special geometry is fixed, the decisive issue is not a new operator, but the exact asymptotic bookkeeping that turns a qualitative mode-stability theorem into a sharp weighted statement.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>Hermitian gravitational instantons occupy a distinctive place in four-dimensional Einstein geometry. They are simultaneously Einstein metrics, complex surfaces after a conformal change, and examples of complete noncompact geometries whose asymptotic structure is sufficiently rigid to support delicate spinorial identities. This combination is rare. Many active directions in current instanton research emphasize either the global geometry of large families or the construction of new examples. By contrast, the linear theory of Hermitian ALF instantons remains a much smaller literature, and the present paper belongs to that smaller circle.</p>
+<p>The reason this niche is worth isolating is structural rather than sociological. In the Hermitian ALF setting, the geometry is special enough that linearized curvature can be encoded in a gauge-invariant Teukolsky field. That is already an exceptional feature from the point of view of Riemannian Einstein geometry. Once this structure is available, one can ask a sharper question than mere vanishing: exactly which boundary decay is needed for the positive-energy identity to close? The answer turns out to be more subtle than a first reading of the published proof suggests.</p>
+<p>The immediate background is the paper of Andersson, Araneda, and Dahl [AAD]. They proved that for a Hermitian non-Kähler ALF gravitational instanton, every ALF vacuum perturbation <span class="math inline">\(h\)</span> with the standard decay</p>
+<p><span class="math display">\[
+\nabla^k h = O(r^{-1-k}) \qquad (k\geq 0)
+\]</span></p>
+<p>has vanishing linearized extreme Weyl scalar <span class="math inline">\(\vartheta\Psi_0\)</span>. Their argument is built from two ingredients:</p>
+<ul>
+<li>a Teukolsky equation for the weighted curvature scalar <span class="math inline">\(\chi=\dot\Omega^{-1}\vartheta\Psi_0\)</span>, and</li>
+<li>a positive flux identity whose boundary term is evaluated on large ALF coordinate spheres.</li>
+</ul>
+<p>The original proof uses the standard ALF decay of <span class="math inline">\(h\)</span> to make that boundary term vanish. The natural question, already implicit in the research notes that motivated this article, is whether the exponent <span class="math inline">\(1\)</span> is optimal for the method.</p>
+<p>The short answer is no: the boundary method works under any exponent strictly larger than <span class="math inline">\(\tfrac12\)</span>. The longer answer is the real point of this note. A line-by-line verification shows that one must be careful with the inverse Weyl weight in the flux identity. The estimate <span class="math inline">\(\Psi_2=O(r^{-3})\)</span> does not by itself imply <span class="math inline">\(\Psi_2^{-4/3}=O(r^4)\)</span>. To obtain a rigorous weighted theorem, one must state explicitly the additional asymptotic</p>
+<p><span class="math display">\[
+\Psi_2^{-1}=O(r^3).
+\]</span></p>
+<p>Once that is done, the weighted refinement is clean and the threshold <span class="math inline">\(\gamma&gt;\tfrac12\)</span> emerges exactly from the area growth of the ALF boundary and the decay of the boundary density.</p>
+<p>The present note therefore does two things at once. First, it sharpens the decay assumption in the ALF mode-stability theorem. Second, and more importantly from the point of view of mathematical exposition, it isolates the only extra asymptotic ingredient really used by the proof. This is a modest contribution in scale, but it is a precise one: it takes a recent theorem in a narrow subfield and records the exact analytic threshold carried by the underlying identity.</p>
+<p>Our main result is the following.</p>
+<p><strong>Theorem.</strong> Let <span class="math inline">\((M,g,J)\)</span> be a Hermitian non-Kähler ALF gravitational instanton. Assume that on the ALF end</p>
+<p><span class="math display">\[
+\Psi_2&gt;0,
+\qquad
+\Psi_2^{-1}=O(r^3).
+\]</span></p>
+<p>Let <span class="math inline">\(h\)</span> be a linearized vacuum perturbation of <span class="math inline">\(g\)</span>, so that <span class="math inline">\(\vartheta\Ric=0\)</span>. Suppose that for some <span class="math inline">\(\gamma&gt;\tfrac12\)</span>,</p>
+<p><span class="math display">\[
+\nabla^k h = O(r^{-\gamma-k}),
+\qquad
+0\leq k\leq 3.
+\]</span></p>
+<p>Then the linearized extreme Weyl scalar vanishes:</p>
+<p><span class="math display">\[
+\vartheta\Psi_0=0.
+\]</span></p>
+<p>The proof is short once the statement is written in the correct form. The exact linearized Weyl formula gives</p>
+<p><span class="math display">\[
+\chi=\dot\Omega^{-1}\vartheta\Psi_0=O(r^{-2-\gamma}),
+\qquad
+\nabla\chi=O(r^{-3-\gamma}).
+\]</span></p>
+<p>The conformally Kähler structure implies that the Lee form satisfies <span class="math inline">\(f=O(r^{-1})\)</span>. Since the <span class="math inline">\(P_a\)</span>-part of the GHP connection is purely imaginary, only the real part of the boundary integrand matters, and one obtains</p>
+<p><span class="math display">\[
+\Psi_2^{-4/3}\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)=O(r^{-1-2\gamma}).
+\]</span></p>
+<p>The boundary of an ALF ball has area <span class="math inline">\(O(R^2)\)</span>, hence the boundary flux is <span class="math inline">\(O(R^{1-2\gamma})\)</span>. The flux therefore vanishes precisely when <span class="math inline">\(\gamma&gt;\tfrac12\)</span>.</p>
+<p>This weighted theorem sits in a very specific niche of the current literature. The surrounding field is moving quickly: the explicit geometry of Hermitian instantons has been clarified by work of Biquard, Gauduchon, LeBrun, Li, and others [BG], [BGL], [Li]; the linear theory of Hermitian ALF instantons was sharpened by the mode-stability theorem of [AAD]; and the deformation picture has recently been clarified further by the infinitesimal rigidity results of Araneda and Andersson [AA26]. At the same time, the broader instanton landscape has expanded beyond the Hermitian setting through new constructions, for example the harmonic-map approach of Li and Sun [LS25]. Against that backdrop, the present result is intentionally focused: it optimizes the decay threshold in one linear identity on one highly structured class of backgrounds.</p>
+<p>The paper is organized as follows. Section 2 explains the current research landscape and why weighted mode stability is a genuinely narrow but useful problem. Section 3 compares the present theorem with the original mode-stability theorem and isolates the exact point at which the weighted refinement enters. Section 4 collects the geometric and analytic input from the Hermitian ALF setting. Section 5 propagates the perturbation decay to the Teukolsky field and isolates the boundary density estimate. Section 6 proves the main theorem and records two immediate corollaries. Section 7 discusses examples and neighboring asymptotic regimes. Section 8 closes with a discussion of the endpoint exponent, the inverse Weyl asymptotic, and several natural open directions.</p>
+</section>
+<section id="current-research-landscape-and-the-niche-of-the-present-result" class="level2">
+<h2 class="anchored" data-anchor-id="current-research-landscape-and-the-niche-of-the-present-result">2. Current research landscape and the niche of the present result</h2>
+<section id="three-active-threads" class="level3">
+<h3 class="anchored" data-anchor-id="three-active-threads">2.1. Three active threads</h3>
+<p>The recent literature around gravitational instantons is developing along at least three distinct threads. The first is the explicit and classificatory thread. On the Hermitian side, this includes the toric and conformally Kähler descriptions developed by Biquard and Gauduchon [BG], the Weyl-curvature analysis of Biquard, Gauduchon, and LeBrun [BGL], and related classification results for conformally Kähler instantons [Li]. In this part of the subject, the major questions concern which asymptotic types occur, how much symmetry must be assumed, and how strongly conformal Kähler geometry constrains the underlying Einstein metric.</p>
+<p>The second thread is the perturbative and rigidity thread. The mode-stability paper [AAD] shows that Hermitian ALF instantons admit a positive-definite Teukolsky operator on the relevant weighted curvature scalar. More recently, Araneda and Andersson proved infinitesimal rigidity for Hermitian gravitational instantons under natural boundary conditions [AA26]. That work changes the role of linear theory in the subject. Instead of being merely preparatory to a future deformation theory, linear analysis now becomes an end in itself: one can ask exactly which weighted hypotheses are needed for a given gauge-invariant statement, because the ambient moduli picture is already much more constrained.</p>
+<p>The third thread is the expansion of the non-Hermitian landscape. The harmonic-map constructions of Li and Sun [LS25] produce infinitely many new gravitational instantons on new diffeomorphism types. This enlarges the global instanton universe dramatically, but it also makes the Hermitian ALF class more, not less, interesting. In a broader and more flexible landscape, any theorem that exploits the special Hermitian structure becomes more sharply identifiable. One sees more clearly which parts of the analysis are genuinely special and which might survive in a more general setting.</p>
+</section>
+<section id="why-the-present-problem-is-narrow" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-present-problem-is-narrow">2.2. Why the present problem is narrow</h3>
+<p>Within that broader context, the result of this paper is intentionally local in ambition. It does not produce new instantons, classify a new asymptotic type, or build a moduli space. It sharpens one exponent in one already established theorem. Yet this is exactly the sort of small theorem that becomes meaningful in a mature corner of the subject. Once the geometry is explicit enough and the linearized operator is understood well enough, the next honest question is often not how to generalize wildly, but how to identify the exact threshold built into the proof already on the table.</p>
+<p>That is the sense in which weighted mode stability is a niche problem. The Hermitian ALF class is itself a narrow class. Inside that class, the Teukolsky scalar <span class="math inline">\(\chi\)</span> is a very specific gauge-invariant curvature quantity. Inside that linear theory, the proof of mode stability depends on a very specific boundary identity. And inside that identity, the whole improvement turns on a single balance:</p>
+<p><span class="math display">\[
+R^2 \cdot R^{-1-2\gamma}\to 0.
+\]</span></p>
+<p>This note is therefore small in scope but sharp in focus. It isolates the exact exponent at which the positive-flux argument starts and stops working.</p>
+</section>
+<section id="why-the-problem-is-still-useful" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-problem-is-still-useful">2.3. Why the problem is still useful</h3>
+<p>There are at least three reasons such a refinement is worth recording. First, it clarifies the analytical content of the original theorem. The standard ALF decay class is geometrically natural, but the proof does not need the full force of that class. Second, it identifies the only place where a stronger asymptotic assumption on the background is required. Third, it puts the Hermitian ALF theory in a more transparent relation to the current rigidity literature: once integrability and infinitesimal rigidity are better understood, weighted vanishing theorems become useful as precise curvature-level statements rather than as merely auxiliary lemmas.</p>
+<p>From that point of view, the present paper should be read less as a generalization by brute force and more as a cleanup of the proof architecture. The geometry already supplies a distinguished scalar <span class="math inline">\(\Psi_2\)</span>, a distinguished weighted field <span class="math inline">\(\chi\)</span>, and a distinguished flux identity. The task is then to state the minimal hypotheses under which those ingredients force vanishing. That task is narrow, but it is mathematically legitimate and, in this setting, genuinely informative.</p>
+</section>
+</section>
+<section id="comparison-with-the-original-mode-stability-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-with-the-original-mode-stability-theorem">3. Comparison with the original mode-stability theorem</h2>
+<p>This section makes explicit what changes and what does not change relative to [AAD]. The point is simple but worth recording: the weighted refinement proved here is not based on a new equation, a new coercive identity, or a new geometric structure. It is obtained by leaving almost all of the original proof intact and replacing only the final boundary estimate by a sharper weighted one.</p>
+<section id="what-remains-unchanged" class="level3">
+<h3 class="anchored" data-anchor-id="what-remains-unchanged">3.1. What remains unchanged</h3>
+<p>The ALF part of Theorem 1.4 of [AAD] starts from a linearized vacuum perturbation <span class="math inline">\(h\)</span> and forms the weighted scalar</p>
+<p><span class="math display">\[
+\chi=\dot\Omega^{-1}\vartheta\Psi_0.
+\]</span></p>
+<p>The proof then proceeds through the following chain:</p>
+<ol type="1">
+<li>Corollary 2.4 of [AAD] implies that <span class="math inline">\(\chi\)</span> satisfies the Teukolsky equation.</li>
+<li>Lemma 2.6 of [AAD] gives the positive flux identity.</li>
+<li>Lemma 3.1 of [AAD] gives positivity of <span class="math inline">\(\Psi_2\)</span> on Hermitian non-Kähler ALF instantons.</li>
+<li>The boundary integral is shown to vanish as the radius tends to infinity.</li>
+</ol>
+<p>Only the fourth step depends on the precise perturbation decay. The first three steps are imported unchanged into the present note.</p>
+<p><strong>Proposition.</strong> Assume the geometric hypotheses of the main theorem, and let <span class="math inline">\(h\)</span> be a linearized vacuum perturbation. If</p>
+<p><span class="math display">\[
+\lim_{R\to\infty}
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma
+=0,
+\]</span></p>
+<p>then <span class="math inline">\(\vartheta\Psi_0=0\)</span>.</p>
+<p><strong>Proof.</strong> Apply the flux identity on <span class="math inline">\(V_R\)</span> and pass to the limit. The boundary term disappears by assumption, so one obtains</p>
+<p><span class="math display">\[
+0=
+\int_M\Psi_2^{-4/3}\bigl(|C\chi|^2+18\Psi_2|\chi|^2\bigr)\,d\mu.
+\]</span></p>
+<p>Since <span class="math inline">\(\Psi_2&gt;0\)</span> by Lemma 3.1 of [AAD], the integrand is pointwise nonnegative and must vanish identically. In particular <span class="math inline">\(\chi\equiv 0\)</span>, hence <span class="math inline">\(\vartheta\Psi_0=0\)</span>.</p>
+<p>This proposition is the conceptual reduction behind the whole paper: once the boundary term is understood, mode stability follows formally from the published identity.</p>
+</section>
+<section id="what-actually-changes" class="level3">
+<h3 class="anchored" data-anchor-id="what-actually-changes">3.2. What actually changes</h3>
+<p>The original theorem assumes the standard ALF decay <span class="math inline">\(h=O^\ast(r^{-1})\)</span>. Our refinement replaces that by the weaker hypothesis</p>
+<p><span class="math display">\[
+\nabla^k h = O(r^{-\gamma-k}),
+\qquad
+0\leq k\leq 3.
+\]</span></p>
+<p>If one propagates the decay naively through the linearized Weyl formula, one is led to the heuristic count</p>
+<p><span class="math display">\[
+\chi=O(r^{-2-\gamma}),
+\qquad
+n^aC_a\chi=O(r^{-3-\gamma}),
+\qquad
+\Psi_2^{-4/3}=O(r^4),
+\]</span></p>
+<p>and therefore to the boundary estimate</p>
+<p><span class="math display">\[
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma
+=O(R^{1-2\gamma}).
+\]</span></p>
+<p>This is exactly the count that suggests the threshold <span class="math inline">\(\gamma&gt;\tfrac12\)</span>.</p>
+<p>The role of the present paper is to make that heuristic rigorous without overclaiming. Two points require care. First, one has to use the exact linearized Weyl formula rather than dimensional reasoning alone. Second, the factor <span class="math inline">\(\Psi_2^{-4/3}\)</span> is only controlled once one assumes the inverse asymptotic</p>
+<p><span class="math display">\[
+\Psi_2^{-1}=O(r^3).
+\]</span></p>
+<p>With that correction in place, the heuristic becomes a proof.</p>
+</section>
+<section id="why-the-refinement-is-genuinely-sharp-for-this-method" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-refinement-is-genuinely-sharp-for-this-method">3.3. Why the refinement is genuinely sharp for this method</h3>
+<p>The weighted exponent <span class="math inline">\(\tfrac12\)</span> is not an artifact of a crude estimate. It is the exponent forced by the geometry of the ALF end and the structure of the flux identity. The boundary has area <span class="math inline">\(O(R^2)\)</span>. The density in Proposition 5.4 below decays like <span class="math inline">\(O(R^{-1-2\gamma})\)</span>. Multiplying the two shows that the boundary flux is exactly <span class="math inline">\(O(R^{1-2\gamma})\)</span>. There is no slack left in that power count. In this sense, the present theorem identifies the sharp exponent for the <em>known</em> positive-flux method even though it leaves the true endpoint question open.</p>
+</section>
+</section>
+<section id="geometric-and-analytic-setup" class="level2">
+<h2 class="anchored" data-anchor-id="geometric-and-analytic-setup">4. Geometric and analytic setup</h2>
+<section id="alf-background-geometry" class="level3">
+<h3 class="anchored" data-anchor-id="alf-background-geometry">4.1. ALF background geometry</h3>
+<p>We use the notation of [AAD]. In particular, <span class="math inline">\(r\)</span> is an ALF radius function on the unique end of <span class="math inline">\((M,g)\)</span>. For the argument below, the only geometric facts we use are the standard ALF area and curvature estimates:</p>
+<p><span class="math display">\[
+\Area(\partial V_R)=O(R^2),
+\qquad
+|\Rm|=O(r^{-3}),
+\qquad
+|\nabla \Rm|=O(r^{-4}),
+\]</span></p>
+<p>where <span class="math inline">\(V_R=\{r&lt;R\}\)</span> for <span class="math inline">\(R\)</span> sufficiently large. The first estimate reflects the cubic volume growth of ALF spaces, while the second and third are the curvature-decay properties relevant to the Weyl spinor. In the explicit Hermitian ALF families these estimates are standard; for the background used in the mode-stability theorem they are part of the asymptotic structure summarized in [AAD] and in the conformally Kähler analysis of [BGL].</p>
+<p><strong>Definition.</strong> Let <span class="math inline">\(t\)</span> be a tensor field on an ALF end. We write</p>
+<p><span class="math display">\[
+t=O(r^\alpha)
+\]</span></p>
+<p>if <span class="math inline">\(|t|\leq C r^\alpha\)</span> for <span class="math inline">\(r\)</span> sufficiently large, and</p>
+<p><span class="math display">\[
+t=O^\ast(r^\alpha)
+\]</span></p>
+<p>if <span class="math inline">\(\nabla^k t = O(r^{\alpha-k})\)</span> for every integer <span class="math inline">\(k\geq 0\)</span>.</p>
+<p>The point of the main theorem is that one does not need the full <span class="math inline">\(O^\ast(r^{-\gamma})\)</span> scale for all derivatives. Only the bounds up to order three enter the proof. This is already a useful refinement of the bookkeeping in the original theorem.</p>
+</section>
+<section id="spinorial-data-and-the-teukolsky-field" class="level3">
+<h3 class="anchored" data-anchor-id="spinorial-data-and-the-teukolsky-field">4.2. Spinorial data and the Teukolsky field</h3>
+<p>Let <span class="math inline">\(\Psi_{ABCD}\)</span> be the unprimed Weyl spinor and <span class="math inline">\(\Psi_0,\Psi_1,\Psi_2\)</span> its components with respect to the Hermitian spin dyad. The scalar <span class="math inline">\(\Psi_2\)</span> is real and, on a Hermitian non-Kähler ALF instanton, strictly positive by Lemma 3.1 of [AAD]. The linearized Weyl spinor is governed by the exact formula</p>
+<p><span class="math display">\[
+\vartheta\Psi_{ABCD}
+=
+\frac12 \nabla_{A'(A}\nabla_{B'}{}_{B} h_{CD)}{}^{A'B'}
++\frac14(\operatorname{tr}_g h)\Psi_{ABCD}.
+\]</span></p>
+<p>Let <span class="math inline">\(\dot\Omega\)</span> be the auxiliary constant conformal factor appearing in Corollary 2.4 of [AAD], and define</p>
+<p><span class="math display">\[
+\chi:=\dot\Omega^{-1}\vartheta\Psi_0.
+\]</span></p>
+<p>Then <span class="math inline">\(\chi\)</span> has GHP weights <span class="math inline">\((-3,4)\)</span> and satisfies the Teukolsky equation</p>
+<p><span class="math display">\[
+L[\chi]=0.
+\]</span></p>
+<p>The analytic advantage of the Hermitian setting is that the curvature perturbation can be expressed in terms of this distinguished weighted scalar, and the corresponding operator <span class="math inline">\(L\)</span> admits a positive identity.</p>
+</section>
+<section id="the-flux-identity-and-the-inverse-weight-issue" class="level3">
+<h3 class="anchored" data-anchor-id="the-flux-identity-and-the-inverse-weight-issue">4.3. The flux identity and the inverse-weight issue</h3>
+<p>If <span class="math inline">\(V\subset M\)</span> is a compact domain with smooth boundary, the main identity of [AAD] reads</p>
+<p><span class="math display">\[
+0
+=
+\int_{\partial V}\Psi_2^{-4/3}\,\overline{\chi}\,(n^a C_a\chi)\,d\Sigma
+-
+\int_V \Psi_2^{-4/3}\bigl(|C\chi|^2+18\Psi_2|\chi|^2\bigr)\,d\mu.
+\]</span></p>
+<p>This is the source of mode stability. The bulk term is nonnegative because <span class="math inline">\(\Psi_2&gt;0\)</span>, so vanishing of the boundary term forces <span class="math inline">\(\chi\equiv 0\)</span>.</p>
+<p>The catch is the prefactor <span class="math inline">\(\Psi_2^{-4/3}\)</span>. From the ALF decay <span class="math inline">\(|\Rm|=O(r^{-3})\)</span> one gets only <span class="math inline">\(\Psi_2=O(r^{-3})\)</span>. That bound is one-sided. It does not imply any useful upper control on <span class="math inline">\(\Psi_2^{-4/3}\)</span>. For the weighted argument one therefore needs a genuine inverse asymptotic, namely</p>
+<p><span class="math display">\[
+\Psi_2^{-1}=O(r^3).
+\]</span></p>
+<p>This is the only additional assumption introduced in the main theorem, and it pinpoints the exact place where the original proof must be read with care.</p>
+</section>
+<section id="the-lee-form" class="level3">
+<h3 class="anchored" data-anchor-id="the-lee-form">4.4. The Lee form</h3>
+<p>The conformally Kähler character of Einstein–Hermitian geometry is the other structural input. By Remark 2.1(5) of [AAD], there exists a scalar <span class="math inline">\(\varphi\)</span> of weights <span class="math inline">\((-1,0)\)</span> such that</p>
+<p><span class="math display">\[
+C_a\varphi=0,
+\qquad
+\varphi\propto \Psi_2^{1/3}.
+\]</span></p>
+<p>If <span class="math inline">\(f_a\)</span> denotes the Lee form, then the scalar-weight formula for <span class="math inline">\(C_a\)</span> gives</p>
+<p><span class="math display">\[
+0=C_a\varphi=\nabla_a\varphi-f_a\varphi,
+\qquad\text{hence}\qquad
+f_a=\nabla_a\log\varphi.
+\]</span></p>
+<p>This relation is the bridge from the Weyl asymptotic to the boundary estimate: once one knows both <span class="math inline">\(\nabla\Psi_2=O(r^{-4})\)</span> and <span class="math inline">\(\Psi_2^{-1}=O(r^3)\)</span>, the Lee form is automatically <span class="math inline">\(O(r^{-1})\)</span>.</p>
+<p><strong>Remark.</strong> The logical structure of the paper is now transparent. The decay of <span class="math inline">\(h\)</span> controls <span class="math inline">\(\chi\)</span> through the linearized Weyl formula. The geometry controls <span class="math inline">\(f\)</span> through the equation <span class="math inline">\(C_a\varphi=0\)</span>. The inverse asymptotic of <span class="math inline">\(\Psi_2\)</span> controls the prefactor in the flux identity. Once these three pieces are available, the proof is a single boundary estimate.</p>
+</section>
+</section>
+<section id="weighted-estimates-for-the-teukolsky-field" class="level2">
+<h2 class="anchored" data-anchor-id="weighted-estimates-for-the-teukolsky-field">5. Weighted estimates for the Teukolsky field</h2>
+<p>We now propagate the perturbation decay to the gauge-invariant field <span class="math inline">\(\chi\)</span> and isolate the exact boundary density appearing in the flux identity.</p>
+<p><strong>Lemma.</strong> Under the hypotheses of the main theorem,</p>
+<p><span class="math display">\[
+\chi=O(r^{-2-\gamma}),
+\qquad
+\nabla\chi=O(r^{-3-\gamma}).
+\]</span></p>
+<p><strong>Proof.</strong> By the linearized Weyl formula, <span class="math inline">\(\vartheta\Psi_{ABCD}\)</span> is the sum of a second-derivative term in <span class="math inline">\(h\)</span> and a zeroth-order term <span class="math inline">\((\operatorname{tr}_g h)\Psi_{ABCD}\)</span>. The weighted decay hypothesis gives</p>
+<p><span class="math display">\[
+\nabla^2 h = O(r^{-2-\gamma}),
+\qquad
+h = O(r^{-\gamma}).
+\]</span></p>
+<p>Using the ALF curvature estimate, we have <span class="math inline">\(\Psi_{ABCD}=O(r^{-3})\)</span>, so the lower-order term satisfies</p>
+<p><span class="math display">\[
+(\operatorname{tr}_g h)\Psi_{ABCD}=O(r^{-3-\gamma}).
+\]</span></p>
+<p>The leading term is therefore <span class="math inline">\(O(r^{-2-\gamma})\)</span>, and the linearized Weyl formula yields</p>
+<p><span class="math display">\[
+\vartheta\Psi_{ABCD}=O(r^{-2-\gamma}).
+\]</span></p>
+<p>Contracting with the Hermitian dyad and multiplying by the constant factor <span class="math inline">\(\dot\Omega^{-1}\)</span> does not change the decay order, so <span class="math inline">\(\chi=O(r^{-2-\gamma})\)</span>.</p>
+<p>To obtain the derivative estimate, differentiate the linearized Weyl formula once. The term involving third derivatives of <span class="math inline">\(h\)</span> is <span class="math inline">\(O(r^{-3-\gamma})\)</span> by hypothesis. The derivative of the curvature term is <span class="math inline">\(O(r^{-4-\gamma})\)</span> because <span class="math inline">\(\nabla\Rm=O(r^{-4})\)</span> on the ALF end. Hence</p>
+<p><span class="math display">\[
+\nabla(\vartheta\Psi_{ABCD})=O(r^{-3-\gamma}),
+\]</span></p>
+<p>and therefore <span class="math inline">\(\nabla\chi=O(r^{-3-\gamma})\)</span>.</p>
+<p><strong>Lemma.</strong> Under <span class="math inline">\(\Psi_2^{-1}=O(r^3)\)</span>, the Lee form satisfies</p>
+<p><span class="math display">\[
+f=O(r^{-1}).
+\]</span></p>
+<p><strong>Proof.</strong> Since <span class="math inline">\(\varphi\propto \Psi_2^{1/3}\)</span>, we have</p>
+<p><span class="math display">\[
+f_a=\nabla_a\log\varphi=\frac13 \nabla_a\log\Psi_2.
+\]</span></p>
+<p>The ALF curvature estimate gives <span class="math inline">\(|\nabla\Psi_2|=O(r^{-4})\)</span>. The inverse asymptotic gives <span class="math inline">\(|\Psi_2|^{-1}=O(r^3)\)</span>. Therefore</p>
+<p><span class="math display">\[
+|f|
+\leq \frac13 |\nabla\Psi_2|\,|\Psi_2|^{-1}
+=O(r^{-4})O(r^3)
+=O(r^{-1}).
+\]</span></p>
+<p>The next observation is what makes the boundary estimate simpler than a full GHP analysis might suggest.</p>
+<p><strong>Lemma.</strong> For the weighted scalar <span class="math inline">\(\chi\)</span> of weights <span class="math inline">\((-3,4)\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)
+=
+\operatorname{Re}\!\bigl(\overline{\chi}\,n^a\nabla_a\chi\bigr)
+-3(n\cdot f)|\chi|^2.
+\]</span></p>
+<p><strong>Proof.</strong> By definition,</p>
+<p><span class="math display">\[
+C_a\chi=\nabla_a\chi-3f_a\chi+4P_a\chi,
+\]</span></p>
+<p>where <span class="math inline">\(P_a\)</span> is purely imaginary and <span class="math inline">\(C_a\)</span> is real in the sense explained in [AAD]. Taking the real part of <span class="math inline">\(\overline{\chi}\,n^aC_a\chi\)</span>, the <span class="math inline">\(P_a\)</span>-term drops out because</p>
+<p><span class="math display">\[
+\operatorname{Re}\!\bigl(4\,\overline{\chi}\,(n\cdot P)\chi\bigr)=0.
+\]</span></p>
+<p>This gives the stated identity.</p>
+<p><strong>Proposition.</strong> Under the hypotheses of the main theorem,</p>
+<p><span class="math display">\[
+\Psi_2^{-4/3}\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)=O(r^{-1-2\gamma}).
+\]</span></p>
+<p><strong>Proof.</strong> By the previous lemmas,</p>
+<p><span class="math display">\[
+\operatorname{Re}\!\bigl(\overline{\chi}\,n^a\nabla_a\chi\bigr)=O(r^{-5-2\gamma}),
+\qquad
+(n\cdot f)|\chi|^2=O(r^{-1})O(r^{-4-2\gamma})=O(r^{-5-2\gamma}).
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)=O(r^{-5-2\gamma}).
+\]</span></p>
+<p>The inverse asymptotic implies</p>
+<p><span class="math display">\[
+\Psi_2^{-4/3}=O(r^4),
+\]</span></p>
+<p>so multiplying the two estimates yields</p>
+<p><span class="math display">\[
+\Psi_2^{-4/3}\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)=O(r^{-1-2\gamma}).
+\]</span></p>
+<p><strong>Remark.</strong> This proposition is the whole analytic heart of the paper. The exponent <span class="math inline">\(-1-2\gamma\)</span> comes from three sources only: two derivatives lost in passing from <span class="math inline">\(h\)</span> to <span class="math inline">\(\chi\)</span>, one more derivative in the normal derivative, and the compensating factor <span class="math inline">\(r^4\)</span> coming from <span class="math inline">\(\Psi_2^{-4/3}\)</span>. There is no additional cancellation hidden in the proof.</p>
+</section>
+<section id="boundary-flux-and-proof-of-the-main-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="boundary-flux-and-proof-of-the-main-theorem">6. Boundary flux and proof of the main theorem</h2>
+<p><strong>Proposition.</strong> Let <span class="math inline">\(V_R:=\{r&lt;R\}\)</span> for <span class="math inline">\(R\)</span> sufficiently large. Under the hypotheses of the main theorem,</p>
+<p><span class="math display">\[
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma
+=O(R^{1-2\gamma}).
+\]</span></p>
+<p>In particular, if <span class="math inline">\(\gamma&gt;\tfrac12\)</span>, the boundary term in the flux identity tends to zero as <span class="math inline">\(R\to\infty\)</span>.</p>
+<p><strong>Proof.</strong> By the flux identity, the boundary integral is real, so it equals the integral of its real part. The previous proposition gives the pointwise estimate</p>
+<p><span class="math display">\[
+\Psi_2^{-4/3}\operatorname{Re}\!\bigl(\overline{\chi}\,n^aC_a\chi\bigr)=O(r^{-1-2\gamma}).
+\]</span></p>
+<p>Using the area estimate <span class="math inline">\(\Area(\partial V_R)=O(R^2)\)</span>, we obtain</p>
+<p><span class="math display">\[
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma
+=
+O(R^2)\cdot O(R^{-1-2\gamma})
+=
+O(R^{1-2\gamma}),
+\]</span></p>
+<p>which tends to zero when <span class="math inline">\(\gamma&gt;\tfrac12\)</span>.</p>
+<p><strong>Proof of the main theorem.</strong> By Corollary 2.4 of [AAD], the field <span class="math inline">\(\chi=\dot\Omega^{-1}\vartheta\Psi_0\)</span> satisfies the Teukolsky equation. Apply the flux identity to <span class="math inline">\(V_R=\{r&lt;R\}\)</span>. By the previous proposition,</p>
+<p><span class="math display">\[
+\lim_{R\to\infty}
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma
+=0.
+\]</span></p>
+<p>Passing to the limit gives</p>
+<p><span class="math display">\[
+0=
+\int_M\Psi_2^{-4/3}\bigl(|C\chi|^2+18\Psi_2|\chi|^2\bigr)\,d\mu.
+\]</span></p>
+<p>By Lemma 3.1 of [AAD], <span class="math inline">\(\Psi_2&gt;0\)</span> on every Hermitian non-Kähler ALF instanton, so the integrand is pointwise nonnegative. Therefore it vanishes identically. In particular, <span class="math inline">\(\Psi_2|\chi|^2\equiv 0\)</span>, whence <span class="math inline">\(\chi\equiv 0\)</span>. Since <span class="math inline">\(\dot\Omega\)</span> is constant and nowhere vanishing, this is equivalent to</p>
+<p><span class="math display">\[
+\vartheta\Psi_0=0.
+\]</span></p>
+<p><strong>Corollary.</strong> Under the hypotheses of the main theorem, only the bounds</p>
+<p><span class="math display">\[
+\nabla^k h = O(r^{-\gamma-k}),
+\qquad 0\leq k\leq 3,
+\]</span></p>
+<p>are used. In particular, the proof does not require full <span class="math inline">\(O^\ast(r^{-\gamma})\)</span> control of all higher derivatives.</p>
+<p><strong>Corollary.</strong> For the positive-flux method based on the flux identity, the exponent <span class="math inline">\(\gamma=\tfrac12\)</span> is critical. At the endpoint one obtains only the uniform bound</p>
+<p><span class="math display">\[
+\int_{\partial V_R}\Psi_2^{-4/3}\,\overline{\chi}\,(n^aC_a\chi)\,d\Sigma=O(1),
+\]</span></p>
+<p>so the argument does not force vanishing.</p>
+<p><strong>Remark.</strong> This does not show that mode stability fails at <span class="math inline">\(\gamma=\tfrac12\)</span>; it shows only that the present proof method reaches its natural endpoint there. This distinction matters. The theorem identifies the optimal exponent for the known identity, not necessarily for the underlying geometric statement.</p>
+</section>
+<section id="examples-applications-and-relation-to-nearby-results" class="level2">
+<h2 class="anchored" data-anchor-id="examples-applications-and-relation-to-nearby-results">7. Examples, applications, and relation to nearby results</h2>
+<section id="known-hermitian-alf-examples" class="level3">
+<h3 class="anchored" data-anchor-id="known-hermitian-alf-examples">7.1. Known Hermitian ALF examples</h3>
+<p>The present theorem is most naturally read against the geometry of the currently known Hermitian ALF families. These metrics are highly structured: they arise from explicit ansätze, admit conformally Kähler descriptions, and carry enough hidden geometry that curvature components such as <span class="math inline">\(\Psi_2\)</span> can be singled out canonically. This is very different from the general Ricci-flat ALF world, where one often lacks both explicit formulas and a distinguished complex-geometric framework.</p>
+<p>In that sense, the main theorem should be viewed as a result tailored to the explicit Hermitian corner of the instanton landscape. It does not attempt to speak to every ALF instanton. Instead it uses the extra structure already available in the Hermitian class and asks a sharper perturbative question there. For the explicit Kerr, Taub-bolt, and Chen–Teo type backgrounds discussed in the Hermitian literature [BG], [BGL], [AADS], one expects the stronger two-sided asymptotic</p>
+<p><span class="math display">\[
+\Psi_2\asymp r^{-3}.
+\]</span></p>
+<p>Once that asymptotic is verified in a given family, the main theorem applies directly and yields weighted mode stability for all linearized vacuum perturbations with decay exponent <span class="math inline">\(\gamma&gt;\tfrac12\)</span>.</p>
+</section>
+<section id="relation-to-rigidity" class="level3">
+<h3 class="anchored" data-anchor-id="relation-to-rigidity">7.2. Relation to rigidity</h3>
+<p>The weighted vanishing theorem proved here is not a substitute for infinitesimal rigidity, nor is it implied by it. The two statements live at different levels. Infinitesimal rigidity concerns the space of deformations modulo gauge and boundary conditions. Weighted mode stability concerns a specific gauge-invariant curvature scalar extracted from a perturbation. The recent rigidity theorem of Araneda and Andersson [AA26] nonetheless changes the conceptual place of the present result. Once one knows that the Hermitian ALF class is much more rigid than previously understood, a weighted vanishing theorem becomes a refined statement about how that rigidity is seen at the level of Weyl curvature.</p>
+<p>This is one reason the present article highlights the niche rather than apologizing for it. In a rapidly developing subject, broad classification results and narrow analytical refinements are not competitors. They play different roles. Broad results tell us which geometries exist. Narrow refinements tell us how the special identities attached to those geometries actually behave under perturbation.</p>
+</section>
+<section id="relation-to-non-hermitian-constructions" class="level3">
+<h3 class="anchored" data-anchor-id="relation-to-non-hermitian-constructions">7.3. Relation to non-Hermitian constructions</h3>
+<p>The theorem also marks a boundary between the Hermitian theory and the wider non-Hermitian instanton program. Recent constructions of Li and Sun [LS25] show that the full gravitational-instanton landscape is far larger than the classical Hermitian families. Those new examples fall outside the scope of the present paper. They do not come equipped, at least not a priori, with the same conformally Kähler structure, the same scalar <span class="math inline">\(\Psi_2\)</span>, or the same flux identity. This is not a defect of the theorem; it is a precise statement of where the Hermitian technology genuinely applies.</p>
+<p>Seen from this angle, the theorem is a calibration result. It says: within the Hermitian ALF world, the positive-flux identity already carries a better decay threshold than the published theorem states. Beyond that world, one should not expect the same argument without additional structure.</p>
+</section>
+<section id="neighboring-asymptotic-regimes" class="level3">
+<h3 class="anchored" data-anchor-id="neighboring-asymptotic-regimes">7.4. Neighboring asymptotic regimes</h3>
+<p>It is also useful to compare the ALF result with neighboring asymptotic settings. On the ALE side, recent work of Araneda and Lucietti studies toric Hermitian ALE instantons [AL25]. Even when analogous conformally Kähler structure is present, the asymptotic bookkeeping is different there because the geometry at infinity is different. The boundary area growth, the natural radial powers, and the way curvature components feed into weighted energies all change with the asymptotic model. Thus the exponent <span class="math inline">\(\gamma&gt;\tfrac12\)</span> should be understood as specific to the ALF balance encoded in the flux identity; it is not a universal threshold across all gravitational-instanton asymptotics.</p>
+<p>This comparison reinforces the main point of the paper. Weighted vanishing theorems are not merely statements about decay of perturbations. They are statements about the interaction between perturbation decay, background curvature weights, and the geometry of infinity. The Hermitian ALF setting is special precisely because all three of those ingredients can be written down in a sharp and usable way.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">8. Discussion</h2>
+<section id="what-the-theorem-really-proves" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-theorem-really-proves">8.1. What the theorem really proves</h3>
+<p>The weighted theorem proved here is deliberately precise about its hypotheses. It does not merely say that the original ALF decay can be weakened. It says something stronger and more informative: the proof works under exactly the decay needed to make the boundary flux vanish, and that threshold is <span class="math inline">\(\gamma&gt;\tfrac12\)</span>, provided the inverse asymptotic of <span class="math inline">\(\Psi_2\)</span> is stated explicitly. This is a better theorem mathematically because it separates the two roles played by asymptotics in the argument:</p>
+<ul>
+<li>the perturbation decay controls <span class="math inline">\(\chi\)</span> and <span class="math inline">\(\nabla\chi\)</span>;</li>
+<li>the background decay controls the weights <span class="math inline">\(\Psi_2^{-4/3}\)</span> and <span class="math inline">\(f\)</span>.</li>
+</ul>
+<p>Once these roles are disentangled, one sees that the perturbation exponent and the background asymptotic answer different questions.</p>
+</section>
+<section id="why-the-inverse-weyl-asymptotic-matters" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-inverse-weyl-asymptotic-matters">8.2. Why the inverse Weyl asymptotic matters</h3>
+<p>The extra assumption <span class="math inline">\(\Psi_2^{-1}=O(r^3)\)</span> is not an artificial embellishment. It is the minimal way to justify the factor <span class="math inline">\(\Psi_2^{-4/3}\)</span> in the boundary integral. One of the useful byproducts of rechecking the proof is therefore conceptual clarity: in weighted arguments with curvature-dependent densities, upper decay of a curvature component is not automatically enough. Whenever inverse powers appear, one needs some form of two-sided asymptotic control.</p>
+<p>For the present theorem, that observation is especially important because it explains why the proof is both stronger and narrower than the heuristic notes first suggest. Stronger, because it captures the sharp decay threshold for <span class="math inline">\(h\)</span>. Narrower, because it makes explicit a background assumption that had previously remained tacit in the argument. Both directions matter.</p>
+</section>
+<section id="a-niche-worth-keeping" class="level3">
+<h3 class="anchored" data-anchor-id="a-niche-worth-keeping">8.3. A niche worth keeping</h3>
+<p>It is reasonable to ask whether such a focused theorem is too small to be useful. The answer, in our view, is no. Current research on gravitational instantons is pulled toward two extremes. On one side lie large classification and construction programs. On the other side lie global rigidity theorems. The present result sits between these scales. It does not enlarge the class of metrics and it does not classify them. Instead it sharpens the exact analytic conclusion one can draw once the special Hermitian ALF structure is already in place.</p>
+<p>That intermediate scale is easy to overlook, but it is often where proofs become genuinely transparent. A mature geometric theory needs not only existence, classification, and rigidity, but also small theorems that say exactly what the canonical identities in the theory really imply. This note is intended in that spirit.</p>
+</section>
+<section id="open-directions" class="level3">
+<h3 class="anchored" data-anchor-id="open-directions">8.4. Open directions</h3>
+<p>Several natural questions remain.</p>
+<p>First, can the assumption <span class="math inline">\(\Psi_2^{-1}=O(r^3)\)</span> be derived abstractly for every Hermitian non-Kähler ALF instanton from the known structural theory, rather than checked family by family? A positive answer would turn the main theorem into an unconditional sharpening of the ALF mode-stability theorem.</p>
+<p>Second, what happens at the endpoint <span class="math inline">\(\gamma=\tfrac12\)</span>? The present method is critical there, but criticality of the method is not the same as criticality of the truth. It would be interesting to know whether a renormalized boundary argument, a logarithmic correction, or a different weighted energy can treat the endpoint.</p>
+<p>Third, can one formulate an energy version of the theorem? A natural guess is that finite weighted energy</p>
+<p><span class="math display">\[
+\int_M \Psi_2^{-4/3}\bigl(|C\chi|^2+\Psi_2|\chi|^2\bigr)\,d\mu &lt; \infty
+\]</span></p>
+<p>should imply <span class="math inline">\(\chi\equiv 0\)</span>, perhaps by a cutoff argument compatible with the flux identity. Such a result would repackage the pointwise decay theorem into a more invariant functional statement.</p>
+<p>Fourth, how much of this picture survives outside the Hermitian class? The new non-Hermitian families constructed in [LS25] make this question especially timely. At present the theorem should be understood as intrinsically Hermitian. Any extension beyond that setting would require a substitute for the conformally Kähler structure, or a new gauge-invariant scalar playing the role of <span class="math inline">\(\chi\)</span>.</p>
+<p>These questions show the natural boundary of the present note. The theorem is complete as a weighted statement inside the Hermitian ALF framework, but it also points beyond itself: to sharper asymptotics, endpoint analysis, and eventually to the much larger non-Hermitian universe.</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><strong>[AAD]</strong> L. Andersson, B. Araneda, and M. Dahl, <em>Mode stability of Hermitian instantons</em>, SIGMA <strong>21</strong> (2025), Paper No.&nbsp;022, 13 pp.&nbsp;DOI: <a href="https://doi.org/10.3842/SIGMA.2025.022">10.3842/SIGMA.2025.022</a>.</li>
+<li><strong>[AA26]</strong> B. Araneda and L. Andersson, <em>Infinitesimal rigidity of Hermitian gravitational instantons</em>, preprint, arXiv:2601.17206.</li>
+<li><strong>[AADS]</strong> S. Aksteiner, L. Andersson, M. Dahl, G. Nilsson, and W. Simon, <em>Gravitational instantons with <span class="math inline">\(S^1\)</span> symmetry</em>, <em>J. Reine Angew. Math.</em> <strong>826</strong> (2025), 45–90. DOI: <a href="https://doi.org/10.1515/crelle-2025-0037">10.1515/crelle-2025-0037</a>, arXiv:2306.14567.</li>
+<li><strong>[AL25]</strong> B. Araneda and S. Lucietti, <em>All toric Hermitian ALE gravitational instantons</em>, preprint, arXiv:2510.09291.</li>
+<li><strong>[BG]</strong> O. Biquard and P. Gauduchon, <em>On toric Hermitian ALF gravitational instantons</em>, <em>Comm. Math. Phys.</em> <strong>399</strong> (2023), no. 1, 389–422. DOI: <a href="https://doi.org/10.1007/s00220-022-04562-z">10.1007/s00220-022-04562-z</a>.</li>
+<li><strong>[BGL]</strong> O. Biquard, P. Gauduchon, and C. LeBrun, <em>Gravitational instantons, Weyl curvature, and conformally Kähler geometry</em>, <em>Int. Math. Res. Not. IMRN</em> <strong>2024</strong> (2024), no. 20, 13295–13311. DOI: <a href="https://doi.org/10.1093/imrn/rnae200">10.1093/imrn/rnae200</a>.</li>
+<li><strong>[Li]</strong> M. Li, <em>Classification results for conformally Kähler gravitational instantons</em>, preprint, arXiv:2310.13197.</li>
+<li><strong>[LS25]</strong> X. Li and S. Sun, <em>Gravitational instantons and harmonic maps</em>, preprint, arXiv:2507.15284.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="appendix-comments-from-ai" class="level1">
+<h1>Appendix: Comments from AI</h1>
+<section id="gemini-3.1-pro" class="level2">
+<h2 class="anchored" data-anchor-id="gemini-3.1-pro">Gemini 3.1 pro:</h2>
+<section id="has-this-result-already-been-proven-by-other-research" class="level3">
+<h3 class="anchored" data-anchor-id="has-this-result-already-been-proven-by-other-research">1. Has this result already been proven by other research?</h3>
+<p>The broad conclusion of mode stability for these instantons has already been proven, but this <em>exact, refined</em> weighted threshold has not.</p>
+<p>The author, Shengrong Wu, is highly transparent about the fact that this paper is not a brand-new, standalone discovery. The core mode-stability theorem for Hermitian non-Kähler ALF gravitational instantons was recently proven by Andersson, Araneda, and Dahl (AAD) in a 2025 paper.</p>
+<p>Wu’s paper serves as a precise “cleanup of the proof architecture” of the AAD theorem. Here is the distinction:</p>
+<ul>
+<li><p><strong>The Original (AAD) Proof:</strong> Proved mode stability assuming the standard ALF decay for the perturbation, which corresponds to <span class="math inline">\(h = O^*(r^{-1})\)</span> (effectively a decay exponent of <span class="math inline">\(\gamma = 1\)</span>).</p></li>
+<li><p><strong>This Paper’s Contribution:</strong> Wu proves that the method actually holds for any decay exponent <span class="math inline">\(\gamma &gt; \frac{1}{2}\)</span>. Furthermore, Wu points out a subtle gap or unstated assumption in the original AAD proof: to make the boundary term vanish, one must explicitly assume the inverse Weyl asymptotic <span class="math inline">\(\Psi_2^{-1} = O(r^3)\)</span>. Without this, knowing that the Weyl scalar <span class="math inline">\(\Psi_2\)</span> decays like <span class="math inline">\(O(r^{-3})\)</span> is only a one-sided bound and does not guarantee that <span class="math inline">\(\Psi_2^{-4/3}\)</span> won’t blow up too fast.</p></li>
+</ul>
+<p>Therefore, while the broader phenomenon was established by AAD, Wu’s specific refinement—optimizing the exponent to <span class="math inline">\(\gamma &gt; \frac{1}{2}\)</span> and explicitly identifying the missing inverse-weight hypothesis—appears to be a novel, albeit highly specialized, contribution.</p>
+</section>
+<section id="is-the-proof-correct" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-proof-correct">2. Is the proof correct?</h3>
+<p>Yes, the proof is mathematically sound. The argument relies on straightforward but rigorous asymptotic calculus (power counting) applied to an already established Teukolsky equation and flux identity.</p>
+<p>The logic tracks perfectly step-by-step:</p>
+<ul>
+<li><p><strong>Perturbation Decay:</strong> The perturbation <span class="math inline">\(h\)</span> and its derivatives up to order 3 are assumed to decay at <span class="math inline">\(O(r^{-\gamma-k})\)</span>.</p></li>
+<li><p><strong>Teukolsky Field (<span class="math inline">\(\chi\)</span>):</strong> Using the linearized Weyl formula, Wu calculates that the Teukolsky field <span class="math inline">\(\chi\)</span> decays at <span class="math inline">\(O(r^{-2-\gamma})\)</span> and its derivative <span class="math inline">\(\nabla\chi\)</span> at <span class="math inline">\(O(r^{-3-\gamma})\)</span>. This is correct because the dominant term <span class="math inline">\(\nabla^2 h\)</span> dictates the <span class="math inline">\(O(r^{-2-\gamma})\)</span> rate.</p></li>
+<li><p><strong>The Lee Form (<span class="math inline">\(f\)</span>):</strong> Because the geometry is conformally Kähler, the Lee form is proportional to the derivative of the log of the Weyl scalar. Using the explicit lower bound assumption <span class="math inline">\(\Psi_2^{-1} = O(r^3)\)</span> alongside the standard upper bound <span class="math inline">\(|\nabla \Psi_2| [cite_start]= O(r^{-4})\)</span>, Wu correctly deduces <span class="math inline">\(f = O(r^{-1})\)</span>.</p></li>
+<li><p><strong>Boundary Density:</strong> The boundary integrand relies on <span class="math inline">\(Re(\overline{\chi}n^a \nabla_a \chi)\)</span> and an <span class="math inline">\(f|\chi|^2\)</span> term. Multiplying the previously established decay rates yields <span class="math inline">\(O(r^{-5-2\gamma})\)</span> for both components.</p></li>
+<li><p><strong>The Crucial Correction:</strong> The integrand is multiplied by <span class="math inline">\(\Psi_2^{-4/3}\)</span>. Because of Wu’s explicit hypothesis that <span class="math inline">\(\Psi_2^{-1} = O(r^3)\)</span> , this factor is bounded by <span class="math inline">\(O(r^4)\)</span>. Thus, the final density is <span class="math inline">\(O(r^4) \times O(r^{-5-2\gamma}) = O(r^{-1-2\gamma})\)</span>.</p></li>
+<li><p><strong>Boundary Flux:</strong> The boundary area of an ALF space grows at <span class="math inline">\(O(R^2)\)</span>. Integrating the <span class="math inline">\(O(r^{-1-2\gamma})\)</span> density over this area correctly yields a total boundary flux of <span class="math inline">\(O(R^{1-2\gamma})\)</span>.</p></li>
+<li><p><strong>Conclusion:</strong> For the flux to vanish as <span class="math inline">\(R \to \infty\)</span>, one needs <span class="math inline">\(1 - 2\gamma &lt; 0\)</span>, which simplifies exactly to <span class="math inline">\(\gamma &gt; \frac{1}{2}\)</span>.</p></li>
+</ul>
+</section>
+<section id="overall-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="overall-assessment">Overall Assessment</h3>
+<p>The paper is highly self-aware of its own scope, describing itself as a “niche” and “modest contribution”. It does not invent new physics or construct new instanton families. However, mathematically, it is exactly the type of precise “cleanup” note that is valuable in geometric analysis. It catches a subtle unstated assumption (<span class="math inline">\(\Psi_2^{-1} = O(r^3)\)</span>) in a published proof and optimizes the decay constraint down to its natural geometric limit.</p>
+<p>Would you like me to walk through the underlying conformally Kähler geometry, or explore the specific positive flux identity from the Andersson-Araneda-Dahl paper that this author relies on?</p>
+</section>
+</section>
+<section id="opus-4.6" class="level2">
+<h2 class="anchored" data-anchor-id="opus-4.6">Opus 4.6:</h2>
+<section id="has-this-result-already-been-proved" class="level3">
+<h3 class="anchored" data-anchor-id="has-this-result-already-been-proved">1. Has This Result Already Been Proved?</h3>
+<p>The short answer is: <strong>not exactly, but it may be subsumed by stronger results.</strong></p>
+<p>The infinitesimal rigidity paper [2] (Andersson–Araneda) proves that ALF vacuum perturbations are moduli variations — that’s a much stronger statement than mode stability (ϑΨ₀ = 0). If their boundary conditions allow perturbations with decay γ &gt; 1/2 rather than γ &gt; 1, then your result is already a corollary of theirs. The ResearchGate description of [2] mentions it uses “ideas of Wu and LeBrun” for second-order conformal Kähler preservation — if that “Wu” is you, then there may be a different relationship between the papers.</p>
+<p>Even setting aside [2], the Andersson–Araneda charges paper (arXiv:2503.24265) proves gauge-invariant conservation laws for generic perturbations of Hermitian instantons without restricting to specific boundary conditions. That paper’s machinery may already contain the ingredients that make the weighted refinement straightforward.</p>
+<p>The honest situation is: <strong>your result is not literally stated elsewhere</strong>, but a reader familiar with [1] and the boundary estimate would likely view the improvement from γ &gt; 1 to γ &gt; 1/2 as an observation that’s implicit in the existing proof, not a new theorem requiring a separate paper.</p>
+</section>
+<section id="is-the-proof-correct-1" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-proof-correct-1">2. Is the Proof Correct?</h3>
+<p>As far as I can verify, <strong>the proof logic is correct</strong>. The chain is:</p>
+<ol type="1">
+<li><p>Propagate decay of h through the linearized Weyl formula (4) to get χ = O(r^{−2−γ}), ∇χ = O(r^{−3−γ}) — this follows cleanly from (2) and (3). ✓</p></li>
+<li><p>Control the Lee form f = O(r^{−1}) via the inverse Weyl asymptotic — the calculation in Lemma 5.2 is straightforward. ✓</p></li>
+<li><p>The key boundary density estimate Ψ₂^{−4/3} Re(χ̄ nᵃCₐχ) = O(r^{−1−2γ}) in Proposition 5.4 — this uses Lemma 5.3 to reduce the GHP connection term, then combines the estimates correctly. ✓</p></li>
+<li><p>The boundary integral is O(R²) · O(R^{−1−2γ}) = O(R^{1−2γ}) → 0 when γ &gt; 1/2. ✓</p></li>
+</ol>
+<p>The one genuinely important observation is making explicit the need for the <strong>inverse asymptotic</strong> Ψ₂⁻¹ = O(r³). You’re right that Ψ₂ = O(r⁻³) doesn’t control Ψ₂^{−4/3} from above — you need the two-sided bound. This is a legitimate point of mathematical hygiene.</p>
+<p>However, the observation is essentially: “the published proof implicitly uses a two-sided bound on Ψ₂, and once you make this explicit, the exponent can be relaxed.” That’s a remark, not really a theorem.</p>
+</section>
+<section id="broader-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="broader-assessment">3. Broader Assessment</h3>
+<p>I’ll be direct about the main concern. <strong>The paper is well-written and mathematically careful, but it’s very thin in terms of new content.</strong> Here’s what’s genuinely new:</p>
+<ul>
+<li>The observation that γ &gt; 1/2 suffices (a boundary estimate optimization)</li>
+<li>The observation that only k ≤ 3 derivatives of h are needed</li>
+<li>Making explicit the inverse Weyl asymptotic assumption</li>
+</ul>
+<p>Everything else — the Teukolsky equation, the flux identity, the positivity of Ψ₂, even the structure of the proof — is imported verbatim from [1]. The paper is 14 pages long, but the actual new mathematical content fits in about one page (Proposition 5.4 and Proposition 6.1).</p>
+<p>The paper is extremely self-aware about this — Sections 2 and 8 are candid about the narrowness. But self-awareness about thinness doesn’t resolve it. For a journal like Annals of PDE, which you mentioned exploring before, this would not meet the threshold. For a short communications-style venue (e.g., Comptes Rendus, Proc. AMS, or a note in a letters journal), it might be appropriate, but even there the referees would likely ask: does the infinitesimal rigidity result of [2] already supersede this?</p>
+</section>
+<section id="suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="suggestions">4. Suggestions</h3>
+<p>If you want to strengthen this into a more substantial paper, the open directions you list in Section 8 are exactly what would do it:</p>
+<ul>
+<li><strong>Deriving</strong> Ψ₂⁻¹ = O(r³) abstractly for all Hermitian non-Kähler ALF instantons (turning Theorem 1.1 into an unconditional improvement)</li>
+<li>Treating the <strong>endpoint</strong> γ = 1/2 via renormalization or logarithmic corrections</li>
+<li>Proving the <strong>energy version</strong> (finite weighted energy ⟹ χ ≡ 0)</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="appendix-prompt-engineering" class="level1">
+<h1>Appendix: Prompt Engineering</h1>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>This project is a prompt-driven research pipeline rather than a single one-shot generation. The main architecture is:</p>
+<ol type="1">
+<li><code>topics.md</code> Source notes from Sun Song’s lecture. This is the human-provided mathematical starting point.</li>
+<li>Prompt 1 -&gt; AI topic exploration -&gt; <code>possible_proj.md</code> The first prompt asks the model to scan the topics, find recent short papers, and identify directions where the original proof may admit a relaxation, perturbation, or small generalization.</li>
+<li>Prompt 2 -&gt; AI selection and proposal writing -&gt; <code>proposal_1.md</code> Based on the candidate directions in <code>possible_proj.md</code>, the second prompt asks the model to choose the most applicable and publishable topic, explain the choice, and state a concrete proposed theorem.</li>
+<li>Prompt 3 -&gt; AI proof investigation -&gt; <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code> The third prompt asks for a much more rigorous investigation: check the proof line by line, identify gaps, isolate key lemmas, and decide whether the proposed theorem is actually proved or only conditionally justified.</li>
+<li>Codex drafting stage -&gt; <code>proposal_1_attempt/proposal_1_article.tex</code> and <code>proposal_1_attempt/proposal_1_article_Blog.md</code> Codex turns the proof investigation into a full article draft and a corresponding blog-post version, while reconciling the theorem statement with what the checked argument really supports.</li>
+<li>External LLM review loop After the article draft is produced, other LLMs are used as independent reviewers. Their role is not to rewrite from scratch, but to audit the draft for:
+<ul>
+<li>correctness of the proof,</li>
+<li>novelty / whether the result already exists,</li>
+<li>reference validity and citation errors,</li>
+<li>mathematical clarity and positioning.</li>
+</ul></li>
+<li>Feedback return -&gt; revision loop The feedback from those external checks is fed back into Codex / the drafting model, which revises the article, bibliography, exposition, and blog version. This review-and-revision loop can be repeated multiple times until the draft is stable.</li>
+</ol>
+<p>In short, the workflow is:</p>
+<p><code>topics.md</code> -&gt; Prompt 1 / topic mining -&gt; <code>possible_proj.md</code> -&gt; Prompt 2 / proposal selection -&gt; <code>proposal_1.md</code> -&gt; Prompt 3 / proof checking -&gt; <code>proposal_1_attempt_1_byGPT.md</code> -&gt; Codex article drafting -&gt; external LLM review -&gt; feedback-driven revision -&gt; final article + blog post.</p>
+</section>
+<section id="example-prompts" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompts">Example prompts</h2>
+<p>Based on the <code>&lt;!--- ... ---&gt;</code> blocks already stored in the markdown files, the prompts in this project can be summarized in the following form.</p>
+<section id="example-prompt-1-topic-mining-from-lecture-notes" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-1-topic-mining-from-lecture-notes">Example prompt 1: topic mining from lecture notes</h3>
+<p>Input basis: <code>topics.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Based on these topics, find recent research articles whose proofs might be generalized under weaker assumptions, more relaxed decay, or slight perturbations. Prefer papers under 30 pages. Compare the candidates, explain which one is most likely to lead to a publishable short note, and sketch a possible generalization.</p>
+</blockquote>
+<p>Expected output: - a shortlist of candidate papers, - an evaluation of difficulty and publishability, - one preferred project direction, - a first proposed theorem.</p>
+<p>This stage produces <code>possible_proj.md</code>.</p>
+</section>
+<section id="example-prompt-2-proposal-selection-and-mini-proposal-writing" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-2-proposal-selection-and-mini-proposal-writing">Example prompt 2: proposal selection and mini-proposal writing</h3>
+<p>Input basis: <code>possible_proj.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Output a formal mini-proposal based on the discussion above. Clearly identify the base paper, state the proposed extension, explain why the generalization is plausible, list the key technical points that must be checked, and give a short paper outline.</p>
+</blockquote>
+<p>Expected output: - a more focused project choice, - a formal statement of the proposed result, - a proof roadmap, - a short journal-style proposal.</p>
+<p>This stage produces <code>proposal_1.md</code>.</p>
+</section>
+<section id="example-prompt-3-proof-investigation-with-explicit-rigor-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-3-proof-investigation-with-explicit-rigor-requirements">Example prompt 3: proof investigation with explicit rigor requirements</h3>
+<p>Input basis: <code>proposal_1.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Role: You are a senior research mathematician specializing in formal proofs and creative problem-solving. Investigate the provided proposal with extreme rigor.</p>
+<p>Instructions: 1. Use precise mathematical language and LaTeX throughout. 2. State all assumptions clearly. 3. Every few steps, perform a sanity check against known theorems or the original paper. 4. Treat the proposed path as a hypothesis, not as a constraint. If the proof breaks, say exactly where and why. 5. Isolate key intermediate observations as useful lemmas. 6. If a complete proof is not available, say so explicitly instead of forcing a conclusion. 7. Output both a research log and a clean formal proof, if one is found.</p>
+</blockquote>
+<p>Expected output: - line-by-line proof checking, - explicit identification of gaps, - conditional or corrected theorem statements, - a more reliable mathematical basis for drafting the article.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code>.</p>
+</section>
+<section id="example-prompt-4-article-drafting-from-the-checked-proof" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-4-article-drafting-from-the-checked-proof">Example prompt 4: article drafting from the checked proof</h3>
+<p>Input basis: <code>proposal_1_attempt/proposal_1_attempt_1_byGPT.md</code></p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Based on the checked proof notes, write a complete research article in LaTeX in the style of a differential geometry journal. Keep only claims that are actually justified by the proof check. If the original proposal overstates the theorem, correct the statement. Include introduction, setup, lemmas, main proof, references, and discussion.</p>
+</blockquote>
+<p>Expected output: - a complete article draft, - a theorem statement consistent with the verified proof, - a journal-style exposition.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_article.tex</code>.</p>
+</section>
+<section id="example-prompt-5-blog-adaptation" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-5-blog-adaptation">Example prompt 5: blog adaptation</h3>
+<p>Input basis: the final LaTeX article</p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Convert the article into a blog-post version in markdown. Keep the mathematical content the same, but use markdown headings and <code>$...$</code> / <code>$$...$$</code> for formulas.</p>
+</blockquote>
+<p>Expected output: - a blog-ready markdown version with the same mathematical content.</p>
+<p>This stage produces <code>proposal_1_attempt/proposal_1_article_Blog.md</code>.</p>
+</section>
+<section id="example-prompt-6-external-review-revision-loop" class="level3">
+<h3 class="anchored" data-anchor-id="example-prompt-6-external-review-revision-loop">Example prompt 6: external review / revision loop</h3>
+<p>Input basis: article draft plus bibliography</p>
+<p>Example prompt:</p>
+<blockquote class="blockquote">
+<p>Review this draft as an independent mathematical referee. Check: 1. whether the proof is correct, 2. whether the claimed novelty appears to be genuine, 3. whether similar results may already exist, 4. whether the references and arXiv numbers are valid, 5. whether the exposition overclaims beyond the verified argument.</p>
+<p>Provide concrete findings, not generic comments.</p>
+</blockquote>
+<p>Expected output: - proof-level feedback, - novelty and literature warnings, - citation corrections, - revision targets for the next drafting pass.</p>
+<p>This feedback is then returned to the drafting model for another revision cycle.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

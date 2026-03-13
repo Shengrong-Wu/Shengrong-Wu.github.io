@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Shengrong Wu’s Blog – Shengrong_Wu_Blog</title>
+<title>Math article pipeline – Shengrong_Wu_Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +26,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,20 +75,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-article-links .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-article-links'] = new List('listing-article-links', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -132,7 +132,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -142,7 +142,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Shengrong_Wu_Blog</span>
     </a>
   </div>
@@ -153,7 +153,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item compact">
@@ -183,7 +183,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Shengrong Wu’s Blog</h1>
+<h1 class="title">Math article pipeline</h1>
 </div>
 
 
@@ -200,77 +200,171 @@ window.Quarto = {
 </header>
 
 
-<p>In this page, I will post some small projects which I complete with AI. More information about me can be found in my <a href="https://sites.google.com/view/shengrongwu">Google site</a>.</p>
+<p>Collect the articles automatically generated by AI.</p>
+<div class="grid">
+<section id="update-log" class="level1 g-col-12 g-col-md-6">
+<h1>Update Log</h1>
+<section id="mar-13-2026.-generated-five-articles." class="level2">
+<h2 class="anchored" data-anchor-id="mar-13-2026.-generated-five-articles.">Mar 13, 2026. Generated five articles.</h2>
+<p>Here is the comparison of the rankings and evaluations for the five articles across the three AI models:</p>
+<section id="comparative-ranking-of-articles-by-ai-models" class="level3">
+<h3 class="anchored" data-anchor-id="comparative-ranking-of-articles-by-ai-models">Comparative Ranking of Articles by AI Models</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th><strong>Opus 4.6</strong></th>
+<th><strong>Gemini 3.1 Pro</strong></th>
+<th><strong>ChatGPT 5.4 Thinking</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1</strong></td>
+<td><strong>Sub-static splitting obstruction</strong></td>
+<td><strong>Sub-static splitting obstruction</strong></td>
+<td><strong>Split-prime localization</strong></td>
+</tr>
+<tr class="even">
+<td><strong>2</strong></td>
+<td><strong>Split-prime localization</strong></td>
+<td><strong>Split-prime localization</strong></td>
+<td><strong>Sub-static splitting obstruction</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>3</strong></td>
+<td><strong>Weighted mode-stability</strong></td>
+<td><strong>Weighted mode-stability</strong></td>
+<td><strong>Weighted mode-stability</strong></td>
+</tr>
+<tr class="even">
+<td><strong>4</strong></td>
+<td><strong>Weighted wall shear stress</strong></td>
+<td><strong>Weighted wall shear stress</strong></td>
+<td><strong>Weighted wall shear stress</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>5</strong></td>
+<td><strong>Holomorph description of <span class="math inline">\(H^1\)</span></strong></td>
+<td><strong>Holomorph description of <span class="math inline">\(H^1\)</span></strong></td>
+<td><strong>Holomorph description of <span class="math inline">\(H^1\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="model-summaries-and-key-comments" class="level3">
+<h3 class="anchored" data-anchor-id="model-summaries-and-key-comments">Model Summaries and Key Comments</h3>
+<section id="a-positivity-obstruction-to-nontrivial-line-dependence-in-sub-static-splittings" class="level4">
+<h4 class="anchored" data-anchor-id="a-positivity-obstruction-to-nontrivial-line-dependence-in-sub-static-splittings">1. A Positivity Obstruction to Nontrivial Line Dependence in Sub-static Splittings</h4>
+<ul>
+<li><strong>Opus 4.6:</strong> Highlights it as the standout paper for identifying a new quantity <span class="math inline">\(Q_h(\beta)\)</span> and proving a novel rigidity mechanism that attacks a gap in Wang’s 2024 preprint.</li>
+<li><strong>Gemini 3.1 Pro:</strong> Notes that it targets and resolves a specific bottleneck using an original geometric observation rather than just generalizing work.</li>
+<li><strong>ChatGPT 5.4 Thinking:</strong> Considers it the strongest of the geometric-analysis notes, introducing a meaningful quantity from a tensor trace identity.</li>
+</ul>
+</section>
+<section id="split-prime-localization-and-lattice-realizations-for-minus-ray-class-groups" class="level4">
+<h4 class="anchored" data-anchor-id="split-prime-localization-and-lattice-realizations-for-minus-ray-class-groups">2. Split-prime localization and lattice realizations for minus ray class groups</h4>
+<ul>
+<li><strong>Opus 4.6:</strong> Describes it as a non-trivial algebraic synthesis bridging the Coykendall–Kettinger and Greither–Kataoka formalisms.</li>
+<li><strong>Gemini 3.1 Pro:</strong> Appreciates the “constructive realization theorem” that provides concrete arithmetic representatives for abstract classes.</li>
+<li><strong>ChatGPT 5.4 Thinking:</strong> Ranks this as the strongest overall novelty, citing the combination of localization, Chebotarev input, and lattice formalism.</li>
+</ul>
+</section>
+<section id="a-weighted-mode-stability-theorem-for-hermitian-alf-gravitational-instantons" class="level4">
+<h4 class="anchored" data-anchor-id="a-weighted-mode-stability-theorem-for-hermitian-alf-gravitational-instantons">3. A weighted mode-stability theorem for Hermitian ALF gravitational instantons</h4>
+<ul>
+<li><strong>Opus 4.6:</strong> Recognizes the sharpening of the decay threshold to <span class="math inline">\(\gamma &gt; 1/2\)</span> and the analytic clarification of the inverse Weyl asymptotic.</li>
+<li><strong>Gemini 3.1 Pro:</strong> Views it as a highly focused technical “corrigendum” that optimizes a decay threshold despite being thin on new overarching concepts.</li>
+<li><strong>ChatGPT 5.4 Thinking:</strong> Calls it a legitimate and useful refinement that identifies a natural decay cutoff while working within an existing proof architecture.</li>
+</ul>
+</section>
+<section id="a-weighted-wall-shear-stress-criterion-for-serrin-type-problems" class="level4">
+<h4 class="anchored" data-anchor-id="a-weighted-wall-shear-stress-criterion-for-serrin-type-problems">4. A weighted wall shear stress criterion for Serrin-type problems</h4>
+<ul>
+<li><strong>Opus 4.6:</strong> Identifies it as a routine “mechanical substitution” of a 2025 criterion into the Bakry–Émery setting.</li>
+<li><strong>Gemini 3.1 Pro:</strong> Describes it as a “standard, albeit perfectly correct, exercise” achieved by “turning the crank” on known proofs.</li>
+<li><strong>ChatGPT 5.4 Thinking:</strong> Notes the shift from <span class="math inline">\(2/n\)</span> to <span class="math inline">\(2/m\)</span> is meaningful but represents a “mostly expected weighted transplant”.</li>
+</ul>
+</section>
+<section id="a-holomorph-description-of-h1-for-finite-local-systems-on-connected-schemes" class="level4">
+<h4 class="anchored" data-anchor-id="a-holomorph-description-of-h1-for-finite-local-systems-on-connected-schemes">5. A holomorph description of <span class="math inline">\(H^1\)</span> for finite local systems on connected schemes</h4>
+<ul>
+<li><strong>Opus 4.6:</strong> Labels the core equivalences as standard torsor theory repackaged and likely “known” to experts.</li>
+<li><strong>Gemini 3.1 Pro:</strong> Ranks this lowest for having the least novel mathematical substance, serving as a formal dictionary of a known result.</li>
+<li><strong>ChatGPT 5.4 Thinking:</strong> Agrees it is formally clean but primarily a scheme-theoretic repackaging of standard material.</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<div class="g-col-12 g-col-md-2">
 
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+</div>
+<section id="articles" class="level1 g-col-12 g-col-md-4">
+<h1>Articles</h1>
+<div id="listing-article-links" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1773409221011" data-listing-reading-time-sort="3" data-listing-word-count-sort="496">
-<div class="thumbnail"><a href="./posts/math_article_pipeline/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
+<div class="quarto-post image-right" data-index="0" data-categories="TWF0aGVtYXRpY3MlMkNBSSUyQ1JpZW1hbm5pYW4lMjBHZW9tZXRyeQ==" data-listing-date-sort="1773331200000" data-listing-file-modified-sort="1773409207068" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2525">
 <div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/math_article_pipeline/index.html" class="no-external">Math article pipeline</a>
+<h3 class="no-anchor listing-title" data-anchor-id="articles">
+<a href="../../posts/math_article_pipeline/articles/line_dependence_substatic_splitting/index.html" class="no-external">Sub-static splitting obstruction</a>
 </h3>
-<div class="delink listing-description"><a href="./posts/math_article_pipeline/index.html" class="no-external">
-Collect the articles automatically generated by AI.
+<div class="delink listing-description"><a href="../../posts/math_article_pipeline/articles/line_dependence_substatic_splitting/index.html" class="no-external">
+<p>Math article generated by ChatGPT. Claude comments: a real contribution to an active problem.</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./posts/math_article_pipeline/index.html" class="no-external">
-<div class="listing-reading-time">3 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ0FJJTIwYWdlbnQ=" data-listing-date-sort="1773244800000" data-listing-file-modified-sort="1773306465084" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="65">
-<div class="thumbnail"><a href="./posts/math_reading_agent/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/math_reading_agent/index.html" class="no-external">A Math Reading Agent with Visualization</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/math_reading_agent/index.html" class="no-external">
-<p>Vibe code a mathematical article reading agent.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/math_reading_agent/index.html" class="no-external">
+<a href="../../posts/math_article_pipeline/articles/line_dependence_substatic_splitting/index.html" class="no-external">
 <div class="listing-date">
-Mar 12, 2026
+Mar 13, 2026
 </div>
 <div class="listing-author">
 Shengrong Wu
 </div>
-<div class="listing-reading-time">1 min</div>
+<div class="listing-reading-time">13 min</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ2FuYWx5c2lz" data-listing-date-sort="1773158400000" data-listing-file-modified-sort="1773306964724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2059">
-<div class="thumbnail"><a href="./posts/singular_wave_equation/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
+<div class="quarto-post image-right" data-index="1" data-categories="TWF0aGVtYXRpY3MlMkNBSSUyQ0FsZ2VicmE=" data-listing-date-sort="1773331200000" data-listing-file-modified-sort="1773409201758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2935">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/singular_wave_equation/index.html" class="no-external">Analysis of Singular Wave Equation</a>
+<a href="../../posts/math_article_pipeline/articles/holomorph_description_connected_schemes/index.html" class="no-external">A holomorph description of <span class="math inline">\(H^1\)</span> for finite local systems on connected schemes</a>
 </h3>
-<div class="delink listing-description"><a href="./posts/singular_wave_equation/index.html" class="no-external">
-<p>Solve a quasi-linear singular wave equation within self-similarity and spherical symmetry, and the stability of the solution.</p>
+<div class="delink listing-description"><a href="../../posts/math_article_pipeline/articles/holomorph_description_connected_schemes/index.html" class="no-external">
+<p>Math research by ChatGPT. Claude comments: correct but not novel enough for a research publication</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./posts/singular_wave_equation/index.html" class="no-external">
+<a href="../../posts/math_article_pipeline/articles/holomorph_description_connected_schemes/index.html" class="no-external">
 <div class="listing-date">
-Mar 11, 2026
+Mar 13, 2026
+</div>
+<div class="listing-author">
+Shengrong Wu
+</div>
+<div class="listing-reading-time">15 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="TWF0aGVtYXRpY3MlMkNBSSUyQ1BERQ==" data-listing-date-sort="1773331200000" data-listing-file-modified-sort="1773408978555" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2081">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/math_article_pipeline/articles/wall_shear_stress_serrin_problem/index.html" class="no-external">Weighted wall shear stress</a>
+</h3>
+<div class="delink listing-description"><a href="../../posts/math_article_pipeline/articles/wall_shear_stress_serrin_problem/index.html" class="no-external">
+<p>Math research by ChatGPT. Incremental but legitimate.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../posts/math_article_pipeline/articles/wall_shear_stress_serrin_problem/index.html" class="no-external">
+<div class="listing-date">
+Mar 13, 2026
 </div>
 <div class="listing-author">
 Shengrong Wu
@@ -279,35 +373,55 @@ Shengrong Wu
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2FuYWx5c2lz" data-listing-date-sort="1773072000000" data-listing-file-modified-sort="1773222499561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1592">
-<div class="thumbnail"><a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/modern_proof_of_PMT/image.jpg" class="thumbnail-image">
-
-</a></div>
+<div class="quarto-post image-right" data-index="3" data-categories="TWF0aGVtYXRpY3MlMkNBSSUyQ0FsZ2VicmE=" data-listing-date-sort="1773331200000" data-listing-file-modified-sort="1773409209583" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4582">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/modern_proof_of_PMT/index.html" class="no-external">A Modern Proof of PMT</a>
+<a href="../../posts/math_article_pipeline/articles/split_prime_localize_lattice_realize_minus_ray/index.html" class="no-external">Split-prime localization</a>
 </h3>
-<div class="delink listing-description"><a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
-<p>Use AI to rewrite proof of positive mass theorem using modern geometric measure theory.</p>
+<div class="delink listing-description"><a href="../../posts/math_article_pipeline/articles/split_prime_localize_lattice_realize_minus_ray/index.html" class="no-external">
+<p>Math article generated by ChatGPT. Modest but real contribution.</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
+<a href="../../posts/math_article_pipeline/articles/split_prime_localize_lattice_realize_minus_ray/index.html" class="no-external">
 <div class="listing-date">
-Mar 10, 2026
+Mar 13, 2026
 </div>
 <div class="listing-author">
 Shengrong Wu
 </div>
-<div class="listing-reading-time">8 min</div>
+<div class="listing-reading-time">23 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="TWF0aGVtYXRpY3MlMkNBSSUyQ0dlb21ldHJpYyUyMEFuYWx5c2lz" data-listing-date-sort="1773331200000" data-listing-file-modified-sort="1773409200223" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="34" data-listing-word-count-sort="6774">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/math_article_pipeline/articles/hermitian_ALF_gravitational_instantons/index.html" class="no-external">Weighted wall shear stress</a>
+</h3>
+<div class="delink listing-description"><a href="../../posts/math_article_pipeline/articles/hermitian_ALF_gravitational_instantons/index.html" class="no-external">
+<p>Math research based on GenAI. Gemini: niche and modest contribution</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../../posts/math_article_pipeline/articles/hermitian_ALF_gravitational_instantons/index.html" class="no-external">
+<div class="listing-date">
+Mar 13, 2026
+</div>
+<div class="listing-author">
+Shengrong Wu
+</div>
+<div class="listing-reading-time">34 min</div>
 </a>
 </div>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+</section>
+</div>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
