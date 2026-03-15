@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-15">
+<meta name="description" content="Math research based on GenAI. The first milestone of the project.">
+
+<title>Threshold Rigidity for Separated Sub-Static Splittings – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Threshold Rigidity for Separated Sub-Static Splittings</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Mathematics</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Geometric Analysis</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Math research based on GenAI. The first milestone of the project.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 15, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is the first milestone of the project. After requiring AI explore more results on previous article, it has successfully made a PhD level, publishable result.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="journal_recommandation.jpg" class="img-fluid figure-img"></p>
+<figcaption>Journal Recommendation by LLMs</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="compare_to_phd.jpg" class="img-fluid figure-img"></p>
+<figcaption>Compare with PhD level research by LLMs</figcaption>
+</figure>
+</div>
+<section id="threshold-rigidity-for-separated-sub-static-splittings" class="level1">
+<h1>Threshold Rigidity for Separated Sub-Static Splittings</h1>
+<p><strong>Shengrong Wu</strong><br>
+National University of Singapore</p>
+<p><em>Automatic Pipeline with ChatGPT</em></p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>We study the separated sub-static ansatz <span class="math display">\[
+  g=\beta(y)^2dt^2+h(y),   V(t,y)=A(t)\beta(y),
+\]</span> on <span class="math inline">\(\mathbb{R}\times N^{n-1}\)</span> under the inequality <span class="math display">\[
+  S(V,g):=V\operatorname{Ric}_g+(\Delta_gV)g-\nabla^2_gV\ge 0.
+\]</span> For this ansatz, we show that the full tensor inequality is equivalent to the one-dimensional condition <span class="math display">\[
+  A''(t)+\kappa_* A(t)\ge 0   \text{for all } t\in \mathbb{R},
+\]</span> where <span class="math display">\[
+  \kappa_*=\inf_{y\in N}\lambda_{\min}^h\bigl(\mathcal{T}_h(\beta)(y)\bigr),  
+  \mathcal{T}_h(\beta)=\beta^2\operatorname{Ric}_h-2\beta\nabla^2_h\beta+(\beta\Delta_h\beta+|\nabla_h\beta|_h^2)h.
+\]</span> This yields an exact criterion for bounded positive nonconstant line factors: such an <span class="math inline">\(A\)</span> exists if and only if <span class="math inline">\(\kappa_*&gt;0\)</span>.</p>
+<p>We derive sharp local corollaries. Strict negativity of the traced slice tensor or of a single tensor direction implies nonexistence of bounded positive line factors, while the borderline case forces constancy. On compact slices, the existence of a bounded positive nonconstant line factor is equivalent to pointwise positive-definiteness of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>. In dimension three we obtain a critical-point determinant criterion: at every critical point of <span class="math inline">\(\beta\)</span>, nonconstant bounded line factors require <span class="math display">\[
+  \beta K_h&gt;|\lambda_1-\lambda_2|,
+\]</span> where <span class="math inline">\(K_h\)</span> is the Gauss curvature and <span class="math inline">\(\lambda_1,\lambda_2\)</span> are the eigenvalues of <span class="math inline">\(\nabla^2_h\beta\)</span>.</p>
+<p>We also prove a conformal reformulation of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>, and use it to derive a boundary-control theorem in a geodesic collar. Finally, we record a corrected formal collar expansion clarifying what additional pointwise input would be needed to connect the threshold invariant directly to Wang’s Neumann-data framework.</p>
+<p><strong>MSC 2020</strong>: 53C21, 53C25, 58J60. <strong>Keywords</strong>: sub-static manifold, splitting theorem, threshold invariant, Bakry-Emery tensor, warped product, rigidity.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A Riemannian triple <span class="math inline">\((M^n,g,V)\)</span> with <span class="math inline">\(V&gt;0\)</span> is called <em>sub-static</em> if <span class="math display">\[
+  S(V,g):=V\operatorname{Ric}_g+(\Delta_gV)g-\nabla^2_gV\ge 0.
+\]</span> This condition appears naturally in the static Einstein setting and in recent comparison, rigidity, and splitting results for weighted and conformally compact geometries [WangRiccati, BF, CFMR, GSW]. A central structural question in the sub-static splitting program is whether the presence of a line forces the potential to be independent of the line direction.</p>
+<p>In Wang’s Riccati approach [WangRiccati], the unresolved part of the splitting problem reduces to the separated ansatz <span class="math display">\[
+  g=\beta(y)^2dt^2+h(y),   V(t,y)=A(t)\beta(y), \tag{ansatz}
+\]</span> on <span class="math inline">\(M=\mathbb{R}\times N^{n-1}\)</span>, with <span class="math inline">\(\beta&gt;0\)</span> on the slice and <span class="math inline">\(A&gt;0\)</span> on <span class="math inline">\(\mathbb{R}\)</span>. The remaining question is whether the sub-static inequality forces <span class="math inline">\(A\)</span> to be constant. The purpose of this paper is to give an exact criterion for that question inside the separated ansatz.</p>
+<p>The key observation is that the slice block of <span class="math inline">\(S(V,g)\)</span> factors into a purely geometric tensor and a one-dimensional term. This leads to the threshold tensor <span class="math display">\[
+  \mathcal{T}_h(\beta):=\beta^2\operatorname{Ric}_h-2\beta\nabla^2_h\beta+(\beta\Delta_h\beta+|\nabla_h\beta|_h^2)h
+\]</span> and the threshold invariant <span class="math display">\[
+  \kappa_*:=\inf_{y\in N}\lambda_{\min}^h\bigl(\mathcal{T}_h(\beta)(y)\bigr).
+\]</span> Our main result states that, for the separated ansatz, the condition <span class="math inline">\(S\ge 0\)</span> is equivalent to the scalar ODE inequality <span class="math display">\[
+  A''+\kappa_* A\ge 0.
+\]</span> The existence problem for bounded positive nonconstant line factors is therefore completely determined by the sign of <span class="math inline">\(\kappa_*\)</span>.</p>
+<p>This reformulation has several immediate consequences. It upgrades the local trace and tensor obstructions to sharp nonexistence/rigidity statements, yields a compact-slice criterion in terms of pointwise positive-definiteness of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>, and in dimension three produces a clean determinant test at critical points of <span class="math inline">\(\beta\)</span>. We also record a conformal identity for <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> and a boundary-control theorem in a geodesic collar, followed by a corrected formal asymptotic lemma relevant to Wang’s boundary expansions.</p>
+<p>The strongest clean contribution of the paper is the exact threshold criterion together with its corollaries. The later conformal and boundary sections are intended as a geometric interface with the broader splitting program, rather than as a full solution to the general conformally compact case.</p>
+<section id="main-results" class="level3">
+<h3 class="anchored" data-anchor-id="main-results">Main results</h3>
+<p>The paper is built around one exact structural theorem and several sharp corollaries. The structural theorem is the Exact Threshold Criterion (Theorem 3.2 below): for the separated ansatz, the tensor inequality <span class="math inline">\(S(V,g)\ge 0\)</span> is equivalent to the scalar inequality <span class="math inline">\(A''+\kappa_* A\ge 0\)</span>. This result is stronger than a rigidity statement alone because it simultaneously gives an existence theorem in the positive-threshold regime.</p>
+<p>The local consequences are recorded in the Sharp Trace Obstruction and Sharp Tensor Obstruction propositions. They sharpen the usual convexity argument by distinguishing the strict and borderline cases: strict negativity of a local obstruction yields nonexistence of bounded positive line factors, while equality yields constancy. In the compact case, the Compact Slices Corollary turns the global existence problem into a pointwise positive-definiteness test for <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>.</p>
+<p>The three-dimensional results show that the threshold theory has concrete geometric content beyond the scalar ODE reduction. At critical points of <span class="math inline">\(\beta\)</span>, positivity of the slice tensor becomes an explicit inequality relating Gauss curvature and Hessian anisotropy. The conformal and collar results then reinterpret the same threshold through the compactified metric and show how boundary geometry can force rigidity.</p>
+</section>
+<section id="context-and-comparison-with-the-literature" class="level3">
+<h3 class="anchored" data-anchor-id="context-and-comparison-with-the-literature">Context and comparison with the literature</h3>
+<p>The present paper should be read as a contribution to the separated-ansatz step in the sub-static splitting program, rather than as a full new splitting theorem for arbitrary sub-static manifolds. In Wang’s line-based approach [WangRiccati], the unresolved issue is the constancy of the line factor once the separated form (ansatz) has been obtained. Our exact threshold criterion addresses precisely that point.</p>
+<p>This perspective is complementary to other approaches in the literature. Colombo, Freitas, Mari, and Rigoli [CFMR] obtain rigidity statements from stable minimal hypersurfaces, while Borghini and Fogagnolo [BF] develop weighted comparison geometry under the sub-static condition. The threshold invariant extracted here is different in flavor: it is neither purely variational nor purely comparison-theoretic, but instead an eigenvalue bound arising directly from the slice block of <span class="math inline">\(S(V,g)\)</span>.</p>
+<p>The conformal identity in the Conformal Reformulation section suggests that these viewpoints are not unrelated. After conformal compactification, the threshold tensor becomes a Bakry–'Emery-type curvature quantity. This does not by itself solve the compactified problem, but it indicates that the threshold invariant is geometrically natural and not an artifact of the separated coordinates.</p>
+</section>
+<section id="organization" class="level3">
+<h3 class="anchored" data-anchor-id="organization">Organization</h3>
+<p>Section 2 derives the slice decomposition. Section 3 proves the exact threshold criterion and the bounded-solution criterion. Section 4 explains how the threshold interacts with local tests and records model families. Section 5 treats scaling and one-dimensional slices. Section 6 proves the sharp local obstructions. Section 7 treats the surface (dimension-three) case. Section 8 contains the conformal reformulation and the collar theorem. Section 9 records the corrected formal expansion relevant to Wang’s boundary data. The appendices collect the warped-product formulas, the ODE lemmas, and expanded model computations.</p>
+</section>
+</section>
+<section id="the-separated-ansatz-and-slice-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="the-separated-ansatz-and-slice-decomposition">The Separated Ansatz and Slice Decomposition</h2>
+<p>Throughout, <span class="math inline">\((N^m,h)\)</span> denotes a connected smooth Riemannian manifold of dimension <span class="math inline">\(m=n-1\ge 1\)</span>. We write <span class="math inline">\(R_h\)</span>, <span class="math inline">\(\operatorname{Ric}_h\)</span>, <span class="math inline">\(\Delta_h\)</span>, <span class="math inline">\(\nabla_h\)</span>, and <span class="math inline">\(\nabla^2_h\)</span> for the scalar curvature, Ricci tensor, Laplacian, gradient, and Hessian of <span class="math inline">\((N,h)\)</span>. We fix <span class="math inline">\(\beta\in C^\infty(N)\)</span> with <span class="math inline">\(\beta&gt;0\)</span>, and <span class="math inline">\(A\in C^\infty(\mathbb{R})\)</span> with <span class="math inline">\(A&gt;0\)</span>. All tensors are smooth.</p>
+<p>The two slice tensors used throughout are <span class="math display">\[
+\begin{aligned}
+  \Theta_h(\beta) &amp;:= \beta\operatorname{Ric}_h-2\nabla^2_h\beta+ \\
+  \bigl(\Delta_h\beta+\beta^{-1}|\nabla_h\beta|_h^2\bigr)h, \\
+  \mathcal{T}_h(\beta) &amp;:= \beta\Theta_h(\beta) \\
+  = \beta^2\operatorname{Ric}_h-2\beta\nabla^2_h\beta+
+  \bigl(\beta\Delta_h\beta+|\nabla_h\beta|_h^2\bigr)h.
+\end{aligned}
+\]</span> The <span class="math inline">\(h\)</span>-trace of <span class="math inline">\(\Theta_h(\beta)\)</span> is <span class="math display">\[
+  \mathcal{Q}_h(\beta)=\beta R_h+(n-3)\Delta_h\beta+(n-1)\beta^{-1}|\nabla_h\beta|_h^2.
+\]</span> The starting point is the following decomposition.</p>
+<p><strong>Lemma 2.1 (Slice decomposition).</strong></p>
+<p>Under the separated ansatz (ansatz), <span class="math display">\[
+  S(\partial_t,\partial_t)=0, \qquad S(\partial_i,\partial_t)=0,
+\]</span> and on the slice directions one has <span class="math display">\[
+  S(\partial_i,\partial_j)=A\Theta_h(\beta)_{ij}+\beta^{-1}A''h_{ij}. \tag{Sij}
+\]</span> In particular, <span class="math display">\[
+  \operatorname{tr}_h\bigl(S|_{TN}\bigr)=A\mathcal{Q}_h(\beta)+(n-1)\beta^{-1}A''. \tag{traceid}
+\]</span> <strong>Proof.</strong></p>
+<p>For <span class="math inline">\(g=\beta^2dt^2+h\)</span>, the nonzero Christoffel symbols involving the <span class="math inline">\(t\)</span>-direction are <span class="math display">\[
+  \Gamma^t_{it}=\beta^{-1}\partial_i\beta, \qquad
+  \Gamma^i_{tt}=-\beta\nabla_h^i\beta, \qquad
+  \Gamma^k_{ij}=\Gamma^k_{ij}(h).
+\]</span> With <span class="math inline">\(V=A(t)\beta(y)\)</span>, the Hessian components are <span class="math display">\[
+\begin{aligned}
+  \nabla^2_gV(\partial_t,\partial_t)
+  &amp;=A''\beta+A\beta|\nabla_h\beta|_h^2, \\
+  \nabla^2_gV(\partial_i,\partial_t)
+  &amp;=0, \\
+  \nabla^2_gV(\partial_i,\partial_j)
+  &amp;=A\nabla^2_h\beta_{ij}.
+\end{aligned}
+\]</span> Hence <span class="math display">\[
+  \Delta_gV=\beta^{-1}A''+A\Delta_h\beta+A\beta^{-1}|\nabla_h\beta|_h^2.
+\]</span> The Ricci tensor of <span class="math inline">\(g=\beta^2dt^2+h\)</span> satisfies <span class="math display">\[
+\begin{aligned}
+  \operatorname{Ric}_g(\partial_t,\partial_t)&amp;=-\beta\Delta_h\beta, \\
+  \operatorname{Ric}_g(\partial_i,\partial_t)&amp;=0, \\
+  \operatorname{Ric}_g(\partial_i,\partial_j)&amp;=\operatorname{Ric}_h{}_{ij}-\beta^{-1}\nabla^2_h\beta_{ij}.
+\end{aligned}
+\]</span> Substituting these identities into <span class="math inline">\(S(V,g)=V\operatorname{Ric}_g+(\Delta_gV)g-\nabla^2_gV\)</span> gives <span class="math inline">\(S_{tt}=0\)</span>, <span class="math inline">\(S_{it}=0\)</span>, and <span class="math display">\[
+\begin{aligned}
+  S_{ij}
+  &amp;=A\beta\bigl(\operatorname{Ric}_h{}_{ij}-\beta^{-1}\nabla^2_h\beta_{ij}\bigr) \\
+    +\bigl(\beta^{-1}A''+A\Delta_h\beta+A\beta^{-1}|\nabla_h\beta|_h^2\bigr)h_{ij}
+    -A\nabla^2_h\beta_{ij} \\
+  &amp;=A\bigl(\beta\operatorname{Ric}_h{}_{ij}-2\nabla^2_h\beta_{ij} \\
+    +(\Delta_h\beta+\beta^{-1}|\nabla_h\beta|_h^2)h_{ij}\bigr)
+    +\beta^{-1}A''h_{ij},
+\end{aligned}
+\]</span> which is (Sij). Taking the <span class="math inline">\(h\)</span>-trace yields (traceid). <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark.</strong></p>
+<p>Lemma 2.1 shows that all sub-static information for the separated ansatz lives in the slice block. In particular, the constancy problem for the line factor <span class="math inline">\(A\)</span> is entirely encoded by the slice geometry <span class="math inline">\((N,h,\beta)\)</span>.</p>
+</section>
+<section id="the-exact-threshold-criterion" class="level2">
+<h2 class="anchored" data-anchor-id="the-exact-threshold-criterion">The Exact Threshold Criterion</h2>
+<p>We begin by noting that finiteness of the threshold invariant is automatic whenever a separated sub-static solution exists.</p>
+<p><strong>Lemma 3.1 (Automatic finiteness of <span class="math inline">\(\kappa_*\)</span>).</strong></p>
+<p>Assume the separated ansatz (ansatz) with <span class="math inline">\(A&gt;0\)</span> and <span class="math inline">\(S(V,g)\ge 0\)</span>. Then <span class="math display">\[
+  \kappa_*=\inf_{y\in N}\lambda_{\min}^h\bigl(\mathcal{T}_h(\beta)(y)\bigr)&gt;-\infty.
+\]</span> <strong>Proof.</strong></p>
+<p>Multiplying (Sij) by <span class="math inline">\(\beta&gt;0\)</span> gives <span class="math display">\[
+  A(t)\mathcal{T}_h(\beta)(y)+A''(t)h(y)\ge 0
+    \qquad\text{for all } t\in\mathbb{R},\ y\in N. \tag{T-inequality}
+\]</span> Fix <span class="math inline">\(t_0\in\mathbb{R}\)</span>. For every <span class="math inline">\(y\in N\)</span> and every <span class="math inline">\(h\)</span>-unit vector <span class="math inline">\(X\in T_yN\)</span>, <span class="math display">\[
+  0\le A(t_0)\mathcal{T}_h(\beta)(X,X)+A''(t_0).
+\]</span> Since <span class="math inline">\(A(t_0)&gt;0\)</span>, <span class="math display">\[
+  \mathcal{T}_h(\beta)(X,X)\ge -\frac{A''(t_0)}{A(t_0)}.
+\]</span> Taking the infimum over all <span class="math inline">\(y\)</span> and all <span class="math inline">\(h\)</span>-unit vectors <span class="math inline">\(X\)</span> yields <span class="math display">\[
+  \kappa_*\ge -\frac{A''(t_0)}{A(t_0)}&gt;-\infty. \qquad\square
+\]</span> <strong>Theorem 3.2 (Exact threshold criterion).</strong></p>
+<p>Under the separated ansatz (ansatz) with <span class="math inline">\(A&gt;0\)</span>, the sub-static condition <span class="math inline">\(S(V,g)\ge 0\)</span> is equivalent to <span class="math display">\[
+  A''(t)+\kappa_* A(t)\ge 0   \qquad\text{for all } t\in\mathbb{R}. \tag{ode}
+\]</span> <strong>Proof.</strong></p>
+<p>By Lemma 2.1, <span class="math inline">\(S\ge 0\)</span> is equivalent to <span class="math display">\[
+  A(t)\mathcal{T}_h(\beta)(y)+A''(t)h(y)\ge 0
+    \quad\text{as bilinear forms on }T_yN,\quad
+    \forall t\in\mathbb{R},\ y\in N.
+\]</span> Assume first that (ode) holds. For every <span class="math inline">\(y\in N\)</span> and every <span class="math inline">\(h\)</span>-unit vector <span class="math inline">\(X\in T_yN\)</span>, <span class="math display">\[
+  \mathcal{T}_h(\beta)(X,X)\ge \lambda_{\min}^h(\mathcal{T}_h(\beta)(y))\ge \kappa_*.
+\]</span> Hence <span class="math display">\[
+  A(t)\mathcal{T}_h(\beta)(X,X)+A''(t)\ge A(t)\kappa_*+A''(t)\ge 0,
+\]</span> which proves (T-inequality), and therefore <span class="math inline">\(S\ge 0\)</span>.</p>
+<p>Conversely, assume (T-inequality). Fix <span class="math inline">\(t\in\mathbb{R}\)</span>. Then for every <span class="math inline">\(y\in N\)</span> and every <span class="math inline">\(h\)</span>-unit vector <span class="math inline">\(X\in T_yN\)</span>, <span class="math display">\[
+  0\le A(t)\mathcal{T}_h(\beta)(X,X)+A''(t).
+\]</span> Taking the infimum over <span class="math inline">\(y\)</span> and <span class="math inline">\(X\)</span> gives <span class="math display">\[
+  0\le A(t)\kappa_* + A''(t),
+\]</span> which is (ode). <span class="math inline">\(\square\)</span></p>
+<p><strong>Corollary 3.3 (Bounded-solution criterion).</strong></p>
+<p>Assume the separated ansatz (ansatz) with <span class="math inline">\(A&gt;0\)</span> bounded on <span class="math inline">\(\mathbb{R}\)</span>. Then a bounded positive nonconstant line factor exists if and only if <span class="math inline">\(\kappa_*&gt;0\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>If <span class="math inline">\(\kappa_*&gt;0\)</span>, choose <span class="math inline">\(0&lt;\omega^2&lt;\kappa_*\)</span> and <span class="math inline">\(0&lt;\varepsilon&lt;1\)</span>, and set <span class="math display">\[
+  A(t)=1+\varepsilon\sin(\omega t).
+\]</span> Then <span class="math inline">\(A\)</span> is bounded, positive, and nonconstant, and <span class="math display">\[
+  A''(t)+\kappa_* A(t)
+  =\kappa_*+\varepsilon(\kappa_*-\omega^2)\sin(\omega t)
+  \ge \kappa_*-\varepsilon(\kappa_*-\omega^2)&gt;0.
+\]</span> So Theorem 3.2 gives <span class="math inline">\(S\ge 0\)</span>.</p>
+<p>Conversely, suppose <span class="math inline">\(A\)</span> is bounded, positive, and nonconstant with <span class="math inline">\(S\ge 0\)</span>. By Theorem 3.2, <span class="math inline">\(A''+\kappa_* A\ge 0\)</span>. If <span class="math inline">\(\kappa_*&lt;0\)</span>, write <span class="math inline">\(\kappa_*=-\mu\)</span> with <span class="math inline">\(\mu&gt;0\)</span>. Then <span class="math display">\[
+  A''(t)\ge \mu A(t)&gt;0   \qquad\text{for all } t.
+\]</span> Thus <span class="math inline">\(A'\)</span> is strictly increasing. Fix <span class="math inline">\(t_0\in\mathbb{R}\)</span>. If <span class="math inline">\(A'(t_0)\ge 0\)</span>, then <span class="math inline">\(A'(t)&gt;0\)</span> for all <span class="math inline">\(t&gt;t_0\)</span>, so <span class="math inline">\(A(t)\to+\infty\)</span> as <span class="math inline">\(t\to+\infty\)</span>. If <span class="math inline">\(A'(t_0)&lt;0\)</span>, then <span class="math inline">\(A'(t)\le A'(t_0)&lt;0\)</span> for every <span class="math inline">\(t&lt;t_0\)</span>, hence <span class="math display">\[
+  A(t)\ge A(t_0)-A'(t_0)(t_0-t)\to+\infty
+    \quad(t\to-\infty).
+\]</span> So <span class="math inline">\(A\)</span> cannot be bounded. If <span class="math inline">\(\kappa_*=0\)</span>, then <span class="math inline">\(A''\ge 0\)</span>, so <span class="math inline">\(A\)</span> is convex; a convex function bounded above on all of <span class="math inline">\(\mathbb{R}\)</span> is constant. Both alternatives contradict the assumption that <span class="math inline">\(A\)</span> is bounded and nonconstant. Therefore <span class="math inline">\(\kappa_*&gt;0\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Proposition 3.4 (Uniform spectral-gap criterion).</strong></p>
+<p>For a fixed slice <span class="math inline">\((N,h,\beta)\)</span>, the following are equivalent.</p>
+<ol type="i">
+<li><p>There exists a bounded positive nonconstant <span class="math inline">\(A:\mathbb{R}\to(0,\infty)\)</span> for which the separated ansatz is sub-static.</p></li>
+<li><p><span class="math inline">\(\kappa_*&gt;0\)</span>.</p></li>
+<li><p>There exists <span class="math inline">\(\kappa&gt;0\)</span> such that <span class="math inline">\(\mathcal{T}_h(\beta)\ge \kappa h\)</span> pointwise on <span class="math inline">\(N\)</span>.</p></li>
+</ol>
+<p>If <span class="math inline">\(N\)</span> is compact, these are further equivalent to:</p>
+<ol start="4" type="i">
+<li><span class="math inline">\(\mathcal{T}_h(\beta)\)</span> is positive-definite at every point of <span class="math inline">\(N\)</span>.</li>
+</ol>
+<p><strong>Proof.</strong></p>
+<p>The equivalence of (i) and (ii) is Corollary 3.3. The equivalence of (ii) and (iii) is immediate from the definition of <span class="math inline">\(\kappa_*\)</span> as the infimum of the smallest <span class="math inline">\(h\)</span>-eigenvalue of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>.</p>
+<p>Assume now that <span class="math inline">\(N\)</span> is compact. If (iv) holds, the continuous function <span class="math inline">\(y\mapsto \lambda_{\min}^h(\mathcal{T}_h(\beta)(y))\)</span> attains a positive minimum, so <span class="math inline">\(\kappa_*&gt;0\)</span>. Conversely, if <span class="math inline">\(\kappa_*&gt;0\)</span>, then <span class="math inline">\(\mathcal{T}_h(\beta)\ge \kappa_* h\)</span>, hence <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> is positive-definite everywhere. <span class="math inline">\(\square\)</span></p>
+<p><strong>Example 3.5 (Three basic regimes).</strong></p>
+<p>The sign possibilities for <span class="math inline">\(\kappa_*\)</span> are all realized.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(n\ge 3\)</span>, <span class="math inline">\(N=S^{n-1}\)</span> with the round metric of sectional curvature <span class="math inline">\(1\)</span>, and <span class="math inline">\(\beta\equiv 1\)</span>, then <span class="math inline">\(\mathcal{T}_h(\beta)=(n-2)h\)</span>, so <span class="math inline">\(\kappa_*=n-2&gt;0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(N=T^{n-1}\)</span> is flat and <span class="math inline">\(\beta\equiv c&gt;0\)</span>, then <span class="math inline">\(\mathcal{T}_h(\beta)=0\)</span>, so <span class="math inline">\(\kappa_*=0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(N=\mathbb{R}^m\)</span> is Euclidean and <span class="math inline">\(\beta(y)=1+(y^1)^2\)</span>, then <span class="math display">\[
+  \mathcal{T}_h(\beta)
+  =\bigl(-2+2(y^1)^2\bigr)dy^1\otimes dy^1
+  +\bigl(2+6(y^1)^2\bigr)\sum_{\alpha=2}^m dy^\alpha\otimes dy^\alpha,
+\]</span> and hence <span class="math inline">\(\kappa_*=-2&lt;0\)</span>.</p></li>
+</ol>
+</section>
+<section id="qualitative-consequences-and-model-families" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-consequences-and-model-families">Qualitative Consequences and Model Families</h2>
+<p>The exact threshold criterion has a simple conceptual consequence: the separated theory is controlled by the sign of a single spectral quantity. This section spells out how the threshold interacts with the more local trace and tensor tests and explains why <span class="math inline">\(\kappa_*\)</span> is the correct global invariant.</p>
+<p><strong>Proposition 4.1 (Hierarchy of sign conditions).</strong></p>
+<p>Assume the separated ansatz with <span class="math inline">\(A&gt;0\)</span> bounded and <span class="math inline">\(S\ge 0\)</span>.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\kappa_*&gt;0\)</span>, then <span class="math inline">\(\Theta_h(\beta)\)</span> is positive-definite at every point of <span class="math inline">\(N\)</span>, and <span class="math inline">\(\mathcal{Q}_h(\beta)&gt;0\)</span> everywhere.</p></li>
+<li><p>If there exist <span class="math inline">\(y_0\in N\)</span> and <span class="math inline">\(0\neq X\in T_{y_0}N\)</span> such that <span class="math inline">\(\Theta_h(\beta)(X,X)\le 0\)</span>, then <span class="math inline">\(\kappa_*\le 0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(N\)</span> is compact, then <span class="math inline">\(\kappa_*&gt;0\)</span> if and only if <span class="math inline">\(\Theta_h(\beta)\)</span> is positive-definite everywhere.</p></li>
+</ol>
+<p><strong>Proof.</strong></p>
+<p>If <span class="math inline">\(\kappa_*&gt;0\)</span>, then every eigenvalue of <span class="math inline">\(\mathcal{T}_h(\beta)(y)\)</span> is bounded below by <span class="math inline">\(\kappa_*\)</span>, so <span class="math inline">\(\mathcal{T}_h(\beta)(y)\)</span> is positive-definite for every <span class="math inline">\(y\)</span>. Since <span class="math inline">\(\mathcal{T}_h(\beta)=\beta\Theta_h(\beta)\)</span> and <span class="math inline">\(\beta&gt;0\)</span>, the same is true of <span class="math inline">\(\Theta_h(\beta)\)</span>. Taking traces yields <span class="math display">\[
+  \beta(y)\mathcal{Q}_h(\beta)(y)=\operatorname{tr}_h\mathcal{T}_h(\beta)(y)\ge m\kappa_*&gt;0,
+\]</span> so <span class="math inline">\(\mathcal{Q}_h(\beta)&gt;0\)</span>.</p>
+<p>If <span class="math inline">\(\Theta_h(\beta)(X,X)\le 0\)</span> at <span class="math inline">\((y_0,X)\)</span>, then <span class="math display">\[
+  \mathcal{T}_h(\beta)(X,X)=\beta(y_0)\Theta_h(\beta)(X,X)\le 0.
+\]</span> Hence the smallest eigenvalue of <span class="math inline">\(\mathcal{T}_h(\beta)(y_0)\)</span> is nonpositive, so <span class="math inline">\(\kappa_*\le 0\)</span>. The compact statement follows from Proposition 3.4. <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 4.2.</strong></p>
+<p>Proposition 4.1 clarifies the relation between the local and global criteria. A positive threshold forces positivity of every local obstruction, while a single nonpositive tensor direction excludes the positive-threshold regime. The threshold criterion is therefore best viewed as the global completion of the local obstruction theory.</p>
+<p><strong>Proposition 4.3 (Constant <span class="math inline">\(\beta\)</span> and Einstein slices).</strong></p>
+<p>Suppose <span class="math inline">\(\beta\equiv c&gt;0\)</span> is constant. Then <span class="math display">\[
+  \mathcal{T}_h(\beta)=c^2\operatorname{Ric}_h, \qquad
+  \kappa_*=c^2\inf_{y\in N}\lambda_{\min}^h\bigl(\operatorname{Ric}_h(y)\bigr).
+\]</span> In particular, if <span class="math inline">\(h\)</span> is Einstein with <span class="math inline">\(\operatorname{Ric}_h=\lambda h\)</span>, then <span class="math inline">\(\kappa_*=c^2\lambda\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>If <span class="math inline">\(\beta\)</span> is constant, then <span class="math inline">\(\nabla_h\beta=0\)</span> and <span class="math inline">\(\nabla^2_h\beta=0\)</span>, so <span class="math inline">\(\mathcal{T}_h(\beta)=\beta^2\operatorname{Ric}_h\)</span>. The eigenvalue formula is immediate. <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 4.4.</strong></p>
+<p>Proposition 4.3 shows that the threshold criterion extends the standard constant-curvature examples in the simplest possible way. Positive Einstein slices lie in the positive-threshold regime, Ricci-flat slices lie in the borderline regime, and negative Einstein slices lie in the obstructed regime.</p>
+<section id="compact-and-noncompact-model-families" class="level3">
+<h3 class="anchored" data-anchor-id="compact-and-noncompact-model-families">Compact and noncompact model families</h3>
+<p>The compact case is especially transparent because positivity of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> immediately produces a uniform positive lower bound. On noncompact slices, by contrast, the smallest eigenvalue may drift to zero or to <span class="math inline">\(-\infty\)</span> at infinity, so the global invariant <span class="math inline">\(\kappa_*\)</span> is genuinely stronger than pointwise positivity at individual points.</p>
+<p><strong>Example 4.5 (Compact positive regime).</strong></p>
+<p>If <span class="math inline">\(n\ge 3\)</span>, <span class="math inline">\(N=S^{n-1}\)</span> is round, and <span class="math inline">\(\beta\equiv 1\)</span>, then <span class="math inline">\(\mathcal{T}_h(\beta)=(n-2)h\)</span>, so the positive regime is realized with a uniform gap. In particular, the periodic family <span class="math inline">\(A(t)=1+\varepsilon\sin(\omega t)\)</span> with <span class="math inline">\(\omega^2&lt;n-2\)</span> gives explicit bounded positive nonconstant separated sub-static triples.</p>
+<p><strong>Example 4.6 (Borderline compact regime).</strong></p>
+<p>If <span class="math inline">\(N=T^{n-1}\)</span> is flat and <span class="math inline">\(\beta\equiv c&gt;0\)</span>, then <span class="math inline">\(\mathcal{T}_h(\beta)=0\)</span> and the condition <span class="math inline">\(S\ge 0\)</span> reduces to <span class="math inline">\(A''\ge 0\)</span>. The borderline regime is therefore genuinely rigid: every bounded positive line factor is constant.</p>
+<p><strong>Example 4.7 (One-dimensional negative regime).</strong></p>
+<p>Let <span class="math inline">\(N=\mathbb{R}\)</span> with metric <span class="math inline">\(dy^2\)</span> and <span class="math inline">\(\beta(y)=\cosh y\)</span>. Since the slice is one-dimensional, <span class="math inline">\(\operatorname{Ric}_h=0\)</span> and <span class="math display">\[
+  \mathcal{T}_h(\beta)=-2\beta\beta''+(\beta\beta''+(\beta')^2)dy^2.
+\]</span> Using <span class="math inline">\(\beta''=\cosh y\)</span> and <span class="math inline">\((\beta')^2=\sinh^2 y\)</span>, one obtains <span class="math display">\[
+  \mathcal{T}_h(\beta)=\bigl(-\cosh^2 y+\sinh^2 y\bigr)dy^2=-dy^2.
+\]</span> Thus <span class="math inline">\(\kappa_*=-1&lt;0\)</span>.</p>
+<p><strong>Example 4.8 (Anisotropic noncompact negative regime).</strong></p>
+<p>The Euclidean example in Example 3.5(iii) shows that the negative regime may be caused by a single bad direction even when all transverse directions are uniformly positive. This anisotropy is precisely why the threshold is defined through the smallest eigenvalue rather than through a trace or averaged quantity.</p>
+</section>
+<section id="why-the-threshold-is-the-correct-invariant" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-threshold-is-the-correct-invariant">Why the threshold is the correct invariant</h3>
+<p>The local quantities <span class="math inline">\(\mathcal{Q}_h(\beta)\)</span> and <span class="math inline">\(\Theta_h(\beta)\)</span> arise naturally from the slice decomposition, but the existence problem for bounded positive nonconstant line factors is not fundamentally a trace problem and not even a pointwise tensor problem. The relevant inequality is <span class="math display">\[
+  A(t)\mathcal{T}_h(\beta)(y)+A''(t)h(y)\ge 0.
+\]</span> For each fixed <span class="math inline">\(t\)</span>, the only slice quantity that controls this inequality in all unit directions simultaneously is the smallest eigenvalue of <span class="math inline">\(\mathcal{T}_h(\beta)(y)\)</span>. Passing from <span class="math inline">\(y\)</span> to the whole slice then leads exactly to <span class="math inline">\(\kappa_*\)</span>.</p>
+<p>From this point of view, the hierarchy of statements in the paper is natural. Tracing the slice block gives the trace obstruction, evaluating on one vector gives the tensor obstruction, and minimizing over all points and directions gives the exact threshold criterion. The strongest theorem is therefore not a separate idea from the local obstructions; it is the sharp global form of the same slice identity.</p>
+</section>
+</section>
+<section id="scaling-and-one-dimensional-slices" class="level2">
+<h2 class="anchored" data-anchor-id="scaling-and-one-dimensional-slices">Scaling and One-Dimensional Slices</h2>
+<p>Two simple structural observations are worth recording separately. The first concerns the effect of rescaling the lapse factor <span class="math inline">\(\beta\)</span>. The second gives a complete description of the threshold tensor when the slice is one-dimensional.</p>
+<p><strong>Proposition 5.1 (Scaling in <span class="math inline">\(\beta\)</span>).</strong></p>
+<p>For every constant <span class="math inline">\(c&gt;0\)</span>, <span class="math display">\[
+  \mathcal{T}_h(c\beta)=c^2\mathcal{T}_h(\beta), \qquad
+  \kappa_*(h,c\beta)=c^2\kappa_*(h,\beta).
+\]</span> Consequently, multiplying <span class="math inline">\(\beta\)</span> by a positive constant preserves the sign of <span class="math inline">\(\kappa_*\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>Using the definition, <span class="math display">\[
+\begin{aligned}
+  \mathcal{T}_h(c\beta)
+  &amp;=(c\beta)^2\operatorname{Ric}_h-2(c\beta)\nabla^2_h(c\beta) \\
+    +\bigl((c\beta)\Delta_h(c\beta)+|\nabla_h(c\beta)|_h^2\bigr)h \\
+  &amp;=c^2\beta^2\operatorname{Ric}_h-2c^2\beta\nabla^2_h\beta \\
+    +c^2\bigl(\beta\Delta_h\beta+|\nabla_h\beta|_h^2\bigr)h \\
+  &amp;=c^2\mathcal{T}_h(\beta).
+\end{aligned}
+\]</span> Taking the smallest eigenvalue and the infimum over <span class="math inline">\(N\)</span> yields the formula for <span class="math inline">\(\kappa_*\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 5.2.</strong></p>
+<p>Proposition 5.1 is consistent with the separated metric <span class="math inline">\(g=\beta^2dt^2+h\)</span>. Multiplying <span class="math inline">\(\beta\)</span> by a constant rescales the distinguished line direction and therefore changes the threshold by a quadratic factor. The sign of the threshold, which is the quantity relevant to rigidity and existence, is unaffected.</p>
+<p><strong>Proposition 5.3 (One-dimensional slice formula).</strong></p>
+<p>Assume <span class="math inline">\(m=1\)</span>, so <span class="math inline">\(N\)</span> is one-dimensional with local coordinate <span class="math inline">\(y\)</span> and metric <span class="math inline">\(h=dy^2\)</span>. Then <span class="math display">\[
+  \mathcal{T}_h(\beta)=\bigl((\beta')^2-\beta\beta''\bigr)dy^2
+  =-\beta^2(\ln\beta)''dy^2.
+\]</span> In particular, <span class="math display">\[
+  \kappa_*=\inf_{y\in N}\bigl((\beta'(y))^2-\beta(y)\beta''(y)\bigr).
+\]</span> <strong>Proof.</strong></p>
+<p>In one dimension <span class="math inline">\(\operatorname{Ric}_h=0\)</span>, <span class="math inline">\(\nabla^2_h\beta=\beta''dy^2\)</span>, and <span class="math inline">\(\Delta_h\beta=\beta''\)</span>. Substituting into the definition gives <span class="math display">\[
+  \mathcal{T}_h(\beta)=-2\beta\beta''dy^2+\bigl(\beta\beta''+(\beta')^2\bigr)dy^2
+  =\bigl((\beta')^2-\beta\beta''\bigr)dy^2.
+\]</span> Since <span class="math display">\[
+  (\ln\beta)'=\frac{\beta'}{\beta}, \qquad
+  (\ln\beta)''=\frac{\beta\beta''-(\beta')^2}{\beta^2},
+\]</span> the second identity follows. <span class="math inline">\(\square\)</span></p>
+<p><strong>Corollary 5.4 (Compact one-dimensional slices).</strong></p>
+<p>Assume <span class="math inline">\(m=1\)</span> and <span class="math inline">\(N\)</span> is compact. Then every bounded positive line factor is constant. Equivalently, there is no bounded positive nonconstant line factor in the separated sub-static ansatz over a compact one-dimensional slice.</p>
+<p><strong>Proof.</strong></p>
+<p>If <span class="math inline">\(\beta\)</span> is constant, then <span class="math inline">\(\mathcal{T}_h(\beta)=0\)</span> by Proposition 5.3, so <span class="math inline">\(\kappa_*=0\)</span> and Corollary 3.3 gives constancy of <span class="math inline">\(A\)</span>.</p>
+<p>Assume <span class="math inline">\(\beta\)</span> is nonconstant. Since <span class="math inline">\(N\)</span> is compact, <span class="math inline">\(\beta\)</span> attains a minimum at some point <span class="math inline">\(y_0\)</span>. There one has <span class="math inline">\(\beta'(y_0)=0\)</span> and <span class="math inline">\(\beta''(y_0)\ge 0\)</span>. Proposition 5.3 then gives <span class="math display">\[
+  \mathcal{T}_h(\beta)(y_0)=-\beta(y_0)\beta''(y_0)dy^2\le 0,
+\]</span> so <span class="math inline">\(\kappa_*\le 0\)</span>. Corollary 3.3 again forces <span class="math inline">\(A\)</span> to be constant. <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 5.5.</strong></p>
+<p>Corollary 5.4 shows that the positive-threshold regime is inherently a higher-dimensional phenomenon, at least for compact slices. In one dimension the threshold can still be positive on noncompact examples, but compactness forces a minimum point of <span class="math inline">\(\beta\)</span> and therefore a nonpositive value of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>.</p>
+<p><strong>Example 5.6 (Three one-dimensional models).</strong></p>
+<p>The one-dimensional formula makes several examples completely transparent.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\beta(y)=e^{ay}\)</span> on <span class="math inline">\(\mathbb{R}\)</span>, then <span class="math inline">\((\beta')^2-\beta\beta''=0\)</span>, so <span class="math inline">\(\kappa_*=0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\beta(y)=\cosh y\)</span>, then <span class="math inline">\((\beta')^2-\beta\beta''=-1\)</span>, so <span class="math inline">\(\kappa_*=-1\)</span>; this recovers Example 4.7.</p></li>
+<li><p>If <span class="math inline">\(\beta(y)=e^{-y^2}\)</span> on <span class="math inline">\(\mathbb{R}\)</span>, then <span class="math display">\[
+  (\beta')^2-\beta\beta''=2e^{-2y^2},
+\]</span> so <span class="math inline">\(\kappa_*=0\)</span> even though the threshold is strictly positive at every finite point. This illustrates that on noncompact slices, pointwise positivity does not imply the uniform positive gap required by Corollary 3.3.</p></li>
+</ol>
+</section>
+<section id="sharp-local-obstructions" class="level2">
+<h2 class="anchored" data-anchor-id="sharp-local-obstructions">Sharp Local Obstructions</h2>
+<p>The exact threshold criterion has immediate local corollaries. The strict-sign cases give nonexistence rather than mere constancy.</p>
+<p><strong>Proposition 6.1 (Sharp trace obstruction).</strong></p>
+<p>Assume the separated ansatz with <span class="math inline">\(A&gt;0\)</span> bounded and <span class="math inline">\(S\ge 0\)</span>. Fix <span class="math inline">\(y_0\in N\)</span>.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\mathcal{Q}_h(\beta)(y_0)&lt;0\)</span>, then no bounded positive line factor exists.</p></li>
+<li><p>If <span class="math inline">\(\mathcal{Q}_h(\beta)(y_0)=0\)</span>, then every bounded positive line factor is constant.</p></li>
+</ol>
+<p><strong>Proof.</strong></p>
+<p>By (traceid), <span class="math display">\[
+  0\le A(t)\mathcal{Q}_h(\beta)(y_0)+(n-1)\beta(y_0)^{-1}A''(t)
+    \qquad\text{for all } t\in\mathbb{R}.
+\]</span> If <span class="math inline">\(\mathcal{Q}_h(\beta)(y_0)&lt;0\)</span>, define <span class="math display">\[
+  c:=-\frac{\beta(y_0)\mathcal{Q}_h(\beta)(y_0)}{n-1}&gt;0.
+\]</span> Then <span class="math inline">\(A''(t)\ge cA(t)&gt;0\)</span> for all <span class="math inline">\(t\)</span>. The argument from the proof of Corollary 3.3 shows that <span class="math inline">\(A\)</span> is unbounded in at least one direction, which is impossible. If <span class="math inline">\(\mathcal{Q}_h(\beta)(y_0)=0\)</span>, then <span class="math inline">\(A''\ge 0\)</span>, so <span class="math inline">\(A\)</span> is convex. Since <span class="math inline">\(A\)</span> is bounded above on <span class="math inline">\(\mathbb{R}\)</span>, it is constant. <span class="math inline">\(\square\)</span></p>
+<p><strong>Proposition 6.2 (Sharp tensor obstruction).</strong></p>
+<p>Assume the separated ansatz with <span class="math inline">\(A&gt;0\)</span> bounded and <span class="math inline">\(S\ge 0\)</span>. Fix <span class="math inline">\(y_0\in N\)</span> and <span class="math inline">\(0\neq X\in T_{y_0}N\)</span>.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(\Theta_h(\beta)(X,X)&lt;0\)</span>, then no bounded positive line factor exists.</p></li>
+<li><p>If <span class="math inline">\(\Theta_h(\beta)(X,X)=0\)</span>, then every bounded positive line factor is constant.</p></li>
+</ol>
+<p><strong>Proof.</strong></p>
+<p>Evaluating (Sij) on <span class="math inline">\((X,X)\)</span> gives <span class="math display">\[
+  0\le A(t)\Theta_h(\beta)(X,X)+\beta(y_0)^{-1}A''(t)|X|_h^2
+    \qquad\text{for all } t\in\mathbb{R}.
+\]</span> If <span class="math inline">\(\Theta_h(\beta)(X,X)&lt;0\)</span>, define <span class="math display">\[
+  c:=-\frac{\beta(y_0)\Theta_h(\beta)(X,X)}{|X|_h^2}&gt;0.
+\]</span> Then <span class="math inline">\(A''(t)\ge cA(t)&gt;0\)</span> for all <span class="math inline">\(t\)</span>, so the same monotonicity argument shows that <span class="math inline">\(A\)</span> cannot be bounded. If <span class="math inline">\(\Theta_h(\beta)(X,X)=0\)</span>, then <span class="math inline">\(A''\ge 0\)</span>, hence <span class="math inline">\(A\)</span> is convex and therefore constant. <span class="math inline">\(\square\)</span></p>
+<p><strong>Corollary 6.3 (Compact slices).</strong></p>
+<p>Assume <span class="math inline">\(N\)</span> is compact. Then there exists a bounded positive nonconstant line factor for the separated ansatz if and only if <span class="math inline">\(\Theta_h(\beta)\)</span> is positive-definite everywhere on <span class="math inline">\(N\)</span>, equivalently if and only if <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> is positive-definite everywhere on <span class="math inline">\(N\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>Since <span class="math inline">\(\mathcal{T}_h(\beta)=\beta\Theta_h(\beta)\)</span> and <span class="math inline">\(\beta&gt;0\)</span>, positive-definiteness of <span class="math inline">\(\Theta_h(\beta)\)</span> and <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> are equivalent pointwise. The claim then follows from Proposition 3.4. <span class="math inline">\(\square\)</span></p>
+<p><strong>Example 6.4 (Tensor obstruction where the trace obstruction is silent).</strong></p>
+<p>Let <span class="math inline">\(n=3\)</span>, let <span class="math inline">\(N=\mathbb{R}^2\)</span> with the Euclidean metric, and set <span class="math inline">\(\beta(x,y)=e^x+c\)</span>, <span class="math inline">\(c\ge 0\)</span>. Then <span class="math inline">\(\operatorname{Ric}_h=0\)</span>, <span class="math inline">\(\nabla^2_h\beta=e^xdx\otimes dx\)</span>, <span class="math inline">\(\Delta_h\beta=e^x\)</span>, and <span class="math inline">\(\beta^{-1}|\nabla\beta|_h^2=e^{2x}/(e^x+c)\)</span>. Hence <span class="math display">\[
+  \Theta_h(\beta)
+  =-2e^xdx\otimes dx
+  +\Bigl(e^x+\frac{e^{2x}}{e^x+c}\Bigr)(dx^2+dy^2)
+  =-\frac{ce^x}{e^x+c}\,dx\otimes dx
+  +\Bigl(e^x+\frac{e^{2x}}{e^x+c}\Bigr)dy\otimes dy.
+\]</span> Its trace is <span class="math display">\[
+  \mathcal{Q}_h(\beta)=2\frac{e^{2x}}{e^x+c}&gt;0,
+\]</span> so Proposition 6.1 is silent. If <span class="math inline">\(c=0\)</span>, then the smallest eigenvalue of <span class="math inline">\(\Theta_h(\beta)\)</span> is <span class="math inline">\(0\)</span> everywhere, so Proposition 6.2 forces every bounded positive line factor to be constant. If <span class="math inline">\(c&gt;0\)</span>, then <span class="math inline">\(\Theta_h(\beta)(\partial_x,\partial_x)=-ce^x/(e^x+c)&lt;0\)</span>, so Proposition 6.2 shows that no bounded positive line factor exists.</p>
+</section>
+<section id="three-dimensional-consequences" class="level2">
+<h2 class="anchored" data-anchor-id="three-dimensional-consequences">Three-Dimensional Consequences</h2>
+<p>Assume from now on that <span class="math inline">\(n=3\)</span>, so the slice <span class="math inline">\(N\)</span> is a surface.</p>
+<p><strong>Proposition 7.1 (Critical-point eigenvalues).</strong></p>
+<p>Let <span class="math inline">\(y_0\)</span> be a critical point of <span class="math inline">\(\beta\)</span>, and let <span class="math inline">\(\lambda_1,\lambda_2\)</span> be the eigenvalues of <span class="math inline">\(\nabla^2_h\beta(y_0)\)</span>. Then the eigenvalues of <span class="math inline">\(\Theta_h(\beta)(y_0)\)</span> are <span class="math display">\[
+  \mu_1=\beta(y_0)K_h(y_0)+\lambda_2-\lambda_1, \qquad
+  \mu_2=\beta(y_0)K_h(y_0)+\lambda_1-\lambda_2.
+\]</span> Consequently, <span class="math display">\[
+  \operatorname{tr}_h\Theta_h(\beta)(y_0)=2\beta(y_0)K_h(y_0)=\beta(y_0)R_h(y_0),
+\]</span> and <span class="math display">\[
+  \det_h\Theta_h(\beta)(y_0)=\beta(y_0)^2K_h(y_0)^2-(\lambda_1-\lambda_2)^2.
+\]</span> <strong>Proof.</strong></p>
+<p>At a critical point, <span class="math inline">\(\nabla_h\beta(y_0)=0\)</span>, so <span class="math inline">\(\Delta_h\beta(y_0)=\lambda_1+\lambda_2\)</span>. Since <span class="math inline">\(N\)</span> is a surface, <span class="math inline">\(\operatorname{Ric}_h=K_hh\)</span>. Therefore <span class="math display">\[
+  \Theta_h(\beta)(y_0)=\beta(y_0)K_h(y_0)h-2\nabla^2_h\beta(y_0)+(\lambda_1+\lambda_2)h.
+\]</span> Diagonalizing <span class="math inline">\(\nabla^2_h\beta(y_0)\)</span> in an orthonormal basis gives the stated formulas. The trace and determinant formulas are immediate. <span class="math inline">\(\square\)</span></p>
+<p><strong>Theorem 7.2 (Three-dimensional curvature-anisotropy criterion).</strong></p>
+<p>Assume <span class="math inline">\(n=3\)</span> and that <span class="math inline">\(A\)</span> is bounded, positive, and nonconstant. At every critical point <span class="math inline">\(y_0\)</span> of <span class="math inline">\(\beta\)</span>, <span class="math display">\[
+  \beta(y_0)K_h(y_0)&gt;|\lambda_1-\lambda_2|.
+\]</span> Equivalently, <span class="math display">\[
+  \det_h\Theta_h(\beta)(y_0)&gt;0 \qquad\text{and}\qquad \operatorname{tr}_h\Theta_h(\beta)(y_0)&gt;0.
+\]</span> In particular, <span class="math inline">\(K_h(y_0)&gt;0\)</span> at every critical point of <span class="math inline">\(\beta\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>By Proposition 6.2, nonconstant bounded line factors are possible only if <span class="math inline">\(\Theta_h(\beta)\)</span> is positive-definite at every point. At a critical point <span class="math inline">\(y_0\)</span>, this means <span class="math inline">\(\mu_1&gt;0\)</span> and <span class="math inline">\(\mu_2&gt;0\)</span>, where <span class="math inline">\(\mu_1,\mu_2\)</span> are the eigenvalues from Proposition 7.1. Their positivity is exactly the curvature-anisotropy inequality. The determinant and trace conditions are equivalent on a surface. Since <span class="math inline">\(\beta&gt;0\)</span>, the inequality implies <span class="math inline">\(K_h(y_0)&gt;0\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Corollary 7.3 (Critical-point obstruction).</strong></p>
+<p>Assume <span class="math inline">\(n=3\)</span> and let <span class="math inline">\(y_0\)</span> be a critical point of <span class="math inline">\(\beta\)</span>.</p>
+<ol type="i">
+<li><p>If <span class="math inline">\(K_h(y_0)&lt;|\lambda_1-\lambda_2|/\beta(y_0)\)</span>, then no bounded positive line factor exists.</p></li>
+<li><p>If <span class="math inline">\(K_h(y_0)=|\lambda_1-\lambda_2|/\beta(y_0)\)</span>, then every bounded positive line factor is constant.</p></li>
+<li><p>If <span class="math inline">\(R_h(y_0)\le 0\)</span>, then every bounded positive line factor is constant.</p></li>
+</ol>
+<p><strong>Proof.</strong></p>
+<p>The first two statements follow from Proposition 7.1 together with Proposition 6.2: strict inequality makes one eigenvalue of <span class="math inline">\(\Theta_h(\beta)(y_0)\)</span> negative, while equality makes one eigenvalue zero. For (iii), since <span class="math inline">\(R_h=2K_h\)</span> on a surface and <span class="math inline">\(\nabla_h\beta(y_0)=0\)</span>, the trace formula gives <span class="math display">\[
+  \mathcal{Q}_h(\beta)(y_0)=\beta(y_0)R_h(y_0).
+\]</span> Thus <span class="math inline">\(R_h(y_0)\le 0\)</span> implies <span class="math inline">\(\mathcal{Q}_h(\beta)(y_0)\le 0\)</span>, and Proposition 6.1 forces constancy. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="conformal-reformulation-and-boundary-control" class="level2">
+<h2 class="anchored" data-anchor-id="conformal-reformulation-and-boundary-control">Conformal Reformulation and Boundary Control</h2>
+<p>Set <span class="math inline">\(u=\beta^{-1}\)</span> and <span class="math inline">\(\bar{h}=u^2h\)</span>. The threshold tensor admits the following conformal expression.</p>
+<p><strong>Proposition 8.1 (Conformal identity).</strong></p>
+<p>With <span class="math inline">\(m=\dim N\)</span>, <span class="math inline">\(u=\beta^{-1}\)</span>, and <span class="math inline">\(\bar{h}=u^2h\)</span>, <span class="math display">\[
+  \mathcal{T}_h(\beta)=u^{-2}\operatorname{Ric}_{\bar{h}}+mu^{-3}\nabla^2_{\bar{h}} u.
+\]</span> Consequently, <span class="math display">\[
+  \kappa_*=\inf_{y\in N}\lambda_{\min}^{\bar{h}}\bigl(\operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}} u\bigr). \tag{kstar-conf}
+\]</span> <strong>Proof.</strong></p>
+<p>Set <span class="math inline">\(f=\ln u\)</span>, so that <span class="math inline">\(\bar{h}=e^{2f}h\)</span>. Under the conformal change <span class="math inline">\(\bar{h}=e^{2f}h\)</span>, <span class="math display">\[
+  \operatorname{Ric}_{\bar{h}}
+  =\operatorname{Ric}_h-(m-2)\bigl(\nabla^2_hf-df\otimes df\bigr)
+  -\bigl(\Delta_hf+(m-2)|\nabla_hf|_h^2\bigr)h.
+\]</span> Since <span class="math inline">\(f=\ln u\)</span>, <span class="math display">\[
+  df=u^{-1}du, \qquad
+  \nabla^2_hf=u^{-1}\nabla^2_hu-u^{-2}du\otimes du,
+\]</span> <span class="math display">\[
+  \Delta_hf=u^{-1}\Delta_hu-u^{-2}|\nabla_hu|_h^2, \qquad
+  |\nabla_hf|_h^2=u^{-2}|\nabla_hu|_h^2.
+\]</span> Substituting yields <span class="math display">\[
+\begin{aligned}
+  \operatorname{Ric}_{\bar{h}}
+  &amp;=\operatorname{Ric}_h-(m-2)u^{-1}\nabla^2_hu+2(m-2)u^{-2}du\otimes du \\
+  &amp;\quad -\bigl(u^{-1}\Delta_hu+(m-3)u^{-2}|\nabla_hu|_h^2\bigr)h.
+\end{aligned}
+\]</span> The Hessian transforms by <span class="math display">\[
+  \nabla^2_{\bar{h}}u
+  =\nabla^2_hu-df\otimes du-du\otimes df+\langle \nabla_hf,\nabla_hu\rangle_hh,
+\]</span> and therefore <span class="math display">\[
+  \nabla^2_{\bar{h}}u
+  =\nabla^2_hu-2u^{-1}du\otimes du+u^{-1}|\nabla_hu|_h^2h.
+\]</span> Multiply the Ricci identity by <span class="math inline">\(u^{-2}\)</span> and the Hessian identity by <span class="math inline">\(mu^{-3}\)</span>, then add: <span class="math display">\[
+\begin{aligned}
+  u^{-2}\operatorname{Ric}_{\bar{h}}+mu^{-3}\nabla^2_{\bar{h}}u
+  &amp;=u^{-2}\operatorname{Ric}_h+2u^{-3}\nabla^2_hu-4u^{-4}du\otimes du \\
+  &amp;\quad +\bigl(-u^{-3}\Delta_hu+3u^{-4}|\nabla_hu|_h^2\bigr)h.
+\end{aligned}
+\]</span> Now substitute <span class="math inline">\(u=\beta^{-1}\)</span>. Then <span class="math display">\[
+  du=-\beta^{-2}d\beta, \qquad
+  \nabla^2_hu=-\beta^{-2}\nabla^2_h\beta+2\beta^{-3}d\beta\otimes d\beta,
+\]</span> <span class="math display">\[
+  \Delta_hu=-\beta^{-2}\Delta_h\beta+2\beta^{-3}|\nabla_h\beta|_h^2, \qquad
+  |\nabla_hu|_h^2=\beta^{-4}|\nabla_h\beta|_h^2.
+\]</span> Substituting these identities gives <span class="math display">\[
+  u^{-2}\operatorname{Ric}_{\bar{h}}+mu^{-3}\nabla^2_{\bar{h}}u
+  =\beta^2\operatorname{Ric}_h-2\beta\nabla^2_h\beta
+  +(\beta\Delta_h\beta+|\nabla_h\beta|_h^2)h
+  =\mathcal{T}_h(\beta).
+\]</span> This proves the conformal identity.</p>
+<p>For (kstar-conf), note that <span class="math inline">\(\bar{h}=u^2h\)</span>, so <span class="math display">\[
+  h^{-1}\mathcal{T}_h(\beta)
+  =h^{-1}\bigl(u^{-2}(\operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}}u)\bigr)
+  =\bar{h}^{-1}\bigl(\operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}}u\bigr).
+\]</span> Thus the corresponding endomorphisms have the same spectrum at each point, and taking the infimum of the smallest eigenvalue gives (kstar-conf). <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 8.2.</strong></p>
+<p>Proposition 8.1 rewrites the threshold condition as an eigenvalue bound for a Bakry–'Emery-type tensor on the conformally rescaled slice <span class="math inline">\((N,\bar{h})\)</span>. This provides a natural interface between the threshold invariant and the comparison geometry developed in [BF].</p>
+<p><strong>Remark 8.3 (Geometric meaning of the conformal formula).</strong></p>
+<p>The conformal identity separates two geometric effects. The Ricci term measures the intrinsic curvature of the compactified slice, while the Hessian term measures the deviation of the defining function <span class="math inline">\(u=\beta^{-1}\)</span> from being affine in the compactified metric. When <span class="math inline">\(u\)</span> is geodesic, the Hessian becomes a second-fundamental-form quantity for the level-set foliation, and the threshold can be read off from the curvature of those level sets. This is exactly the mechanism used in the collar argument below.</p>
+<p>We now give a concrete geometric class in which the threshold is forced to be nonpositive.</p>
+<p><strong>Theorem 8.4 (Geodesic-slice boundary control).</strong></p>
+<p>Assume <span class="math inline">\(n=3\)</span>. With <span class="math inline">\(u=\beta^{-1}\)</span> and <span class="math inline">\(\bar{h}=u^2h\)</span>, suppose in a collar <span class="math inline">\(\{0&lt;u&lt;\varepsilon\}\subset \bar N\)</span> that:</p>
+<p>(A1) <span class="math inline">\(|\nabla_{\bar{h}}u|\equiv 1\)</span>;</p>
+<p>(A2) <span class="math inline">\(\partial\bar N\)</span> is totally geodesic in <span class="math inline">\((\bar N,\bar{h})\)</span>;</p>
+<p>(A3) the level sets <span class="math inline">\(\{u=c\}\)</span> have geodesic curvature <span class="math inline">\(k_u\ge 0\)</span>.</p>
+<p>Then <span class="math inline">\(\kappa_*\le 0\)</span>. More precisely:</p>
+<ul>
+<li>if <span class="math inline">\(k_u\not\equiv 0\)</span> on the collar, then <span class="math inline">\(\kappa_*&lt;0\)</span>, hence no bounded positive line factor exists;</li>
+<li>if <span class="math inline">\(k_u\equiv 0\)</span> on the collar, then every bounded positive line factor is constant.</li>
+</ul>
+<p><strong>Proof.</strong></p>
+<p>Because <span class="math inline">\(n=3\)</span>, the slice is a surface, so <span class="math inline">\(\operatorname{Ric}_{\bar{h}}=K_{\bar{h}}\bar{h}\)</span>. Under (A1), if <span class="math inline">\(N_u\)</span> denotes the unit normal to the level sets of <span class="math inline">\(u\)</span> and <span class="math inline">\(T\)</span> a unit tangent vector, then <span class="math display">\[
+  \nabla^2_{\bar{h}}u(N_u,\cdot)=0, \qquad \nabla^2_{\bar{h}}u(T,T)=k_u.
+\]</span> Therefore the two eigenvalues of <span class="math inline">\(\operatorname{Ric}_{\bar{h}}+2u^{-1}\nabla^2_{\bar{h}}u\)</span> in the <span class="math inline">\((N_u,T)\)</span>-frame are <span class="math display">\[
+  \lambda_{N_u}=K_{\bar{h}}, \qquad \lambda_T=K_{\bar{h}}+2u^{-1}k_u.
+\]</span> In geodesic coordinates <span class="math inline">\(\bar{h}=du^2+\gamma(u,\theta)^2d\theta^2\)</span>, the Riccati identity is <span class="math display">\[
+  k_u'=-K_{\bar{h}}-k_u^2. \tag{riccati}
+\]</span> By (A2), <span class="math inline">\(k_u(0,\theta)=0\)</span> for all <span class="math inline">\(\theta\)</span>, and (A3) gives <span class="math inline">\(k_u\ge 0\)</span> in the collar.</p>
+<p>If <span class="math inline">\(k_u\equiv 0\)</span>, then (riccati) implies <span class="math inline">\(K_{\bar{h}}\equiv 0\)</span>, so <span class="math inline">\(\lambda_{N_u}=\lambda_T=0\)</span> in the collar. By (kstar-conf), this gives <span class="math inline">\(\kappa_*\le 0\)</span>. Corollary 3.3 then implies that every bounded positive line factor is constant.</p>
+<p>Assume now that <span class="math inline">\(k_u\not\equiv 0\)</span>. Then there exists <span class="math inline">\((u_0,\theta_0)\)</span> with <span class="math inline">\(k_u(u_0,\theta_0)&gt;0\)</span>. Since <span class="math inline">\(k_u(0,\theta_0)=0\)</span> and <span class="math inline">\(k_u\ge 0\)</span>, there is <span class="math inline">\(u_1\in(0,u_0]\)</span> such that <span class="math inline">\(k_u'(u_1,\theta_0)&gt;0\)</span>. Evaluating (riccati) there gives <span class="math display">\[
+  K_{\bar{h}}(u_1,\theta_0)=-k_u'(u_1,\theta_0)-k_u(u_1,\theta_0)^2&lt;0.
+\]</span> Hence <span class="math inline">\(\lambda_{N_u}(u_1,\theta_0)&lt;0\)</span>, so (kstar-conf) gives <span class="math inline">\(\kappa_*&lt;0\)</span>. Corollary 3.3 now rules out bounded positive nonconstant line factors. <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 8.5 (Role of the collar assumptions).</strong></p>
+<p>The assumptions in Theorem 8.4 are geometrically distinct. Assumption (A1) turns <span class="math inline">\(u\)</span> into a distance-type function for the compactified metric. Assumption (A2) fixes the initial condition for the level-set curvature at the boundary. Assumption (A3) provides the sign that forces the Riccati equation to produce a point of nonpositive curvature unless the collar is flat in the relevant direction. The theorem is therefore a boundary-to-interior mechanism for forcing nonpositivity of the threshold.</p>
+</section>
+<section id="a-formal-collar-expansion-and-the-wang-interface" class="level2">
+<h2 class="anchored" data-anchor-id="a-formal-collar-expansion-and-the-wang-interface">A Formal Collar Expansion and the Wang Interface</h2>
+<p>The previous section produces a concrete collar condition implying <span class="math inline">\(\kappa_*\le 0\)</span>. To relate this more directly to Wang’s Neumann-data framework [WangArea], one needs pointwise control of the threshold eigenvalues near conformal infinity. The next lemma records the correct formal expansion in a geodesic collar.</p>
+<p><strong>Lemma 9.1 (Formal geodesic-collar expansion).</strong></p>
+<p>Assume in geodesic coordinates that <span class="math display">\[
+  \bar{h}=du^2+\gamma(u,\theta)^2d\theta^2, \qquad
+  \gamma(u,\theta)=1+a(\theta)u^2+b(\theta)u^3+c(\theta)u^4+O(u^5).
+\]</span> Then <span class="math display">\[
+  K_{\bar{h}}=-2a-6bu+\bigl(2a^2-12c\bigr)u^2+O(u^3),
+\]</span> <span class="math display">\[
+  k_u=2au+3bu^2+\bigl(4c-2a^2\bigr)u^3+O(u^4),
+\]</span> and therefore the eigenvalues of <span class="math inline">\(\operatorname{Ric}_{\bar{h}}+2u^{-1}\nabla^2_{\bar{h}}u\)</span> in the normal/tangential frame are <span class="math display">\[
+  \lambda_N=-2a-6bu+\bigl(2a^2-12c\bigr)u^2+O(u^3),
+\]</span> <span class="math display">\[
+  \lambda_T=2a-\bigl(2a^2+4c\bigr)u^2+O(u^3). \tag{eigNT}
+\]</span> In particular, if <span class="math inline">\(a\equiv 0\)</span>, then <span class="math display">\[
+  \lambda_N=-6bu-12cu^2+O(u^3), \qquad \lambda_T=-4cu^2+O(u^3).
+\]</span> <strong>Proof.</strong></p>
+<p>Differentiate the expansion of <span class="math inline">\(\gamma\)</span>: <span class="math display">\[
+  \gamma_u=2au+3bu^2+4cu^3+O(u^4), \qquad
+  \gamma_{uu}=2a+6bu+12cu^2+O(u^3).
+\]</span> Also, <span class="math display">\[
+  \gamma^{-1}=1-au^2-bu^3+(a^2-c)u^4+O(u^5).
+\]</span> Since <span class="math display">\[
+  K_{\bar{h}}=-\frac{\gamma_{uu}}{\gamma}, \qquad
+  k_u=\frac{\gamma_u}{\gamma},
+\]</span> we obtain <span class="math display">\[
+  K_{\bar{h}}
+  =-\gamma_{uu}\gamma^{-1}
+  =-2a-6bu+\bigl(2a^2-12c\bigr)u^2+O(u^3),
+\]</span> and <span class="math display">\[
+  k_u
+  =\gamma_u\gamma^{-1}
+  =2au+3bu^2+\bigl(4c-2a^2\bigr)u^3+O(u^4).
+\]</span> Finally, substitute these expansions into (eigNT). <span class="math inline">\(\square\)</span></p>
+<p><strong>Remark 9.2.</strong></p>
+<p>Lemma 9.1 is intentionally formal. To turn it into a direct boundary criterion for <span class="math inline">\(\kappa_*\le 0\)</span> in Wang’s setting, one still needs additional geometric input controlling the coefficient <span class="math inline">\(a(\theta)\)</span> and the pointwise sign of <span class="math inline">\(b(\theta)\)</span>. Wang’s second-variation formula in [WangArea] gives integrated information on the boundary data, while the threshold condition is pointwise.</p>
+<p><strong>Remark 9.3.</strong></p>
+<p>This mismatch between integrated and pointwise information appears to be the basic obstruction to closing Wang’s remaining separated-ansatz question by the Neumann-data method alone. The threshold is governed by an extremal eigenvalue, hence by pointwise signs. A boundary integral can contribute to that problem only after an additional argument upgrades average information to a pointwise statement.</p>
+</section>
+<section id="discussion-and-open-problems" class="level2">
+<h2 class="anchored" data-anchor-id="discussion-and-open-problems">Discussion and Open Problems</h2>
+<p>Within the separated ansatz, Theorem 3.2 reduces the sub-static tensor inequality to a scalar ODE with a single geometric parameter <span class="math inline">\(\kappa_*\)</span>. This reformulation makes several consequences especially transparent:</p>
+<ul>
+<li>bounded positive nonconstant line factors exist exactly when <span class="math inline">\(\kappa_*&gt;0\)</span>;</li>
+<li>local strict negativity of the trace or tensor obstruction gives nonexistence, not merely constancy;</li>
+<li>on compact slices, existence is equivalent to pointwise positive-definiteness of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>.</li>
+</ul>
+<p>These statements seem to capture the cleanest reusable content of the separated theory.</p>
+<p>The conformal and collar results point toward the broader splitting problem, but they do not by themselves settle the general conformally compact case considered in [WangRiccati, WangArea]. The remaining issue is the passage from boundary data to pointwise control of the threshold eigenvalues.</p>
+<p>From a practical point of view, the paper suggests three different workflows for applying the theory. On compact slices one should check positive-definiteness of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> directly, since Corollary 6.3 gives an if-and-only-if criterion. On noncompact slices, one should instead estimate the global lower spectral bound <span class="math inline">\(\kappa_*\)</span>, because pointwise positivity alone need not be enough. In dimension three, critical points of <span class="math inline">\(\beta\)</span> supply a third route: Theorem 7.2 converts the problem to an explicit inequality involving curvature and Hessian anisotropy.</p>
+<p>The boundary-control theorem suggests a fourth, more geometric route. Rather than computing <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> explicitly on the original slice, one may compactify conformally and study the geometry of the defining function <span class="math inline">\(u=\beta^{-1}\)</span>. This is useful when the slice comes with natural conformal boundary data. The obstacle, made precise in Section 9, is that the threshold is fundamentally pointwise while current Neumann-data formulas are primarily integral in nature.</p>
+<section id="a-practical-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="a-practical-workflow">A practical workflow</h3>
+<p>For actual applications, the threshold formalism suggests a concrete order of attack. First, one computes the tensor <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> from its definition. In many examples this is easier than working directly with the full sub-static tensor on <span class="math inline">\(\mathbb{R}\times N\)</span>, because the separated ansatz has already eliminated the mixed and <span class="math inline">\(tt\)</span> components.</p>
+<p>Second, one checks whether the problem is compact or noncompact. On compact slices, Corollary 6.3 reduces the existence question to a pointwise definiteness test for <span class="math inline">\(\Theta_h(\beta)\)</span> or <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>. No further global analysis is needed beyond continuity of the eigenvalues. On noncompact slices, however, one must genuinely estimate the infimum of the smallest eigenvalue. Examples such as the Gaussian-type one-dimensional model in Example 5.6(iii) show that pointwise positivity may coexist with <span class="math inline">\(\kappa_*=0\)</span>.</p>
+<p>Third, one uses local obstructions whenever a full spectral estimate is unavailable. Propositions 6.1 and 6.2 are especially useful at critical points of <span class="math inline">\(\beta\)</span> or at points where a preferred geometric frame is available. In dimension three this becomes particularly effective, because Theorem 7.2 translates positivity of <span class="math inline">\(\Theta_h(\beta)\)</span> into a scalar inequality involving <span class="math inline">\(K_h\)</span> and the Hessian anisotropy of <span class="math inline">\(\beta\)</span>.</p>
+<p>Fourth, if the slice comes from a conformally compact problem, one can pass to the compactified metric and attempt to control the eigenvalues of <span class="math inline">\(\operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}}u\)</span>. Theorem 8.4 is one instance of this strategy: it does not compute <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> directly, but instead infers the sign of <span class="math inline">\(\kappa_*\)</span> from the geometry of the level-set foliation of <span class="math inline">\(u\)</span>. This separation between computational and geometric routes is one of the main practical advantages of the threshold viewpoint.</p>
+<p><strong>Open Problem 10.1.</strong></p>
+<p>Prove <span class="math inline">\(\kappa_*\le 0\)</span> in Wang’s conformally compactifiable sub-static setting without the extra collar assumptions of Theorem 8.4. By Corollary 3.3, this would force the line factor to be constant and would complete the separated-ansatz step of the splitting program.</p>
+<p><strong>Open Problem 10.2.</strong></p>
+<p>Find geometric conditions on <span class="math inline">\((N,h,\beta)\)</span> guaranteeing positivity or nonpositivity of <span class="math inline">\(\kappa_*\)</span> without computing the full spectrum of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>. In dimension three, can one derive such conditions directly from topology or asymptotic data on the conformal boundary?</p>
+<p><strong>Open Problem 10.3.</strong></p>
+<p>Generalize Theorem 8.4 to higher-dimensional slices. In dimensions <span class="math inline">\(m\ge 3\)</span>, the Ricci tensor is no longer a scalar multiple of the metric, so one needs an analogue of the two-dimensional Riccati argument that directly controls the smallest eigenvalue of <span class="math inline">\(\operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}}u\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="appendices" class="level1">
+<h1>Appendices</h1>
+<section id="warped-product-formulas" class="level2">
+<h2 class="anchored" data-anchor-id="warped-product-formulas">Warped-Product Formulas</h2>
+<p>This appendix records the basic formulas behind Lemma 2.1. They are standard, but gathering them in one place keeps the main argument focused on the threshold reduction.</p>
+<p>Let <span class="math display">\[
+  g=\beta(y)^2dt^2+h_{ij}(y)dy^idy^j, \qquad
+  V(t,y)=A(t)\beta(y).
+\]</span> Then <span class="math display">\[
+  g_{tt}=\beta^2, \quad g_{ij}=h_{ij}, \quad g^{tt}=\beta^{-2}, \quad g^{ij}=h^{ij}.
+\]</span> The nonzero Christoffel symbols involving the <span class="math inline">\(t\)</span>-direction are <span class="math display">\[
+  \Gamma^t_{it}=\beta^{-1}\partial_i\beta, \qquad
+  \Gamma^i_{tt}=-\beta\nabla_h^i\beta.
+\]</span> All purely spatial Christoffel symbols are those of <span class="math inline">\(h\)</span>.</p>
+<section id="hessian-and-laplacian" class="level3">
+<h3 class="anchored" data-anchor-id="hessian-and-laplacian">Hessian and Laplacian</h3>
+<p>Since <span class="math inline">\(\partial_tV=A'\beta\)</span> and <span class="math inline">\(\partial_iV=A\partial_i\beta\)</span>, the Hessian components are <span class="math display">\[
+\begin{aligned}
+  \nabla^2_gV(\partial_t,\partial_t)
+  &amp;=\partial_t\partial_tV-\Gamma^k_{tt}\partial_kV \\
+  =A''\beta+A\beta|\nabla_h\beta|_h^2, \\
+  \nabla^2_gV(\partial_i,\partial_t)
+  &amp;=\partial_i(A'\beta)-\Gamma^t_{it}A'\beta \\
+  =0, \\
+  \nabla^2_gV(\partial_i,\partial_j)
+  &amp;=A\nabla^2_h\beta_{ij}.
+\end{aligned}
+\]</span> Tracing these identities gives <span class="math display">\[
+  \Delta_gV=\beta^{-2}\nabla^2_gV(\partial_t,\partial_t)+h^{ij}\nabla^2_gV(\partial_i,\partial_j)
+  =\beta^{-1}A''+A\Delta_h\beta+A\beta^{-1}|\nabla_h\beta|_h^2.
+\]</span></p>
+</section>
+<section id="ricci-tensor" class="level3">
+<h3 class="anchored" data-anchor-id="ricci-tensor">Ricci tensor</h3>
+<p>For the warped product <span class="math inline">\(g=\beta^2dt^2+h\)</span> one has <span class="math display">\[
+  \operatorname{Ric}_g(\partial_t,\partial_t)=-\beta\Delta_h\beta, \qquad
+  \operatorname{Ric}_g(\partial_i,\partial_t)=0, \qquad
+  \operatorname{Ric}_g(\partial_i,\partial_j)=\operatorname{Ric}_h{}_{ij}-\beta^{-1}\nabla^2_h\beta_{ij}.
+\]</span> Substituting the Hessian, Laplacian, and Ricci formulas into <span class="math display">\[
+  S(V,g)=V\operatorname{Ric}_g+(\Delta_gV)g-\nabla^2_gV
+\]</span> gives the cancellation in the <span class="math inline">\(tt\)</span>-component and yields the slice decomposition (Sij).</p>
+</section>
+</section>
+<section id="auxiliary-ode-lemmas" class="level2">
+<h2 class="anchored" data-anchor-id="auxiliary-ode-lemmas">Auxiliary ODE Lemmas</h2>
+<p>The exact threshold criterion reduces the geometric problem to an elementary ODE inequality. The lemmas below isolate the one-dimensional facts used repeatedly in the main text.</p>
+<p><strong>Lemma A.1 (Bounded convex functions).</strong></p>
+<p>If <span class="math inline">\(A\in C^2(\mathbb{R})\)</span> satisfies <span class="math inline">\(A''\ge 0\)</span> and is bounded above on <span class="math inline">\(\mathbb{R}\)</span>, then <span class="math inline">\(A\)</span> is constant.</p>
+<p><strong>Proof.</strong></p>
+<p>The derivative <span class="math inline">\(A'\)</span> is monotone nondecreasing. If <span class="math inline">\(A'(t_0)&gt;0\)</span> at some point, then <span class="math inline">\(A'(t)\ge A'(t_0)&gt;0\)</span> for all <span class="math inline">\(t\ge t_0\)</span>, which forces <span class="math inline">\(A(t)\to+\infty\)</span> as <span class="math inline">\(t\to+\infty\)</span>. If <span class="math inline">\(A'(t_0)&lt;0\)</span>, then <span class="math inline">\(A'(t)\le A'(t_0)&lt;0\)</span> for all <span class="math inline">\(t\le t_0\)</span>, which forces <span class="math inline">\(A(t)\to+\infty\)</span> as <span class="math inline">\(t\to-\infty\)</span>. Hence <span class="math inline">\(A'\equiv 0\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Lemma A.2 (Positive forcing).</strong></p>
+<p>Let <span class="math inline">\(A\in C^2(\mathbb{R})\)</span> be positive. If there exists <span class="math inline">\(c&gt;0\)</span> such that <span class="math display">\[
+  A''(t)\ge cA(t)  \qquad\text{for all } t\in\mathbb{R},
+\]</span> then <span class="math inline">\(A\)</span> is unbounded on <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>Since <span class="math inline">\(A''\ge cA&gt;0\)</span>, the derivative <span class="math inline">\(A'\)</span> is strictly increasing. Fix <span class="math inline">\(t_0\in\mathbb{R}\)</span>. If <span class="math inline">\(A'(t_0)\ge 0\)</span>, then <span class="math inline">\(A'(t)&gt;0\)</span> for all <span class="math inline">\(t&gt;t_0\)</span>, so <span class="math inline">\(A(t)\to+\infty\)</span> as <span class="math inline">\(t\to+\infty\)</span>. If <span class="math inline">\(A'(t_0)&lt;0\)</span>, then <span class="math inline">\(A'(t)\le A'(t_0)&lt;0\)</span> for all <span class="math inline">\(t&lt;t_0\)</span>, hence <span class="math display">\[
+  A(t)\ge A(t_0)-A'(t_0)(t_0-t)\to+\infty \quad(t\to-\infty). \qquad\square
+\]</span> <strong>Lemma A.3 (Periodic test family).</strong></p>
+<p>If <span class="math inline">\(\kappa&gt;0\)</span>, then for every <span class="math inline">\(0&lt;\omega^2&lt;\kappa\)</span> and <span class="math inline">\(0&lt;\varepsilon&lt;1\)</span>, <span class="math display">\[
+  A(t)=1+\varepsilon\sin(\omega t)
+\]</span> is bounded, positive, nonconstant, and satisfies <span class="math inline">\(A''+\kappa A&gt;0\)</span> on <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>Direct computation gives <span class="math display">\[
+  A''+\kappa A
+  =\kappa+\varepsilon(\kappa-\omega^2)\sin(\omega t)
+  \ge \kappa-\varepsilon(\kappa-\omega^2)&gt;0. \qquad\square
+\]</span> ## Expanded Model Calculations</p>
+<p>This appendix records the detailed calculations for the model families used in the body of the paper.</p>
+<section id="round-sphere" class="level3">
+<h3 class="anchored" data-anchor-id="round-sphere">Round sphere</h3>
+<p>Assume <span class="math inline">\(n\ge 3\)</span>, let <span class="math inline">\(N=S^{n-1}\)</span> with the round metric of sectional curvature <span class="math inline">\(1\)</span>, and <span class="math inline">\(\beta\equiv 1\)</span>. Then <span class="math display">\[
+  \operatorname{Ric}_h=(n-2)h, \qquad \nabla_h\beta=0, \qquad \nabla^2_h\beta=0,
+\]</span> so <span class="math display">\[
+  \Theta_h(\beta)=(n-2)h, \qquad \mathcal{T}_h(\beta)=(n-2)h, \qquad \kappa_*=n-2.
+\]</span> This is the basic compact positive example.</p>
+</section>
+<section id="flat-torus" class="level3">
+<h3 class="anchored" data-anchor-id="flat-torus">Flat torus</h3>
+<p>If <span class="math inline">\(N=T^{n-1}\)</span> is flat and <span class="math inline">\(\beta\equiv c&gt;0\)</span>, then all derivative terms vanish and <span class="math inline">\(\operatorname{Ric}_h=0\)</span>. Hence <span class="math display">\[
+  \Theta_h(\beta)=0, \qquad \mathcal{T}_h(\beta)=0, \qquad \kappa_*=0.
+\]</span> This realizes the borderline rigid regime.</p>
+</section>
+<section id="euclidean-anisotropic-example" class="level3">
+<h3 class="anchored" data-anchor-id="euclidean-anisotropic-example">Euclidean anisotropic example</h3>
+<p>Let <span class="math inline">\(N=\mathbb{R}^m\)</span> be Euclidean and <span class="math inline">\(\beta(y)=1+(y^1)^2\)</span>. Then <span class="math display">\[
+  \nabla\beta=2y^1dy^1, \qquad
+  \nabla^2\beta=2dy^1\otimes dy^1, \qquad
+  \Delta\beta=2.
+\]</span> Since <span class="math inline">\(\operatorname{Ric}_h=0\)</span>, <span class="math display">\[
+\begin{aligned}
+  \mathcal{T}_h(\beta)
+  &amp;=-2\beta\nabla^2\beta+(\beta\Delta\beta+|\nabla\beta|^2)h \\
+  &amp;=-4(1+(y^1)^2)dy^1\otimes dy^1 \\
+    +\bigl(2(1+(y^1)^2)+4(y^1)^2\bigr)\sum_{\alpha=1}^{m}dy^\alpha\otimes dy^\alpha \\
+  &amp;=\bigl(-2+2(y^1)^2\bigr)dy^1\otimes dy^1 \\
+    +\bigl(2+6(y^1)^2\bigr)\sum_{\alpha=2}^{m}dy^\alpha\otimes dy^\alpha.
+\end{aligned}
+\]</span> Thus the smallest eigenvalue is <span class="math inline">\(-2+2(y^1)^2\)</span>, and its infimum equals <span class="math inline">\(-2\)</span>.</p>
+</section>
+<section id="one-dimensional-negative-example" class="level3">
+<h3 class="anchored" data-anchor-id="one-dimensional-negative-example">One-dimensional negative example</h3>
+<p>Let <span class="math inline">\(N=\mathbb{R}\)</span> with <span class="math inline">\(h=dy^2\)</span> and <span class="math inline">\(\beta(y)=\cosh y\)</span>. Since <span class="math inline">\(\operatorname{Ric}_h=0\)</span> in one dimension, <span class="math display">\[
+  \mathcal{T}_h(\beta)=\bigl(-2\beta\beta''+(\beta\beta''+(\beta')^2)\bigr)dy^2.
+\]</span> Using <span class="math inline">\(\beta''=\cosh y\)</span> and <span class="math inline">\((\beta')^2=\sinh^2 y\)</span>, one finds <span class="math display">\[
+  \mathcal{T}_h(\beta)
+  =\bigl(-2\cosh^2 y+\cosh^2 y+\sinh^2 y\bigr)dy^2
+  =-dy^2.
+\]</span> Hence <span class="math inline">\(\kappa_*=-1\)</span>.</p>
+</section>
+<section id="exponential-example-with-positive-trace" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-example-with-positive-trace">Exponential example with positive trace</h3>
+<p>Consider the example from Section 6: <span class="math display">\[
+  N=\mathbb{R}^2, \quad h=dx^2+dy^2, \quad \beta(x,y)=e^x+c, \quad c\ge 0.
+\]</span> Because <span class="math inline">\(\operatorname{Ric}_h=0\)</span>, <span class="math display">\[
+  \Theta_h(\beta)=-2\nabla^2_h\beta+\Bigl(\Delta_h\beta+\beta^{-1}|\nabla\beta|_h^2\Bigr)h.
+\]</span> Now <span class="math display">\[
+  \nabla^2_h\beta=e^xdx\otimes dx, \qquad
+  \Delta_h\beta=e^x, \qquad
+  |\nabla\beta|_h^2=e^{2x}.
+\]</span> Therefore <span class="math display">\[
+  \Delta_h\beta+\beta^{-1}|\nabla\beta|_h^2
+  =e^x+\frac{e^{2x}}{e^x+c},
+\]</span> and <span class="math display">\[
+\begin{aligned}
+  \Theta_h(\beta)
+  &amp;=-2e^xdx\otimes dx \\
+    +\Bigl(e^x+\frac{e^{2x}}{e^x+c}\Bigr)(dx^2+dy^2) \\
+  &amp;= \\
+    \Bigl(-e^x+\frac{e^{2x}}{e^x+c}\Bigr)dx\otimes dx
+    +\Bigl(e^x+\frac{e^{2x}}{e^x+c}\Bigr)dy\otimes dy \\
+  &amp;= \\
+    -\frac{ce^x}{e^x+c}\,dx\otimes dx
+    +\Bigl(e^x+\frac{e^{2x}}{e^x+c}\Bigr)dy\otimes dy.
+\end{aligned}
+\]</span> Taking the trace gives <span class="math display">\[
+  \mathcal{Q}_h(\beta)
+  =-\frac{ce^x}{e^x+c}+e^x+\frac{e^{2x}}{e^x+c}
+  =2\frac{e^{2x}}{e^x+c}&gt;0.
+\]</span> Thus the trace obstruction is silent even though the tensor obstruction is active. When <span class="math inline">\(c=0\)</span>, the <span class="math inline">\(dx\)</span>-eigenvalue vanishes identically. When <span class="math inline">\(c&gt;0\)</span>, the <span class="math inline">\(dx\)</span>-eigenvalue is strictly negative.</p>
+</section>
+</section>
+<section id="surface-critical-point-algebra" class="level2">
+<h2 class="anchored" data-anchor-id="surface-critical-point-algebra">Surface critical-point algebra</h2>
+<p>At a critical point of <span class="math inline">\(\beta\)</span> on a surface, the formula for <span class="math inline">\(\Theta_h(\beta)\)</span> simplifies enough to be useful in explicit calculations. Let <span class="math inline">\(\lambda_1,\lambda_2\)</span> be the eigenvalues of <span class="math inline">\(\nabla^2_h\beta\)</span> in an orthonormal frame. Since <span class="math inline">\(\nabla_h\beta=0\)</span> and <span class="math inline">\(\operatorname{Ric}_h=K_hh\)</span>, <span class="math display">\[
+  \Theta_h(\beta)=\beta K_hh-2\nabla^2_h\beta+(\lambda_1+\lambda_2)h.
+\]</span> Hence the two eigenvalues of <span class="math inline">\(\Theta_h(\beta)\)</span> are <span class="math display">\[
+  \mu_1=\beta K_h+\lambda_2-\lambda_1, \qquad
+  \mu_2=\beta K_h+\lambda_1-\lambda_2.
+\]</span> From these formulas one reads off immediately that <span class="math display">\[
+  \operatorname{tr}_h\Theta_h(\beta)=2\beta K_h, \qquad
+  \det_h\Theta_h(\beta)=\beta^2K_h^2-(\lambda_1-\lambda_2)^2.
+\]</span> Thus positivity of <span class="math inline">\(\Theta_h(\beta)\)</span> at a critical point is equivalent to the pair of inequalities <span class="math display">\[
+  2\beta K_h&gt;0, \qquad
+  \beta^2K_h^2-(\lambda_1-\lambda_2)^2&gt;0,
+\]</span> which in turn collapse to the single curvature-anisotropy inequality <span class="math display">\[
+  \beta K_h&gt;|\lambda_1-\lambda_2|.
+\]</span> This is the algebraic core of Theorem 7.2.</p>
+</section>
+<section id="a-checklist-for-computing-the-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="a-checklist-for-computing-the-threshold">A Checklist for Computing the Threshold</h2>
+<p>For readers who want to apply the theory to new examples, it is useful to summarize the workflow suggested by the paper in a compact form.</p>
+<section id="step-1-compute-the-slice-tensor" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-compute-the-slice-tensor">Step 1: compute the slice tensor</h3>
+<p>Start from <span class="math display">\[
+  \mathcal{T}_h(\beta)=\beta^2\operatorname{Ric}_h-2\beta\nabla^2_h\beta+(\beta\Delta_h\beta+|\nabla_h\beta|_h^2)h.
+\]</span> In symmetric examples this often collapses immediately. For constant <span class="math inline">\(\beta\)</span>, one reduces to the Ricci tensor. In one dimension, Proposition 5.3 gives the closed formula <span class="math inline">\(\mathcal{T}_h(\beta)=-\beta^2(\ln\beta)''dy^2\)</span>.</p>
+</section>
+<section id="step-2-decide-whether-compactness-is-available" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-decide-whether-compactness-is-available">Step 2: decide whether compactness is available</h3>
+<p>If <span class="math inline">\(N\)</span> is compact, the problem simplifies sharply: the existence of a bounded positive nonconstant line factor is equivalent to pointwise positive-definiteness of <span class="math inline">\(\mathcal{T}_h(\beta)\)</span>. In that case one does not need to estimate the infimum of the smallest eigenvalue globally; continuity and compactness do the work automatically.</p>
+<p>If <span class="math inline">\(N\)</span> is noncompact, by contrast, pointwise positivity is only preliminary information. One must determine whether the smallest eigenvalue stays uniformly away from zero. The examples in Sections 4 and 5 show that this distinction is essential.</p>
+</section>
+<section id="step-3-use-local-obstructions-when-full-diagonalization-is-hard" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-use-local-obstructions-when-full-diagonalization-is-hard">Step 3: use local obstructions when full diagonalization is hard</h3>
+<p>If a direct spectral computation is cumbersome, the local obstructions can still be very effective. A single point with <span class="math inline">\(\mathcal{Q}_h(\beta)&lt;0\)</span> already rules out bounded positive line factors, and a single nonpositive tensor direction is enough to force rigidity or nonexistence. In dimension three, critical points of <span class="math inline">\(\beta\)</span> provide especially convenient test points, because the condition reduces to the curvature-anisotropy inequality of Theorem 7.2.</p>
+</section>
+<section id="step-4-move-to-the-conformal-picture-when-boundary-geometry-is-natural" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-move-to-the-conformal-picture-when-boundary-geometry-is-natural">Step 4: move to the conformal picture when boundary geometry is natural</h3>
+<p>When the slice is naturally described through a compactification, Proposition 8.1 replaces <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> by the tensor <span class="math display">\[
+  \operatorname{Ric}_{\bar{h}}+mu^{-1}\nabla^2_{\bar{h}}u.
+\]</span> This form is better adapted to geometric foliation arguments and to level-set methods. Theorem 8.4 is an example: it never computes <span class="math inline">\(\mathcal{T}_h(\beta)\)</span> directly, but still controls the sign of <span class="math inline">\(\kappa_*\)</span>.</p>
+</section>
+<section id="step-5-conclude-through-the-sign-of-kappa_" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-conclude-through-the-sign-of-kappa_">Step 5: conclude through the sign of <span class="math inline">\(\kappa_*\)</span></h3>
+<p>Once the sign is known, Corollary 3.3 finishes the argument. A positive threshold produces explicit oscillatory line factors. A zero threshold forces convexity and hence constancy. A negative threshold produces positive forcing and hence unboundedness. In this sense, all of the geometry in the separated ansatz feeds into a single scalar decision at the final step.</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><p>[BF] S. Borghini and M. Fogagnolo, <em>Comparison geometry for sub-static manifolds</em>, 2023, <a href="https://arxiv.org/abs/2307.14618">arXiv:2307.14618</a>.</p></li>
+<li><p>[CFMR] G. Colombo, A. Freitas, L. Mari, and M. Rigoli, <em>Some splitting and rigidity results for sub-static spaces</em>, 2024, <a href="https://arxiv.org/abs/2412.05238">arXiv:2412.05238</a>.</p></li>
+<li><p>[GSW] G. J. Galloway, S. Surya, and E. Woolgar, <em>On the geometry and mass of static, asymptotically AdS spacetimes, and the uniqueness of the AdS soliton</em>, <em>Comm. Math. Phys.</em> <strong>241</strong> (2003), 1–25; <a href="https://arxiv.org/abs/hep-th/0108170">arXiv:hep-th/0108170</a>.</p></li>
+<li><p>[WangRiccati] Z. Wang, <em>Riccati equation for static spaces and its applications</em>, 2025, <a href="https://arxiv.org/abs/2408.12180">arXiv:2408.12180</a>.</p></li>
+<li><p>[WangArea] Z. Wang, <em>Neumann data and second variation formula of renormalized area for conformally compact static spaces</em>, 2025, <a href="https://arxiv.org/abs/2504.15048">arXiv:2504.15048</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="evaluation" class="level1">
+<h1>Evaluation:</h1>
+<section id="gpt" class="level2">
+<h2 class="anchored" data-anchor-id="gpt">GPT:</h2>
+<p>My assessment is:</p>
+<p><strong>Correctness:</strong> the paper looks <strong>substantively plausible but not yet referee-safe</strong>. <strong>Novelty:</strong> <strong>moderate, specialized-note level</strong>, not breakthrough level. <strong>Journal fit:</strong> a <strong>specialized geometry/global analysis journal</strong>, most naturally <strong>Q2</strong> at current strength.</p>
+<p>The strongest part is the exact reduction in Sections 2–3: for the separated ansatz <span class="math display">\[g=\beta(y)^2dt^2+h(y),\qquad V(t,y)=A(t)\beta(y),\]</span> the paper isolates the slice tensor <span class="math display">\[T_h(\beta)=\beta^2\mathrm{Ric}*h-2\beta\nabla_h^2\beta+(\beta\Delta_h\beta+|\nabla_h\beta|*h^2)h,\]</span> defines <span class="math display">\[\kappa**=\inf*{y\in N}\lambda_{\min}^h(T_h(\beta)(y)),\]</span> and proves the equivalence <span class="math display">\[S(V,g)\ge 0 \iff A''+\kappa_*A\ge 0,\]</span> followed by the bounded positive nonconstant criterion “iff <span class="math inline">\(\kappa_*&gt;0\)</span>.” That is the real mathematical contribution of the draft, and it is clearly articulated in the abstract and main theorem section.</p>
+<p>On <strong>correctness</strong>, the core warped-product computation and the ODE consequences appear internally coherent. In particular, Lemma 2.1, Theorem 3.2, Corollary 3.3, and the compact-slice criterion fit together logically, and the examples are aligned with the sign trichotomy <span class="math inline">\(\kappa_*&gt;0,\ \kappa_*=0,\ \kappa_*&lt;0\)</span>. But I would still call the paper <strong>“correct modulo careful checking,” not “clearly correct.”</strong> The conformal reformulation and collar sections are coefficient-sensitive and therefore the part most likely to attract referee scrutiny; they may well be right, but they need especially careful line-by-line verification before submission. There are also some presentational/formal issues: for example, Theorem 3.2 really wants an explicit finiteness remark for <span class="math inline">\(\kappa_*\)</span> in the statement, not only nearby; and the paper itself says the later sections are more of an “interface” to Wang’s program than a complete closure of the broader problem.</p>
+<p>On <strong>novelty</strong>, I would rate it as <strong>moderate</strong>. The main theorem is a clean and useful extraction of the separated-ansatz problem into a single threshold invariant, together with sharp local corollaries, a compact criterion, and a 3D critical-point test. That is a legitimate contribution. But the paper also explicitly positions itself as addressing only the <strong>separated ansatz step</strong> rather than proving a full new splitting theorem, and Section 10 leaves the Wang-interface problem open. So this is not reading like a top-tier theorem paper; it reads more like a <strong>well-structured specialized note that clarifies one unresolved reduction step and packages it sharply</strong>.</p>
+<p>Because of that novelty level, I would <strong>not</strong> aim first at journals like <strong>Journal of Differential Geometry</strong> or <strong>The Journal of Geometric Analysis</strong>. JDG is a clear mismatch at current strength, and JGA generally asks for stronger innovation at the geometry/analysis interface than this draft currently delivers. JGA’s scope emphasizes innovative work at the crossroads of geometry, analysis, and PDE, and it is currently listed as <strong>Q1</strong>; AGAG is aimed squarely at global analysis and geometry and is currently <strong>Q2</strong>; Differential Geometry and its Applications is also squarely on-topic and is currently <strong>Q2</strong>. (<a href="https://link.springer.com/journal/12220/aims-and-scope?utm_source=chatgpt.com" title="Aims and scope | The Journal of Geometric Analysis">Springer</a>)</p>
+<p>So my recommendation is:</p>
+<ul>
+<li><strong>Best fit:</strong> <strong>Annals of Global Analysis and Geometry</strong> — the scope matches very well: global analysis, differential geometry, variational/global geometric questions. Current standing is <strong>Q2</strong>. (<a href="https://link.springer.com/journal/10455/aims-and-scope?utm_source=chatgpt.com" title="Aims and scope | Annals of Global Analysis and Geometry">Springer</a>)</li>
+<li><strong>Also reasonable:</strong> <strong>Differential Geometry and its Applications</strong> — also very natural in scope, currently <strong>Q2</strong>. (<a href="https://www.sciencedirect.com/journal/differential-geometry-and-its-applications?utm_source=chatgpt.com" title="Differential Geometry and its Applications | Journal">ScienceDirect</a>)</li>
+<li><strong>Broader fallback:</strong> <strong>Mediterranean Journal of Mathematics</strong> if you want a less specialized and somewhat safer venue; it is broad-scope and currently <strong>Q2</strong>. (<a href="https://link.springer.com/journal/9" title="Home | Mediterranean Journal of Mathematics | Springer Nature Link">Springer</a>)</li>
+</ul>
+<p>My bottom line:</p>
+<p><span class="math display">\[\text{correctness status} \approx \text{promising but still needs hard checking},\]</span> <span class="math display">\[\text{novelty level} \approx \text{solid specialized note},\]</span> <span class="math display">\[\text{recommended tier} \approx \text{Q2 specialized geometry/global analysis}. \]</span></p>
+<p>If you want a sharper label: I would call this <strong>“strong Q2 / maybe borderline low-Q1 only if significantly strengthened.”</strong> To move it upward, the paper would need one of the following: <span class="math display">\[\text{either } \big(\text{close the Wang separated-ansatz problem}\big),\]</span> <span class="math display">\[\text{or } \big(\text{replace the collar/interface section by a genuinely stronger theorem}\big),\]</span> <span class="math display">\[\text{or } \big(\text{extract a broader geometric criterion beyond the separated model}\big).\]</span></p>
+<p>At its current level, <strong>AGAG</strong> is the cleanest recommendation.</p>
+</section>
+<section id="claude" class="level2">
+<h2 class="anchored" data-anchor-id="claude">Claude:</h2>
+<section id="correctness" class="level3">
+<h3 class="anchored" data-anchor-id="correctness">Correctness</h3>
+<p>The paper is mathematically correct as far as I can verify. The arguments are clean and the logic is tight throughout.</p>
+<p>The core computation in Lemma 2.1 — the slice decomposition of <span class="math inline">\(S(V,g)\)</span> under the warped-product ansatz — is a straightforward Christoffel symbol / Hessian / Ricci calculation. I checked the key cancellation yielding <span class="math inline">\(S_{tt}=0\)</span> and <span class="math inline">\(S_{it}=0\)</span>, and the surviving slice block formula (6) is consistent with standard warped-product identities.</p>
+<p>Theorem 3.2 (the exact threshold criterion) follows almost immediately once you observe that the slice inequality <span class="math inline">\(A(t)\,T_h(\beta)(y) + A''(t)\,h(y) \geq 0\)</span> is linear in the pair <span class="math inline">\((A\cdot\lambda, A'')\)</span> and that minimizing over unit directions and points extracts exactly <span class="math inline">\(\kappa_*\)</span>. The logic is correct and essentially optimal — there’s no slack in the equivalence.</p>
+<p>Corollary 3.3 (bounded-solution criterion) uses only elementary ODE facts: convex bounded functions on <span class="math inline">\(\mathbb{R}\)</span> are constant, and <span class="math inline">\(A'' \geq cA &gt; 0\)</span> forces unboundedness. These are stated and proved cleanly in Appendix B.</p>
+<p>The conformal identity (Proposition 8.1) involves a longer computation but follows a well-trodden path — conformal transformation of Ricci, substitution of <span class="math inline">\(u = \beta^{-1}\)</span>. I traced through the key steps and the algebra checks out.</p>
+<p>The three-dimensional critical-point criterion (Theorem 7.2) is a direct algebraic consequence of diagonalizing <span class="math inline">\(\Theta_h(\beta)\)</span> at a critical point of <span class="math inline">\(\beta\)</span> on a surface. No issues there.</p>
+<p>One minor organizational note: the paper references “Section 4” for local tests but the sharp local obstructions actually appear in Section 6. The introduction mentions this correctly, but Section 4’s discussion sometimes reads as if it’s stating the results that are only proved later. This is a presentational choice, not an error.</p>
+<p><strong>Verdict on correctness</strong>: Sound. No errors detected.</p>
+<hr>
+</section>
+<section id="novelty" class="level3">
+<h3 class="anchored" data-anchor-id="novelty">Novelty</h3>
+<p>This is where a more nuanced assessment is needed. The paper’s contribution should be evaluated at several levels:</p>
+<p><strong>What is genuinely new.</strong> The identification of <span class="math inline">\(\kappa_*\)</span> as the exact threshold controlling the bounded-solution problem within the separated ansatz is, as far as I know, new and cleanly formulated. The equivalence in Theorem 3.2 is a precise structural result — it’s not just a sufficient condition but an if-and-only-if. The three-dimensional determinant criterion at critical points (Theorem 7.2) and the conformal reformulation (Proposition 8.1) are nice additions that give the threshold geometric content beyond the abstract spectral definition.</p>
+<p><strong>What limits the novelty.</strong> The paper is entirely confined to the separated ansatz (2). It does not solve the general sub-static splitting problem, and the authors are upfront about this. The separated ansatz is already a very special structural assumption — the metric is a warped product and the potential factors multiplicatively. Within this ansatz, the key observation (that the slice block of <span class="math inline">\(S\)</span> factors into a geometric tensor times <span class="math inline">\(A\)</span> plus <span class="math inline">\(A''\)</span> times <span class="math inline">\(h\)</span>) is natural once you write things out. The ODE analysis that follows is elementary.</p>
+<p>The conformal and collar sections (8–9) gesture toward the broader problem but explicitly acknowledge they don’t resolve it. The formal collar expansion in Section 9 is essentially bookkeeping, and Remark 9.3 candidly states the fundamental obstacle (pointwise vs.&nbsp;integrated information).</p>
+<p>The paper also doesn’t engage deeply with the competing approaches in the literature — the stable-minimal-hypersurface methods of Colombo–Freitas–Mari–Rigoli or the weighted comparison geometry of Borghini–Fogagnolo. The relationship is mentioned but not developed.</p>
+<p><strong>Assessment.</strong> The paper makes a correct, clean, and complete contribution to a specific technical subproblem (the separated-ansatz step) within the sub-static splitting program. The threshold criterion is sharp within its domain. However, the scope is narrow — the separated ansatz is a restricted setting, and the paper’s results don’t directly advance the general splitting conjecture. The techniques are competent but not deep; the main arguments use standard warped-product formulas and elementary ODE theory.</p>
+<hr>
+</section>
+<section id="journal-recommendation" class="level3">
+<h3 class="anchored" data-anchor-id="journal-recommendation">Journal Recommendation</h3>
+<p>Given the profile — correct and well-written, clean structural result, but narrow scope and limited technical depth — this paper fits naturally into a <strong>solid specialty journal in differential geometry or geometric analysis</strong>.</p>
+<p>Appropriate journals would include:</p>
+<ul>
+<li><strong>Annals of Global Analysis and Geometry</strong> — good fit for the scope and level</li>
+<li><strong>Differential Geometry and its Applications</strong> — natural home for this type of structural result</li>
+<li><strong>Journal of Geometry and Physics</strong> — if the GR motivation is emphasized</li>
+<li><strong>Pacific Journal of Mathematics</strong> or <strong>Proceedings of the AMS</strong> — if shortened to focus on the main theorem and its immediate corollaries</li>
+</ul>
+<p>These are roughly <strong>mid-tier</strong> journals (not top-tier like Annals of PDE, CPAM, Duke, or Inventiones, but reputable journals where a focused, correct contribution finds an appropriate audience). In terms of typical rankings, these sit in the range of solid Q1–Q2 journals depending on the classification system.</p>
+<p>The paper would likely <strong>not</strong> be competitive for Annals of PDE (which the memory notes as a target), because Annals of PDE generally expects either substantially new techniques or resolution of significant open problems, and this paper does neither — it resolves a subproblem within an ansatz using relatively elementary methods. That said, if the threshold criterion turns out to be a key ingredient in eventually resolving the full splitting conjecture, the paper’s significance would be reassessed retrospectively.</p>
+</section>
+</section>
+</section>
+<section id="gemini" class="level1">
+<h1>Gemini:</h1>
+<p>Here is an evaluation of the article based on correctness, novelty, and subsequent journal recommendations.</p>
+<section id="correctness-1" class="level3">
+<h3 class="anchored" data-anchor-id="correctness-1">1. Correctness</h3>
+<p>The article demonstrates a high degree of mathematical correctness, grounded in well-established principles of Riemannian geometry and geometric analysis.</p>
+<ul>
+<li><p><strong>Methodological Soundness:</strong> The fundamental computations rely on standard, verifiable techniques, such as warped product curvature formulas, slice decompositions, and conformal transformations.</p></li>
+<li><p><strong>Rigorous Proofs:</strong> The central result (Theorem 3.2), which reduces the multi-dimensional sub-static tensor inequality to the one-dimensional scalar ODE <span class="math inline">\(A''(t) + \kappa_* A(t) \ge 0\)</span>, is rigorously proven by systematically evaluating the bilinear forms.</p></li>
+<li><p><strong>Logical Deductions:</strong> The paper correctly utilizes elementary ODE maximum-principle arguments (detailed in Appendix B) to prove when line factors must be unbounded or constant based on the sign of the threshold invariant.</p></li>
+<li><p><strong>Self-Aware Constraints:</strong> The author is mathematically careful, acknowledging where the theory is incomplete, such as noting that the formal collar expansion (Lemma 9.1) requires additional geometric input to fully close Wang’s remaining questions.</p></li>
+</ul>
+</section>
+<section id="novelty-1" class="level3">
+<h3 class="anchored" data-anchor-id="novelty-1">2. Novelty</h3>
+<p>The novelty of the paper is <strong>moderate to high within its specific subfield</strong>, characterized by an elegant structural insight rather than a massive, field-altering breakthrough.</p>
+<ul>
+<li><p><strong>Specific Problem Resolution:</strong> The paper’s primary novel contribution is providing an exact, one-dimensional ODE criterion for the “separated ansatz,” a specific unresolved bottleneck in Wang’s recent line-based splitting approach.</p></li>
+<li><p><strong>Conceptual Shift:</strong> Instead of relying on local ad-hoc bounds, the author introduces the “threshold invariant” <span class="math inline">\(\kappa_*\)</span>, effectively showing that the existence problem is entirely governed by a single global spectral gap.</p></li>
+<li><p><strong>Scope Limitations:</strong> The author explicitly bounds the novelty, stating the paper should be read as a “contribution to the separated-ansatz step… rather than as a full new splitting theorem for arbitrary sub-static manifolds”.</p></li>
+<li><p><strong>Future Utility:</strong> The conformal reformulation of the threshold tensor (Proposition 8.1) and the explicit identification of a fundamental mismatch (pointwise vs.&nbsp;integrated information) in current Neumann-data boundary approaches offer valuable, original stepping stones for future research.</p></li>
+</ul>
+</section>
+<section id="journal-recommendations-tier-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="journal-recommendations-tier-assessment">3. Journal Recommendations &amp; Tier Assessment</h3>
+<p>Because the paper solves a very specific intermediate step (the separated ansatz) in an ongoing mathematical program rather than resolving the full sub-static splitting conjecture, it is best suited for high-quality, specialized journals rather than top-tier general mathematics journals (like <em>Annals of Mathematics</em> or <em>Journal of the AMS</em>).</p>
+<p><strong>Recommended Tier:</strong> <strong>Tier 2 / Strong Q1 in Specialized Mathematics</strong> The paper is crisp, exact, and structurally illuminating, making it an excellent candidate for respected journals focusing on geometric analysis, differential geometry, or mathematical physics.</p>
+<p><strong>Recommended Journals:</strong></p>
+<ul>
+<li><strong><em>Journal of Geometric Analysis</em>:</strong> An ideal fit. This journal frequently publishes strong, targeted results in geometric PDEs, conformal geometry, and curvature inequalities.</li>
+<li><strong><em>Communications in Analysis and Geometry</em>:</strong> A highly respected journal that focuses heavily on the intersection of analysis, differential equations, and differential geometry.</li>
+<li><strong><em>Classical and Quantum Gravity</em>:</strong> If the author wishes to frame the work closer to its physical roots (static Einstein spaces and general relativity), this Q1 physics journal is highly appropriate.</li>
+<li><strong><em>Proceedings of the American Mathematical Society (PAMS)</em>:</strong> Given the paper’s relatively short length, clear exact criteria, and self-contained proofs, PAMS is an excellent venue for concise, impactful results.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
