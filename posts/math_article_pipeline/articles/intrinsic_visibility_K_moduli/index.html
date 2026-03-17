@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-17">
+<meta name="description" content="Math research based on GenAI.">
+
+<title>Intrinsic visibility in K-moduli – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Intrinsic visibility in K-moduli</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Mathematics</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Algebraic Geometry</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Math research based on GenAI.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="intrinsic-visibility-of-coefficient-walls-in-k-moduli" class="level1">
+<h1>Intrinsic visibility of coefficient walls in K-moduli</h1>
+<p><strong>Shengrong Wu</strong><br>
+National University of Singapore</p>
+<p><em>Automatic Pipeline with ChatGPT</em></p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>We formulate and prove an intrinsic visibility theorem for fixed-ambient wall crossing in <span class="math inline">\(K\)</span>-moduli. The theorem has two parts. First, for every liftable coefficient face, the GIT wall equation is exactly the corresponding special-value equation <span class="math display">\[
+\mu_F^{\mathrm{GIT}}=-\beta.
+\]</span> Second, an interior strictly <span class="math inline">\(K\)</span>-semistable parameter is forced away from every locally product open set on which a local <span class="math inline">\(\delta\)</span>-gap holds, hence any such hidden wall is detected over the non-log-smooth locus of a special fiber. This upgrades the coefficient-rigidity hypothesis of the abstract visibility package to an intrinsic condition.</p>
+<p>We then apply the theorem in two directions. In the Kim–Liu–Wang weighted branch family, we recover the full dichotomy: every pre-last wall is coefficient-visible, while the last wall is pair-singularity-visible and is detected by a local weighted blow-up over the unique non-toric <span class="math inline">\(A\)</span>-singularity of the special divisor <span class="math inline">\(D_\beta\)</span>. As a second application, we study the family <span class="math display">\[
+\bigl(\mathbb P^2,\alpha \Lambda + c C_p\bigr),
+\qquad
+\Lambda=(y=0),
+\qquad
+C_p:\ z^d+a z x^{d-1}+\sum_{j=0}^d a_j x^{d-j}y^j=0.
+\]</span> On a natural dense open coefficient locus <span class="math inline">\(B^\circ\)</span>, we compute the complete coefficient wall arrangement, prove the exact identities <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(\alpha,c)=-\beta_{(\mathbb P^2,\alpha\Lambda+cC_e)}(v_e),
+\]</span> and show that there is no hidden wall on <span class="math inline">\(B^\circ\)</span>. Thus the second family exhibits the opposite behavior from the weighted branch family: on the generic locus, all walls are coefficient-visible.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>Two complementary analyses isolate a precise phenomenon in non-proportional wall crossing for <span class="math inline">\(K\)</span>-stability. A wall can arise in two very different ways.</p>
+<p>The first mechanism is fixed-ambient and coefficient-theoretic. One starts with a common affine coefficient space <span class="math inline">\(B\)</span> carrying a torus action, a family of log Fano pairs over <span class="math inline">\(B\)</span>, and an affine CM character map <span class="math display">\[
+\chi:P\to M_\mathbb R
+\]</span> from the coefficient domain. A wall appears when <span class="math inline">\(\chi(\mathbf c)\)</span> crosses a supporting hyperplane of a coefficient face. If the face is liftable, then the corresponding wall model carries a product special test configuration and the wall equation is exactly a <span class="math inline">\(\beta\)</span>-equation.</p>
+<p>The second mechanism is invisible to the coefficient arrangement. A parameter may lie in the interior of a coefficient chamber and still be strictly <span class="math inline">\(K\)</span>-semistable. In that case the destabilizing object comes from a non-product special test configuration. The problem is then to show that the associated special center cannot stay inside a locally rigid part of the family, and therefore must be detected over the non-log-smooth locus of a special fiber.</p>
+<p>A family-specific analysis of the weighted branch example proves this dichotomy in the Kim–Liu–Wang family. A parallel abstract analysis proves the coefficient-visible part, the hidden-wall criterion, and an extended visibility theorem under a coefficient-rigidity hypothesis. The present article unifies those two strands and adds two genuinely new ingredients.</p>
+<p>First, we replace coefficient-rigidity by an intrinsic criterion. The key input is a local product-neighborhood transport theorem: if the center of a hidden special divisor lies in a neighborhood isomorphic to <span class="math inline">\(V\times \mathbb A^1\)</span>, then the same divisor restricts to a divisorial valuation on <span class="math inline">\(V\)</span>. Combined with a local <span class="math inline">\(\delta\)</span>-gap <span class="math display">\[
+\delta_x&gt;1,
+\]</span> this excludes zero-<span class="math inline">\(\beta\)</span> valuations from every such product neighborhood.</p>
+<p>Second, we add a second substantial application. The naive plane-branch family <span class="math display">\[
+(\mathbb P^2,cC_p)
+\]</span> does not produce a nontrivial wall arrangement: the corresponding <span class="math inline">\(\beta\)</span>-functions are all proportional to <span class="math inline">\(c\)</span>. The correct family is the non-proportional variant <span class="math display">\[
+\bigl(\mathbb P^2,\alpha \Lambda + c C_p\bigr),
+\qquad
+\Lambda=(y=0).
+\]</span> For this family we compute the coefficient walls explicitly and prove that on a natural dense open coefficient locus there is no hidden wall at all.</p>
+<p>The center theorem of the paper is the following.</p>
+<p><strong>Theorem A (Intrinsic visibility theorem).</strong> In the fixed-ambient setup of Sections 2 and 3, assume that every exposed coefficient face met by <span class="math inline">\(\chi(P)\)</span> is liftable. Assume moreover that for every hidden wall point, every point of the corresponding special fiber outside its non-log-smooth locus admits a neighborhood isomorphic over <span class="math inline">\(\mathbb A^1\)</span> to <span class="math inline">\(V\times \mathbb A^1\)</span>, where <span class="math inline">\(V\)</span> is an open subset of the original fiber satisfying <span class="math display">\[
+\delta_x(X,\Delta)&gt;1
+\qquad\text{for all }x\in V.
+\]</span> Then every wall point represented by a semistable coefficient point is of exactly one of the following two types:</p>
+<ol type="1">
+<li><p><strong>coefficient-visible</strong>, detected by a liftable coefficient face and satisfying the exact identity <span class="math display">\[
+\mu_F^{\mathrm{GIT}}=-\beta
+\]</span> on the corresponding wall model;</p></li>
+<li><p><strong>pair-singularity-visible</strong>, detected by a special divisorial valuation with <span class="math inline">\(\beta=0\)</span> whose special center lies over the non-log-smooth locus of a special fiber.</p></li>
+</ol>
+<p>The weighted-branch family realizes both alternatives. The plane-branch-with-line family on the regular open locus <span class="math inline">\(B^\circ\)</span> realizes only the first one.</p>
+<p>The proof road map is short. Section 3 establishes the cone criterion and toric wall centers. Section 4 proves liftability criteria, the facewise identity <span class="math inline">\(\mu^{\mathrm{GIT}}=-\beta\)</span>, the hidden-wall criterion, and the local product transport theorem. Section 5 assembles these ingredients into Theorem A. Sections 6 and 7 treat the two applications.</p>
+</section>
+<section id="standard-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="standard-inputs">2. Standard inputs</h2>
+<p>We use the following facts from the literature.</p>
+<ol type="1">
+<li><p>If a <span class="math inline">\(1\)</span>-PS of <span class="math inline">\(\operatorname{Aut}(X,\Delta;L)\)</span> induces a product test configuration, then the weight on the CM line is the generalized Futaki invariant of that product test configuration.</p></li>
+<li><p>If a log Fano pair is <span class="math inline">\(K\)</span>-semistable but not <span class="math inline">\(K\)</span>-polystable, then there exists a non-product special test configuration with vanishing generalized Futaki invariant whose central fiber is the unique <span class="math inline">\(K\)</span>-polystable degeneration.</p></li>
+<li><p>For a special test configuration, the generalized Futaki invariant equals the <span class="math inline">\(\beta\)</span>-invariant of the associated special divisorial valuation.</p></li>
+<li><p>For a log Fano pair, <span class="math inline">\(K\)</span>-semistability is equivalent to the nonnegativity of <span class="math inline">\(\beta(v)\)</span> for all prime divisors over the pair.</p></li>
+<li><p>Since <span class="math inline">\(\mathbb P^2\)</span> is <span class="math inline">\(K\)</span>-polystable, one has <span class="math display">\[
+S_{-K_{\mathbb P^2}}(v)\le A_{\mathbb P^2}(v)
+\]</span> for every divisorial valuation <span class="math inline">\(v\)</span> over <span class="math inline">\(\mathbb P^2\)</span>. Equivalently, <span class="math display">\[
+S_H(v)\le \frac{A_{\mathbb P^2}(v)}{3},
+\qquad H=\mathcal O_{\mathbb P^2}(1).
+\]</span></p></li>
+<li><p>For a semi-quasihomogeneous plane curve singularity whose weighted initial form is <span class="math inline">\(Z^d+X^s\)</span> with <span class="math inline">\(d,s\ge 2\)</span>, the local log canonical threshold equals <span class="math display">\[
+\operatorname{lct}(Z^d+X^s)=\frac1d+\frac1s.
+\]</span></p></li>
+</ol>
+<p>Items (1)–(3) are standard in Li–Xu and in the real-coefficient <span class="math inline">\(K\)</span>-moduli theory of Liu–Zhou. Item (4) is the valuative criterion for <span class="math inline">\(K\)</span>-semistability. Item (6) is the standard semi-quasihomogeneous computation of the local log canonical threshold.</p>
+</section>
+<section id="fixed-ambient-setup-and-coefficient-faces" class="level2">
+<h2 class="anchored" data-anchor-id="fixed-ambient-setup-and-coefficient-faces">3. Fixed-ambient setup and coefficient faces</h2>
+<p>Let <span class="math inline">\(T\)</span> be an algebraic torus with character lattice <span class="math inline">\(M=X^*(T)\)</span> and cocharacter lattice <span class="math inline">\(N=X_*(T)\)</span>. Let <span class="math display">\[
+B=\mathbb A^s_{z_1,\dots,z_s}
+\]</span> carry a diagonal <span class="math inline">\(T\)</span>-action with nonzero weights <span class="math display">\[
+r_1,\dots,r_s\in M.
+\]</span> Let <span class="math display">\[
+\pi:(\mathcal X,\mathcal D_1,\dots,\mathcal D_m)\to B
+\]</span> be a <span class="math inline">\(T\)</span>-equivariant family, and let <span class="math inline">\(P\subset \mathbb R^m\)</span> be a convex coefficient domain such that for every <span class="math inline">\(\mathbf c=(c_1,\dots,c_m)\in P\)</span> and every relevant fiber <span class="math inline">\(X_p\)</span>, the pair <span class="math display">\[
+(X_p,\Delta_{p,\mathbf c}),
+\qquad
+\Delta_{p,\mathbf c}:=\sum_{j=1}^m c_j D_{j,p},
+\]</span> is log Fano. Assume the CM line is <span class="math inline">\(T\)</span>-linearized by an affine character map <span class="math display">\[
+\chi:P\to M_\mathbb R.
+\]</span></p>
+<p>For <span class="math inline">\(p\in B\)</span>, set <span class="math display">\[
+\operatorname{Supp}(p):=\{i\mid z_i(p)\neq 0\},
+\qquad
+\Gamma(p):=\operatorname{Cone}\{r_i\mid i\in\operatorname{Supp}(p)\}\subset M_\mathbb R.
+\]</span></p>
+<section id="coefficient-faces" class="level3">
+<h3 class="anchored" data-anchor-id="coefficient-faces">3.1. Coefficient faces</h3>
+<p>Fix an exposed face <span class="math inline">\(F\)</span> of some support cone. Choose a primitive supporting covector <span class="math inline">\(\nu_F\in N\)</span> with <span class="math display">\[
+\langle m,\nu_F\rangle=0 \quad (m\in F),
+\qquad
+\langle m,\nu_F\rangle&gt;0 \quad (m\in \Gamma\setminus F)
+\]</span> for a support cone <span class="math inline">\(\Gamma\)</span> having <span class="math inline">\(F\)</span> as an exposed face. Define the supporting hyperplane <span class="math display">\[
+H_F:=\{\mathbf c\in P\mid \langle \chi(\mathbf c),\nu_F\rangle=0\}.
+\]</span> The connected components of <span class="math display">\[
+P\setminus \bigcup_F H_F
+\]</span> are the <strong>coefficient chambers</strong>.</p>
+<p>For an exposed face <span class="math inline">\(F\)</span>, define <span class="math display">\[
+I_F:=\{i\mid r_i\in F\},
+\qquad
+B_F:=\{z_j=0\text{ for }j\notin I_F\}\cong \mathbb A^{I_F},
+\]</span> and for <span class="math inline">\(\mathbf c\in H_F\)</span> define <span class="math display">\[
+W_F:=\{\mathbf c\in P\mid \chi(\mathbf c)\in \operatorname{relint}(F)\},
+\]</span> <span class="math display">\[
+B_F^{ss}(\mathbf c):=\{q\in B_F\mid \chi(\mathbf c)\in \Gamma(q)\},
+\]</span> <span class="math display">\[
+Z_F(\mathbf c):=B_F^{ss}(\mathbf c)//T.
+\]</span></p>
+<p>A point <span class="math inline">\(\mathbf c_*\in P\)</span> is a <strong>wall point</strong> if some fiber <span class="math inline">\((X_p,\Delta_{p,\mathbf c_*})\)</span> is strictly <span class="math inline">\(K\)</span>-semistable.</p>
+<p>A wall point is called <strong>coefficient-visible</strong> if <span class="math inline">\(\mathbf c_*\in W_F\)</span> for some liftable face <span class="math inline">\(F\)</span>. It is called <strong>hidden</strong> if <span class="math inline">\(\mathbf c_*\)</span> lies in the interior of a coefficient chamber. It is called <strong>pair-singularity-visible</strong> if it is hidden and the associated special divisorial valuation with <span class="math inline">\(\beta=0\)</span> is centered over the non-log-smooth locus of a special fiber.</p>
+</section>
+<section id="the-cone-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="the-cone-criterion">3.2. The cone criterion</h3>
+<p><strong>Proposition 3.1.</strong> For any <span class="math inline">\(p\in B\)</span> and <span class="math inline">\(\mathbf c\in P\)</span>, <span class="math display">\[
+p\text{ is }\chi(\mathbf c)\text{-semistable}
+\iff
+\chi(\mathbf c)\in \Gamma(p).
+\]</span></p>
+<p><strong>Proof.</strong> Let <span class="math inline">\(\nu\in N_\mathbb R\)</span>, and let <span class="math inline">\(\lambda_\nu:\mathbb G_m\to T\)</span> be the corresponding <span class="math inline">\(1\)</span>-PS. The limit <span class="math display">\[
+\lim_{t\to 0}\lambda_\nu(t)\cdot p
+\]</span> exists if and only if <span class="math display">\[
+\langle r_i,\nu\rangle\ge 0
+\qquad\text{for all }i\in \operatorname{Supp}(p),
+\]</span> that is, if and only if <span class="math inline">\(\nu\in \Gamma(p)^\vee\)</span>. By Hilbert–Mumford, <span class="math display">\[
+p\text{ is semistable }
+\iff
+\langle \chi(\mathbf c),\nu\rangle\ge 0
+\quad\text{for all }\nu\in \Gamma(p)^\vee.
+\]</span> By the bipolar theorem, this is equivalent to <span class="math inline">\(\chi(\mathbf c)\in \Gamma(p)\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Proposition 3.2.</strong> Let <span class="math inline">\(p\in B\)</span>, let <span class="math inline">\(F\)</span> be an exposed face of <span class="math inline">\(\Gamma(p)\)</span> with supporting covector <span class="math inline">\(\nu_F\)</span>, and suppose <span class="math display">\[
+\chi(\mathbf c)\in \operatorname{relint}(F).
+\]</span> Then the limit <span class="math display">\[
+q:=\lim_{t\to 0}\lambda_F(t)\cdot p
+\]</span> exists, lies in <span class="math inline">\(B_F\)</span>, satisfies <span class="math display">\[
+\Gamma(q)=F,
+\]</span> and is semistable at <span class="math inline">\(\mathbf c\)</span>.</p>
+<p><strong>Proof.</strong> Because <span class="math inline">\(F\)</span> is an exposed face of <span class="math inline">\(\Gamma(p)\)</span>, <span class="math display">\[
+\langle r_i,\nu_F\rangle=0 \quad (r_i\in F),
+\qquad
+\langle r_i,\nu_F\rangle&gt;0 \quad (r_i\in \Gamma(p)\setminus F).
+\]</span> Hence <span class="math inline">\(\lambda_F\)</span> kills exactly the coordinates whose weights are not in <span class="math inline">\(F\)</span>. Therefore <span class="math inline">\(q\)</span> exists and belongs to <span class="math inline">\(B_F\)</span>. The surviving support weights are exactly the support weights of <span class="math inline">\(p\)</span> lying on <span class="math inline">\(F\)</span>, so they generate <span class="math inline">\(F\)</span>, and thus <span class="math display">\[
+\Gamma(q)=F.
+\]</span> Since <span class="math inline">\(\chi(\mathbf c)\in \operatorname{relint}(F)\subset F=\Gamma(q)\)</span>, Proposition 3.1 implies that <span class="math inline">\(q\)</span> is semistable at <span class="math inline">\(\mathbf c\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Corollary 3.3.</strong> For every exposed face <span class="math inline">\(F\)</span> and every <span class="math inline">\(\mathbf c\in W_F\)</span>, the quotient <span class="math display">\[
+Z_F(\mathbf c)=B_F^{ss}(\mathbf c)//T
+\]</span> is a semiprojective toric variety. If <span class="math inline">\(F\)</span> is a ray, then <span class="math inline">\(Z_F(\mathbf c)\)</span> is a weighted projective space.</p>
+<p><strong>Proof.</strong> The coordinate subspace <span class="math inline">\(B_F\)</span> is an affine space with diagonal torus action. The semistable locus is cut out by Proposition 3.1, so the quotient is the standard toric GIT quotient. If <span class="math inline">\(F\)</span> is a ray generated by a primitive character <span class="math inline">\(r_F\)</span> and <span class="math display">\[
+r_i=m_i r_F
+\qquad (i\in I_F),\qquad m_i\in \mathbb Z_{&gt;0},
+\]</span> then the action factors through a one-dimensional torus acting with weights <span class="math inline">\(m_i\)</span>, and the quotient is <span class="math display">\[
+\mathbb P(m_i\mid i\in I_F).
+\]</span> <span class="math inline">\(\square\)</span></p>
+</section>
+</section>
+<section id="liftability-the-identity-mumathrmgit-beta-and-hidden-walls" class="level2">
+<h2 class="anchored" data-anchor-id="liftability-the-identity-mumathrmgit-beta-and-hidden-walls">4. Liftability, the identity <span class="math inline">\(\mu^{\mathrm{GIT}}=-\beta\)</span>, and hidden walls</h2>
+<section id="liftable-faces" class="level3">
+<h3 class="anchored" data-anchor-id="liftable-faces">4.1. Liftable faces</h3>
+<p>An exposed face <span class="math inline">\(F\)</span> is called <strong>liftable</strong> if there exists a primitive cocharacter <span class="math display">\[
+\lambda_F:\mathbb G_m\to T
+\]</span> with differential <span class="math inline">\(\nu_F\)</span> such that for every <span class="math inline">\(\mathbf c_0\in W_F\)</span> and every polystable point <span class="math inline">\(q\in B_F^{ss}(\mathbf c_0)\)</span>, there is an open set <span class="math inline">\(U_{F,q}\subset P\)</span> containing <span class="math inline">\(W_F\)</span> with the following property: for every <span class="math inline">\(\mathbf c\in U_{F,q}\)</span>, the induced <span class="math inline">\(\mathbb G_m\)</span>-action on <span class="math inline">\((X_q,\Delta_{q,\mathbf c})\)</span> is a product special test configuration whose associated special valuation is divisorial. We denote that valuation by <span class="math display">\[
+v_{F,q,\mathbf c}.
+\]</span></p>
+<p>In fixed-ambient linear-system problems, liftability is often automatic once the supporting <span class="math inline">\(1\)</span>-PS fixes the wall model and has divisorial weight valuation.</p>
+<p><strong>Proposition 4.1 (Fixed-ambient liftability criterion).</strong> Let <span class="math inline">\(Y\)</span> be a normal projective <span class="math inline">\(T\)</span>-variety, let <span class="math inline">\(V_1,\dots,V_m\)</span> be finite-dimensional <span class="math inline">\(T\)</span>-stable linear systems on <span class="math inline">\(Y\)</span>, and let <span class="math display">\[
+B:=V_1\times\cdots\times V_m.
+\]</span> Assume that every relevant fiber pair <span class="math inline">\((Y,\Delta_{p,\mathbf c})\)</span> is log Fano. Let <span class="math inline">\(F\)</span> be an exposed coefficient face met by <span class="math inline">\(\chi(P)\)</span>, let <span class="math inline">\(\lambda_F\)</span> be the supporting <span class="math inline">\(1\)</span>-PS, and let <span class="math inline">\(\mathbf c_0\in W_F\)</span>, <span class="math inline">\(q\in B_F^{ss}(\mathbf c_0)\)</span> be polystable. Assume the weight valuation of <span class="math inline">\(\lambda_F\)</span> on <span class="math inline">\(K(Y)\)</span> is divisorial. Then <span class="math inline">\(F\)</span> is liftable.</p>
+<p><strong>Proof.</strong> Since <span class="math inline">\(q\in B_F\)</span>, every nonzero coefficient of <span class="math inline">\(q\)</span> has weight in <span class="math inline">\(F\)</span>, and <span class="math inline">\(\nu_F\)</span> vanishes on <span class="math inline">\(F\)</span>. Hence <span class="math inline">\(\lambda_F\)</span> fixes <span class="math inline">\(q\)</span> and therefore fixes every divisor appearing in the boundary of the wall model. For every <span class="math inline">\(\mathbf c\)</span>, the induced action on <span class="math inline">\((Y,\Delta_{q,\mathbf c})\)</span> is therefore a product test configuration. Because the pair is log Fano, it is a product special test configuration. By assumption the associated weight valuation is divisorial, so the definition of liftability is satisfied. <span class="math inline">\(\square\)</span></p>
+<p>A useful local criterion for divisoriality is weighted blow-up divisoriality.</p>
+<p><strong>Corollary 4.2 (Weighted blow-up criterion).</strong> In the situation of Proposition 4.1, suppose that near the generic point of an irreducible <span class="math inline">\(\lambda_F\)</span>-fixed subvariety <span class="math inline">\(Z\subset Y\)</span>, the variety <span class="math inline">\(Y\)</span> is smooth with local coordinates <span class="math display">\[
+(u_1,\dots,u_r,v_1,\dots,v_s)
+\]</span> such that <span class="math display">\[
+Z=(v_1=\cdots=v_s=0),
+\]</span> <span class="math inline">\(\lambda_F\)</span> acts trivially on the <span class="math inline">\(u_i\)</span>, and <span class="math display">\[
+\lambda_F(t)\cdot v_j=t^{w_j}v_j,
+\qquad
+w_j\in \mathbb Z_{&gt;0},
+\qquad
+\gcd(w_1,\dots,w_s)=1.
+\]</span> Then the weight valuation of <span class="math inline">\(\lambda_F\)</span> is the divisorial valuation of the exceptional divisor of the weighted blow-up of <span class="math inline">\(Z\)</span> with weights <span class="math inline">\((w_1,\dots,w_s)\)</span>.</p>
+<p><strong>Proof.</strong> The valuation ideals are generated by monomials in the <span class="math inline">\(v_j\)</span> of weighted degree at least <span class="math inline">\(m\)</span>, so their Rees algebra is the Rees algebra of the weighted blow-up of <span class="math inline">\(Z\)</span> with weights <span class="math inline">\((w_1,\dots,w_s)\)</span>. The exceptional divisor is prime, and by construction its valuation equals the weight valuation. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="the-facewise-identity" class="level3">
+<h3 class="anchored" data-anchor-id="the-facewise-identity">4.2. The facewise identity</h3>
+<p>For a liftable exposed face <span class="math inline">\(F\)</span> with supporting covector <span class="math inline">\(\nu_F\)</span>, define <span class="math display">\[
+\mu_F^{\mathrm{GIT}}(\mathbf c):=-\langle \chi(\mathbf c),\nu_F\rangle.
+\]</span></p>
+<p><strong>Theorem 4.3 (Facewise identity).</strong> Let <span class="math inline">\(F\)</span> be a liftable face, let <span class="math inline">\(\mathbf c_0\in W_F\)</span>, let <span class="math inline">\(q\in B_F^{ss}(\mathbf c_0)\)</span> be polystable, and let <span class="math inline">\(U_{F,q}\)</span> be as above. Then for every <span class="math inline">\(\mathbf c\in U_{F,q}\)</span>, <span class="math display">\[
+\mu_F^{\mathrm{GIT}}(\mathbf c)
+=
+-\beta_{(X_q,\Delta_{q,\mathbf c})}(v_{F,q,\mathbf c}).
+\]</span></p>
+<p><strong>Proof.</strong> Because <span class="math inline">\(q\in B_F\)</span>, the <span class="math inline">\(1\)</span>-PS <span class="math inline">\(\lambda_F\)</span> fixes <span class="math inline">\(q\)</span>. By liftability, for every <span class="math inline">\(\mathbf c\in U_{F,q}\)</span> the induced action on <span class="math inline">\((X_q,\Delta_{q,\mathbf c})\)</span> gives a product special test configuration whose associated special divisorial valuation is <span class="math inline">\(v_{F,q,\mathbf c}\)</span>.</p>
+<p>By definition of the CM linearization, the weight of <span class="math inline">\(\lambda_F\)</span> on the CM line over <span class="math inline">\(q\)</span> equals <span class="math display">\[
+\langle \chi(\mathbf c),\nu_F\rangle.
+\]</span> By the CM/Futaki dictionary, this equals the generalized Futaki invariant of the induced product special test configuration. By the special test configuration formula, the same Futaki invariant equals <span class="math display">\[
+\beta_{(X_q,\Delta_{q,\mathbf c})}(v_{F,q,\mathbf c}).
+\]</span> Therefore <span class="math display">\[
+\beta_{(X_q,\Delta_{q,\mathbf c})}(v_{F,q,\mathbf c})
+=
+\langle \chi(\mathbf c),\nu_F\rangle
+=
+-\mu_F^{\mathrm{GIT}}(\mathbf c).
+\]</span> <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="hidden-walls" class="level3">
+<h3 class="anchored" data-anchor-id="hidden-walls">4.3. Hidden walls</h3>
+<p><strong>Theorem 4.4 (Hidden-wall criterion).</strong> Let <span class="math inline">\(\mathbf c_*\)</span> lie in the interior of a coefficient chamber. Suppose that for some fiber <span class="math inline">\(X_p\)</span> the pair <span class="math inline">\((X_p,\Delta_{p,\mathbf c_*})\)</span> is strictly <span class="math inline">\(K\)</span>-semistable. Then:</p>
+<ol type="1">
+<li><p>there exists a special divisorial valuation <span class="math inline">\(v_*\)</span> with <span class="math display">\[
+\beta_{(X_p,\Delta_{p,\mathbf c_*})}(v_*)=0;
+\]</span></p></li>
+<li><p>the wall point <span class="math inline">\(\mathbf c_*\)</span> is not explained by any liftable coefficient face.</p></li>
+</ol>
+<p>In particular, every strictly <span class="math inline">\(K\)</span>-semistable interior point is a hidden wall point.</p>
+<p><strong>Proof.</strong> Since <span class="math inline">\((X_p,\Delta_{p,\mathbf c_*})\)</span> is <span class="math inline">\(K\)</span>-semistable but not <span class="math inline">\(K\)</span>-polystable, there exists a non-product special test configuration with vanishing generalized Futaki invariant. Let <span class="math inline">\(v_*\)</span> be the associated special divisorial valuation. Then <span class="math display">\[
+\beta(v_*)=0.
+\]</span> This proves (1).</p>
+<p>Suppose that <span class="math inline">\(\mathbf c_*\)</span> were explained by a liftable face <span class="math inline">\(F\)</span>. Then there would exist a wall model <span class="math inline">\((X_q,\Delta_{q,\mathbf c_*})\)</span> and a divisorial valuation <span class="math inline">\(v_{F,q,\mathbf c_*}\)</span> with <span class="math display">\[
+0=\beta(v_{F,q,\mathbf c_*}).
+\]</span> By Theorem 4.3, <span class="math display">\[
+0=\beta(v_{F,q,\mathbf c_*})=-\mu_F^{\mathrm{GIT}}(\mathbf c_*),
+\]</span> hence <span class="math inline">\(\mathbf c_*\in H_F\)</span>. This contradicts the assumption that <span class="math inline">\(\mathbf c_*\)</span> lies in the interior of a coefficient chamber. Therefore no liftable face explains <span class="math inline">\(\mathbf c_*\)</span>. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="intrinsic-exclusion-of-hidden-centers" class="level3">
+<h3 class="anchored" data-anchor-id="intrinsic-exclusion-of-hidden-centers">4.4. Intrinsic exclusion of hidden centers</h3>
+<p>We now isolate the intrinsic replacement for coefficient-rigidity.</p>
+<p><strong>Proposition 4.5 (Local <span class="math inline">\(\delta\)</span>-gap).</strong> Let <span class="math inline">\((X,\Delta)\)</span> be a log Fano pair and let <span class="math display">\[
+L:=-(K_X+\Delta).
+\]</span> Suppose <span class="math inline">\(V\subset X\)</span> is an open subset such that <span class="math display">\[
+\delta_x(X,\Delta)&gt;1
+\qquad\text{for all }x\in V.
+\]</span> Then every divisorial valuation <span class="math inline">\(v\)</span> centered in <span class="math inline">\(V\)</span> satisfies <span class="math display">\[
+\beta_{(X,\Delta)}(v)&gt;0.
+\]</span></p>
+<p><strong>Proof.</strong> By definition of <span class="math inline">\(\delta_x\)</span>, <span class="math display">\[
+\frac{A_{X,\Delta}(v)}{S_L(v)}\ge \delta_x(X,\Delta)&gt;1
+\]</span> for every divisorial valuation <span class="math inline">\(v\)</span> centered at <span class="math inline">\(x\in V\)</span>. Hence <span class="math display">\[
+A_{X,\Delta}(v)&gt;S_L(v),
+\]</span> that is, <span class="math display">\[
+\beta_{(X,\Delta)}(v)&gt;0.
+\]</span> <span class="math inline">\(\square\)</span></p>
+<p>The next proposition transports a hidden special divisor through a local product neighborhood.</p>
+<p><strong>Proposition 4.6 (Local product transport).</strong> Let <span class="math inline">\((X,\Delta)\)</span> be an <span class="math inline">\(n\)</span>-dimensional log Fano pair, and let <span class="math display">\[
+(\mathfrak X,\mathfrak \Delta)\to \mathbb A^1_t
+\]</span> be a non-product special test configuration of <span class="math inline">\((X,\Delta)\)</span>. Let <span class="math inline">\(E\)</span> be the prime divisor over <span class="math inline">\(\mathfrak X\)</span> defining the associated special valuation <span class="math inline">\(w\)</span> on <span class="math inline">\(K(X)(t)\)</span>, normalized by <span class="math display">\[
+w(t)=1.
+\]</span> Let <span class="math inline">\(z\in \mathfrak X_0\)</span> be the center of <span class="math inline">\(E\)</span> on the special fiber. Assume there exists an open neighborhood <span class="math inline">\(U\ni z\)</span> and an isomorphism of pairs over <span class="math inline">\(\mathbb A^1\)</span> <span class="math display">\[
+(U,\mathfrak \Delta|_U)\cong (V,\Delta_V)\times \mathbb A^1
+\]</span> for some open subset <span class="math inline">\(V\subset X\)</span>. Then the restriction <span class="math display">\[
+v:=w|_{K(V)}
+\]</span> is a nontrivial divisorial valuation on <span class="math inline">\(K(V)\)</span> centered at the point of <span class="math inline">\(V\)</span> corresponding to <span class="math inline">\(z\)</span>.</p>
+<p><strong>Proof.</strong> Set <span class="math inline">\(K:=K(V)\)</span>. The valuation <span class="math inline">\(w\)</span> is a rank-one divisorial valuation on the <span class="math inline">\((n+1)\)</span>-dimensional function field <span class="math inline">\(K(t)\)</span>. Its residue field has transcendence degree <span class="math display">\[
+\operatorname{trdeg}_k \kappa(w)=n.
+\]</span> The restriction <span class="math inline">\(v=w|_K\)</span> is nontrivial because <span class="math inline">\(w\)</span> is the valuation associated with a non-product special test configuration.</p>
+<p>Since <span class="math inline">\(v(K^\times)\)</span> is a nonzero subgroup of <span class="math inline">\(\mathbb Z\)</span>, there exists <span class="math inline">\(d\in \mathbb Z_{&gt;0}\)</span> and <span class="math inline">\(f\in K^\times\)</span> with <span class="math display">\[
+v(f)=d.
+\]</span> Set <span class="math display">\[
+u:=\frac{t^d}{f}.
+\]</span> Then <span class="math display">\[
+w(u)=d-d=0.
+\]</span> Moreover <span class="math inline">\(t\)</span> is algebraic over <span class="math inline">\(K(u)\)</span> because it satisfies the equation <span class="math display">\[
+T^d-fu=0.
+\]</span> Hence <span class="math inline">\(K(t)\)</span> is algebraic over <span class="math inline">\(K(u)\)</span>. Passing to residue fields, <span class="math inline">\(\kappa(w)\)</span> is algebraic over <span class="math inline">\(\kappa(v)(\bar u)\)</span>, and therefore <span class="math display">\[
+\operatorname{trdeg}_k \kappa(w)\le \operatorname{trdeg}_k \kappa(v)+1.
+\]</span> Thus <span class="math display">\[
+n\le \operatorname{trdeg}_k \kappa(v)+1.
+\]</span></p>
+<p>On the other hand, <span class="math inline">\(v\)</span> is a rank-one valuation on the <span class="math inline">\(n\)</span>-dimensional field <span class="math inline">\(K\)</span>, so Abhyankar’s inequality gives <span class="math display">\[
+\operatorname{trdeg}_k \kappa(v)+1\le n.
+\]</span> Hence <span class="math display">\[
+\operatorname{trdeg}_k \kappa(v)=n-1,
+\]</span> so <span class="math inline">\(v\)</span> is divisorial.</p>
+<p>Finally, because <span class="math inline">\(w\)</span> dominates the local ring at <span class="math inline">\(z\)</span> on <span class="math inline">\(V\times \mathbb A^1\)</span>, its restriction <span class="math inline">\(v\)</span> dominates the local ring of the corresponding point on <span class="math inline">\(V\)</span>. Therefore <span class="math inline">\(v\)</span> is centered there. <span class="math inline">\(\square\)</span></p>
+</section>
+</section>
+<section id="the-intrinsic-visibility-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="the-intrinsic-visibility-theorem">5. The intrinsic visibility theorem</h2>
+<p>We can now prove the center theorem.</p>
+<p><strong>Theorem 5.1 (Intrinsic visibility theorem).</strong> Assume the setup of Section 3. Assume that every exposed coefficient face met by <span class="math inline">\(\chi(P)\)</span> is liftable. Assume moreover that for every hidden wall point, every point of the corresponding special fiber outside its non-log-smooth locus admits a neighborhood isomorphic over <span class="math inline">\(\mathbb A^1\)</span> to <span class="math inline">\(V\times \mathbb A^1\)</span>, where <span class="math inline">\(V\)</span> is an open subset of the original fiber satisfying <span class="math display">\[
+\delta_x(X,\Delta)&gt;1
+\qquad\text{for all }x\in V.
+\]</span> Then every wall point represented by a semistable coefficient point is of exactly one of the following two types:</p>
+<ol type="1">
+<li><p>coefficient-visible, detected by a liftable coefficient face;</p></li>
+<li><p>pair-singularity-visible, detected by a special divisorial valuation with <span class="math inline">\(\beta=0\)</span> centered over the non-log-smooth locus of a special fiber.</p></li>
+</ol>
+<p>Moreover, on every liftable coefficient face one has the exact identity <span class="math display">\[
+\mu_F^{\mathrm{GIT}}=-\beta.
+\]</span></p>
+<p><strong>Proof.</strong> Let <span class="math inline">\(\mathbf c_*\)</span> be a wall point represented by a semistable coefficient point.</p>
+<p>If <span class="math inline">\(\mathbf c_*\)</span> lies on the coefficient hyperplane arrangement, then since the representing coefficient point is semistable, Proposition 3.1 implies that <span class="math inline">\(\chi(\mathbf c_*)\)</span> lies in an exposed face <span class="math inline">\(F\)</span> of its support cone. By assumption <span class="math inline">\(F\)</span> is liftable, so <span class="math inline">\(\mathbf c_*\)</span> is coefficient-visible. The identity <span class="math display">\[
+\mu_F^{\mathrm{GIT}}=-\beta
+\]</span> on the corresponding wall model is exactly Theorem 4.3.</p>
+<p>Now suppose that <span class="math inline">\(\mathbf c_*\)</span> lies in the interior of a coefficient chamber. Then by Theorem 4.4 there exists a special divisorial valuation <span class="math inline">\(v_*\)</span> with <span class="math display">\[
+\beta(v_*)=0,
+\]</span> and <span class="math inline">\(\mathbf c_*\)</span> is hidden. Let <span class="math display">\[
+(\mathfrak X,\mathfrak \Delta)\to \mathbb A^1
+\]</span> be the corresponding special test configuration, and let <span class="math inline">\(z\)</span> be the center of the associated prime divisor on the special fiber. If <span class="math inline">\(z\)</span> lay outside the non-log-smooth locus, then by hypothesis <span class="math inline">\(z\)</span> would admit a product neighborhood <span class="math display">\[
+U\cong V\times \mathbb A^1
+\]</span> with <span class="math display">\[
+\delta_x(X,\Delta)&gt;1
+\qquad (x\in V).
+\]</span> By Proposition 4.6, the special divisor would restrict to a divisorial valuation on <span class="math inline">\(V\)</span>. By Proposition 4.5, every divisorial valuation centered in <span class="math inline">\(V\)</span> has strictly positive <span class="math inline">\(\beta\)</span>. This contradicts <span class="math display">\[
+\beta(v_*)=0.
+\]</span> Therefore the special center of <span class="math inline">\(v_*\)</span> must lie over the non-log-smooth locus of the special fiber. By definition, <span class="math inline">\(\mathbf c_*\)</span> is pair-singularity-visible.</p>
+<p>The two alternatives are disjoint because pair-singularity-visibility is defined only for hidden interior points. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="application-i-the-weighted-branch-family" class="level2">
+<h2 class="anchored" data-anchor-id="application-i-the-weighted-branch-family">6. Application I: the weighted branch family</h2>
+<p>We now recover the full structural theorem for the weighted branch family as an application of Theorem 5.1.</p>
+<section id="the-family-and-its-coefficient-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-family-and-its-coefficient-data">6.1. The family and its coefficient data</h3>
+<p>The family is the Kim–Liu–Wang weighted branch family. In odd parity one works on <span class="math display">\[
+W=\mathbb P(1,2,n+2)_{x,y,z}
+\]</span> with divisors <span class="math display">\[
+D_p:\ z^2y+a z x^{n+4}+\sum_{j=0}^{n+3} a_j x^{2n+6-2j} y^j=0,
+\]</span> and pairs <span class="math inline">\((W,wD_p)\)</span> for <span class="math display">\[
+0&lt;w&lt;\frac{n+5}{2n+6}.
+\]</span> In even parity one writes <span class="math inline">\(n=2\ell\)</span> and works on <span class="math display">\[
+W'=\mathbb P(1,1,\ell+1)_{u,y,z},
+\qquad
+H=(u=0),
+\]</span> with divisors <span class="math display">\[
+D_p:\ z^2y+a z u^{\ell+2}+\sum_{j=0}^{2\ell+3} a_j u^{2\ell+3-j} y^j=0,
+\]</span> and pairs <span class="math display">\[
+\left(W',\frac12H+wD_p\right),
+\qquad
+0&lt;w&lt;\frac{2\ell+5}{4\ell+6}.
+\]</span></p>
+<p>The common coefficient space is <span class="math display">\[
+B_n=\mathbb A^{n+5}_{a,a_0,\dots,a_{n+3}},
+\]</span> with residual torus <span class="math display">\[
+T=(\mathbb G_m)^2
+\]</span> acting with weights <span class="math display">\[
+v=(-1,-1),
+\qquad
+v_j=(j-1,-2)
+\qquad (0\le j\le n+3),
+\]</span> and CM character <span class="math display">\[
+u_w=
+\left(
+\frac{1-n+2nw}{6},
+\frac{2n+1-(4n+6)w}{3(n+2)}
+\right).
+\]</span></p>
+<p>These are exactly the coefficient data computed in the weighted branch analysis.</p>
+</section>
+<section id="the-slice-and-the-vgit-walls" class="level3">
+<h3 class="anchored" data-anchor-id="the-slice-and-the-vgit-walls">6.2. The slice and the VGIT walls</h3>
+<p>For <span class="math display">\[
+w&gt;\frac{2n+1}{4n+6},
+\]</span> one rescales <span class="math inline">\(u_w\)</span> to the affine slice <span class="math inline">\(y=-2\)</span> and obtains <span class="math display">\[
+\widetilde u_w=(\rho(w),-2),
+\]</span> where <span class="math display">\[
+\rho(w)=\frac{(n+2)(n-1)-2n(n+2)w}{2n+1-(4n+6)w}.
+\]</span> All coefficient weights <span class="math inline">\(v_j\)</span> lie on the same affine line <span class="math inline">\(y=-2\)</span>, and the ray through <span class="math inline">\(v=(-1,-1)\)</span> meets that slice at <span class="math inline">\((-2,-2)\)</span>. Therefore semistability is interval containment on the slice, and the walls are exactly the values <span class="math display">\[
+w_i=\frac{(n+2)^2-(2n+1)i}{(n+2)(2n+6)-(4n+6)i}
+\]</span> for which <span class="math display">\[
+\rho(w_i)=n+2-i.
+\]</span> Before the last <span class="math inline">\(K\)</span>-moduli wall, each new wall orbit is a coordinate orbit.</p>
+</section>
+<section id="liftable-wall-rays-and-the-identity-mumathrmgit-beta" class="level3">
+<h3 class="anchored" data-anchor-id="liftable-wall-rays-and-the-identity-mumathrmgit-beta">6.3. Liftable wall rays and the identity <span class="math inline">\(\mu^{\mathrm{GIT}}=-\beta\)</span></h3>
+<p>Fix a pre-last wall and let <span class="math display">\[
+e=n+3-i
+\]</span> in the odd case and <span class="math display">\[
+e=2\ell+3-i
+\]</span> in the even case. Let <span class="math inline">\(p_e\)</span> be the coordinate point with only <span class="math inline">\(a_e\neq 0\)</span>.</p>
+<p>The associated wall model is <span class="math display">\[
+D_e:\ z^2y+x^{2n+6-2e}y^e=0
+\]</span> in odd parity and <span class="math display">\[
+D_e:\ z^2y+u^{2\ell+3-e}y^e=0
+\]</span> in even parity. It is obtained as the limit under the supporting <span class="math inline">\(1\)</span>-PS <span class="math display">\[
+\mu_e(\tau)[x:y:z]=[x:\tau^{-2}y:\tau^{1-e}z]
+\]</span> in odd parity and the analogous <span class="math inline">\(u\)</span>-version in even parity.</p>
+<p>Each such <span class="math inline">\(1\)</span>-PS fixes the wall model and acts with divisorial weight valuation. The corresponding intrinsic complexity-one valuation is <span class="math display">\[
+v_e=v(1,n+3-e)
+\]</span> in odd parity and <span class="math display">\[
+v_e=v(2,2\ell+3-e)
+\]</span> in even parity.</p>
+<p>Therefore every pre-last coefficient face is liftable by Proposition 4.1, and Theorem 4.3 applies. In this family the resulting equality is the explicit identity <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(w)=-\beta_{D_e}(v_e).
+\]</span> Equivalently, <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(w)=0
+\iff
+\beta_{D_e}(v_e)=0
+\iff
+w=w_i.
+\]</span></p>
+<p>Thus every pre-last wall is coefficient-visible.</p>
+</section>
+<section id="the-last-wall-is-not-a-coefficient-wall" class="level3">
+<h3 class="anchored" data-anchor-id="the-last-wall-is-not-a-coefficient-wall">6.4. The last wall is not a coefficient wall</h3>
+<p>Let <span class="math display">\[
+m=\frac{n+1}{2}
+\]</span> when <span class="math inline">\(n\)</span> is odd, and let <span class="math inline">\(m=\ell+1\)</span> when <span class="math inline">\(n=2\ell\)</span> is even. The weighted branch computation shows that the last <span class="math inline">\(K\)</span>-moduli wall occurs at <span class="math display">\[
+\xi_n=\frac{n^3+11n^2+31n+23}{2n^3+18n^2+50n+42}
+\]</span> in odd parity and at <span class="math display">\[
+\xi_{2\ell}=\frac{2\ell^2+8\ell+3}{4\ell^2+12\ell+6}
+\]</span> in even parity.</p>
+<p>The same computation gives the strict inequalities <span class="math display">\[
+w_m&lt;\xi_n&lt;\frac{n+5}{2n+6}
+\]</span> in odd parity and <span class="math display">\[
+\frac12&lt;\xi_{2\ell}&lt;\frac{2\ell+5}{4\ell+6}
+\]</span> in even parity. Equivalently, <span class="math display">\[
+\rho(\xi_n)\in \left(\frac{n+1}{2},\frac{n+3}{2}\right),
+\qquad
+\rho(\xi_{2\ell})\in (\ell,\ell+1).
+\]</span> Therefore the CM character lies strictly inside the last VGIT chamber at the last <span class="math inline">\(K\)</span>-wall. In particular, the last wall is hidden from the fixed-ambient coefficient arrangement.</p>
+</section>
+<section id="the-last-wall-is-pair-singularity-visible" class="level3">
+<h3 class="anchored" data-anchor-id="the-last-wall-is-pair-singularity-visible">6.5. The last wall is pair-singularity-visible</h3>
+<p>The weighted branch computation also identifies a special fixed-ambient model <span class="math inline">\(D_\beta\)</span> carrying the unique non-toric <span class="math inline">\(A\)</span>-singularity relevant to the last wall. Let <span class="math inline">\(E\)</span> be the exceptional divisor of the corresponding weighted blow-up.</p>
+<p>In odd parity, <span class="math inline">\(E\)</span> arises from the local weighted blow-up of weights <span class="math inline">\((2,n+4)\)</span> and has <span class="math display">\[
+\beta_E(w)=
+\frac{n^3+11n^2+31n+23-(2n^3+18n^2+50n+42)w}{3(n+2)(n+3)}.
+\]</span> In even parity, <span class="math inline">\(E\)</span> arises from the local weighted blow-up of weights <span class="math inline">\((1,\ell+2)\)</span> and has <span class="math display">\[
+\beta_E(w)=
+\frac{2\ell^2+8\ell+3-(4\ell^2+12\ell+6)w}{6(\ell+1)}.
+\]</span> Hence <span class="math display">\[
+\beta_E(w)=0
+\iff
+w=\xi_n
+\quad\text{or}\quad
+w=\xi_{2\ell}.
+\]</span></p>
+<p>Because the last wall is not coefficient-visible, Theorem 4.4 identifies it as hidden. The special divisor <span class="math inline">\(E\)</span> has <span class="math inline">\(\beta_E=0\)</span> and is centered over the non-log-smooth point of the special fiber <span class="math inline">\(D_\beta\)</span>. Therefore the last wall is pair-singularity-visible.</p>
+<p>We have proved the following.</p>
+<p><strong>Theorem 6.1.</strong> In the Kim–Liu–Wang weighted branch family, every wall before the last one is coefficient-visible, and on each pre-last wall model one has <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(w)=-\beta_{D_e}(v_e).
+\]</span> The last wall lies strictly inside the final VGIT chamber and is detected instead by the local weighted-blow-up divisor over the unique non-toric <span class="math inline">\(A\)</span>-singularity of the special divisor <span class="math inline">\(D_\beta\)</span>. In particular, the weighted branch family realizes both alternatives of Theorem 5.1.</p>
+</section>
+</section>
+<section id="application-ii-plane-branches-with-a-fixed-line" class="level2">
+<h2 class="anchored" data-anchor-id="application-ii-plane-branches-with-a-fixed-line">7. Application II: plane branches with a fixed line</h2>
+<p>We now give a second substantial application, in which the generic picture is purely coefficient-visible.</p>
+<section id="the-family-and-its-coefficient-geometry" class="level3">
+<h3 class="anchored" data-anchor-id="the-family-and-its-coefficient-geometry">7.1. The family and its coefficient geometry</h3>
+<p>Fix an integer <span class="math inline">\(d\ge 3\)</span> and a real number <span class="math inline">\(0&lt;\alpha&lt;1\)</span>. Let <span class="math display">\[
+\Lambda=(y=0)\subset \mathbb P^2_{x,y,z},
+\]</span> and let <span class="math display">\[
+B_d=\mathbb A^{d+2}_{a,a_0,\dots,a_d}.
+\]</span> For <span class="math display">\[
+p=(a,a_0,\dots,a_d)\in B_d
+\]</span> define <span class="math display">\[
+C_p:\ z^d+a z x^{d-1}+\sum_{j=0}^d a_j x^{d-j} y^j=0.
+\]</span> We study the log Fano pairs <span class="math display">\[
+(\mathbb P^2,\alpha\Lambda+cC_p),
+\qquad
+0&lt;c&lt;\frac{3-\alpha}{d}.
+\]</span></p>
+<p>Let <span class="math display">\[
+T=(\mathbb G_m)^2
+\]</span> act on coordinates by <span class="math display">\[
+(s,t)\cdot [x:y:z]=[sx:ty:z].
+\]</span> The coefficient weights are <span class="math display">\[
+r_a=(-(d-1),0),
+\qquad
+r_j=(-(d-j),-j)
+\qquad (0\le j\le d).
+\]</span> All <span class="math inline">\(r_j\)</span> lie on the affine line <span class="math display">\[
+u+v=-d.
+\]</span> The ray through <span class="math inline">\(r_a\)</span> meets the same affine line at <span class="math inline">\(r_0\)</span>, so after taking the common slice the support points are indexed by <span class="math display">\[
+0,1,\dots,d.
+\]</span></p>
+<p>For <span class="math inline">\(e&gt;0\)</span>, let <span class="math inline">\(F_e=\mathbb R_{\ge 0}r_e\)</span>. For <span class="math inline">\(e=0\)</span>, the ray <span class="math inline">\(F_0\)</span> contains both <span class="math inline">\(r_a\)</span> and <span class="math inline">\(r_0\)</span>.</p>
+<p>The supporting quotient for <span class="math inline">\(F_0\)</span> is <span class="math display">\[
+Z_{F_0}\cong \mathbb P(d-1,d),
+\]</span> while for <span class="math inline">\(e&gt;0\)</span> the ray quotient is a point.</p>
+</section>
+<section id="liftable-wall-rays" class="level3">
+<h3 class="anchored" data-anchor-id="liftable-wall-rays">7.2. Liftable wall rays</h3>
+<p>For <span class="math inline">\(0\le e\le d\)</span>, define <span class="math display">\[
+\lambda_e(\tau)[x:y:z]=[\tau^e x:\tau^{e-d}y:z].
+\]</span> If <span class="math inline">\(a_e\neq 0\)</span> and <span class="math inline">\(a_j=0\)</span> for <span class="math inline">\(j&gt;e\)</span>, then <span class="math display">\[
+\lim_{\tau\to 0}\lambda_e(\tau)\cdot C_p
+=
+C_e,
+\]</span> where <span class="math display">\[
+C_e:\ z^d+x^{d-e}y^e=0
+\qquad (e&gt;0),
+\]</span> and for <span class="math inline">\(e=0\)</span> one gets the weighted-projective wall family <span class="math display">\[
+C_{[u:v]}:\ z^d+u z x^{d-1}+v x^d=0,
+\qquad [u:v]\in \mathbb P(d-1,d).
+\]</span></p>
+<p>On the affine chart <span class="math inline">\(y=1\)</span> with coordinates <span class="math display">\[
+X=\frac{x}{y},
+\qquad
+Z=\frac{z}{y},
+\]</span> the same <span class="math inline">\(1\)</span>-PS acts by <span class="math display">\[
+X\mapsto \tau^d X,
+\qquad
+Z\mapsto \tau^{d-e} Z.
+\]</span> Thus the associated valuation is the weighted-blow-up valuation <span class="math display">\[
+v_e=v\!\left(\frac d{g_e},\frac{d-e}{g_e}\right),
+\qquad
+g_e:=\gcd(d,e).
+\]</span> Each ray is therefore liftable by Corollary 4.2.</p>
+</section>
+<section id="the-beta-functions-on-the-wall-models" class="level3">
+<h3 class="anchored" data-anchor-id="the-beta-functions-on-the-wall-models">7.3. The <span class="math inline">\(\beta\)</span>-functions on the wall models</h3>
+<p>For <span class="math inline">\(e&gt;0\)</span>, the center of <span class="math inline">\(v_e\)</span> is the point <span class="math display">\[
+P=[0:1:0],
+\]</span> which does not lie on <span class="math inline">\(\Lambda\)</span>. Hence <span class="math display">\[
+v_e(\Lambda)=0.
+\]</span> Moreover <span class="math display">\[
+A_{\mathbb P^2}(v_e)=\frac{2d-e}{g_e},
+\qquad
+S_H(v_e)=\frac{2d-e}{3g_e},
+\qquad
+v_e(C_e)=\frac{d(d-e)}{g_e}.
+\]</span> Since <span class="math display">\[
+-(K_{\mathbb P^2}+\alpha\Lambda+cC_e)=(3-\alpha-dc)H,
+\]</span> one obtains <span class="math display">\[
+\beta_e(\alpha,c)
+:=
+\beta_{(\mathbb P^2,\alpha\Lambda+cC_e)}(v_e)
+=
+\frac{\alpha(2d-e)+dc(2e-d)}{3g_e}.
+\]</span></p>
+<p>For <span class="math inline">\(e=0\)</span>, the wall family is <span class="math inline">\(C_{[u:v]}\)</span>. The relevant valuation is the ordinary blow-up at <span class="math inline">\(P\)</span>, namely <span class="math inline">\(v_0=v(1,1)\)</span>, and <span class="math display">\[
+\beta_0(\alpha,c)=\frac{2\alpha-dc}{3}.
+\]</span></p>
+<p>Therefore Theorem 4.3 gives the exact wall identity <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(\alpha,c)
+=
+-\beta_e(\alpha,c)
+\qquad (0\le e\le d).
+\]</span></p>
+</section>
+<section id="the-common-cm-character-and-the-coefficient-walls" class="level3">
+<h3 class="anchored" data-anchor-id="the-common-cm-character-and-the-coefficient-walls">7.4. The common CM character and the coefficient walls</h3>
+<p>The equations for <span class="math inline">\(e=0\)</span> and <span class="math inline">\(e=1\)</span> determine the common CM character uniquely. One finds <span class="math display">\[
+\chi_{\alpha,c}
+=
+\left(
+-\frac{\alpha+dc}{3},
+\frac{2\alpha-dc}{3}
+\right).
+\]</span> For <span class="math display">\[
+c&gt;\frac{\alpha}{2d},
+\]</span> the ray through <span class="math inline">\(\chi_{\alpha,c}\)</span> meets the affine line <span class="math inline">\(u+v=-d\)</span>. After positive rescaling one obtains <span class="math display">\[
+\widetilde\chi_{\alpha,c}
+=
+\bigl(-(d-\rho(c)),-\rho(c)\bigr),
+\]</span> with <span class="math display">\[
+\rho(c)=\frac{d(dc-2\alpha)}{2dc-\alpha}.
+\]</span> A direct derivative computation gives <span class="math display">\[
+\rho'(c)=\frac{3\alpha d^2}{(2dc-\alpha)^2}&gt;0,
+\]</span> so <span class="math inline">\(\rho\)</span> is strictly increasing.</p>
+<p>Because the slice points are exactly <span class="math inline">\(0,1,\dots,d\)</span>, semistability is interval containment: <span class="math display">\[
+p\text{ is semistable at }(\alpha,c)
+\iff
+\rho(c)\in [j_{\min}(p),j_{\max}(p)].
+\]</span> In particular, semistable coefficient points exist if and only if <span class="math display">\[
+\rho(c)\in [0,d],
+\]</span> that is, if and only if <span class="math display">\[
+c\ge \frac{2\alpha}{d}.
+\]</span> The walls occur exactly when <span class="math inline">\(\rho(c)\)</span> equals an integer. Solving <span class="math display">\[
+\rho(c_e)=e
+\]</span> gives <span class="math display">\[
+c_e=\frac{\alpha(2d-e)}{d(d-2e)}.
+\]</span> These are positive exactly for <span class="math display">\[
+0\le e&lt;\frac d2,
+\]</span> and strictly increasing in <span class="math inline">\(e\)</span> because <span class="math display">\[
+\frac{d}{de}\left(\frac{2d-e}{d-2e}\right)=\frac{3d}{(d-2e)^2}&gt;0.
+\]</span></p>
+<p>Let <span class="math display">\[
+c_{\max}:=\frac{3-\alpha}{d}.
+\]</span> Then <span class="math display">\[
+c_e&lt;c_{\max}
+\iff
+e&lt;\frac{d(1-\alpha)}{2-\alpha}.
+\]</span> Define <span class="math display">\[
+m:=\max\left\{e\in \mathbb Z_{\ge 0}\ \middle|\ e&lt;\frac{d(1-\alpha)}{2-\alpha}\right\}.
+\]</span> Then the coefficient walls in the log Fano interval are exactly <span class="math display">\[
+c_0&lt;c_1&lt;\cdots&lt;c_m,
+\]</span> with <span class="math display">\[
+c_0=\frac{2\alpha}{d},
+\qquad
+c_m&lt;c_{\max}\le c_{m+1}
+\]</span> whenever <span class="math inline">\(m+1&lt;d/2\)</span>.</p>
+</section>
+<section id="a-natural-regular-open-locus" class="level3">
+<h3 class="anchored" data-anchor-id="a-natural-regular-open-locus">7.5. A natural regular open locus</h3>
+<p>Let <span class="math display">\[
+P=[0:1:0]\in \mathbb P^2.
+\]</span> Define <span class="math inline">\(B^\circ\subset B_d\)</span> to be the open set of coefficient points <span class="math inline">\(p\)</span> such that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(C_p\)</span> is smooth on <span class="math inline">\(\mathbb P^2\setminus \{P\}\)</span>;</p></li>
+<li><p><span class="math inline">\(C_p\)</span> meets <span class="math inline">\(\Lambda\)</span> transversely.</p></li>
+</ol>
+<p>This is a nonempty <span class="math inline">\(T\)</span>-invariant Zariski open subset.</p>
+<p>For <span class="math inline">\(p\in B^\circ\)</span>, the pair <span class="math inline">\((\mathbb P^2,\alpha\Lambda+cC_p)\)</span> is log smooth away from <span class="math inline">\(P\)</span>. Thus any hidden wall on <span class="math inline">\(B^\circ\)</span> would have to come from a divisorial valuation centered at <span class="math inline">\(P\)</span>.</p>
+<p>We now show that this never happens at any non-wall semistable parameter.</p>
+</section>
+<section id="two-local-lemmas-on-mathbb-p2" class="level3">
+<h3 class="anchored" data-anchor-id="two-local-lemmas-on-mathbb-p2">7.6. Two local lemmas on <span class="math inline">\(\mathbb P^2\)</span></h3>
+<p><strong>Lemma 7.2.</strong> For every divisorial valuation <span class="math inline">\(v\)</span> over <span class="math inline">\(\mathbb P^2\)</span>, <span class="math display">\[
+S_H(v)\le \frac{A_{\mathbb P^2}(v)}{3}.
+\]</span></p>
+<p><strong>Proof.</strong> Since <span class="math inline">\(\mathbb P^2\)</span> is <span class="math inline">\(K\)</span>-polystable, <span class="math display">\[
+A_{\mathbb P^2}(v)\ge S_{-K_{\mathbb P^2}}(v).
+\]</span> Now <span class="math inline">\(-K_{\mathbb P^2}=3H\)</span>, so <span class="math display">\[
+S_{-K_{\mathbb P^2}}(v)=3S_H(v).
+\]</span> Hence <span class="math display">\[
+S_H(v)\le \frac{A_{\mathbb P^2}(v)}{3}.
+\]</span> <span class="math inline">\(\square\)</span></p>
+<p><strong>Lemma 7.3.</strong> Let <span class="math inline">\(x\)</span> be a smooth point of a smooth surface <span class="math inline">\(X\)</span>, let <span class="math inline">\(u,v\)</span> be regular parameters at <span class="math inline">\(x\)</span>, and let <span class="math inline">\(w\)</span> be a divisorial valuation centered at <span class="math inline">\(x\)</span>. Then <span class="math display">\[
+A_X(w)\ge w(u)+w(v).
+\]</span></p>
+<p><strong>Proof.</strong> Choose a model <span class="math inline">\(\pi:Y\to X\)</span> on which the corresponding prime divisor <span class="math inline">\(E\)</span> appears, and let <span class="math inline">\(w=\operatorname{ord}_E\)</span>. At the generic point of <span class="math inline">\(E\)</span> choose a local equation <span class="math inline">\(s=0\)</span> for <span class="math inline">\(E\)</span>. Write <span class="math display">\[
+u=s^a \phi,
+\qquad
+v=s^b \psi
+\]</span> with <span class="math inline">\(\phi,\psi\)</span> not divisible by <span class="math inline">\(s\)</span>, so <span class="math display">\[
+w(u)=a,
+\qquad
+w(v)=b.
+\]</span> Then <span class="math display">\[
+\pi^*(du\wedge dv)
+=
+d(s^a\phi)\wedge d(s^b\psi)
+\]</span> has vanishing order at least <span class="math inline">\(a+b-1\)</span> along <span class="math inline">\(E\)</span>. Since <span class="math inline">\(du\wedge dv\)</span> trivializes <span class="math inline">\(K_X\)</span> locally, the coefficient of <span class="math inline">\(E\)</span> in <span class="math inline">\(K_Y-\pi^*K_X\)</span> is at least <span class="math inline">\(a+b-1\)</span>. Therefore <span class="math display">\[
+A_X(w)=1+\operatorname{ord}_E(K_Y-\pi^*K_X)\ge a+b=w(u)+w(v).
+\]</span> <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="no-hidden-wall-on-bcirc" class="level3">
+<h3 class="anchored" data-anchor-id="no-hidden-wall-on-bcirc">7.7. No hidden wall on <span class="math inline">\(B^\circ\)</span></h3>
+<p>We now prove the second application.</p>
+<p><strong>Theorem 7.4.</strong> Let <span class="math inline">\(p\in B^\circ\)</span>, and let <span class="math display">\[
+c\in (0,c_{\max})
+\]</span> be a coefficient-semistable value which is not one of the wall values <span class="math inline">\(c_e\)</span>. Then the pair <span class="math display">\[
+(\mathbb P^2,\alpha\Lambda+cC_p)
+\]</span> is <span class="math inline">\(K\)</span>-stable. In particular, there is no hidden wall on <span class="math inline">\(B^\circ\)</span>.</p>
+<p><strong>Proof.</strong> Let <span class="math inline">\(E\)</span> be any prime divisor over <span class="math inline">\(\mathbb P^2\)</span>. We show <span class="math display">\[
+\beta_{(\mathbb P^2,\alpha\Lambda+cC_p)}(E)&gt;0.
+\]</span> Write <span class="math display">\[
+A(E):=A_{\mathbb P^2}(E),
+\qquad
+S(E):=S_H(E).
+\]</span> Then <span class="math display">\[
+\beta(E)=A(E)-\alpha E(\Lambda)-c E(C_p)-(3-\alpha-dc)S(E).
+\]</span> By Lemma 7.2, <span class="math display">\[
+\beta(E)\ge \frac{\alpha+dc}{3}A(E)-\alpha E(\Lambda)-c E(C_p).
+\]</span></p>
+<p>Because <span class="math inline">\(c\)</span> is coefficient-semistable and not a wall value, the interval criterion implies <span class="math display">\[
+c&gt;c_0=\frac{2\alpha}{d}.
+\]</span></p>
+<p>We distinguish cases according to the center of <span class="math inline">\(E\)</span> on <span class="math inline">\(\mathbb P^2\)</span>.</p>
+<p>First, if the center is outside <span class="math inline">\(\Lambda\cup C_p\)</span>, then <span class="math display">\[
+E(\Lambda)=E(C_p)=0,
+\]</span> so <span class="math display">\[
+\beta(E)\ge \frac{\alpha+dc}{3}A(E)&gt;0.
+\]</span></p>
+<p>Second, suppose the center lies on a smooth point of <span class="math inline">\(\Lambda\setminus C_p\)</span>. Choose regular parameters <span class="math inline">\(u_1,u_2\)</span> with <span class="math inline">\(\Lambda=(u_1=0)\)</span>. Then <span class="math inline">\(E(C_p)=0\)</span>, and Lemma 7.3 gives <span class="math display">\[
+A(E)\ge E(u_1)+E(u_2).
+\]</span> Hence <span class="math display">\[
+\beta(E)\ge \frac{\alpha+dc}{3}\bigl(E(u_1)+E(u_2)\bigr)-\alpha E(u_1)
+= \frac{dc-2\alpha}{3}E(u_1)+\frac{\alpha+dc}{3}E(u_2)&gt;0.
+\]</span></p>
+<p>Third, suppose the center lies on a smooth point of <span class="math inline">\(C_p\setminus \Lambda\)</span>. Choose regular parameters <span class="math inline">\(u_1,u_2\)</span> with <span class="math inline">\(C_p=(u_2=0)\)</span>. Then Lemma 7.3 gives <span class="math display">\[
+A(E)\ge E(u_1)+E(u_2),
+\]</span> and therefore <span class="math display">\[
+\beta(E)\ge \frac{\alpha+dc}{3}\bigl(E(u_1)+E(u_2)\bigr)-c E(u_2)
+= \frac{\alpha+dc}{3}E(u_1)+\frac{\alpha+c(d-3)}{3}E(u_2)&gt;0.
+\]</span></p>
+<p>Fourth, suppose the center lies on <span class="math inline">\(\Lambda\cap C_p\)</span>. Because <span class="math inline">\(p\in B^\circ\)</span>, the intersection is transverse. Choose regular parameters <span class="math inline">\(u_1,u_2\)</span> with <span class="math display">\[
+\Lambda=(u_1=0),
+\qquad
+C_p=(u_2=0).
+\]</span> Then Lemma 7.3 gives <span class="math display">\[
+A(E)\ge E(u_1)+E(u_2),
+\]</span> and <span class="math display">\[
+\beta(E)\ge \frac{\alpha+dc}{3}\bigl(E(u_1)+E(u_2)\bigr)-\alpha E(u_1)-c E(u_2)
+= \frac{dc-2\alpha}{3}E(u_1)+\frac{\alpha+c(d-3)}{3}E(u_2)&gt;0.
+\]</span></p>
+<p>It remains to consider valuations centered at <span class="math display">\[
+P=[0:1:0].
+\]</span> Let <span class="math display">\[
+e_+(p):=\max\{j\mid a_j\neq 0\}.
+\]</span> Set <span class="math display">\[
+k:=\lfloor \rho(c)\rfloor+1.
+\]</span> Since <span class="math inline">\(c\)</span> is not a wall value, <span class="math inline">\(\rho(c)\notin \mathbb Z\)</span>. By semistability, <span class="math display">\[
+\rho(c)\in [j_{\min}(p),j_{\max}(p)],
+\]</span> hence <span class="math display">\[
+e_+(p)=j_{\max}(p)\ge k.
+\]</span> Set <span class="math display">\[
+s:=d-e_+(p).
+\]</span> On the chart <span class="math inline">\(y=1\)</span> the local equation of <span class="math inline">\(C_p\)</span> at <span class="math inline">\(P\)</span> is <span class="math display">\[
+f_P(X,Z)=Z^d+a Z X^{d-1}+X^s u(X),
+\]</span> where <span class="math inline">\(u(0)\neq 0\)</span> if <span class="math inline">\(s\ge 1\)</span>.</p>
+<p>If <span class="math inline">\(s=0\)</span>, then <span class="math inline">\(P\notin C_p\)</span>, already covered by the first case. If <span class="math inline">\(s=1\)</span>, then <span class="math inline">\(P\)</span> is a smooth point of <span class="math inline">\(C_p\)</span>, already covered by the third case. So we may assume <span class="math inline">\(s\ge 2\)</span>.</p>
+<p>Consider the weights <span class="math display">\[
+\operatorname{wt}(X)=d,
+\qquad
+\operatorname{wt}(Z)=s.
+\]</span> The weighted degree of the principal part <span class="math inline">\(Z^d+X^s\)</span> is <span class="math inline">\(ds\)</span>, while the term <span class="math inline">\(Z X^{d-1}\)</span> has weighted degree <span class="math display">\[
+s+d(d-1)&gt;ds
+\]</span> because <span class="math inline">\(s&lt;d\)</span>. Therefore <span class="math inline">\(f_P\)</span> is semi-quasihomogeneous with weighted initial form <span class="math display">\[
+Z^d+X^s.
+\]</span> By the standard semi-quasihomogeneous theorem, <span class="math display">\[
+\operatorname{lct}_P(C_p)=\frac1d+\frac1s.
+\]</span> Hence for every prime divisor <span class="math inline">\(E\)</span> centered at <span class="math inline">\(P\)</span>, <span class="math display">\[
+E(C_p)\le \frac{ds}{d+s}A(E).
+\]</span> Therefore <span class="math display">\[
+\beta(E)\ge
+\left(\frac{\alpha+dc}{3}-c\frac{ds}{d+s}\right)A(E).
+\]</span> Since <span class="math inline">\(s=d-e_+(p)\)</span>, this coefficient equals <span class="math display">\[
+\frac{\alpha(2d-e_+(p))+dc(2e_+(p)-d)}{3(2d-e_+(p))}.
+\]</span></p>
+<p>We now check that this number is positive. If <span class="math inline">\(e_+(p)\ge d/2\)</span>, then <span class="math inline">\(2e_+(p)-d\ge 0\)</span>, so positivity is immediate. If <span class="math inline">\(e_+(p)&lt;d/2\)</span>, then <span class="math inline">\(k&lt;d/2\)</span> as well, because <span class="math inline">\(e_+(p)\ge k\)</span>. Since <span class="math inline">\(\rho\)</span> is strictly increasing and <span class="math inline">\(\rho(c)&lt;k\)</span>, one has <span class="math display">\[
+c&lt;c_k.
+\]</span> Because the wall values are strictly increasing for <span class="math inline">\(e&lt;d/2\)</span> and <span class="math inline">\(e_+(p)\ge k\)</span>, we get <span class="math display">\[
+c&lt;c_k\le c_{e_+(p)}.
+\]</span> Thus <span class="math display">\[
+\alpha(2d-e_+(p))+dc(2e_+(p)-d)&gt;0.
+\]</span> Hence <span class="math inline">\(\beta(E)&gt;0\)</span> in every case.</p>
+<p>We have proved that every prime divisor over <span class="math inline">\(\mathbb P^2\)</span> has strictly positive <span class="math inline">\(\beta\)</span>-invariant. By the valuative criterion, the pair is <span class="math inline">\(K\)</span>-stable. In particular, there is no hidden wall on <span class="math inline">\(B^\circ\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>We combine the previous calculations.</p>
+<p><strong>Theorem 7.5.</strong> On the regular open locus <span class="math inline">\(B^\circ\)</span>, the wall structure of the family <span class="math display">\[
+(\mathbb P^2,\alpha\Lambda+cC_p)
+\]</span> is completely coefficient-visible. More precisely:</p>
+<ol type="1">
+<li><p>the coefficient walls in the log Fano interval are exactly <span class="math display">\[
+c_e=\frac{\alpha(2d-e)}{d(d-2e)}
+\]</span> for <span class="math display">\[
+0\le e&lt;\frac{d(1-\alpha)}{2-\alpha};
+\]</span></p></li>
+<li><p>the wall center for <span class="math inline">\(e=0\)</span> is <span class="math display">\[
+Z_{F_0}\cong \mathbb P(d-1,d),
+\]</span> while for <span class="math inline">\(e&gt;0\)</span> the wall center is a point;</p></li>
+<li><p>on every wall model one has the exact identity <span class="math display">\[
+\mu_e^{\mathrm{GIT}}(\alpha,c)=-\beta_e(\alpha,c);
+\]</span></p></li>
+<li><p>there is no hidden wall on <span class="math inline">\(B^\circ\)</span>.</p></li>
+</ol>
+<p><strong>Proof.</strong> Parts (1)–(3) are Sections 7.2–7.4. Part (4) is Theorem 7.4. <span class="math inline">\(\square\)</span></p>
+</section>
+</section>
+<section id="final-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="final-remarks">8. Final remarks</h2>
+<p>The weighted branch family and the plane-branch-with-line family illustrate two opposite outcomes of the same abstract theorem.</p>
+<p>In the weighted branch family, the fixed-ambient coefficient problem controls every wall before the last one, but the final wall is forced out of the coefficient arrangement and is detected by a singularity valuation over a special fiber. This is the genuinely two-mechanism picture.</p>
+<p>In the plane-branch-with-line family, the coefficient arrangement is again nontrivial and the exact identities <span class="math display">\[
+\mu^{\mathrm{GIT}}=-\beta
+\]</span> hold on all liftable wall models. However, on the natural dense regular locus <span class="math inline">\(B^\circ\)</span>, there is no hidden wall at all. Thus the second application shows that hidden walls are not forced by non-proportionality alone; they arise only when the special singularity geometry is strong enough to overcome the local <span class="math inline">\(\delta\)</span>-gap mechanism.</p>
+<p>This is exactly the conceptual content of Theorem 5.1. The theorem is not merely a reformulation of a family-specific calculation. It separates three independent tasks:</p>
+<ol type="1">
+<li><p>identify the coefficient faces and prove liftability;</p></li>
+<li><p>compare product CM weights with <span class="math inline">\(\beta\)</span>-invariants on wall models;</p></li>
+<li><p>show that a hidden special divisor cannot remain in the locally product, <span class="math inline">\(\delta\)</span>-rigid part of the family.</p></li>
+</ol>
+<p>Once these are separated, the weighted branch family and the plane-branch-with-line family become two clean test cases for the same theorem. The first family exhibits both coefficient-visible and pair-singularity-visible walls. The second family exhibits only coefficient-visible walls on its regular coefficient locus. Together they show that the visibility theorem is both flexible and sharp.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[1] C. Li and C. Xu, <em>Special test configuration and <span class="math inline">\(K\)</span>-stability of Fano varieties</em>, Ann. of Math. (2) <strong>180</strong> (2014), no. 1, 197–232.</p>
+<p>[2] Y. Liu and C. Zhou, <em><span class="math inline">\(K\)</span>-moduli with real coefficients</em>, arXiv:2412.15723.</p>
+<p>[3] Y. Liu and C. Zhou, <em>Non-proportional wall crossing for <span class="math inline">\(K\)</span>-stability</em>, arXiv:2412.15725.</p>
+<p>[4] I.-K. Kim, Y. Liu, and C. Wang, <em>Wall-crossing for <span class="math inline">\(K\)</span>-moduli spaces of certain families of weighted projective hypersurfaces</em>, arXiv:2406.07907.</p>
+<p>[5] J. Kollár, <em>Singularities of the Minimal Model Program</em>, Cambridge Tracts in Mathematics <strong>200</strong>, Cambridge University Press, 2013.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
