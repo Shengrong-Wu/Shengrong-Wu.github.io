@@ -1,0 +1,16 @@
+---
+title: "About Me"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: google
+      text: Google
+      href: https://sites.google.com/view/shengrongwu
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/shengrong-wu-2004jul07
+
+---
+
+I am Shengrong Wu, a Ph.D. Candidate in Mathematics at the National University of Singapore (NUS), specializing in Geometric Analysis and Partial Differential Equations (PDEs),particularly within the context of General Relativity. I am advised by Prof. An Xinliang. My background is rooted in rigorous theoretical mathematics, complemented by computational skills using Python. 

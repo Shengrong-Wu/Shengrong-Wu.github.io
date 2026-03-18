@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-13">
+<meta name="description" content="Math research by ChatGPT. Claude comments: correct but not novel enough for a research publication">
+
+<title>Holomorph description of H^1 – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Holomorph description of <span class="math inline">\(H^1\)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Mathematics</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Algebra</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Math research by ChatGPT. Claude comments: correct but not novel enough for a research publication
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 13, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="a-holomorph-description-of-h1-for-finite-local-systems-on-connected-schemes" class="level1">
+<h1>A holomorph description of <span class="math inline">\(H^1\)</span> for finite local systems on connected schemes</h1>
+<p><strong>Shengrong Wu</strong><br>
+National University of Singapore</p>
+<p><em>Automatic Pipeline with ChatGPT</em></p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>For a field <span class="math inline">\(K\)</span> and a finite Galois module <span class="math inline">\(M\)</span>, O’Dorney described <span class="math inline">\(H^1(K,M)\)</span> in terms of finite ’etale algebras whose monodromy lies in the holomorph <span class="math inline">\(\Hol(M)=M\rtimes \Aut(M)\)</span>. We prove the scheme-theoretic analogue for a connected scheme <span class="math inline">\(U\)</span> and a finite locally constant sheaf <span class="math inline">\(\mathcal M\)</span> on <span class="math inline">\(U_{\et}\)</span>. The resulting description identifies <span class="math inline">\(H^1_{\et}(U,\mathcal M)\)</span> with affine <span class="math inline">\(\Hol(M)\)</span>-monodromy lifts of <span class="math inline">\(\pi_1(U)\)</span> modulo translation-conjugacy, or equivalently with finite ’etale covers carrying a fixed <span class="math inline">\(\Aut(M)\)</span>-resolvent torsor. For integral normal noetherian <span class="math inline">\(U\)</span> this recovers exactly the classes unramified along <span class="math inline">\(U\)</span>, and in the affine case it yields a tensor-product compatibility for the corresponding finite ’etale algebras.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>Let <span class="math inline">\(M\)</span> be a finite abelian group. The holomorph</p>
+<p><span class="math display">\[
+\Hol(M)=M\rtimes \Aut(M)
+\]</span></p>
+<p>is the group of affine transformations of the set <span class="math inline">\(M\)</span>. Its structural role in degree-<span class="math inline">\(1\)</span> cohomology is elementary but important: the normal subgroup <span class="math inline">\(M\)</span> records translations, the quotient <span class="math inline">\(\Hol(M)/M\cong \Aut(M)\)</span> records the fixed linear part of the monodromy, and the stabilizer of <span class="math inline">\(0\in M\)</span> is exactly <span class="math inline">\(\Aut(M)\)</span>.</p>
+<p>For a field <span class="math inline">\(K\)</span>, O’Dorney made this structure completely explicit. If <span class="math inline">\(M\)</span> is a finite <span class="math inline">\(G_K\)</span>-module with action</p>
+<p><span class="math display">\[
+\phi:G_K\to \Aut(M),
+\]</span></p>
+<p>then <span class="math inline">\(H^1(K,M)\)</span> may be described by lifts</p>
+<p><span class="math display">\[
+\psi:G_K\to \Hol(M)
+\]</span></p>
+<p>of <span class="math inline">\(\phi\)</span>, modulo conjugation by the translation subgroup <span class="math inline">\(M\)</span>, or equivalently by finite ’etale <span class="math inline">\(K\)</span>-algebras with monodromy in <span class="math inline">\(\Hol(M)\)</span> and a fixed <span class="math inline">\(\Aut(M)\)</span>-resolvent torsor .</p>
+<p>The aim of this note is to record the corresponding statement for connected schemes. Let <span class="math inline">\(U\)</span> be connected and let</p>
+<p><span class="math display">\[
+\phi:\pi_1(U,\bar u)\to \Aut(M)
+\]</span></p>
+<p>be continuous. The associated finite locally constant sheaf <span class="math inline">\(\mathcal M_\phi\)</span> plays the role of a finite Galois module. We show that <span class="math inline">\(H^1_{\et}(U,\mathcal M_\phi)\)</span> is still controlled by affine <span class="math inline">\(\Hol(M)\)</span>-actions: the only change is that one replaces the absolute Galois group <span class="math inline">\(G_K\)</span> by the ’etale fundamental group <span class="math inline">\(\pi_1(U,\bar u)\)</span>.</p>
+<p>This result is formally close to standard torsor theory. We do <em>not</em> claim a new abstract classification of torsors. The point is instead to isolate a concrete and functorial holomorph package, parallel to O’Dorney’s field-level statement, that keeps the linear and translational parts of the monodromy visible and makes the arithmetic meaning over non-field bases explicit. Over</p>
+<p><span class="math display">\[
+U=\Spec \mathcal O_{K,S},
+\]</span></p>
+<p>for example, the theorem identifies classes in <span class="math inline">\(H^1_{\et}(U,\mathcal M_\phi)\)</span> with O’Dorney’s classes in <span class="math inline">\(H^1(K,M)\)</span> that are unramified at every finite place outside <span class="math inline">\(S\)</span>.</p>
+<p>The main theorem gives three equivalent descriptions:</p>
+<ol type="1">
+<li><span class="math inline">\(H^1_{\et}(U,\mathcal M_\phi)\)</span>;</li>
+<li>lifts of <span class="math inline">\(\phi\)</span> to <span class="math inline">\(\Hol(M)\)</span> modulo conjugation by <span class="math inline">\(M\)</span>;</li>
+<li>triples <span class="math inline">\((E,Y,\theta)\)</span>, where <span class="math inline">\(E\to U\)</span> is a finite ’etale <span class="math inline">\(\Hol(M)\)</span>-torsor, <span class="math inline">\(Y=E/\Aut(M)\)</span> is a degree-<span class="math inline">\(|M|\)</span> finite ’etale cover, and <span class="math inline">\(\theta:E/M\xrightarrow{\sim}T_\phi\)</span> identifies the quotient by the translation subgroup with the fixed <span class="math inline">\(\Aut(M)\)</span>-torsor attached to <span class="math inline">\(\phi\)</span>.</li>
+</ol>
+<p>We also prove that pullback corresponds to base change, and that addition in <span class="math inline">\(H^1\)</span> is controlled by the addition map</p>
+<p><span class="math display">\[
+M\times M\to M.
+\]</span></p>
+<p>The paper is organized as follows. Section~2 fixes notation and recalls the necessary background on finite ’etale covers, finite local systems, and torsors. Section~3 states the main theorem and its corollaries. Section~4 contains the proof. Section~5 gives explicit examples over arithmetic and function-field bases. Section~6 records remarks and open questions.</p>
+</section>
+<section id="notation-and-preliminaries" class="level2">
+<h2 class="anchored" data-anchor-id="notation-and-preliminaries">2. Notation and preliminaries</h2>
+<p>Let <span class="math inline">\(U\)</span> be a connected scheme with geometric point <span class="math inline">\(\bar u\)</span>, and let <span class="math inline">\(\pi_1(U,\bar u)\)</span> be its profinite ’etale fundamental group.</p>
+<p>Let <span class="math inline">\(M\)</span> be a finite abelian group. We write</p>
+<p><span class="math display">\[
+\Hol(M)=M\rtimes \Aut(M)
+\]</span></p>
+<p>for the holomorph, acting on the set <span class="math inline">\(M\)</span> by affine maps</p>
+<p><span class="math display">\[
+(a,t)\cdot x=a(x)+t.
+\]</span></p>
+<p>With this convention,</p>
+<p><span class="math display">\[
+(a,t)(b,u)=(ab,\ t+a(u)).
+\]</span></p>
+<p>For <span class="math inline">\(y\in M\)</span>, write <span class="math inline">\(\tau_y=(1,y)\)</span> for translation by <span class="math inline">\(y\)</span>.</p>
+<p>Fix a continuous homomorphism</p>
+<p><span class="math display">\[
+\phi:\pi_1(U,\bar u)\to \Aut(M).
+\]</span></p>
+<p>Let <span class="math inline">\(\mathcal M_\phi\)</span> be the associated finite locally constant sheaf of abelian groups on <span class="math inline">\(U_{\et}\)</span>. Let</p>
+<p><span class="math display">\[
+T_\phi\to U
+\]</span></p>
+<p>be the finite ’etale <span class="math inline">\(\Aut(M)\)</span>-torsor corresponding to <span class="math inline">\(\phi\)</span> under the equivalence between finite ’etale <span class="math inline">\(U\)</span>-schemes and finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-sets.</p>
+<p>We use the following facts.</p>
+<ul>
+<li>Finite ’etale <span class="math inline">\(U\)</span>-schemes are equivalent to finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-sets .</li>
+<li>Finite locally constant sheaves of abelian groups on <span class="math inline">\(U_{\et}\)</span> are equivalent to finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-modules .</li>
+<li>For a finite abelian sheaf, <span class="math inline">\(H^1\)</span> classifies torsors under that sheaf; for a finite constant sheaf this is spelled out in .</li>
+</ul>
+<p><strong>Remark.</strong> Changing the base point <span class="math inline">\(\bar u\)</span> conjugates <span class="math inline">\(\pi_1(U,\bar u)\)</span> and therefore conjugates <span class="math inline">\(\phi\)</span> and the set of lifts. All constructions below are invariant under this change.</p>
+<p><strong>Remark.</strong> If <span class="math inline">\(U=\Spec R\)</span> is affine, a finite ’etale <span class="math inline">\(U\)</span>-scheme is equivalently a finite ’etale <span class="math inline">\(R\)</span>-algebra. The scheme language is slightly cleaner globally, but the algebra language is what one sees over rings of <span class="math inline">\(S\)</span>-integers.</p>
+</section>
+<section id="main-result" class="level2">
+<h2 class="anchored" data-anchor-id="main-result">3. Main result</h2>
+<p><strong>Theorem 3.1.</strong> Let <span class="math inline">\(U\)</span> be a connected scheme with geometric point <span class="math inline">\(\bar u\)</span>, let <span class="math inline">\(M\)</span> be a finite abelian group, and let</p>
+<p><span class="math display">\[
+\phi:\pi_1(U,\bar u)\to \Aut(M)
+\]</span></p>
+<p>be continuous. Let <span class="math inline">\(\mathcal M_\phi\)</span> be the associated finite locally constant sheaf of abelian groups on <span class="math inline">\(U_{\et}\)</span>, and let <span class="math inline">\(T_\phi\to U\)</span> be the associated finite ’etale <span class="math inline">\(\Aut(M)\)</span>-torsor.</p>
+<p>Then the following sets are naturally in bijection:</p>
+<ol type="1">
+<li><p><span class="math inline">\(H^1_{\et}(U,\mathcal M_\phi)\)</span>;</p></li>
+<li><p>continuous homomorphisms</p>
+<p><span class="math display">\[
+\psi:\pi_1(U,\bar u)\to \Hol(M)
+\]</span></p>
+<p>with <span class="math inline">\(\pi\circ \psi=\phi\)</span>, modulo conjugation by the translation subgroup <span class="math inline">\(M\subseteq \Hol(M)\)</span>;</p></li>
+<li><p>isomorphism classes of triples <span class="math inline">\((E,Y,\theta)\)</span> where</p>
+<ul>
+<li><span class="math inline">\(E\to U\)</span> is a finite ’etale <span class="math inline">\(\Hol(M)\)</span>-torsor,</li>
+<li><span class="math inline">\(Y=E/\Aut(M)\)</span> is a finite ’etale <span class="math inline">\(U\)</span>-scheme of degree <span class="math inline">\(|M|\)</span>,</li>
+<li><span class="math inline">\(\theta:E/M\xrightarrow{\sim}T_\phi\)</span> is an isomorphism of <span class="math inline">\(\Aut(M)\)</span>-torsors.</li>
+</ul></li>
+</ol>
+<p>Moreover, if <span class="math inline">\(f:V\to U\)</span> is a morphism of connected schemes, then pullback</p>
+<p><span class="math display">\[
+f^*:H^1_{\et}(U,\mathcal M_\phi)\to H^1_{\et}(V,f^{-1}\mathcal M_\phi)
+\]</span></p>
+<p>corresponds under (b) to precomposition with <span class="math inline">\(f_*:\pi_1(V,\bar v)\to \pi_1(U,\bar u)\)</span> and under (c) to base change of the triple <span class="math inline">\((E,Y,\theta)\)</span>.</p>
+<p><strong>Corollary 3.2.</strong> Assume that <span class="math inline">\(U\)</span> is integral, normal, and noetherian, with function field <span class="math inline">\(K\)</span>. Then the generic-fiber functor identifies</p>
+<p><span class="math display">\[
+H^1_{\et}(U,\mathcal M_\phi)
+\]</span></p>
+<p>with the subset of <span class="math inline">\(H^1(K,M)\)</span> consisting of the O’Dorney classes whose associated finite ’etale <span class="math inline">\(K\)</span>-scheme is unramified along <span class="math inline">\(U\)</span>.</p>
+<p>In particular, if</p>
+<p><span class="math display">\[
+U=\Spec \mathcal O_{K,S}
+\]</span></p>
+<p>for a number field <span class="math inline">\(K\)</span> and a finite set <span class="math inline">\(S\)</span> of finite places, then these are exactly the classes unramified at every finite place <span class="math inline">\(v\notin S\)</span>. No archimedean place enters the geometry of <span class="math inline">\(U\)</span>.</p>
+<p><strong>Proposition 3.3.</strong> Let <span class="math inline">\(\alpha,\beta,\alpha+\beta\in H^1_{\et}(U,\mathcal M_\phi)\)</span>, and let <span class="math inline">\(Y_\alpha,Y_\beta,Y_{\alpha+\beta}\)</span> be the corresponding finite ’etale <span class="math inline">\(U\)</span>-schemes from Theorem~<span class="math inline">\(\ref{thm:main}\)</span>. Then there is a finite ’etale morphism</p>
+<p><span class="math display">\[
+Y_\alpha\times_U Y_\beta\longrightarrow Y_{\alpha+\beta}.
+\]</span></p>
+<p>If <span class="math inline">\(U=\Spec R\)</span> is affine, dualizing this morphism gives an inclusion of finite ’etale <span class="math inline">\(R\)</span>-algebras</p>
+<p><span class="math display">\[
+L_{\alpha+\beta}\hookrightarrow L_\alpha\otimes_R L_\beta.
+\]</span></p>
+</section>
+<section id="proof" class="level2">
+<h2 class="anchored" data-anchor-id="proof">4. Proof</h2>
+<p><strong>Lemma 4.1.</strong> Let <span class="math inline">\(\mathcal P\)</span> be an <span class="math inline">\(\mathcal M_\phi\)</span>-torsor on <span class="math inline">\(U_{\et}\)</span>. Then the geometric fiber <span class="math inline">\(X=\mathcal P_{\bar u}\)</span> is a finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-set equipped with a simply transitive <span class="math inline">\(M\)</span>-action satisfying</p>
+<p><span class="math display">\[
+g\cdot(m\cdot x)=\phi(g)(m)\cdot(g\cdot x)
+\]</span></p>
+<p>for all <span class="math inline">\(g\in \pi_1(U,\bar u)\)</span>, <span class="math inline">\(m\in M\)</span>, and <span class="math inline">\(x\in X\)</span>.</p>
+<p>Conversely, every such finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-set arises from an <span class="math inline">\(\mathcal M_\phi\)</span>-torsor.</p>
+<p><strong>Proof.</strong> This is the standard translation between torsors under a finite locally constant sheaf and finite locally constant sheaves of sets with simply transitive group action. Evaluating at <span class="math inline">\(\bar u\)</span> and using gives the stated description in terms of finite continuous <span class="math inline">\(\pi_1(U,\bar u)\)</span>-sets.</p>
+<p><strong>Lemma 4.2.</strong> Fix an <span class="math inline">\(\mathcal M_\phi\)</span>-torsor <span class="math inline">\(\mathcal P\)</span>, let <span class="math inline">\(X=\mathcal P_{\bar u}\)</span>, and choose an <span class="math inline">\(M\)</span>-equivariant bijection</p>
+<p><span class="math display">\[
+\iota:M\xrightarrow{\sim} X.
+\]</span></p>
+<p>Then there is a unique continuous homomorphism</p>
+<p><span class="math display">\[
+\psi_\iota:\pi_1(U,\bar u)\to \Hol(M)
+\]</span></p>
+<p>such that</p>
+<p><span class="math display">\[
+g\cdot \iota(x)=\iota(\psi_\iota(g)(x))
+\]</span></p>
+<p>for all <span class="math inline">\(g\in \pi_1(U,\bar u)\)</span> and <span class="math inline">\(x\in M\)</span>, and it satisfies</p>
+<p><span class="math display">\[
+\pi\circ \psi_\iota=\phi.
+\]</span></p>
+<p><strong>Proof.</strong> Define <span class="math inline">\(\psi_\iota(g)\in \operatorname{Sym}(M)\)</span> by the displayed formula. Since the <span class="math inline">\(M\)</span>-action on <span class="math inline">\(X\)</span> is compatible with <span class="math inline">\(\phi\)</span>, for all <span class="math inline">\(x,m\in M\)</span> we have</p>
+<p><span class="math display">\[
+g\cdot \iota(x+m)
+=g\cdot(m\cdot \iota(x))
+=\phi(g)(m)\cdot(g\cdot \iota(x)).
+\]</span></p>
+<p>Applying <span class="math inline">\(\iota^{-1}\)</span> gives</p>
+<p><span class="math display">\[
+\psi_\iota(g)(x+m)=\psi_\iota(g)(x)+\phi(g)(m).
+\]</span></p>
+<p>Thus <span class="math inline">\(\psi_\iota(g)\)</span> is affine with linear part <span class="math inline">\(\phi(g)\)</span>, so <span class="math inline">\(\psi_\iota(g)\in \Hol(M)\)</span> and <span class="math inline">\(\pi\circ\psi_\iota=\phi\)</span>.</p>
+<p>The homomorphism property follows from functoriality of the monodromy action, and continuity is automatic because the target is finite.</p>
+<p><strong>Lemma 4.3.</strong> Let <span class="math inline">\(\iota_y=\iota\circ \tau_y\)</span>, where <span class="math inline">\(\tau_y\)</span> denotes translation by <span class="math inline">\(y\in M\)</span>. Then</p>
+<p><span class="math display">\[
+\psi_{\iota_y}(g)=\tau_{-y}\psi_\iota(g)\tau_y
+\]</span></p>
+<p>for all <span class="math inline">\(g\in \pi_1(U,\bar u)\)</span>.</p>
+<p><strong>Proof.</strong> For every <span class="math inline">\(x\in M\)</span>,</p>
+<p><span class="math display">\[
+g\cdot \iota_y(x)
+=g\cdot \iota(x+y)
+=\iota\bigl(\psi_\iota(g)(x+y)\bigr)
+=\iota_y\bigl(\tau_{-y}\psi_\iota(g)\tau_y(x)\bigr).
+\]</span></p>
+<p>This proves the identity.</p>
+<p><strong>Proof of Theorem~<span class="math inline">\(\ref{thm:main}\)</span>.</strong> The equivalence (a)<span class="math inline">\(\Leftrightarrow\)</span>(b) follows from Lemmas~<span class="math inline">\(\ref{lem:torsor-piset}\)</span>, <span class="math inline">\(\ref{lem:labeling}\)</span>, and <span class="math inline">\(\ref{lem:conjugacy}\)</span>.</p>
+<p>For (b)<span class="math inline">\(\Rightarrow\)</span>(c), let</p>
+<p><span class="math display">\[
+\psi:\pi_1(U,\bar u)\to \Hol(M)
+\]</span></p>
+<p>be a lift of <span class="math inline">\(\phi\)</span>. Let <span class="math inline">\(E\to U\)</span> be the finite ’etale <span class="math inline">\(\Hol(M)\)</span>-torsor attached to the regular left action of <span class="math inline">\(\Hol(M)\)</span> on itself. Let</p>
+<p><span class="math display">\[
+Y=E/\Aut(M).
+\]</span></p>
+<p>Because the stabilizer of <span class="math inline">\(0\in M\)</span> under the affine action of <span class="math inline">\(\Hol(M)\)</span> is <span class="math inline">\(\Aut(M)\)</span>, the finite ’etale cover <span class="math inline">\(Y\)</span> is the one corresponding to the affine <span class="math inline">\(\pi_1(U,\bar u)\)</span>-set <span class="math inline">\(M\)</span>. Also,</p>
+<p><span class="math display">\[
+E/M
+\]</span></p>
+<p>is the <span class="math inline">\(\Aut(M)\)</span>-torsor attached to the composite</p>
+<p><span class="math display">\[
+\pi_1(U,\bar u)\xrightarrow{\psi}\Hol(M)\xrightarrow{\pi}\Aut(M),
+\]</span></p>
+<p>which is exactly <span class="math inline">\(\phi\)</span>. Hence there is a canonical isomorphism</p>
+<p><span class="math display">\[
+\theta:E/M\xrightarrow{\sim}T_\phi.
+\]</span></p>
+<p>For (c)<span class="math inline">\(\Rightarrow\)</span>(b), a <span class="math inline">\(\Hol(M)\)</span>-torsor <span class="math inline">\(E\)</span> gives a monodromy map</p>
+<p><span class="math display">\[
+\psi:\pi_1(U,\bar u)\to \Hol(M)
+\]</span></p>
+<p>well defined up to conjugacy by <span class="math inline">\(\Hol(M)\)</span>. The extra datum</p>
+<p><span class="math display">\[
+\theta:E/M\xrightarrow{\sim}T_\phi
+\]</span></p>
+<p>fixes the image of <span class="math inline">\(\psi\)</span> in <span class="math inline">\(\Aut(M)\)</span> exactly. Therefore the remaining ambiguity is conjugation by the kernel of</p>
+<p><span class="math display">\[
+\Hol(M)\twoheadrightarrow \Aut(M),
+\]</span></p>
+<p>namely by the translation subgroup <span class="math inline">\(M\)</span>.</p>
+<p>The pullback statement follows from functoriality of the fiber functor and the construction of <span class="math inline">\(E\)</span> and <span class="math inline">\(Y\)</span> from finite continuous <span class="math inline">\(\pi_1\)</span>-sets.</p>
+<p><strong>Proof of Corollary~<span class="math inline">\(\ref{cor:unramified}\)</span>.</strong> Let <span class="math inline">\(\eta\)</span> be the generic point of <span class="math inline">\(U\)</span>. By , <span class="math inline">\(\pi_1(U,\bar\eta)\)</span> is the Galois group of the maximal extension of <span class="math inline">\(K\)</span> unramified along <span class="math inline">\(U\)</span>. Hence a lift</p>
+<p><span class="math display">\[
+\psi:\pi_1(U,\bar\eta)\to \Hol(M)
+\]</span></p>
+<p>is exactly a field-theoretic lift of the unramified quotient of <span class="math inline">\(G_K\)</span>. Applying O’Dorney’s field theorem over <span class="math inline">\(K\)</span> gives the identification with the unramified subset of <span class="math inline">\(H^1(K,M)\)</span> .</p>
+<p>When <span class="math inline">\(U=\Spec \mathcal O_{K,S}\)</span>, codimension-one points are the finite places outside <span class="math inline">\(S\)</span>, so “unramified along <span class="math inline">\(U\)</span>” is equivalent to “unramified at every finite place <span class="math inline">\(v\notin S\)</span>”.</p>
+<p><strong>Proof of Proposition~<span class="math inline">\(\ref{prop:sum}\)</span>.</strong> Choose lifts</p>
+<p><span class="math display">\[
+\psi_\alpha(g)=(\phi(g),\sigma_\alpha(g)),
+\qquad
+\psi_\beta(g)=(\phi(g),\sigma_\beta(g)).
+\]</span></p>
+<p>Then <span class="math inline">\(Y_\alpha\times_U Y_\beta\)</span> corresponds to the finite <span class="math inline">\(\pi_1(U,\bar u)\)</span>-set <span class="math inline">\(M\times M\)</span> with action</p>
+<p><span class="math display">\[
+g\cdot(x_1,x_2)=
+(\phi(g)x_1+\sigma_\alpha(g),\ \phi(g)x_2+\sigma_\beta(g)).
+\]</span></p>
+<p>The addition map</p>
+<p><span class="math display">\[
+q:M\times M\to M,\qquad q(x_1,x_2)=x_1+x_2,
+\]</span></p>
+<p>is equivariant for the action attached to the sum cocycle <span class="math inline">\(\sigma_\alpha+\sigma_\beta\)</span>, because</p>
+<p><span class="math display">\[
+q(g\cdot(x_1,x_2))
+=
+\phi(g)(x_1+x_2)+\sigma_\alpha(g)+\sigma_\beta(g).
+\]</span></p>
+<p>Therefore <span class="math inline">\(q\)</span> induces a morphism of finite ’etale <span class="math inline">\(U\)</span>-schemes</p>
+<p><span class="math display">\[
+Y_\alpha\times_U Y_\beta\to Y_{\alpha+\beta}.
+\]</span></p>
+<p>If <span class="math inline">\(U=\Spec R\)</span> is affine, dualizing the above morphism gives the inclusion</p>
+<p><span class="math display">\[
+L_{\alpha+\beta}\hookrightarrow L_\alpha\otimes_R L_\beta.
+\]</span></p>
+<p>The scheme-theoretic statement is primary; the algebra statement is its affine dual.</p>
+</section>
+<section id="examples-and-applications" class="level2">
+<h2 class="anchored" data-anchor-id="examples-and-applications">5. Examples and applications</h2>
+<p><strong>Example 5.1 (Quadratic covers over <span class="math inline">\(\mathbf Z\lbrack 1/2\rbrack\)</span>).</strong> Let</p>
+<p><span class="math display">\[
+U=\Spec \mathbf Z[1/2],\qquad M=C_2,
+\]</span></p>
+<p>with trivial <span class="math inline">\(\phi\)</span>. Then <span class="math inline">\(\Aut(C_2)=1\)</span> and <span class="math inline">\(\Hol(C_2)\cong C_2\)</span>. Theorem <span class="math inline">\(\ref{thm:main}\)</span> says that <span class="math inline">\(H^1_{\et}(U,C_2)\)</span> is represented by quadratic ’etale covers of <span class="math inline">\(U\)</span>.</p>
+<p>Examples include</p>
+<p><span class="math display">\[
+\mathbf Z[1/2]\times \mathbf Z[1/2],\qquad
+\mathbf Z[1/2][i],\qquad
+\mathbf Z[1/2][\sqrt{2}],\qquad
+\mathbf Z[1/2][\sqrt{-2}].
+\]</span></p>
+<p>These are finite ’etale because the discriminants <span class="math inline">\(-4\)</span>, <span class="math inline">\(8\)</span>, and <span class="math inline">\(-8\)</span> are units after inverting <span class="math inline">\(2\)</span>.</p>
+<p>The point here is not merely the generic fibers over <span class="math inline">\(\mathbf Q\)</span>, but the fact that the covers already exist over the arithmetic scheme <span class="math inline">\(\Spec \mathbf Z[1/2]\)</span>.</p>
+<p><strong>Example 5.2 (An <span class="math inline">\(S_3\)</span>-cover over <span class="math inline">\(\mathbf Z\lbrack 1/6\rbrack\)</span>).</strong> Let</p>
+<p><span class="math display">\[
+U=\Spec \mathbf Z[1/6],\qquad M=C_3.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\Aut(C_3)\cong C_2,\qquad \Hol(C_3)\cong S_3.
+\]</span></p>
+<p>Let</p>
+<p><span class="math display">\[
+\phi:\pi_1(U,\bar u)\to C_2
+\]</span></p>
+<p>be the quadratic character cutting out</p>
+<p><span class="math display">\[
+T_\phi=\Spec \mathbf Z[1/6][\omega],\qquad \omega^2+\omega+1=0.
+\]</span></p>
+<p>Consider</p>
+<p><span class="math display">\[
+L=\mathbf Z[1/6][x]/(x^3-2).
+\]</span></p>
+<p>Its discriminant is</p>
+<p><span class="math display">\[
+-108=-2^2 3^3,
+\]</span></p>
+<p>which is a unit on <span class="math inline">\(U\)</span>, so <span class="math inline">\(L\)</span> is finite ’etale over <span class="math inline">\(U\)</span>. Its generic fiber has Galois closure with group <span class="math inline">\(S_3\)</span>, and the corresponding quadratic resolvent is <span class="math inline">\(\mathbf Q(\sqrt{-3})\)</span>. Thus Theorem~<span class="math inline">\(\ref{thm:main}\)</span> places <span class="math inline">\(L\)</span> naturally in</p>
+<p><span class="math display">\[
+H^1_{\et}(U,\mathcal M_\phi).
+\]</span></p>
+<p><strong>Example 5.3 (A function-field example).</strong> Let</p>
+<p><span class="math display">\[
+U=\Spec \mathbf F_5[t,1/t(t-1)],\qquad M=C_2,
+\]</span></p>
+<p>again with trivial <span class="math inline">\(\phi\)</span>. Then</p>
+<p><span class="math display">\[
+Y=\Spec \mathbf F_5[t,1/t(t-1)][y]/(y^2-t(t-1))
+\]</span></p>
+<p>is finite ’etale over <span class="math inline">\(U\)</span>, because the discriminant <span class="math inline">\(4t(t-1)\)</span> is a unit on the base. This gives a nontrivial class in</p>
+<p><span class="math display">\[
+H^1_{\et}(U,C_2).
+\]</span></p>
+<p>Hence the same formalism applies over open curves over finite fields.</p>
+</section>
+<section id="remarks-and-open-questions" class="level2">
+<h2 class="anchored" data-anchor-id="remarks-and-open-questions">6. Remarks and open questions</h2>
+<p><strong>Remark.</strong> The theorem should be viewed as a concrete holomorph reformulation of standard torsor theory in the specific setting of finite local systems, rather than as a new abstract theorem of ’etale cohomology. Its novelty lies in the explicit affine package and in the arithmetic-scheme interpretation parallel to O’Dorney’s field theorem.</p>
+<p><strong>Remark.</strong> The algebraic structure of <span class="math inline">\(\Hol(M)\)</span> is essential. The normal subgroup <span class="math inline">\(M\)</span> encodes translations, the quotient <span class="math inline">\(\Aut(M)\)</span> encodes the fixed linear part, and the stabilizer of <span class="math inline">\(0\in M\)</span> identifies the degree-<span class="math inline">\(|M|\)</span> cover as a quotient by <span class="math inline">\(\Aut(M)\)</span>. The addition law in <span class="math inline">\(H^1\)</span> is controlled by the additive map <span class="math inline">\(M\times M\to M\)</span>.</p>
+<p><strong>Remark.</strong> Nothing here addresses bad reduction. Extending the same picture to finite flat group schemes over Dedekind bases would require replacing finite ’etale monodromy by a different kind of integral structure.</p>
+<ol type="1">
+<li><p>Can one formulate an analogous description for nonabelian finite local systems, replacing ordinary <span class="math inline">\(H^1\)</span> by pointed nonabelian cohomology?</p></li>
+<li><p>Is there a finite-flat analogue over Dedekind schemes that remains valid at primes dividing <span class="math inline">\(|M|\)</span>?</p></li>
+<li><p>Can the additive compatibility in Proposition~<span class="math inline">\(\ref{prop:sum}\)</span> be refined into a useful description of cup products or low-degree pairings?</p></li>
+<li><p>For <span class="math inline">\(U=\Spec \mathcal O_{K,S}\)</span>, can one make the resolvent torsor explicitly computable for small groups such as <span class="math inline">\(C_3\)</span>, <span class="math inline">\(C_4\)</span>, and <span class="math inline">\(V_4\)</span>?</p></li>
+<li><p>What is the correct formulation in towers <span class="math inline">\(U_n\to U\)</span>, especially in Iwasawa-theoretic situations?</p></li>
+<li><p>Is there a useful function-field refinement involving Artin–Schreier and Kummer covers on open curves over finite fields?</p></li>
+</ol>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>[O’Dorney, 2025, arXiv:2506.11310] Evan M. O’Dorney, <em>’Etale algebras and the Kummer theory of finite Galois modules</em>, arXiv:2506.11310, 2025.</li>
+<li>[Stacks Project Authors, 2025, Tag 03VD] The Stacks Project Authors, <em>The Stacks Project</em>, Tag 03VD (Fundamental groups), 2025.</li>
+<li>[Stacks Project Authors, 2025, Tag 0DV4] The Stacks Project Authors, <em>The Stacks Project</em>, Tag 0DV4 (Locally constant sheaves and the fundamental group), 2025.</li>
+<li>[Stacks Project Authors, 2025, Tag 0A5G] The Stacks Project Authors, <em>The Stacks Project</em>, Tag 0A5G (First cohomology and torsors), 2025.</li>
+</ul>
+</section>
+</section>
+<section id="peer-review" class="level1">
+<h1>Peer Review</h1>
+<section id="claude" class="level2">
+<h2 class="anchored" data-anchor-id="claude">Claude</h2>
+<p>I’ve read through your paper carefully. Here’s my evaluation.</p>
+<section id="correctness-of-the-proofs" class="level3">
+<h3 class="anchored" data-anchor-id="correctness-of-the-proofs">Correctness of the Proofs</h3>
+<p>The proofs are correct, and the logical chain is clean. The core argument — Lemmas 4.1 through 4.3 feeding into Theorem 3.1 — is a straightforward and well-executed exercise in unwinding definitions. Specifically:</p>
+<p><strong>Lemma 4.1</strong> is just the standard dictionary between torsors under a finite locally constant sheaf and π₁-sets with compatible simply transitive action. Nothing to object to here.</p>
+<p><strong>Lemma 4.2</strong> correctly identifies the affine structure: the computation that ψ_ι(g)(x + m) = ψ_ι(g)(x) + φ(g)(m) is the right calculation showing the map lands in Hol(M) with the correct linear part. The continuity argument (finite target) is fine.</p>
+<p><strong>Lemma 4.3</strong> is a one-line verification, and it’s correct.</p>
+<p><strong>Theorem 3.1 proof:</strong> The (a)⇔(b) direction is solid. For (b)⇒(c), the identification of Y = E/Aut(M) with the degree-|M| cover and E/M with T_φ via the stabilizer-of-0 observation is correct. The (c)⇒(b) direction — that θ pins down the Aut(M)-component and leaves only M-conjugacy ambiguity — is also right.</p>
+<p><strong>Corollary 3.2</strong> and <strong>Proposition 3.3</strong> are clean applications. The fiber product / addition map argument in 3.3 is correct.</p>
+</section>
+<section id="novelty-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="novelty-assessment">Novelty Assessment</h3>
+<p>This is where things get more delicate. As you acknowledge in Remark 6.1, the main theorem is a “concrete holomorph reformulation of standard torsor theory.” I’d put it more bluntly: <strong>the core content of Theorem 3.1 is well-known to experts, and each equivalence is essentially a repackaging of standard facts.</strong></p>
+<p>The equivalence (a)⇔(b) — that H¹(U, M_φ) is classified by lifts π₁ → Hol(M) of φ modulo M-conjugacy — is a direct consequence of the general fact that H¹ classifies extensions (or equivalently, crossed homomorphisms modulo principal ones). The crossed homomorphism g ↦ σ(g) satisfying the cocycle condition is exactly the translational component of a lift to Hol(M). This perspective appears implicitly throughout group cohomology texts (Brown, Neukirch, Serre) and in the étale cohomology literature whenever one discusses twisted coefficient systems.</p>
+<p>The equivalence (a)⇔(c) is a specialization of the general torsor-theoretic framework: given a short exact sequence 1 → M → Hol(M) → Aut(M) → 1, an Aut(M)-torsor T_φ, and the connecting map in nonabelian cohomology, the fiber over [T_φ] is exactly H¹(U, M_φ). This is standard nonabelian cohomology (Giraud, Breen, or even just Serre’s <em>Galois Cohomology</em> §I.5 in the field case).</p>
+<p><strong>What O’Dorney contributed</strong> was the explicit étale-algebra interpretation over fields, connecting this to concrete arithmetic objects. Your paper’s contribution is observing that the same package works over connected schemes by replacing G_K with π₁(U, ū). But this replacement is essentially formal — once you accept the equivalences between finite étale covers, π₁-sets, and locally constant sheaves (which are all in the Stacks Project), the theorem follows by the same argument.</p>
+</section>
+<section id="summary-judgment" class="level3">
+<h3 class="anchored" data-anchor-id="summary-judgment">Summary Judgment</h3>
+<p>The paper is <strong>correct but not novel enough for a research publication</strong> in its current form. The proofs are well-written and the examples in Section 5 are nice illustrations, but the main theorem is a routine generalization that experts in étale cohomology would regard as “known.” The open questions in Section 6 are genuinely interesting (especially Q2 on finite flat group schemes and Q5 on Iwasawa-theoretic towers), but they are stated without progress toward answers.</p>
+<p>If you want to develop this further, I’d suggest either: (a) making serious progress on one of those open questions, particularly Q2 or Q3, which would give the paper real content beyond the formal generalization; or (b) finding a concrete arithmetic application where the scheme-level holomorph description yields something that wasn’t accessible from the field-level statement alone — for instance, explicit computation of the resolvent torsors in Q4 for specific rings of S-integers.</p>
+<p>Would you like to dig into any of the open questions, or discuss strategy for strengthening the paper?</p>
+</section>
+</section>
+<section id="gemini" class="level2">
+<h2 class="anchored" data-anchor-id="gemini">Gemini</h2>
+<p>The article titled <strong>“A holomorph description of <span class="math inline">\(H^{1}\)</span> for finite local systems on connected schemes”</strong> is a specialized contribution to arithmetic geometry . Like the previous papers, it carries the subtitle <strong>“Automatic Pipeline with ChatGPT,”</strong> indicating it was produced through an AI-assisted workflow.</p>
+<section id="honest-evaluation-of-the-article" class="level3">
+<h3 class="anchored" data-anchor-id="honest-evaluation-of-the-article">Honest Evaluation of the Article</h3>
+<p>This paper is a technical extension of a 2025 result by Evan O’Dorney. While O’Dorney’s original work focused on the field-theoretic level (Galois modules), this article generalizes the description to the language of <strong>schemes</strong> and <strong>étale fundamental groups</strong> (<span class="math inline">\(\pi_1\)</span>) .</p>
+<p>The primary value of the paper is not in proving a new abstract theorem of étale cohomology, but in providing a <strong>concrete “holomorph package”</strong>. It successfully bridges the gap between abstract torsor theory and practical arithmetic examples, such as quadratic covers over <span class="math inline">\(\mathbb{Z}[1/2]\)</span> or <span class="math inline">\(S_3\)</span>-covers over <span class="math inline">\(\mathbb{Z}[1/6]\)</span> .</p>
+<hr>
+</section>
+<section id="is-the-proof-correct" class="level3">
+<h3 class="anchored" data-anchor-id="is-the-proof-correct">Is the Proof Correct?</h3>
+<p><strong>Yes, the mathematical logic is sound and follows established categorical equivalences.</strong> The author relies on standard results from the <strong>Stacks Project</strong> to bridge the gap between sheaves and group actions . The proof structure is as follows:</p>
+<ul>
+<li><p><strong>Lemma 4.1 &amp; 4.2:</strong> Correctfully uses the equivalence between torsors under a finite locally constant sheaf and continuous actions of <span class="math inline">\(\pi_1(U)\)</span> on a finite set <span class="math inline">\(M\)</span> . It shows that a lift to the holomorph <span class="math inline">\(Hol(M)\)</span> is the same as choosing a specific affine action compatible with the linear action .</p></li>
+<li><p><strong>Lemma 4.3:</strong> Correctfully identifies that changing the “origin” of the affine action corresponds precisely to conjugation by the translation subgroup <span class="math inline">\(M\)</span>, which explains why the cohomology is classified by lifts <em>modulo</em> <span class="math inline">\(M\)</span> .</p></li>
+<li><p><strong>Theorem 3.1:</strong> The bijection between cohomology classes, group-theoretic lifts, and geometric triples <span class="math inline">\((E, Y, \theta)\)</span> is a standard application of the <strong>Galois correspondence for covers</strong> .</p></li>
+<li><p><strong>Proposition 3.3:</strong> The proof for tensor-product compatibility of the corresponding algebras is algebraically sound, using the addition map <span class="math inline">\(M \times M \to M\)</span> to relate the product of two covers to the cover of their sum .</p></li>
+</ul>
+<hr>
+</section>
+<section id="has-other-research-already-proved-this" class="level3">
+<h3 class="anchored" data-anchor-id="has-other-research-already-proved-this">Has Other Research Already Proved This?</h3>
+<p>The core idea—that <span class="math inline">\(H^1\)</span> classifies torsors and torsors are governed by the fundamental group—is a foundational result of <strong>Grothendieck’s Étale Cohomology</strong>.</p>
+<p>However, the <strong>specific holomorph formulation</strong> presented here is unique to the 2025/2026 timeline:</p>
+<ol type="1">
+<li><p><strong>O’Dorney (2025):</strong> Proved the version for fields.</p></li>
+<li><p><strong>This Paper (2026):</strong> Generalizes it to schemes.</p></li>
+</ol>
+<p>While an expert in the field would find the transition from O’Dorney’s field case to the scheme case to be “natural” or “expected,” this paper is the first to explicitly write down the <strong>functorial package</strong> for schemes and prove the <strong>algebraic inclusion</strong> for the resulting étale algebras (<span class="math inline">\(L_{\alpha+\beta} \hookrightarrow L_\alpha \otimes_R L_\beta\)</span>).</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

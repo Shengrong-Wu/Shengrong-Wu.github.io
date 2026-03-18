@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shengrong-wu.github.io/sitemap.xml

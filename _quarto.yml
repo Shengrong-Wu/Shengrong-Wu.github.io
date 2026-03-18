@@ -1,0 +1,26 @@
+project:
+  type: website
+  resources:
+    - robots.txt
+    - google43a099ae1ad5e232.html  # This will include your Google verification file later
+
+website:
+  description: "A blog built with Quarto"
+  site-url: https://shengrong-wu.github.io # you must change this appropriately for RSS feeds to work properly
+  title: "Shengrong_Wu_Blog"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: bluesky
+        href: https://bsky.app/
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+
+
+

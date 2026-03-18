@@ -1,0 +1,700 @@
+---
+title: "Analysis of Singular Wave Equation"
+author: "Shengrong Wu"
+date: "2026-03-11"
+categories: [math, analysis]
+description: "Solve a quasi-linear singular wave equation within self-similarity and spherical symmetry, and the stability of the solution."
+---
+
+This article is finished by ChatGPT 5.4 Thinking with prompt engineering by Shengrong Wu. ChatGPT 5.4 reveals the shocking math ability of AI and threatens the mathematics researchers. Although the projects is relatively simple, the accuracy and the logical presentation is a big step for AI4math.
+
+
+# Singular Wave Equation Analysis: Self-Similar Profiles and Exterior Stability
+
+## Abstract
+We study the singular radial wave equation
+$$
+u_{tt}-u_{rr}-\frac{n-1}{r}u_r+\frac{f(u)}{r^2}=0
+$$
+from two complementary viewpoints. First, we analyze self-similar solutions
+$$
+u(t,r)=U\!\left(\frac{t}{r}\right),
+$$
+derive the singular profile equation
+$$
+(1-a^2)U''+(n-3)aU'+f(U)=0,
+\qquad a=\frac{t}{r},
+$$
+and study the two distinguished limits $a=1$ and $a=\infty$, corresponding respectively to the null cone $r=t$ and the axis $r=0$. For finite-trace cone branches, we obtain sharp expansions at $a=1$; in particular, for $n=3$ bounded profiles are generically continuous but not $C^1$ at the cone, whereas for $n>3$ bounded profiles are generically $C^1$ there. At the axis, bounded limits must lie at zeros of $f$, and linearization at such a zero yields the indicial equation
+$$
+\beta^2+(n-2)\beta-f'(\ell)=0,
+$$
+which determines the radial regularity near $r=0$. This gives the Hölder exponent
+$$
+\beta_+=\frac{\sqrt5-1}{2}
+$$
+for the bounded $\sinh$ branch in dimension three.
+
+Second, in the three-dimensional case we study stability of a bounded background solution in an exterior characteristic domain. After linearizing the difference equation and introducing the transformation $z=rw$, the perturbation reduces to a $(1+1)$-dimensional wave equation with inverse-square potential. In null coordinates this becomes a Volterra-type integral equation, from which we prove an $L^\infty$ stability estimate on every truncated region away from $r=0$. Thus small outgoing Goursat perturbations produce small interior perturbations, and if the solutions extend continuously to the axis in a larger region, then the perturbation also vanishes at the axis in the limit. The same mechanism extends to all spatial dimensions after the standard conjugation by $r^{(n-1)/2}$.
+
+# 1. Introduction
+
+We consider the singular radial wave equation
+$$
+u_{tt}-u_{rr}-\frac{n-1}{r}u_r+\frac{f(u)}{r^2}=0,
+\qquad (t,r)\in (0,\infty)\times (0,\infty).
+$$
+Inverse-square terms arise naturally in equivariant reductions of geometric wave equations and in semilinear models with critical singular potentials. Because $r^{-2}$ has the same homogeneity as two derivatives, it interacts strongly with both the null cone $r=t$ and the axis $r=0$.
+
+The present article has two goals.
+
+1. Analyze self-similar solutions
+   $$
+   u(t,r)=U\!\left(\frac{t}{r}\right)
+   $$
+   and determine how the nonlinearity $f$ governs cone continuity and axis regularity.
+2. Use that structure to motivate a stability analysis for bounded backgrounds in an exterior characteristic domain in three space dimensions.
+
+The dimension $n=4$ is distinguished at the PDE level. If $F'(u)=f(u)$, the formal conserved energy is
+$$
+E[u](t)=\int_0^\infty \left(\frac12 u_t(t,r)^2+\frac12 u_r(t,r)^2+\frac{F(u(t,r))}{r^2}\right) r^{n-1}\,dr,
+$$
+and under the scaling
+$$
+u_\lambda(t,r)=u(\lambda t,\lambda r)
+$$
+one has
+$$
+E[u_\lambda](t)=\lambda^{n-4}E[u](\lambda t).
+$$
+Thus $n=4$ is the energy-critical dimension. In the self-similar analysis, however, the decisive issues are different: at $a=1$ one encounters a regular singular point of the profile ODE, while at $a=\infty$ one obtains a balance between the radial operator and the linearized inverse-square potential.
+
+# 2. Self-Similar Reduction and a Lyapunov Identity
+
+Assume
+$$
+u(t,r)=U(a),
+\qquad
+a=\frac{t}{r}.
+$$
+Then
+$$
+a_t=\frac1r,
+\qquad
+a_r=-\frac{t}{r^2}=-\frac{a}{r},
+$$
+so
+$$
+u_t=\frac1r U'(a),
+\qquad
+u_r=-\frac{a}{r}U'(a).
+$$
+Differentiating once more gives
+$$
+u_{tt}=\frac1{r^2}U''(a),
+\qquad
+u_{rr}=\frac1{r^2}\bigl(a^2U''(a)+2aU'(a)\bigr).
+$$
+Also,
+$$
+-\frac{n-1}{r}u_r=\frac{(n-1)a}{r^2}U'(a).
+$$
+Substituting into the PDE yields
+$$
+\frac1{r^2}\left[(1-a^2)U''+(n-3)aU'+f(U)\right]=0,
+$$
+hence the profile equation is
+$$
+(1-a^2)U''+(n-3)aU'+f(U)=0. \tag{2.1}
+$$
+
+### Proposition 2.1 (Geometric meaning of the singular points)
+The distinguished points of the profile equation have the following interpretation.
+
+1. $a=1$ corresponds to the null cone $r=t$.
+2. $a\to\infty$ corresponds to the axis $r=0$ for fixed $t>0$.
+
+### Proof
+The identity $a=t/r$ gives $a=1$ exactly when $r=t$. For fixed $t>0$, one has $a=t/r\to\infty$ as $r\to0$. Thus the profile equation must be studied near both the cone point $a=1$ and the axis point $a=\infty$.
+
+Let $F'(u)=f(u)$ and define
+$$
+H(a)=\frac12(a^2-1)U'(a)^2-F(U(a)).
+$$
+
+### Proposition 2.2 (Profile Lyapunov identity)
+Every $C^2$ solution of (2.1) satisfies
+$$
+H'(a)=(n-2)a\,U'(a)^2. \tag{2.2}
+$$
+
+### Proof
+Differentiate $H$:
+$$
+H'(a)=aU'^2+(a^2-1)U'U''-f(U)U'.
+$$
+From (2.1),
+$$
+(a^2-1)U''=(n-3)aU'+f(U),
+$$
+so
+$$
+H'(a)=aU'^2+(n-3)aU'^2=(n-2)aU'^2.
+$$
+
+Identity (2.2) gives a monotonic quantity for the profile equation. The special role of dimension four comes from the PDE energy scaling, not from vanishing of this one-dimensional Lyapunov derivative.
+
+# 3. Behavior at the Null Cone
+
+The first question is whether the self-similar profile reaches the cone with a finite trace.
+
+### Proposition 3.1 (Finite-trace expansion at $a=1$)
+Assume $n\ge 3$, $f\in C^1$, and $U$ is bounded on $(1,1+\varepsilon)$ with
+$$
+U(a)\to U_1
+\qquad \text{as } a\downarrow 1.
+$$
+Then:
+
+1. if $n>3$, one has
+   $$
+   U(a)=U_1-\frac{f(U_1)}{n-3}(a-1)+C(a-1)^{(n-1)/2}+o\!\left((a-1)^{(n-1)/2}+a-1\right),
+   $$
+   and in particular
+   $$
+   U'(1^+)=-\frac{f(U_1)}{n-3};
+   $$
+2. if $n=3$, one has
+   $$
+   U(a)=U_1+\frac12 f(U_1)(a-1)\log(a-1)+O(a-1),
+   $$
+   so bounded profiles are continuous at the cone but a $C^1$ crossing requires
+   $$
+   f(U_1)=0.
+   $$
+
+### Proof
+Rewrite (2.1) as
+$$
+U''+\frac{(n-3)a}{1-a^2}U'+\frac{f(U)}{1-a^2}=0.
+$$
+An integrating factor is
+$$
+\mu(a)=(a^2-1)^{-(n-3)/2},
+$$
+because
+$$
+\frac{d}{da}\bigl(\mu(a)U'(a)\bigr)
+=\mu(a)\frac{f(U(a))}{a^2-1}
+=(a^2-1)^{-(n-1)/2}f(U(a)).
+$$
+Since $U(a)\to U_1$ as $a\downarrow 1$, one may replace $f(U(a))$ by $f(U_1)+o(1)$ near $a=1$. Integrating the resulting asymptotic identity once gives the leading behavior of $U'$, and a second integration yields the claimed expansions.
+
+### Remark 3.2 (What is generic at the cone?)
+Proposition 3.1 is conditional: it applies to finite-trace branches, that is, to self-similar profiles with
+$$
+U(1^+)=U_1\in \mathbb R.
+$$
+Within that class:
+
+1. for $n>3$, bounded branches are generically $C^1$ at the cone;
+2. for $n=3$, bounded branches are generically continuous but not $C^1$.
+
+However, boundedness at $a=1$ is not automatic for arbitrary local ODE solutions.
+
+### Remark 3.3 (Singular cone branches)
+If $f$ is unbounded, singular branches can occur. For example, when $n=3$ and
+$$
+f(u)=\sinh u,
+$$
+the ansatz
+$$
+U(a)=-\log(a-1)+\log 4+o(1)
+$$
+gives
+$$
+(1-a^2)U''+\sinh(U)=o\!\left(\frac1{a-1}\right)
+$$
+as $a\downarrow 1$. Thus the finite-trace branch is a selected one, not the only possible local behavior.
+
+### Remark 3.4 (Globally bounded nonlinearities force cone continuity)
+If
+$$
+f\in C^0(\mathbb R)\cap L^\infty(\mathbb R)
+$$
+and $U\in C^2((1,1+\varepsilon))$ solves (2.1), then $U$ automatically has a finite one-sided limit as $a\downarrow 1$.
+
+Indeed:
+
+1. for $n=3$,
+   $$
+   U''(a)=\frac{f(U(a))}{a^2-1}=O\!\left(\frac1{a-1}\right),
+   $$
+   so
+   $$
+   U'(a)=O\bigl(|\log(a-1)|\bigr),
+   $$
+   and this is integrable near $a=1$;
+2. for $n>3$, the integrating-factor identity implies
+   $$
+   U'(a)=O(1)
+   $$
+   as $a\downarrow 1$.
+
+Thus for globally bounded $f$, every local self-similar profile that reaches arbitrarily close to the cone is continuous there.
+
+# 4. Axis Asymptotics and the Role of $f$
+
+We now study bounded continuation to the axis.
+
+### Lemma 4.1 (Admissible axis states)
+Assume
+$$
+U(a)\to \ell,
+\qquad
+aU'(a)\to 0,
+\qquad
+a^2U''(a)\to 0
+$$
+as $a\to\infty$. Then
+$$
+f(\ell)=0.
+$$
+
+### Proof
+Passing to the limit in (2.1) gives
+$$
+f(\ell)=0.
+$$
+
+Thus bounded axis traces must occur at zeros of $f$.
+
+### Theorem 4.2 (Linearized axis exponent)
+Assume $f\in C^1$, $f(\ell)=0$, and
+$$
+f(\ell+V)=cV+o(V),
+\qquad
+c=f'(\ell).
+$$
+Set
+$$
+V(a)=U(a)-\ell.
+$$
+Then the linearized equation at $a=\infty$ is
+$$
+a^2V''-(n-3)aV'-cV=0.
+$$
+Seeking a decaying mode
+$$
+V(a)\sim a^{-\beta}
+$$
+gives the indicial equation
+$$
+\beta^2+(n-2)\beta-c=0. \tag{4.1}
+$$
+If $c>0$, the positive root is
+$$
+\beta_+=\frac{-(n-2)+\sqrt{(n-2)^2+4c}}{2},
+$$
+and the corresponding asymptotic profile is
+$$
+U(a)=\ell+Ca^{-\beta_+}+o(a^{-\beta_+}). \tag{4.2}
+$$
+
+### Proof
+For large $a$, equation (2.1) takes the form
+$$
+-a^2V''+(n-3)aV'+cV+o(V)=0.
+$$
+Substituting the ansatz $V(a)\sim a^{-\beta}$ gives
+$$
+\beta(\beta+1)+(n-3)\beta-c=0,
+$$
+which is equivalent to (4.1). The positive root yields the decaying branch.
+
+### Corollary 4.3 (Radial regularity at the axis)
+If (4.2) holds, then for each fixed $t>0$,
+$$
+u(t,r)-\ell
+=C\,t^{-\beta_+}r^{\beta_+}+o(r^{\beta_+})
+\qquad \text{as } r\downarrow 0.
+$$
+Hence:
+
+1. if $0<\beta_+<1$, then generic selected axis-regular profiles are only $C^{0,\beta_+}$ at $r=0$;
+2. if $\beta_+=1$, then generic selected axis-regular profiles are Lipschitz;
+3. if $m<\beta_+<m+1$, then generic selected axis-regular profiles are $C^m$ but not $C^{m+1}$.
+
+### Remark 4.4 (Existence versus genericity at the axis)
+The axis is more rigid than the cone.
+
+1. A local finite-trace branch at $a=1$ depends on free cone data.
+2. To reach a prescribed axis state $\ell$, one must eliminate the non-decaying mode of the large-$a$ linearization.
+3. Hence bounded extension to the axis is a codimension-one condition and is not generic when shooting from the cone.
+
+Among profiles specifically selected to satisfy $U(a)\to\ell$, the coefficient $C$ in (4.2) is generically nonzero, so the exponent $\beta_+$ usually gives the sharp regularity.
+
+# 5. Dimension-Dependent Behavior and Basic Examples
+
+For integer radial wave equations with $n\ge 3$, three regimes appear.
+
+## 5.1 The case $n<4$
+
+Among integer dimensions, this means $n=3$. The profile equation becomes
+$$
+(1-a^2)U''+f(U)=0.
+$$
+Within the class of finite-trace branches, bounded profiles are continuous at the cone and satisfy
+$$
+U(a)=U_1+\frac12 f(U_1)(a-1)\log(a-1)+O(a-1).
+$$
+Thus the cone is generically continuous but not $C^1$. At the axis, if $f(\ell)=0$ and $c=f'(\ell)>0$, then
+$$
+\beta_+=\frac{-1+\sqrt{1+4c}}{2}.
+$$
+For $c=1$,
+$$
+\beta_+=\frac{\sqrt5-1}{2}\approx 0.618.
+$$
+
+## 5.2 The case $n=4$
+
+This is the energy-critical dimension for the full PDE. At the cone one has
+$$
+U'(1^+)=-f(U_1),
+$$
+so bounded finite-trace branches are already $C^1$ there. At the axis,
+$$
+\beta_+=-1+\sqrt{1+c}.
+$$
+For $c=1$,
+$$
+\beta_+=\sqrt2-1\approx 0.414.
+$$
+
+## 5.3 The case $n>4$
+
+The cone behavior remains $C^1$ for finite-trace branches, with
+$$
+U'(1^+)=-\frac{f(U_1)}{n-3}.
+$$
+At the axis the exponent is still given by
+$$
+\beta_+=\frac{-(n-2)+\sqrt{(n-2)^2+4c}}{2},
+$$
+which decreases with $n$ when $c$ is fixed. For $c=1$:
+
+| dimension | exponent $\beta_+$ |
+| --- | --- |
+| $5$ | $\dfrac{\sqrt{13}-3}{2}\approx 0.303$ |
+| $6$ | $\sqrt5-2\approx 0.236$ |
+| $7$ | $\dfrac{\sqrt{29}-5}{2}\approx 0.193$ |
+
+Thus higher dimension does not improve axis regularity for fixed linearized potential strength $f'(\ell)$.
+
+## 5.4 Example: $f(u)=\sinh u$
+
+The nonlinearity $\sinh u$ has a simple zero at $u=0$, with
+$$
+f'(0)=1.
+$$
+Hence the only bounded axis state is
+$$
+\ell=0.
+$$
+In dimension three this gives
+$$
+\beta_+=\frac{\sqrt5-1}{2},
+$$
+so the bounded self-similar branch is Hölder but not $C^1$ at the axis.
+
+At the cone:
+
+1. singular branches are possible because $\sinh u$ is unbounded;
+2. among finite-trace branches, the expansion in Proposition 3.1 applies;
+3. in dimension three, a $C^1$ cone crossing requires
+   $$
+   \sinh(U_1)=0,
+   $$
+   hence $U_1=0$.
+
+## 5.5 Example: $f(u)=\cosh u$
+
+Since
+$$
+\cosh u>0
+\qquad \text{for all } u\in \mathbb R,
+$$
+the equation
+$$
+f(\ell)=0
+$$
+has no solution. Therefore no bounded self-similar profile can converge to a finite axis value.
+
+At the cone, finite-trace branches can still exist, and Proposition 3.1 describes them. Thus for $\cosh u$ the obstruction is not the cone but the axis.
+
+# 6. Exterior Stability of Bounded Backgrounds in Dimension Three
+
+We now turn to the stability problem in $(1+3)$ dimensions. The argument below does not require the background to be exactly self-similar, but it applies in particular to bounded self-similar backgrounds of the type discussed above.
+
+We consider
+$$
+u_{tt}-u_{rr}-\frac{2}{r}u_r+\frac{f(u)}{r^2}=0
+$$
+in the exterior characteristic domain
+$$
+\Omega=\{(t,r): t>0,\ r>t,\ r+t<2\}. \tag{6.1}
+$$
+
+Introduce null coordinates
+$$
+\alpha=r+t,
+\qquad
+\beta=r-t.
+$$
+Then
+$$
+r=\frac{\alpha+\beta}{2},
+\qquad
+t=\frac{\alpha-\beta}{2},
+$$
+and
+$$
+\Omega=\{(\alpha,\beta): 0<\beta<\alpha<2\}. \tag{6.2}
+$$
+
+The two characteristic boundary pieces are
+$$
+\Gamma_{\mathrm{out}}=\{\beta=0,\ 0<\alpha<2\},
+\qquad
+\Gamma_{\mathrm{in}}=\{\alpha=2,\ 0<\beta<2\}.
+$$
+
+Let $\bar u$ be a bounded background solution in $\Omega$, and let $u$ be a second bounded solution of the same equation. We assume:
+
+1. $u$ and $\bar u$ agree on $\Gamma_{\mathrm{in}}$;
+2. on $\Gamma_{\mathrm{out}}$ their difference is prescribed by a boundary trace $g$;
+3. the perturbation size tends to zero in $L^\infty$.
+
+### Proposition 6.1 (Difference equation)
+Set
+$$
+w=u-\bar u.
+$$
+Assume
+$$
+|u(t,r)|,\ |\bar u(t,r)|\le M
+$$
+and
+$$
+f\in C^1(\mathbb R).
+$$
+Then
+$$
+w_{tt}-w_{rr}-\frac{2}{r}w_r+\frac{m(t,r)}{r^2}w=0, \tag{6.3}
+$$
+where
+$$
+m(t,r)=\int_0^1 f'\bigl(\bar u+\theta(u-\bar u)\bigr)\,d\theta
+$$
+satisfies
+$$
+|m(t,r)|\le L_M:=\sup_{|y|\le M}|f'(y)|. \tag{6.4}
+$$
+
+### Proof
+Subtract the equations for $u$ and $\bar u$, and apply the mean value formula to $f(u)-f(\bar u)$.
+
+### Proposition 6.2 (Conjugation to a $(1+1)$-dimensional equation)
+If
+$$
+z(t,r)=r\,w(t,r),
+$$
+then
+$$
+z_{tt}-z_{rr}+\frac{m(t,r)}{r^2}z=0. \tag{6.5}
+$$
+In null coordinates this becomes
+$$
+z_{\alpha\beta}=K(\alpha,\beta)z, \tag{6.6}
+$$
+where
+$$
+K(\alpha,\beta)=\frac{m(\alpha,\beta)}{(\alpha+\beta)^2}. \tag{6.7}
+$$
+
+### Proof
+Since
+$$
+w=\frac{z}{r},
+$$
+a direct computation gives
+$$
+w_{tt}-w_{rr}-\frac{2}{r}w_r
+=\frac1r(z_{tt}-z_{rr}).
+$$
+Equation (6.5) follows after multiplying (6.3) by $r$. Using
+$$
+\partial_t=\partial_\alpha-\partial_\beta,
+\qquad
+\partial_r=\partial_\alpha+\partial_\beta,
+$$
+one gets
+$$
+z_{tt}-z_{rr}=-4z_{\alpha\beta},
+$$
+which yields (6.6) and (6.7).
+
+### Proposition 6.3 (Goursat formulation)
+Assume
+$$
+z(2,\beta)=0,
+\qquad
+z(\alpha,0)=g(\alpha),
+\qquad
+g(2)=0. \tag{6.8}
+$$
+Then
+$$
+z(\alpha,\beta)
+=g(\alpha)-\int_\alpha^2\int_0^\beta K(\sigma,\tau)z(\sigma,\tau)\,d\tau\,d\sigma. \tag{6.9}
+$$
+
+### Proof
+Integrate (6.6) over the null rectangle
+$$
+[\alpha,2]\times[0,\beta].
+$$
+Using the fundamental theorem of calculus twice,
+$$
+\int_\alpha^2\int_0^\beta z_{\sigma\tau}(\sigma,\tau)\,d\tau\,d\sigma
+=z(2,\beta)-z(2,0)-z(\alpha,\beta)+z(\alpha,0).
+$$
+Insert (6.6) and the boundary values (6.8).
+
+### Theorem 6.4 ($L^\infty$ stability in the exterior domain)
+Assume the hypotheses of Propositions 6.1-6.3 and suppose
+$$
+\|g\|_{L^\infty(0,2)}\le \varepsilon. \tag{6.10}
+$$
+For any
+$$
+0<\alpha_0<2,
+$$
+define
+$$
+\Omega_{\alpha_0}
+=\{(\alpha,\beta): \alpha_0\le \alpha<2,\ 0\le \beta\le \alpha\}. \tag{6.11}
+$$
+Then there exists a constant $C_{\alpha_0}>0$, depending only on $\alpha_0$ and the bound $L_M$, such that
+$$
+\|u-\bar u\|_{L^\infty(\Omega_{\alpha_0})}\le C_{\alpha_0}\varepsilon. \tag{6.12}
+$$
+
+### Proof
+From (6.4) and (6.7),
+$$
+|K(\alpha,\beta)|\le \frac{L_M}{(\alpha+\beta)^2}\le \frac{L_M}{\alpha_0^2}=:A_{\alpha_0}
+$$
+on $\Omega_{\alpha_0}$. Taking absolute values in (6.9) gives
+$$
+|z(\alpha,\beta)|
+\le
+\varepsilon
++A_{\alpha_0}\int_\alpha^2\int_0^\beta |z(\sigma,\tau)|\,d\tau\,d\sigma.
+$$
+Define
+$$
+M(\beta)=\sup\bigl\{|z(\sigma,\tau)|:\alpha_0\le \sigma<2,\ 0\le \tau\le \min\{\beta,\sigma\}\bigr\}.
+$$
+Then
+$$
+M(\beta)
+\le
+\varepsilon
++A_{\alpha_0}(2-\alpha_0)\int_0^\beta M(\tau)\,d\tau.
+$$
+By Gronwall's inequality,
+$$
+M(\beta)\le C_{\alpha_0}\varepsilon,
+\qquad 0\le \beta\le 2.
+$$
+Therefore
+$$
+\|z\|_{L^\infty(\Omega_{\alpha_0})}\le C_{\alpha_0}\varepsilon.
+$$
+Since
+$$
+r=\frac{\alpha+\beta}{2}\ge \frac{\alpha_0}{2}
+$$
+on $\Omega_{\alpha_0}$, it follows that
+$$
+\|w\|_{L^\infty(\Omega_{\alpha_0})}
+\le
+\frac{2}{\alpha_0}\|z\|_{L^\infty(\Omega_{\alpha_0})}
+\le
+C'_{\alpha_0}\varepsilon.
+$$
+This is exactly (6.12).
+
+### Remark 6.5 (No exact transport for nonzero potential)
+If $K\equiv 0$, then (6.9) reduces to
+$$
+z(\alpha,\beta)=g(\alpha),
+$$
+so the perturbation is transported exactly along the $\alpha$-characteristics. For the singular wave equation, however, $K$ is generally nonzero, and one should not claim exact support confinement or exact transport along one null family. The inverse-square potential couples the two null directions.
+
+### Remark 6.6 (Axis stability after extension)
+The axis $r=0$ is not contained in $\Omega$. Hence the exterior-domain theorem does not by itself give a statement at the axis. However, if both solutions extend continuously to the axis in a larger region and the same type of estimate remains valid there, then
+$$
+(u-\bar u)(t,0)\to 0
+$$
+as the boundary perturbation amplitude tends to zero.
+
+### Remark 6.7 (Other spatial dimensions)
+The same mechanism works in any fixed dimension $n\ge 2$. For
+$$
+w_{tt}-w_{rr}-\frac{n-1}{r}w_r+\frac{m(t,r)}{r^2}w=0,
+$$
+set
+$$
+z=r^{\frac{n-1}{2}}w.
+$$
+Then
+$$
+z_{tt}-z_{rr}
++\frac{m(t,r)+\frac{(n-1)(n-3)}{4}}{r^2}z=0.
+$$
+Thus the null-coordinate Volterra argument is unchanged, except for the additional Hardy term
+$$
+\frac{(n-1)(n-3)}{4r^2}.
+$$
+On every truncated region away from $r=0$, the effective coefficient remains bounded, so one obtains the same type of $L^\infty$ stability estimate.
+
+# 7. Conclusion and Further Directions
+
+The singular radial wave equation exhibits two distinct but closely related structures.
+
+1. The self-similar reduction isolates the cone point $a=1$ and the axis point $a=\infty$, revealing how the value of $f$ controls cone behavior and how the zero set and linearization of $f$ control axis regularity.
+2. The stability problem in the exterior null domain shows that bounded backgrounds remain stable under small characteristic perturbations, even when the motivating self-similar background is only Hölder at the axis.
+
+The examples
+$$
+f(u)=\sinh u
+$$
+and
+$$
+f(u)=\cosh u
+$$
+illustrate the basic dichotomy:
+
+1. if $f$ has a zero, bounded axis-regular self-similar branches can exist, with regularity determined by $f'(\ell)$;
+2. if $f$ has no zero, bounded continuation to the axis is impossible, though finite-trace cone branches may still exist.
+
+Several problems remain open.
+
+1. Classify global self-similar profiles and their singular branches for general nonlinearities $f$.
+2. Develop a full shooting theory connecting finite-trace cone data to bounded axis states.
+3. Prove stability in Hölder or weighted Sobolev norms adapted to the non-smooth axis behavior.
+4. Extend the exterior null-domain analysis to regions that include the axis itself.
+5. Study dynamic stability of the bounded self-similar $\sinh$ branch for the full nonlinear radial evolution.

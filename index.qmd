@@ -1,0 +1,11 @@
+---
+title: "Shengrong Wu's Blog"
+listing:
+  contents: 
+    - "posts/*/index.qmd"
+  type: default        # 'default' shows Title + Image + Description
+  fields: [image, date, title, author, description, reading-time] # <--- Explicitly exclude 'description' or 'categories' if they are too long
+  sort: "date desc"
+---
+
+In this page, I will post some small projects which I complete with AI. More information about me can be found in my [Google site](https://sites.google.com/view/shengrongwu).

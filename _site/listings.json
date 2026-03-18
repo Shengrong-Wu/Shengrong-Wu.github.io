@@ -1,0 +1,26 @@
+[
+  {
+    "listing": "/posts/math_article_pipeline/index.html",
+    "items": [
+      "/posts/math_article_pipeline/articles/Renyi_defects_on_cylindrical_neutral_blocks/index.html",
+      "/posts/math_article_pipeline/articles/intrinsic_visibility_K_moduli/index.html",
+      "/posts/math_article_pipeline/articles/capacitary_mono_quantity_hawking_mass/index.html",
+      "/posts/math_article_pipeline/articles/canonical_rigidity_warped_prod_mink_ineq/index.html",
+      "/posts/math_article_pipeline/articles/Threshold_Rigidity_Separated_Sub_Static_Splittings/index.html",
+      "/posts/math_article_pipeline/articles/line_dependence_substatic_splitting/index.html",
+      "/posts/math_article_pipeline/articles/holomorph_description_connected_schemes/index.html",
+      "/posts/math_article_pipeline/articles/wall_shear_stress_serrin_problem/index.html",
+      "/posts/math_article_pipeline/articles/split_prime_localize_lattice_realize_minus_ray/index.html",
+      "/posts/math_article_pipeline/articles/hermitian_ALF_gravitational_instantons/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/math_article_pipeline/index.html",
+      "/posts/math_reading_agent/index.html",
+      "/posts/singular_wave_equation/index.html",
+      "/posts/modern_proof_of_PMT/index.html"
+    ]
+  }
+]

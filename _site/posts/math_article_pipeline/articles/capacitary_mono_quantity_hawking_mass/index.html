@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-17">
+<meta name="description" content="Math research based on GenAI.">
+
+<title>Convergence of quantities to Hawking mass – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Convergence of quantities to Hawking mass</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Mathematics</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Geometric Analysis</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Math research based on GenAI.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="evaluation.png" class="img-fluid figure-img"></p>
+<figcaption>LLMs’ evaluation on novelty</figcaption>
+</figure>
+</div>
+<section id="distributional-convergence-of-p-capacitary-monotone-quantities-to-the-hawking-mass" class="level1">
+<h1>Distributional convergence of p-capacitary monotone quantities to the Hawking mass</h1>
+<p><strong>Shengrong Wu</strong><br>
+National University of Singapore</p>
+<p><em>Automatic Pipeline with ChatGPT</em></p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>On a one-ended asymptotically flat <span class="math inline">\(3\)</span>-manifold <span class="math inline">\((M^3,g)\)</span> with nonnegative scalar curvature and connected smooth minimal boundary <span class="math inline">\(\Sigma\)</span>, we prove that the boundary-normalized Xia–Yin–Zhou monotone quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span> converges, as <span class="math inline">\(p\to1^+\)</span>, to the Hawking mass minus the Penrose scale in the sense of distributions on every compact time window <span class="math inline">\([0,S]\)</span>. More precisely, if <span class="math inline">\(p_j\to1^+\)</span> and <span class="math inline">\(w_{p_j}\to w_1\)</span> is the associated weak inverse mean curvature flow limit, then <span class="math display">\[
+-\frac{\mathcal Z_{p_j,1}}{8\pi}
+\rightharpoonup
+m_H(\Gamma_s^{(1)})-m_0
+\qquad\text{in }\mathcal D'([0,S]),
+\]</span> where <span class="math inline">\(m_0=\lim_{p\to1^+}m_p^\sharp\)</span> is the Penrose-scale limit and <span class="math inline">\(\Gamma_s^{(1)}=\partial^*\{w_1&lt;s\}\)</span> is the weak IMCF leaf.</p>
+<p>The key new ingredient, which closes the only gap left open in the preceding note, is an <strong>initial-layer estimate</strong> showing that the integral <span class="math inline">\(\int_0^\delta K_p(s)\,ds\)</span> of the leafwise <span class="math inline">\(L^2\)</span>-norm of <span class="math inline">\(|\nabla w_p|\)</span> vanishes in the iterated limit <span class="math inline">\(p\to1^+\)</span>, <span class="math inline">\(\delta\downarrow0\)</span>. The proof uses a <strong>collar decomposition</strong> near the boundary <span class="math inline">\(\Sigma\)</span>: in a thin collar, the BPP uniform gradient bound controls the integrand via the small volume of the collar; away from <span class="math inline">\(\Sigma\)</span>, the strong <span class="math inline">\(L^3\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> applies. This circumvents the fact that the BPP convergence theorem is only interior away from <span class="math inline">\(\Sigma\)</span>.</p>
+<hr>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<section id="the-penrose-inequality-and-geometric-flows" class="level3">
+<h3 class="anchored" data-anchor-id="the-penrose-inequality-and-geometric-flows">1.1. The Penrose inequality and geometric flows</h3>
+<p>The Riemannian Penrose inequality <span class="math display">\[
+m_{\mathrm{ADM}}\ge\sqrt{\frac{|\Sigma|}{16\pi}}
+\]</span> is one of the central results in mathematical general relativity. It asserts that for an asymptotically flat <span class="math inline">\(3\)</span>-manifold <span class="math inline">\((M^3,g)\)</span> with nonnegative scalar curvature and minimal boundary <span class="math inline">\(\Sigma\)</span>, the ADM mass is bounded below by the irreducible mass determined by the area of <span class="math inline">\(\Sigma\)</span>. Physically, this reflects the expectation from the cosmic censorship conjecture that the total energy of a gravitational system cannot be less than what is already trapped behind a black hole horizon.</p>
+<p>The inequality was proved in full generality for connected horizons by Huisken and Ilmanen [HI01] using their theory of weak inverse mean curvature flow (IMCF). Their proof relies on the Geroch monotonicity formula: the Hawking mass <span class="math display">\[
+m_H(\Sigma_s):=\sqrt{\frac{|\Sigma_s|}{16\pi}}\left(1-\frac{1}{16\pi}\int_{\Sigma_s}H^2\,d\sigma\right)
+\]</span> is nondecreasing along IMCF, beginning at <span class="math inline">\(m_0=\sqrt{|\Sigma|/(16\pi)}\)</span> on the minimal boundary and converging to <span class="math inline">\(m_{\mathrm{ADM}}\)</span> at infinity. The difficulty lies in the fact that classical IMCF develops singularities; the Huisken–Ilmanen weak formulation circumvents this via a level-set approach, at the cost of establishing monotonicity through jumps in the flow.</p>
+</section>
+<section id="the-p-capacitary-approach" class="level3">
+<h3 class="anchored" data-anchor-id="the-p-capacitary-approach">1.2. The <span class="math inline">\(p\)</span>-capacitary approach</h3>
+<p>An entirely different strategy, developed by Agostiniani, Mantegazza, Mazzieri, and Oronzio [AMMO], replaces the geometric flow by a static elliptic PDE. For <span class="math inline">\(1&lt;p&lt;3\)</span>, one solves for the <span class="math inline">\(p\)</span>-capacitary potential <span class="math inline">\(u_p\)</span> — the <span class="math inline">\(p\)</span>-harmonic function equal to <span class="math inline">\(0\)</span> on <span class="math inline">\(\Sigma\)</span> and tending to <span class="math inline">\(1\)</span> at infinity — and constructs a monotone quantity <span class="math inline">\(\mathcal F_p^{\mathrm{AMMO}}\)</span> along its level sets. The monotonicity follows from a combination of the divergence theorem, the Bochner formula, and the Gauss equation, without requiring any flow. Since <span class="math inline">\(p\)</span>-harmonic functions enjoy strong elliptic regularity away from their critical set, the analytic difficulties are quite different from those of IMCF.</p>
+<p>This approach has been substantially extended in two directions. Xia, Yin, and Zhou [XYZ] introduced a family of boundary-normalized monotone quantities <span class="math inline">\(\mathcal Z_{p,k}\)</span>, parametrized by a Schwarzschild ODE system. The <span class="math inline">\(k=0\)</span> member recovers the AMMO quantity (up to sign), while the <span class="math inline">\(k=1\)</span> member yields sharper boundary estimates: a gradient bound on <span class="math inline">\(\Sigma\)</span>, mass-capacity and area-capacity inequalities, and — crucially — a Penrose-scale constant <span class="math inline">\(m_p^\sharp\)</span> that converges to the irreducible mass <span class="math inline">\(\sqrt{|\Sigma|/(16\pi)}\)</span> as <span class="math inline">\(p\to1^+\)</span>. Independently, Benatti, Pluda, and Pozzetta [BPP] developed a comprehensive weak theory for the level-set structure of the logarithmic variable <span class="math inline">\(w_p:=-(p-1)\log(1-u_p)\)</span>, establishing curvature-varifold regularity of almost every level, <span class="math inline">\(W^{1,1}\)</span> monotonicity through critical values, and — most relevant for us — strong <span class="math inline">\(L^q\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> to the gradient of a weak IMCF as <span class="math inline">\(p\to1^+\)</span>.</p>
+</section>
+<section id="the-bridge-problem" class="level3">
+<h3 class="anchored" data-anchor-id="the-bridge-problem">1.3. The bridge problem</h3>
+<p>A natural and compelling question, raised implicitly in [AMMO] and explicitly pursued in [BPP], is whether the <span class="math inline">\(p\)</span>-capacitary monotone quantities converge to the Hawking mass as <span class="math inline">\(p\to1^+\)</span>. A positive answer would provide a new, purely elliptic proof of the Geroch monotonicity formula — or more precisely, would show that the Geroch monotonicity arises as a limiting case of the <span class="math inline">\(p\)</span>-capacitary monotonicity.</p>
+<p>We call this the <strong><span class="math inline">\(p\to1^+\)</span> bridge problem</strong>. It asks for the distributional convergence <span class="math display">\[
+-\frac{\mathcal Z_{p,1}}{8\pi}\rightharpoonup m_H(\Gamma_s^{(1)})-m_0
+\qquad\text{in }\mathcal D'([0,S])
+\]</span> on every compact time window <span class="math inline">\([0,S]\)</span>, where <span class="math inline">\(\Gamma_s^{(1)}\)</span> denotes the weak IMCF leaf at time <span class="math inline">\(s\)</span> and <span class="math inline">\(m_0=\lim m_p^\sharp\)</span> is the Penrose-scale limit.</p>
+<p>The difficulty of this problem is that the BPP convergence results are inherently interior: the strong <span class="math inline">\(L^q\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> holds on compact subsets of <span class="math inline">\(M\setminus\Sigma\)</span>, but the level sets <span class="math inline">\(\{w_p=s\}\)</span> for small <span class="math inline">\(s&gt;0\)</span> accumulate on <span class="math inline">\(\Sigma\)</span> as <span class="math inline">\(p\to1^+\)</span>. Any argument based on coarea must therefore control the behavior of the integrands near the boundary, where the convergence theorem does not directly apply.</p>
+</section>
+<section id="prior-results-and-the-remaining-gap" class="level3">
+<h3 class="anchored" data-anchor-id="prior-results-and-the-remaining-gap">1.4. Prior results and the remaining gap</h3>
+<p>The structural groundwork for the bridge was laid in a preceding note, which established the following results in the range <span class="math inline">\(1&lt;p\le2\)</span>:</p>
+<ul>
+<li>the exact AMMO defect splitting in the smooth regime, identifying the topological and geometric contributions to the monotone quantity’s derivative;</li>
+<li>the weak continuation of this splitting through critical levels, via the logarithmic variable <span class="math inline">\(w_p\)</span> and the BPP curvature-varifold theory;</li>
+<li>the identification of the Xia–Yin–Zhou boundary-normalized family <span class="math inline">\(\mathcal Z_{p,k}\)</span> as the correct object for the bridge, with its <span class="math inline">\(k=0\)</span> branch recovering AMMO and its <span class="math inline">\(k=1\)</span> branch encoding the sharp boundary estimates;</li>
+<li>the weak <span class="math inline">\(k=1\)</span> derivative formula, extending the smooth XYZ identity through critical values;</li>
+<li>the exact Hawking-defect bridge identity (Proposition 3.5 below), which decomposes the gap between a Hawking-type renormalization of <span class="math inline">\(\mathcal Z_{p,1}\)</span> and the Penrose scale into the monotone quantity itself and two explicit error terms;</li>
+<li>the IMCF-scale coefficient asymptotics, showing that the Hawking-type prefactor converges to the correct Hawking-mass prefactor;</li>
+<li>the compact-window bridge on every <span class="math inline">\(I=[s_0,s_1]\Subset(0,\infty)\)</span>, i.e., away from the initial time <span class="math inline">\(s=0\)</span>.</li>
+</ul>
+<p>The only gap left open was the <strong>initial-jump regime at <span class="math inline">\(s=0\)</span></strong>: near <span class="math inline">\(s=0\)</span>, the Schwarzschild coordinate <span class="math inline">\(y_p(s)\to1\)</span> and the Laplace-type bounds used in the compact-window argument degenerate. This paper closes that gap.</p>
+</section>
+<section id="main-result" class="level3">
+<h3 class="anchored" data-anchor-id="main-result">1.5. Main result</h3>
+<p>We now state the main theorem precisely. The geometric setup, the definition of the XYZ quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span>, and all notation are fixed in Section 2. The error terms <span class="math inline">\(\mathcal E_p^{(0)}\)</span> and <span class="math inline">\(\mathcal E_p^{(1)}\)</span> arise from the exact Hawking-defect bridge identity (Proposition 3.5), which algebraically relates the XYZ monotone quantity to a Hawking-type expression <span class="math inline">\(\mathfrak H_p\)</span> on each level set. Part (1) of the theorem says that both error terms in this identity vanish as <span class="math inline">\(p\to1^+\)</span>; part (2) identifies the limit of the Hawking-type expression as the actual Hawking mass of the weak IMCF; and part (3) combines these to give the distributional convergence of the rescaled XYZ quantity.</p>
+<p><strong>Theorem A (full-window <span class="math inline">\(p\to1^+\)</span> bridge).</strong> <em>Assume the standing hypotheses (Section 2.1). Let <span class="math inline">\(p_j\to1^+\)</span> and, after passing to a subsequence, let <span class="math inline">\(w_{p_j}\to w_1\)</span> be the weak IMCF limit provided by [BPP]. Fix <span class="math inline">\(S&gt;0\)</span>. Then on <span class="math inline">\([0,S]\)</span>:</em></p>
+<ol type="1">
+<li><p><em><span class="math inline">\(\mathcal E_{p_j}^{(0)}\to0\)</span> and <span class="math inline">\(\mathcal E_{p_j}^{(1)}\to0\)</span> in <span class="math inline">\(L^1([0,S])\)</span>;</em></p></li>
+<li><p><em><span class="math inline">\(\mathfrak H_{p_j}\rightharpoonup m_H(\Gamma_s^{(1)})\)</span> in <span class="math inline">\(\mathcal D'([0,S])\)</span>;</em></p></li>
+<li><p><em><span class="math inline">\(\displaystyle -\frac{\mathcal Z_{p_j,1}}{8\pi}\rightharpoonup m_H(\Gamma_s^{(1)})-m_0\)</span> in <span class="math inline">\(\mathcal D'([0,S])\)</span>.</em></p></li>
+</ol>
+<p>Here <span class="math inline">\(m_0=\lim_{p\to1^+} m_p^\sharp=\sqrt{|\Gamma_0^{(1)}|/(16\pi)}\)</span> is the Penrose-scale limit. The convergence in (3) can be read as saying that the <span class="math inline">\(p\)</span>-capacitary monotone quantity, when properly rescaled, recovers the Geroch monotonicity in the limit <span class="math inline">\(p\to1^+\)</span>: the quantity <span class="math inline">\(-\mathcal Z_{p,1}/(8\pi)\)</span> plays the role of the Hawking mass minus its initial value along the <span class="math inline">\(p\)</span>-capacitary foliation, and this role is preserved in the distributional limit.</p>
+</section>
+<section id="the-key-new-idea-collar-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="the-key-new-idea-collar-decomposition">1.6. The key new idea: collar decomposition</h3>
+<p><strong>Why naive approaches fail.</strong> The compact-window bridge (Proposition 4.1) was proved in the preceding note using the coarea formula and strong <span class="math inline">\(L^3\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> on compact subsets of <span class="math inline">\(M\setminus\Sigma\)</span>. A natural first attempt to extend this to <span class="math inline">\([0,S]\)</span> is to work directly in the original <span class="math inline">\(u_p\)</span>-variables and freeze the boundary flux, using the exact AMMO divergence identity together with a boundary correction term. This approach (Path B in the preceding note’s exploration) fails: the AMMO divergence does not produce a frozen boundary-flux term, and the correction structure does not arise naturally from the equation. The obstacle is that the equation <span class="math inline">\(\Delta_p u_p=0\)</span> does not have the right absorption structure near <span class="math inline">\(\Sigma\)</span> to control the boundary integrals uniformly.</p>
+<p>A second natural attempt is to work directly with the <span class="math inline">\(u_p\)</span>-normalization through critical values, relying on the monotonicity established in [AMMO]. Although AMMO do prove monotonicity through critical levels, the curvature-varifold regularity, <span class="math inline">\(W^{1,1}\)</span> structure, and weak Gauss–Bonnet theorem that are needed to control the initial-layer integrals are not available in the <span class="math inline">\(u_p\)</span>-normalization (Path C). These properties are specific to the <span class="math inline">\(w_p\)</span>-normalization and the BPP framework.</p>
+<p>A third attempt, which came closer to succeeding, is to tune a single BPP exponent <span class="math inline">\(\alpha\)</span> to absorb the boundary degeneracy. The BPP family is parametrized by <span class="math inline">\(\alpha&gt;\frac{3-p}{2}\)</span>, and for the compact-window argument the exponent <span class="math inline">\(\alpha=3-p\)</span> works perfectly. However, for the initial-layer problem, the family is structurally underdetermined: controlling all three of the ODE-coupled coefficients in the XYZ system requires not one but three matching conditions, and no single value of <span class="math inline">\(\alpha\)</span> satisfies all of them simultaneously (Path E).</p>
+<p><strong>The obstruction and its resolution.</strong> The underlying geometric difficulty is the following. As <span class="math inline">\(s\downarrow0\)</span>, the level sets <span class="math inline">\(\Sigma_{p,s}=\{w_p=s\}\)</span> approach the boundary <span class="math inline">\(\Sigma=\{w_p=0\}\)</span>. The sub-level set <span class="math inline">\(\{0&lt;w_p&lt;\delta\}\)</span> is a thin shell around <span class="math inline">\(\Sigma\)</span>, and its closure touches <span class="math inline">\(\Sigma\)</span>. The BPP convergence theorem (BPP-2 above) provides strong <span class="math inline">\(L^q\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> only on compact subsets of <span class="math inline">\(M\setminus\Sigma\)</span> — that is, only away from the boundary. The coarea identity relates <span class="math inline">\(\int_0^\delta K_p(s)\,ds\)</span> to <span class="math inline">\(\int_{\{0&lt;w_p&lt;\delta\}}|\nabla w_p|^3\,d\mu\)</span>, but this bulk integral lives on a set that touches <span class="math inline">\(\Sigma\)</span>, and one cannot directly pass to the limit.</p>
+<p>The problem is therefore one of boundary regularity: BPP convergence breaks down at <span class="math inline">\(\Sigma\)</span>, and no change of variable or exponent adjustment can repair this, since the boundary behavior of <span class="math inline">\(w_p\)</span> is dictated by the Dirichlet condition <span class="math inline">\(u_p=0\)</span> on <span class="math inline">\(\Sigma\)</span>, which makes <span class="math inline">\(w_p\to0\)</span> there for all <span class="math inline">\(p\)</span> simultaneously.</p>
+<p>Our solution is a <strong>collar decomposition</strong> that sidesteps this boundary problem entirely, without requiring any new PDE input. We introduce a small geometric parameter <span class="math inline">\(r&gt;0\)</span> and decompose the initial layer <span class="math inline">\(\{0&lt;w_p&lt;\delta\}\)</span> into two pieces: a thin collar <span class="math inline">\(N_r:=\{x:\operatorname{dist}(x,\Sigma)&lt;r\}\)</span> around the boundary, and the complement <span class="math inline">\(D_{1,r}:=D_1\setminus N_r\)</span>, which lies at distance at least <span class="math inline">\(r\)</span> from <span class="math inline">\(\Sigma\)</span>.</p>
+<p>On the collar <span class="math inline">\(N_r\)</span>, the BPP theory does provide a uniform <span class="math inline">\(L^\infty\)</span> gradient bound (BPP-4) that holds up to the boundary. This bound, combined with the fact that the Riemannian volume <span class="math inline">\(|N_r|\)</span> tends to zero as <span class="math inline">\(r\downarrow0\)</span> (since <span class="math inline">\(\Sigma\)</span> is smooth and compact), controls the bulk integral <span class="math inline">\(\int_{A_{p,\delta}\cap N_r}|\nabla w_p|^3\,d\mu\)</span> by a quantity that can be made arbitrarily small by choosing <span class="math inline">\(r\)</span> small.</p>
+<p>On the complement <span class="math inline">\(D_{1,r}\)</span>, we are safely in the interior of <span class="math inline">\(M\setminus\Sigma\)</span>, and the strong <span class="math inline">\(L^3\)</span> convergence applies. The limiting bulk integral <span class="math inline">\(\int_{\{w_1&lt;2\delta\}\cap D_{1,r}}|\nabla w_1|^3\,d\mu\)</span> tends to zero as <span class="math inline">\(\delta\downarrow0\)</span> by dominated convergence, since the sets <span class="math inline">\(\{w_1&lt;2\delta\}\)</span> shrink to <span class="math inline">\(\{w_1=0\}\)</span> where <span class="math inline">\(\nabla w_1\)</span> vanishes almost everywhere.</p>
+<p>The two-parameter limit — first <span class="math inline">\(\delta\downarrow0\)</span>, then <span class="math inline">\(r\downarrow0\)</span> — yields the initial-layer estimate (Proposition 5.2). This estimate is the only genuinely new ingredient in the paper; once it is in hand, the proof of Theorem A follows by a standard patching argument combining the compact-window bridge on <span class="math inline">\([\delta,S]\)</span> with the initial-layer control on <span class="math inline">\([0,\delta]\)</span>.</p>
+</section>
+<section id="organization" class="level3">
+<h3 class="anchored" data-anchor-id="organization">1.7. Organization</h3>
+<p>The paper is organized as follows. Section 2 fixes notation and collects the standing hypotheses, together with the five results from the BPP theory that serve as our analytic input. Section 3 assembles the structural results from the preceding note — the boundary-normalized XYZ family, the weak derivative formula, the exact Hawking-defect bridge identity, and the coefficient asymptotics — stated precisely for self-containedness. Section 4 recalls the compact-window bridge. Section 5, which is the heart of the paper, proves the initial-layer estimate via the collar decomposition. Section 6 combines all ingredients to prove Theorem A. Section 7 discusses the significance of the result and the remaining open problems in the <span class="math inline">\(p\)</span>-capacitary level-set program.</p>
+<hr>
+</section>
+</section>
+<section id="preliminaries" class="level2">
+<h2 class="anchored" data-anchor-id="preliminaries">2. Preliminaries</h2>
+<p>This section establishes the geometric and analytic framework used throughout the paper. We begin with the standing geometric hypotheses, then introduce the <span class="math inline">\(p\)</span>-capacitary potential and its associated constants, the logarithmic change of variable that connects the capacitary problem to the BPP theory, and finally collect the specific results from [BPP] that we require.</p>
+<section id="standing-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="standing-hypotheses">2.1. Standing hypotheses</h3>
+<p>Throughout, <span class="math inline">\((M^3,g)\)</span> denotes a one-ended asymptotically flat exterior region with connected smooth compact minimal boundary <span class="math inline">\(\Sigma=\partial M\)</span>, nonnegative scalar curvature <span class="math inline">\(R_g\ge0\)</span>, and trivial relative homology <span class="math inline">\(H^2(M,\Sigma;\mathbb Z)=0\)</span>. As shown by Huisken and Ilmanen [HI01], the homological condition is automatic in the asymptotically flat exterior setting, so it is not an additional restriction. We restrict to the range <span class="math inline">\(1&lt;p\le2\)</span>, which is the regime where the BPP weak theory is fully available; the case <span class="math inline">\(2&lt;p&lt;3\)</span> remains open (see Section 7).</p>
+</section>
+<section id="the-p-capacitary-potential-and-basic-constants" class="level3">
+<h3 class="anchored" data-anchor-id="the-p-capacitary-potential-and-basic-constants">2.2. The <span class="math inline">\(p\)</span>-capacitary potential and basic constants</h3>
+<p>The fundamental analytic object in the capacitary approach is the <span class="math inline">\(p\)</span>-harmonic potential <span class="math inline">\(u_p\)</span>, which serves as a replacement for the level-set function of IMCF. Its level sets foliate the exterior region (away from critical points), and the monotone quantities of interest are defined as integrals over these level sets. For <span class="math inline">\(1&lt;p&lt;3\)</span>, <span class="math inline">\(u_p\)</span> is defined as the solution to: <span class="math display">\[
+\begin{cases}
+\Delta_p u_p=\operatorname{div}\!\left(|\nabla u_p|^{p-2}\nabla u_p\right)=0 &amp; \text{in }M,\\
+u_p=0 &amp; \text{on }\Sigma,\\
+u_p(x)\to 1 &amp; \text{as }x\to\infty.
+\end{cases}
+\]</span> Set <span class="math display">\[
+\operatorname{Cap}_p(\Sigma):=\int_M |\nabla u_p|^p\,d\mu,
+\qquad
+c_p:=\left(\frac{\operatorname{Cap}_p(\Sigma)}{4\pi}\right)^{\!1/(p-1)},
+\qquad
+a:=\frac{3-p}{p-1}.
+\]</span></p>
+<p>The constant <span class="math inline">\(c_p\)</span> is the <span class="math inline">\(p\)</span>-capacitary radius, which normalizes the capacity to be comparable to a geometric radius. The exponent <span class="math inline">\(a=(3-p)/(p-1)\)</span> diverges as <span class="math inline">\(p\to1^+\)</span> (specifically <span class="math inline">\(a\sim2/(p-1)\)</span>), reflecting the increasingly singular character of the <span class="math inline">\(p\)</span>-Laplacian in this limit.</p>
+</section>
+<section id="the-logarithmic-variable" class="level3">
+<h3 class="anchored" data-anchor-id="the-logarithmic-variable">2.3. The logarithmic variable</h3>
+<p>A key insight, developed systematically in [BPP], is that the natural variable for the weak theory is not <span class="math inline">\(u_p\)</span> itself but the logarithmic transform <span class="math display">\[
+w_p:=-(p-1)\log(1-u_p),
+\qquad
+X_p:=|\nabla w_p|.
+\]</span> A direct computation shows that <span class="math inline">\(w_p\)</span> satisfies <span class="math inline">\(\Delta_p w_p=|\nabla w_p|^p\)</span> in <span class="math inline">\(M\)</span>, which is precisely the equation studied in the BPP theory. This change of variable has two important effects: it transforms the boundary conditions from <span class="math inline">\(u_p\in[0,1)\)</span> to <span class="math inline">\(w_p\in[0,\infty)\)</span>, and it converts the <span class="math inline">\(p\)</span>-harmonic equation (with no right-hand side) into the BPP equation (with a nonlinear absorption term). The latter equation has much better regularity properties through critical levels, which is why the weak theory is formulated in terms of <span class="math inline">\(w_p\)</span>.</p>
+<p>We write <span class="math display">\[
+\Sigma_{p,s}:=\{w_p=s\},
+\qquad
+\Omega_{p,s}:=\{w_p&lt;s\},
+\]</span> for the level sets and sub-level sets of <span class="math inline">\(w_p\)</span>, and for the weak IMCF limit <span class="math inline">\(w_1\)</span>, <span class="math display">\[
+\Gamma_s^{(1)}:=\partial^*\{w_1&lt;s\}
+\]</span> for the reduced boundary of the sub-level set of the limiting function.</p>
+</section>
+<section id="bpp-input" class="level3">
+<h3 class="anchored" data-anchor-id="bpp-input">2.4. BPP input</h3>
+<p>The analytic backbone of our argument comes from the theory developed by Benatti, Pluda, and Pozzetta in [BPP]. We collect the five specific results that we require, labeled (BPP-1) through (BPP-5) for ease of reference. The first two concern the convergence of <span class="math inline">\(w_p\)</span> and its gradient as <span class="math inline">\(p\to1^+\)</span>; the third quantifies how closely the mean curvature of <span class="math inline">\(p\)</span>-capacitary level sets approximates the gradient magnitude; the fourth provides the uniform gradient bound that is essential for the collar decomposition; and the fifth gives the limiting IMCF structure.</p>
+<p><strong>(BPP-1) (Existence of the weak IMCF limit.)</strong> There exists a proper weak IMCF <span class="math inline">\(w_1\)</span> in the sense of Huisken–Ilmanen such that <span class="math inline">\(w_p\to w_1\)</span> locally uniformly as <span class="math inline">\(p\to1^+\)</span> (after passing to a subsequence). This is the fundamental convergence result that justifies the entire bridge program.</p>
+<p><strong>(BPP-2) (Strong interior gradient convergence.)</strong> For every bounded domain <span class="math inline">\(D\)</span> with <span class="math inline">\(\inf_{\partial D}w_1&gt;0\)</span>, <span class="math inline">\(\nabla w_p\to\nabla w_1\)</span> strongly in <span class="math inline">\(L^q_{\mathrm{loc}}(D\setminus\Sigma)\)</span> for all <span class="math inline">\(q\in[1,\infty)\)</span>. The restriction to <span class="math inline">\(D\setminus\Sigma\)</span> — that is, the exclusion of the boundary — is the source of the initial-layer difficulty addressed in Section 5.</p>
+<p><strong>(BPP-3) (Mean curvature approximation.)</strong> For every <span class="math inline">\(T&gt;0\)</span>, <span class="math inline">\(\int_0^T\int_{\Sigma_{p,s}}(H_p-X_p)^2\,dH^2\,ds\to0\)</span> as <span class="math inline">\(p\to1^+\)</span>. This says that along the <span class="math inline">\(p\)</span>-capacitary level sets, the mean curvature <span class="math inline">\(H_p\)</span> and the gradient magnitude <span class="math inline">\(X_p=|\nabla w_p|\)</span> become indistinguishable in an integrated <span class="math inline">\(L^2\)</span> sense. Along a true IMCF, one has <span class="math inline">\(H=|\nabla w|\)</span> exactly, so this result captures the approach to IMCF.</p>
+<p><strong>(BPP-4) (Uniform gradient bound.)</strong> For every bounded open <span class="math inline">\(D\supset\Sigma\)</span> and compact <span class="math inline">\(K\Subset D\)</span>, <span class="math inline">\(\|\nabla w_p\|_{L^\infty(K\setminus\Sigma)}\le C(K,D)\)</span> uniformly in <span class="math inline">\(p\)</span>. Unlike (BPP-2), this bound does apply up to (but not on) <span class="math inline">\(\Sigma\)</span>. It is the key input for the collar piece of the decomposition in Section 5: even though we cannot pass to the limit near <span class="math inline">\(\Sigma\)</span>, we can control the size of the integrand.</p>
+<p><strong>(BPP-5) (Weak IMCF structure.)</strong> The weak IMCF <span class="math inline">\(w_1\)</span> satisfies the exponential area law <span class="math inline">\(|\Gamma_s^{(1)}|=e^s|\Gamma_0^{(1)}|\)</span>, and the Hawking mass <span class="math inline">\(m_H(\Gamma_s^{(1)})\)</span> is essentially monotone nondecreasing. This is the Geroch monotonicity in the weak IMCF formulation.</p>
+</section>
+<section id="the-penrose-scale-limit" class="level3">
+<h3 class="anchored" data-anchor-id="the-penrose-scale-limit">2.5. The Penrose-scale limit</h3>
+<p>The Penrose-scale constant <span class="math inline">\(m_p^\sharp\)</span> is the mass parameter that appears in the <span class="math inline">\(k=1\)</span> branch of the XYZ family. It is defined in terms of the <span class="math inline">\(p\)</span>-capacity and an incomplete beta integral: <span class="math display">\[
+m_p^\sharp:=2(I_a(1)c_p)^{1/a},
+\qquad
+I_a(y):=\int_0^y z^{a-1}(1+z)^{-2a}\,dz.
+\]</span> The incomplete beta function <span class="math inline">\(I_a\)</span> arises from the radial profile of the <span class="math inline">\(p\)</span>-harmonic potential in the Schwarzschild geometry, where it controls the reparametrization between the Schwarzschild radial coordinate and the IMCF time. The crucial asymptotic fact, proved by Stirling-type estimates in the preceding note, is that <span class="math display">\[
+m_0:=\lim_{p\to1^+}m_p^\sharp=\sqrt{\frac{|\Gamma_0^{(1)}|}{16\pi}},
+\]</span> which is exactly the irreducible mass appearing in the Penrose inequality. This convergence is what gives the bridge its geometric meaning: the <span class="math inline">\(p\)</span>-capacitary Penrose scale converges to the IMCF Penrose scale.</p>
+<hr>
+</section>
+</section>
+<section id="structural-input-from-the-preceding-note" class="level2">
+<h2 class="anchored" data-anchor-id="structural-input-from-the-preceding-note">3. Structural input from the preceding note</h2>
+<p>This section collects the algebraic and analytic results that were established in the preceding note and that serve as the structural foundation for the bridge argument. The key objects are the Xia–Yin–Zhou boundary-normalized monotone quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span> (Section 3.1), its weak derivative formula through critical levels (Section 3.2), the exact Hawking-defect bridge identity that relates <span class="math inline">\(\mathcal Z_{p,1}\)</span> to a Hawking-type expression (Section 3.5), and the coefficient asymptotics that identify the correct limiting prefactors (Section 3.6). We state each result precisely to make the present paper self-contained, but we refer to the preceding note for the proofs.</p>
+<section id="the-boundary-normalized-xyz-family" class="level3">
+<h3 class="anchored" data-anchor-id="the-boundary-normalized-xyz-family">3.1. The boundary-normalized XYZ family</h3>
+<p>The monotone quantities introduced by Xia, Yin, and Zhou [XYZ] form a one-parameter family indexed by an initial condition <span class="math inline">\(k\)</span> for a Schwarzschild-adapted ODE system. The key feature that distinguishes this family from the original AMMO quantity is the freedom to choose the boundary normalization. The <span class="math inline">\(k=0\)</span> branch recovers the AMMO quantity (with a sign flip), while the <span class="math inline">\(k=1\)</span> branch is tuned to extract sharp information at the boundary <span class="math inline">\(\Sigma\)</span>. It is the <span class="math inline">\(k=1\)</span> branch that carries the Penrose-scale constant <span class="math inline">\(m_p^\sharp\)</span> and that we use for the bridge.</p>
+<p>The general XYZ family is <span class="math display">\[
+\mathcal Z_{p,k}(r)
+=
+4\pi\gamma(r)+\alpha(r)\int_{\Sigma_r}H|\nabla u_p|\,dH^2+\beta(r)\int_{\Sigma_r}|\nabla u_p|^2\,dH^2,
+\]</span> where <span class="math inline">\((\alpha,\beta,\gamma)\)</span> solve the Schwarzschild ODE system <span class="math display">\[
+\alpha'-(2a+1)\eta f'\alpha-af'\beta=0,\quad
+\beta'+(2a+1)\eta^2f'\alpha=0,\quad
+\gamma'=-f'\alpha.
+\]</span> The <span class="math inline">\(k=0\)</span> branch gives <span class="math inline">\(\mathcal Z_{p,0}=-\mathcal F_p^{\mathrm{AMMO}}\)</span>. The <span class="math inline">\(k=1\)</span> branch, with <span class="math inline">\(r_0=m_p^\sharp/2\)</span>, yields the boundary gradient estimate, the mass-capacity and area-capacity inequalities, the <span class="math inline">\(p=2\)</span> Oronzio bound, and the Penrose-scale limit. (See the note, Step 3.)</p>
+</section>
+<section id="the-weak-k1-derivative-formula" class="level3">
+<h3 class="anchored" data-anchor-id="the-weak-k1-derivative-formula">3.2. The weak <span class="math inline">\(k=1\)</span> derivative formula</h3>
+<p>The following proposition extends the smooth XYZ monotonicity formula through the critical set of <span class="math inline">\(u_p\)</span>. In the smooth regime (where <span class="math inline">\(u_p\)</span> has no critical points), the derivative of <span class="math inline">\(\mathcal Z_{p,1}\)</span> is computed by direct differentiation under the integral sign. The weak extension, proved in the preceding note using the BPP curvature-varifold theory and the auxiliary quantity <span class="math inline">\(G_p\)</span> at exponent <span class="math inline">\(\mu=3-p\)</span>, shows that the same formula holds in the <span class="math inline">\(W^{1,1}\)</span> sense for almost every level. The nonnegative defect density <span class="math inline">\(\mathcal D_{p,1}^{\mathrm{weak}}\)</span> contains four terms: the ambient scalar curvature, a Kato-type gradient term, the traceless second fundamental form, and a squared mean-curvature deviation that measures how far the level set departs from the Schwarzschild model.</p>
+<p><strong>Proposition 3.1.</strong> <em>Assume <span class="math inline">\(1&lt;p\le2\)</span>. Then <span class="math inline">\(\mathcal Z_{p,1}\in W^{1,1}_{\mathrm{loc}}((r_0,\infty))\)</span> and for a.e. <span class="math inline">\(r&gt;r_0\)</span>:</em> <span class="math display">\[
+\frac{d}{dr}\mathcal Z_{p,1}(r)
+=
+\gamma'(r)\Bigl[\Theta_p^{\mathrm{weak}}(r)+\mathcal D_{p,1}^{\mathrm{weak}}(r)\Bigr],
+\]</span> <em>where</em> <span class="math display">\[
+\Theta_p^{\mathrm{weak}}(r):=4\pi-\frac12\int_{\Sigma_r}R^\top\,dH^2,
+\]</span> <em>and</em> <span class="math display">\[
+\mathcal D_{p,1}^{\mathrm{weak}}(r)
+:=
+\int_{\Sigma_r}
+\left[
+\frac{R_g}{2}
++
+\frac{|\nabla^\top X_p|^2}{X_p^2}
++
+\frac{|\mathring h|^2}{2}
++
+(2a+1)\left(\frac{H_p}{2}-\eta(r)|\nabla u_p|\right)^2
+\right]\,dH^2.
+\]</span></p>
+<p><em>Proof.</em> The proof uses two variational identities derived from BPP Lemma 3.9 at exponent <span class="math inline">\(\mu=3-p\)</span>. The first gives <span class="math display">\[
+I_2'(r)=-af'(r)I_1(r),
+\tag{3.1}
+\]</span> where <span class="math inline">\(I_1(r):=\int_{\Sigma_r}H_p|\nabla u_p|\,dH^2\)</span> and <span class="math inline">\(I_2(r):=\int_{\Sigma_r}|\nabla u_p|^2\,dH^2\)</span>. The second, obtained by differentiating <span class="math inline">\(I_1\)</span> and applying the Gauss equation on the curvature-varifold level, gives <span class="math display">\[
+I_1'(r)
+=
+-f'(r)\int_{\Sigma_r}
+\left[
+\frac{|\nabla^\top X_p|^2}{X_p^2}
++\frac12(R_g-R^\top+|\mathring h|^2)
++\frac{2a+1}{4}H_p^2
+\right]\,dH^2.
+\tag{3.2}
+\]</span> Inserting (3.1)–(3.2) into <span class="math inline">\(\mathcal Z_{p,1}'=4\pi\gamma'+\alpha'I_1+\beta'I_2+\alpha I_1'+\beta I_2'\)</span>, applying the ODE system, and completing the square <span class="math display">\[
+\frac{2a+1}{4}H_p^2-(2a+1)\eta H_p|\nabla u_p|+(2a+1)\eta^2|\nabla u_p|^2=(2a+1)\left(\frac{H_p}{2}-\eta|\nabla u_p|\right)^2
+\]</span> yields the claim. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="the-k1-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="the-k1-coefficients">3.3. The <span class="math inline">\(k=1\)</span> coefficients</h3>
+<p>The explicit coefficient formulas for the <span class="math inline">\(k=1\)</span> branch are obtained by solving the Schwarzschild ODE system with the initial conditions that correspond to the boundary normalization at <span class="math inline">\(r_0=m_p^\sharp/2\)</span>. The parameter <span class="math inline">\(y:=m_p^\sharp/(2r)\in(0,1]\)</span> is the Schwarzschild compactification coordinate; <span class="math inline">\(y=1\)</span> corresponds to the boundary <span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(y\to0\)</span> corresponds to spatial infinity. The behavior of these coefficients near <span class="math inline">\(y=1\)</span> (i.e., near <span class="math inline">\(\Sigma\)</span>) is the source of the degeneracy in the initial-layer regime, since the incomplete beta function <span class="math inline">\(I_a(y)\)</span> concentrates near <span class="math inline">\(y=1\)</span> as <span class="math inline">\(a\to\infty\)</span>.</p>
+<p>The explicit formulas are <span class="math display">\[
+\eta_p(r)=c_p^{-1}r^a(1+y)^{2a-1}(1-y),
+\qquad
+\frac{\alpha_p(r)}{\eta_p(r)}=\frac{m_p^\sharp}{2y}(1+y)^2,
+\]</span> and <span class="math display">\[
+\beta_p(r)+\eta_p(r)\alpha_p(r)
+=
+\frac{m_p^\sharp}{a}\,c_p^{-2}r^{2a}(1+y)^{4a}.
+\tag{3.3}
+\]</span></p>
+</section>
+<section id="reparametrization-by-imcf-time" class="level3">
+<h3 class="anchored" data-anchor-id="reparametrization-by-imcf-time">3.4. Reparametrization by IMCF time</h3>
+<p>To compare the <span class="math inline">\(p\)</span>-capacitary foliation with the weak IMCF, one needs a common time parameter. The natural choice is the IMCF time <span class="math inline">\(s\)</span>, which is defined implicitly by <span class="math inline">\(I_a(y_p(s))/I_a(1)=e^{-s/(p-1)}\)</span>, with <span class="math inline">\(y_p(s)=m_p^\sharp/(2r_p(s))\)</span>. At <span class="math inline">\(s=0\)</span>, one has <span class="math inline">\(y_p(0)=1\)</span>, corresponding to the boundary; as <span class="math inline">\(s\to\infty\)</span>, <span class="math inline">\(y_p(s)\to0\)</span>, corresponding to spatial infinity. The relationship between <span class="math inline">\(s\)</span> and the gradient on each level set is: <span class="math display">\[
+|\nabla u_p|=\frac{e^{-s/(p-1)}}{p-1}\,X_p.
+\tag{3.4}
+\]</span></p>
+</section>
+<section id="the-exact-hawking-defect-bridge-identity" class="level3">
+<h3 class="anchored" data-anchor-id="the-exact-hawking-defect-bridge-identity">3.5. The exact Hawking-defect bridge identity</h3>
+<p>The bridge identity is the algebraic heart of the argument. It relates three objects: the XYZ monotone quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span>, a Hawking-type expression <span class="math inline">\(\mathfrak H_p\)</span> that is defined in terms of the mean curvature integral <span class="math inline">\(\int H_p^2\)</span>, and two error terms <span class="math inline">\(\mathcal E_p^{(0)}\)</span> and <span class="math inline">\(\mathcal E_p^{(1)}\)</span>. The identity holds exactly on every regular level, without any limiting procedure or approximation. Its significance is that it reduces the bridge problem to showing that the two error terms vanish as <span class="math inline">\(p\to1^+\)</span>: if they do, then <span class="math inline">\(\mathcal Z_{p,1}/(8\pi)\)</span> is asymptotically equal to <span class="math inline">\(m_p^\sharp-\mathfrak H_p\)</span>, and since <span class="math inline">\(\mathfrak H_p\)</span> converges to the Hawking mass (by the coefficient asymptotics and the convergence of <span class="math inline">\(\int H_p^2\)</span>), the bridge follows.</p>
+<p>The error term <span class="math inline">\(\mathcal E_p^{(0)}\)</span> measures the deviation between the actual leafwise <span class="math inline">\(L^2\)</span>-norm of <span class="math inline">\(|\nabla u_p|\)</span> and its Schwarzschild model value. The error term <span class="math inline">\(\mathcal E_p^{(1)}\)</span> measures the pointwise deviation of <span class="math inline">\(H_p\)</span> from the Schwarzschild-predicted value <span class="math inline">\(2\eta_p|\nabla u_p|\)</span> on each level set. Both vanish in the Schwarzschild geometry, reflecting the fact that the bridge identity is an exact identity for the model case.</p>
+<p>Define the Hawking-type renormalization <span class="math display">\[
+\mathfrak H_p(s):=\frac{\alpha_p(r_p(s))}{32\pi\eta_p(r_p(s))}\left(16\pi-\int_{\Sigma_{p,s}}H_p^2\,dH^2\right),
+\]</span> and the two error terms <span class="math display">\[
+\mathcal E_p^{(0)}(s)
+:=
+\frac{m_p^\sharp}{8\pi a}
+\left[
+4\pi-c_p^{-2}r_p(s)^{2a}\!\left(1+\frac{m_p^\sharp}{2r_p(s)}\right)^{4a}
+\int_{\Sigma_{p,s}}|\nabla u_p|^2\,dH^2
+\right],
+\]</span> <span class="math display">\[
+\mathcal E_p^{(1)}(s)
+:=
+\frac{\alpha_p(r_p(s))}{32\pi\eta_p(r_p(s))}
+\int_{\Sigma_{p,s}}\left(H_p-2\eta_p(r_p(s))|\nabla u_p|\right)^2\,dH^2.
+\]</span></p>
+<p><strong>Proposition 3.5 (exact Hawking-defect bridge).</strong> <em>On every regular level,</em> <span class="math display">\[
+\boxed{
+\mathfrak H_p(s)-m_p^\sharp
+=
+-\frac{\mathcal Z_{p,1}(s)}{8\pi}
+-\mathcal E_p^{(0)}(s)
+-\mathcal E_p^{(1)}(s).
+}
+\]</span></p>
+<p><em>Proof.</em> Specialize the explicit XYZ formula to <span class="math inline">\(C_1=0\)</span>, <span class="math inline">\(C_2=c_p^{-1}\)</span>, insert the coefficient formulas from Section 3.3, and rearrange. See the note for details. <span class="math inline">\(\square\)</span></p>
+<p>This identity is the structural backbone of the paper: it decomposes the gap between the Hawking-type quantity <span class="math inline">\(\mathfrak H_p\)</span> and the Penrose scale <span class="math inline">\(m_p^\sharp\)</span> into the XYZ monotone quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span> and two error terms <span class="math inline">\(\mathcal E_p^{(0)}\)</span>, <span class="math inline">\(\mathcal E_p^{(1)}\)</span>. The full-window bridge (Theorem A) follows once both errors are shown to vanish in <span class="math inline">\(L^1([0,S])\)</span> and <span class="math inline">\(\mathfrak H_p\)</span> is shown to converge to the Hawking mass.</p>
+</section>
+<section id="coefficient-asymptotics" class="level3">
+<h3 class="anchored" data-anchor-id="coefficient-asymptotics">3.6. Coefficient asymptotics</h3>
+<p>The final ingredient from the preceding note is the convergence of the Hawking-type prefactor <span class="math inline">\(A_p(s)\)</span> to the correct Hawking-mass prefactor as <span class="math inline">\(p\to1^+\)</span>. This is what ensures that <span class="math inline">\(\mathfrak H_p\)</span> converges to the actual Hawking mass and not to some other functional of the level-set geometry. The proof relies on Laplace-type asymptotics for the incomplete beta function <span class="math inline">\(I_a\)</span> as <span class="math inline">\(a\to\infty\)</span>, which extract the leading-order behavior from the concentration of the integrand near <span class="math inline">\(y=1\)</span>.</p>
+<p><strong>Proposition 3.6.</strong> <em>For every fixed <span class="math inline">\(s&gt;0\)</span>,</em> <span class="math display">\[
+A_p(s):=\frac{\alpha_p(r_p(s))}{32\pi\eta_p(r_p(s))}
+\longrightarrow
+A_1(s):=\frac{m_0 e^{s/2}}{16\pi}
+\qquad\text{as }p\to1^+.
+\]</span></p>
+<p><em>Proof.</em> Laplace asymptotics for <span class="math inline">\(I_a\)</span> give <span class="math inline">\(\lim_{a\to\infty}\frac{1}{a}\log\frac{I_a(y)}{I_a(1)}=\log\frac{4y}{(1+y)^2}\)</span>. Since <span class="math inline">\(a(p-1)=3-p\to2\)</span>, we obtain <span class="math inline">\((1+y_p(s))^2/(4y_p(s))\to e^{s/2}\)</span>, and the formula <span class="math inline">\(\alpha_p/\eta_p=m_p^\sharp(1+y)^2/(2y)\)</span> with <span class="math inline">\(m_p^\sharp\to m_0\)</span> yields the claim. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+</section>
+<section id="the-compact-window-bridge" class="level2">
+<h2 class="anchored" data-anchor-id="the-compact-window-bridge">4. The compact-window bridge</h2>
+<p>This section presents the bridge result on compact sub-intervals of <span class="math inline">\((0,\infty)\)</span>, which was proved in the preceding note. The proof is included here for completeness and because the structure of the argument — particularly the role of the coarea formula and the Cauchy–Schwarz comparison between <span class="math inline">\(\int H_p^2\)</span> and <span class="math inline">\(K_p\)</span> — will be needed again in Section 6 when we extend to the full interval <span class="math inline">\([0,S]\)</span>.</p>
+<p>The central quantity in the analysis is the leafwise <span class="math inline">\(L^2\)</span>-norm of the gradient: <span class="math display">\[
+K_p(s):=\int_{\Sigma_{p,s}} X_p^2\,dH^2.
+\]</span> By the coarea formula, the <span class="math inline">\(L^1\)</span>-norm of <span class="math inline">\(K_p\)</span> over any interval <span class="math inline">\(I\)</span> equals the bulk <span class="math inline">\(L^3\)</span>-norm of <span class="math inline">\(\nabla w_p\)</span> on the corresponding sub-level set. This rewriting is what allows us to exploit the strong <span class="math inline">\(L^q\)</span> convergence (BPP-2).</p>
+<p><strong>Proposition 4.1 (compact-window bridge).</strong> <em>Fix <span class="math inline">\(I=[s_0,s_1]\Subset(0,\infty)\)</span>. Let <span class="math inline">\(p_j\to1^+\)</span> and <span class="math inline">\(w_{p_j}\to w_1\)</span> be the weak IMCF limit. Then:</em></p>
+<ol type="1">
+<li><em><span class="math inline">\(\mathcal E_{p_j}^{(0)}\to0\)</span> and <span class="math inline">\(\mathcal E_{p_j}^{(1)}\to0\)</span> in <span class="math inline">\(L^1(I)\)</span>;</em></li>
+<li><em><span class="math inline">\(\mathfrak H_{p_j}\rightharpoonup m_H(\Gamma_s^{(1)})\)</span> in <span class="math inline">\(\mathcal D'(I)\)</span>;</em></li>
+<li><em><span class="math inline">\(-\mathcal Z_{p_j,1}/(8\pi)\rightharpoonup m_H(\Gamma_s^{(1)})-m_0\)</span> in <span class="math inline">\(\mathcal D'(I)\)</span>.</em></li>
+</ol>
+<p><strong>Proof.</strong> The argument proceeds through five steps.</p>
+<p><strong>Step 1 (Control of <span class="math inline">\(K_p\)</span> and the <span class="math inline">\(H_p^2\)</span> term).</strong> Since <span class="math inline">\(I\Subset(0,\infty)\)</span>, one may choose a bounded smooth domain <span class="math inline">\(D\)</span> with <span class="math inline">\(\operatorname{supp}\subset(0,\inf_{\partial D}w_1)\)</span>. By coarea, <span class="math display">\[
+\int_I \psi(s)K_p(s)\,ds
+=
+\int_{D\setminus\Sigma} \psi(w_p)|\nabla w_p|^3\,d\mu.
+\tag{4.1}
+\]</span> Strong <span class="math inline">\(L^3\)</span> convergence on <span class="math inline">\(D\setminus\Sigma\)</span> (BPP-2) gives <span class="math inline">\(\int_I\psi K_p\,ds\to\int_I\psi\int_{\Gamma_s^{(1)}}|\nabla w_1|^2\,dH^2\,ds\)</span>, and in particular <span class="math inline">\(\sup_p\|K_p\|_{L^1(I)}&lt;\infty\)</span>. Combined with (BPP-3) and Cauchy–Schwarz, <span class="math display">\[
+\int_I\left|\int_{\Sigma_{p,s}}H_p^2\,dH^2-K_p(s)\right|\,ds\to0.
+\tag{4.2}
+\]</span></p>
+<p><strong>Step 2 (<span class="math inline">\(\mathcal E_p^{(0)}\to0\)</span>).</strong> On <span class="math inline">\(I\Subset(0,\infty)\)</span>, the coefficient asymptotics give <span class="math inline">\(y_p(s)\in[\underline y_I,\overline y_I]\Subset(0,1)\)</span>. Define <span class="math inline">\(\Phi_a(y):=I_a(y)\,y^{-a}(1+y)^{2a}\)</span>. Differentiating <span class="math inline">\(z^a(1+z)^{-2a}\)</span> yields <span class="math display">\[
+\Phi_a(y)\le\frac{1+y}{a(1-y)}\le\frac{C_I}{a}\quad\text{on }I.
+\tag{4.3}
+\]</span> Using (3.4) and (3.3), one obtains <span class="math inline">\(|\mathcal E_p^{(0)}(s)|\le\frac{m_p^\sharp}{2a}+\frac{C_I}{a}K_p(s)\)</span>, so <span class="math inline">\(\|\mathcal E_p^{(0)}\|_{L^1(I)}\to0\)</span>.</p>
+<p><strong>Step 3 (<span class="math inline">\(\mathcal E_p^{(1)}\to0\)</span>).</strong> Set <span class="math inline">\(\rho_p(s):=2\eta_p(r_p(s))e^{-s/(p-1)}/(p-1)\)</span>, so <span class="math inline">\(2\eta_p|\nabla u_p|=\rho_pX_p\)</span>. On <span class="math inline">\(I\)</span>, <span class="math inline">\(\rho_p\to1\)</span> uniformly and <span class="math inline">\(\sup_I A_p\le C_I\)</span>. Then <span class="math display">\[
+\int_I\int_{\Sigma_{p,s}}(H_p-\rho_pX_p)^2\le 2\int_I\int(H_p-X_p)^2+2\|\rho_p-1\|_\infty^2\|K_p\|_{L^1(I)}\to0,
+\]</span> whence <span class="math inline">\(\|\mathcal E_p^{(1)}\|_{L^1(I)}\to0\)</span>.</p>
+<p><strong>Step 4 (Weak limit of <span class="math inline">\(\mathfrak H_p\)</span>).</strong> By (4.2) and Step 1, <span class="math inline">\(\int_{\Sigma_{p,s}}H_p^2\rightharpoonup\int_{\Gamma_s^{(1)}}H_1^2\)</span> in <span class="math inline">\(\mathcal D'(I)\)</span>. Since <span class="math inline">\(A_p\to A_1\)</span> uniformly and <span class="math inline">\(A_1(s)(16\pi-\int_{\Gamma_s^{(1)}}H_1^2)=m_H(\Gamma_s^{(1)})\)</span> by the BPP area law, <span class="math display">\[
+\mathfrak H_p\rightharpoonup m_H(\Gamma_s^{(1)})\quad\text{in }\mathcal D'(I).
+\]</span></p>
+<p><strong>Step 5.</strong> The bridge identity (Proposition 3.5) gives <span class="math inline">\(-\mathcal Z_{p,1}/(8\pi)=\mathfrak H_p-m_p^\sharp+\mathcal E_p^{(0)}+\mathcal E_p^{(1)}\)</span>. Steps 2–4 and <span class="math inline">\(m_p^\sharp\to m_0\)</span> yield the claim. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+<section id="the-initial-layer-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="the-initial-layer-estimate">5. The initial-layer estimate</h2>
+<p>This section contains the main new contribution of the paper: the proof that the leafwise <span class="math inline">\(L^2\)</span>-norm <span class="math inline">\(K_p(s)\)</span> has vanishing <span class="math inline">\(L^1\)</span>-mass near <span class="math inline">\(s=0\)</span> in the iterated limit <span class="math inline">\(p\to1^+\)</span>, <span class="math inline">\(\delta\downarrow0\)</span>.</p>
+<p>Before proceeding to the proof, we explain why this result is not straightforward and why it requires a new idea. The compact-window bridge (Proposition 4.1) relies on two inputs: the strong <span class="math inline">\(L^3\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> (to pass coarea integrals to the limit) and the uniform boundedness of the incomplete-beta profile <span class="math inline">\(\Phi_a(y)\)</span> (to control the coefficients). Both inputs degenerate near <span class="math inline">\(s=0\)</span>. The strong convergence (BPP-2) holds only on compact subsets of <span class="math inline">\(M\setminus\Sigma\)</span>, but the sub-level sets <span class="math inline">\(\{0&lt;w_p&lt;\delta\}\)</span> touch <span class="math inline">\(\Sigma\)</span>. The incomplete-beta profile <span class="math inline">\(\Phi_a(y_p(s))\)</span> is bounded on <span class="math inline">\([\underline y,\overline y]\Subset(0,1)\)</span> but blows up as <span class="math inline">\(y\to1\)</span> (i.e., as <span class="math inline">\(s\to0\)</span>) for fixed <span class="math inline">\(a\)</span>.</p>
+<p>The first step is to show that <span class="math inline">\(\Phi_a(y)\)</span> does not blow up too badly — specifically, that it is globally bounded by <span class="math inline">\(C/\sqrt{a}\)</span> — which is the content of Lemma 5.1. The second and main step is the collar decomposition of Proposition 5.2.</p>
+<section id="a-global-bound-for-the-incomplete-beta-profile" class="level3">
+<h3 class="anchored" data-anchor-id="a-global-bound-for-the-incomplete-beta-profile">5.1. A global bound for the incomplete-beta profile</h3>
+<p>The following lemma provides a uniform estimate on the normalized incomplete beta function that is valid on the entire interval <span class="math inline">\((0,1]\)</span>, including near <span class="math inline">\(y=1\)</span> where the pointwise bound <span class="math inline">\((1+y)/(a(1-y))\)</span> from (4.3) degenerates. The proof splits into two cases according to whether <span class="math inline">\(1-y\)</span> is large or small compared to <span class="math inline">\(a^{-1/2}\)</span>, and in the latter case uses the Stirling-type asymptotics of the beta function.</p>
+<p><strong>Lemma 5.1.</strong> <em>Define <span class="math inline">\(\Phi_a(y):=I_a(y)\,y^{-a}(1+y)^{2a}\)</span> for <span class="math inline">\(y\in(0,1]\)</span>. Then there exists a universal constant <span class="math inline">\(C&gt;0\)</span> such that</em> <span class="math display">\[
+\sup_{0&lt;y\le1}\Phi_a(y)\le\frac{C}{\sqrt{a}}
+\qquad\text{for all }a\ge1.
+\]</span></p>
+<p><em>Proof.</em> If <span class="math inline">\(1-y\ge a^{-1/2}\)</span>, then <span class="math inline">\(\Phi_a(y)\le(1+y)/(a(1-y))\le 2/\sqrt{a}\)</span> from (4.3). If <span class="math inline">\(1-y&lt;a^{-1/2}\)</span>, write <span class="math inline">\(y=1-\varepsilon\)</span>. Then <span class="math inline">\((1+y)^2/(4y)=1+\varepsilon^2/(4y)\)</span>, hence <span class="math inline">\(y^{-a}(1+y)^{2a}\le C\cdot 4^a\)</span> since <span class="math inline">\(a\varepsilon^2\le1\)</span>. Since <span class="math inline">\(I_a(y)\le I_a(1)=\frac12B(a,a)\sim Ca^{-1/2}4^{-a}\)</span>, we get <span class="math inline">\(\Phi_a(y)\le Ca^{-1/2}\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>A useful corollary is the global bound <span class="math display">\[
+\frac{m_p^\sharp}{a}\frac{\Phi_a(y)^2}{(p-1)^2}\le C
+\qquad\text{for }p\to1^+,
+\tag{5.1}
+\]</span> since <span class="math inline">\(a(p-1)=3-p\)</span>.</p>
+</section>
+<section id="the-initial-layer-vanishing-of-k_p" class="level3">
+<h3 class="anchored" data-anchor-id="the-initial-layer-vanishing-of-k_p">5.2. The initial-layer vanishing of <span class="math inline">\(K_p\)</span></h3>
+<p>We now state and prove the central result of the paper. The estimate below says that the total <span class="math inline">\(L^2\)</span>-energy of the gradient, integrated over the level sets in a thin initial layer <span class="math inline">\([0,\delta]\)</span>, can be made arbitrarily small by first taking <span class="math inline">\(p\to1^+\)</span> and then shrinking <span class="math inline">\(\delta\)</span>.</p>
+<p><strong>Proposition 5.2 (initial-layer estimate).</strong> <em>For every <span class="math inline">\(S&gt;0\)</span>,</em> <span class="math display">\[
+\boxed{
+\lim_{\delta\downarrow0}\,\limsup_{p\to1^+}\int_0^\delta K_p(s)\,ds=0.
+}
+\]</span></p>
+<p>The proof proceeds by the collar decomposition described in Section 1.6. We emphasize that the order of limits is essential: we first take <span class="math inline">\(p\to1^+\)</span> for fixed <span class="math inline">\(\delta\)</span> and <span class="math inline">\(r\)</span>, then let <span class="math inline">\(\delta\downarrow0\)</span>, and finally let <span class="math inline">\(r\downarrow0\)</span>. The first limit uses the strong convergence (BPP-2) on the interior piece; the second uses dominated convergence for the limiting function <span class="math inline">\(w_1\)</span>; and the third uses the vanishing volume of the collar. No single limit would suffice — the argument requires all three in this specific order.</p>
+<p><strong>Proof.</strong> Fix <span class="math inline">\(S&gt;0\)</span>. Choose bounded open sets <span class="math inline">\(D_1\Subset D_2\subset M\)</span> with smooth boundaries such that <span class="math inline">\(\overline{\{w_1\le2S\}}\subset D_1\)</span> and <span class="math inline">\(\inf_{\partial D_i}w_1&gt;2S\)</span>. By (BPP-4), <span class="math display">\[
+\|\nabla w_p\|_{L^\infty(D_1\setminus\Sigma)}\le C
+\qquad\text{uniformly in }p.
+\tag{5.2}
+\]</span></p>
+<p>Let <span class="math inline">\(A_{p,\delta}:=\{0&lt;w_p&lt;\delta\}\)</span>. By coarea, <span class="math display">\[
+\int_0^\delta K_p(s)\,ds=\int_{A_{p,\delta}}|\nabla w_p|^3\,d\mu.
+\tag{5.3}
+\]</span> Since <span class="math inline">\(w_p\to w_1\)</span> uniformly on <span class="math inline">\(D_1\setminus\Sigma\)</span>, for <span class="math inline">\(p\)</span> close to <span class="math inline">\(1\)</span>, <span class="math display">\[
+A_{p,\delta}\cap D_1\subset\{w_1&lt;2\delta\}\cap D_1.
+\tag{5.4}
+\]</span></p>
+<p>Fix <span class="math inline">\(r&gt;0\)</span> and set <span class="math inline">\(N_r:=\{x\in D_1:\operatorname{dist}(x,\Sigma)&lt;r\}\)</span> and <span class="math inline">\(D_{1,r}:=D_1\setminus N_r\)</span>.</p>
+<p><strong>Collar piece.</strong> By (5.2), <span class="math display">\[
+\int_{A_{p,\delta}\cap N_r}|\nabla w_p|^3\,d\mu\le C^3|N_r|.
+\tag{5.5}
+\]</span> Since <span class="math inline">\(\Sigma\)</span> is smooth and compact, <span class="math inline">\(|N_r|\to0\)</span> as <span class="math inline">\(r\downarrow0\)</span>.</p>
+<p><strong>Interior piece.</strong> Since <span class="math inline">\(D_{1,r}\Subset D_1\setminus\Sigma\)</span>, strong <span class="math inline">\(L^3\)</span> convergence (BPP-2) applies. Using <span class="math inline">\(|a|^3\le4|a-b|^3+4|b|^3\)</span> with <span class="math inline">\(a=\nabla w_p\)</span>, <span class="math inline">\(b=\nabla w_1\)</span> and the inclusion (5.4), <span class="math display">\[
+\limsup_{p\to1^+}\int_{A_{p,\delta}\cap D_{1,r}}|\nabla w_p|^3\,d\mu
+\le 4\int_{\{w_1&lt;2\delta\}\cap D_{1,r}}|\nabla w_1|^3\,d\mu.
+\tag{5.6}
+\]</span> As <span class="math inline">\(\delta\downarrow0\)</span>, the sets <span class="math inline">\(\{w_1&lt;2\delta\}\cap D_{1,r}\)</span> decrease to <span class="math inline">\(\{w_1=0\}\cap D_{1,r}\)</span>, where <span class="math inline">\(\nabla w_1=0\)</span> a.e. By dominated convergence, the right side of (5.6) tends to <span class="math inline">\(0\)</span>.</p>
+<p><strong>Combining.</strong> From (5.3), (5.5), and (5.6), <span class="math display">\[
+\limsup_{\delta\downarrow0}\,\limsup_{p\to1^+}\int_0^\delta K_p(s)\,ds\le C^3|N_r|.
+\]</span> Letting <span class="math inline">\(r\downarrow0\)</span> completes the proof. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+</section>
+<section id="proof-of-theorem-a" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-theorem-a">6. Proof of Theorem A</h2>
+<p>With all the structural ingredients in place, we now prove the full-window bridge. The strategy is a <strong>patching argument</strong>: for each of the three conclusions in Theorem A, we split the interval <span class="math inline">\([0,S]\)</span> into <span class="math inline">\([0,\delta]\)</span> and <span class="math inline">\([\delta,S]\)</span>. On <span class="math inline">\([\delta,S]\)</span>, the compact-window bridge (Proposition 4.1) applies directly. On <span class="math inline">\([0,\delta]\)</span>, we use the initial-layer estimate (Proposition 5.2) together with the global coefficient bounds (Lemma 5.1) to show that all relevant quantities have small <span class="math inline">\(L^1\)</span>-mass. The parameter <span class="math inline">\(\delta\)</span> is then sent to zero.</p>
+<p>This patching approach is standard in PDE convergence theory — it is analogous, for instance, to proving <span class="math inline">\(L^1\)</span> convergence on <span class="math inline">\([0,T]\)</span> by establishing convergence on <span class="math inline">\([\varepsilon,T]\)</span> for every <span class="math inline">\(\varepsilon&gt;0\)</span> and then controlling the mass on <span class="math inline">\([0,\varepsilon]\)</span>. The novelty here is that the initial-layer control requires the collar decomposition of Section 5.</p>
+<p>Fix <span class="math inline">\(S&gt;0\)</span>.</p>
+<section id="step-1.-vanishing-of-mathcal-e_p0-on-0s" class="level3">
+<h3 class="anchored" data-anchor-id="step-1.-vanishing-of-mathcal-e_p0-on-0s">Step 1. Vanishing of <span class="math inline">\(\mathcal E_p^{(0)}\)</span> on <span class="math inline">\([0,S]\)</span></h3>
+<p>The error term <span class="math inline">\(\mathcal E_p^{(0)}\)</span> measures the deviation of the leafwise <span class="math inline">\(L^2\)</span>-norm of <span class="math inline">\(|\nabla u_p|\)</span> from its Schwarzschild model value. On <span class="math inline">\([\delta,S]\)</span>, this is controlled by the compact-window argument (Proposition 4.1, Step 2), which uses the fact that <span class="math inline">\(y_p(s)\)</span> stays bounded away from <span class="math inline">\(1\)</span> on this interval. The initial-layer piece requires the global bound from Lemma 5.1.</p>
+<p>Using (3.4), (3.3), and the global bound (5.1), <span class="math display">\[
+|\mathcal E_p^{(0)}(s)|\le\frac{m_p^\sharp}{2a}+C\,K_p(s).
+\tag{6.1}
+\]</span> Hence <span class="math display">\[
+\int_0^\delta|\mathcal E_p^{(0)}|\,ds\le\frac{m_p^\sharp}{2a}\delta+C\int_0^\delta K_p(s)\,ds.
+\]</span> Since <span class="math inline">\(m_p^\sharp/a\to0\)</span> and Proposition 5.2 gives vanishing of the initial-layer <span class="math inline">\(K_p\)</span>-mass, <span class="math display">\[
+\lim_{\delta\downarrow0}\,\limsup_{p\to1^+}\int_0^\delta|\mathcal E_p^{(0)}|\,ds=0.
+\]</span> Combining with Proposition 4.1 on <span class="math inline">\([\delta,S]\)</span> yields <span class="math inline">\(\mathcal E_p^{(0)}\to0\)</span> in <span class="math inline">\(L^1([0,S])\)</span>.</p>
+</section>
+<section id="step-2.-vanishing-of-mathcal-e_p1-on-0s" class="level3">
+<h3 class="anchored" data-anchor-id="step-2.-vanishing-of-mathcal-e_p1-on-0s">Step 2. Vanishing of <span class="math inline">\(\mathcal E_p^{(1)}\)</span> on <span class="math inline">\([0,S]\)</span></h3>
+<p>The error term <span class="math inline">\(\mathcal E_p^{(1)}\)</span> measures the pointwise deviation of <span class="math inline">\(H_p\)</span> from <span class="math inline">\(2\eta_p|\nabla u_p|\)</span> on each level set. Its vanishing requires showing that the Hawking-type prefactor <span class="math inline">\(A_p\)</span> and the rescaling coefficient <span class="math inline">\(\rho_p\)</span> remain uniformly bounded on the full interval <span class="math inline">\([0,S]\)</span>, including near <span class="math inline">\(s=0\)</span> where the compact-window bounds degenerate. The initial-layer control follows from the uniform boundedness of <span class="math inline">\(A_p(s)\)</span> and <span class="math inline">\(\rho_p(s)\)</span> on <span class="math inline">\([0,S]\)</span>.</p>
+<p>Because <span class="math inline">\(y_p(s)\ge y_p(S)\to y_*(S)\in(0,1)\)</span>, we have <span class="math inline">\(\inf_{s\in[0,S]}y_p(s)&gt;0\)</span> for <span class="math inline">\(p\)</span> close to <span class="math inline">\(1\)</span>, giving <span class="math inline">\(\sup_{s\in[0,S]}A_p(s)\le C_S\)</span>.</p>
+<p>For <span class="math inline">\(\rho_p\)</span>, using the explicit formula <span class="math inline">\(\rho_p(s)=2\Phi_a(y_p(s))(1-y_p(s))/((p-1)(1+y_p(s)))\)</span> and Lemma 5.1, we get <span class="math inline">\(\sup_{s\in[0,S]}|\rho_p(s)|\le C_S\)</span> by a case analysis on whether <span class="math inline">\(1-y_p(s)\ge a^{-1/2}\)</span> or not.</p>
+<p>Then <span class="math inline">\((H_p-\rho_pX_p)^2\le 2(H_p-X_p)^2+C_SX_p^2\)</span>, so <span class="math display">\[
+\int_0^\delta\mathcal E_p^{(1)}\,ds
+\le C_S\int_0^\delta\int_{\Sigma_{p,s}}(H_p-X_p)^2\,dH^2\,ds+C_S\int_0^\delta K_p(s)\,ds.
+\]</span> Both terms vanish by (BPP-3) and Proposition 5.2, respectively. Patching with Proposition 4.1 gives <span class="math inline">\(\mathcal E_p^{(1)}\to0\)</span> in <span class="math inline">\(L^1([0,S])\)</span>.</p>
+</section>
+<section id="step-3.-weak-convergence-of-mathfrak-h_p-on-0s" class="level3">
+<h3 class="anchored" data-anchor-id="step-3.-weak-convergence-of-mathfrak-h_p-on-0s">Step 3. Weak convergence of <span class="math inline">\(\mathfrak H_p\)</span> on <span class="math inline">\([0,S]\)</span></h3>
+<p>The convergence of the Hawking-type expression <span class="math inline">\(\mathfrak H_p\)</span> to the actual Hawking mass <span class="math inline">\(m_H(\Gamma_s^{(1)})\)</span> is the most delicate step, because it requires distributional convergence rather than just <span class="math inline">\(L^1\)</span> vanishing. The strategy is again to patch: on <span class="math inline">\([\delta,S]\)</span>, convergence is given by Proposition 4.1, and on <span class="math inline">\([0,\delta]\)</span>, we show that the total mass of <span class="math inline">\(\mathfrak H_p\)</span> is small. The latter uses a smooth cutoff function to interpolate between the two regimes.</p>
+<p>On <span class="math inline">\([\delta,S]\)</span>, convergence is given by Proposition 4.1. For the initial layer, the bound <span class="math inline">\(|\mathfrak H_p(s)|\le C_S(1+\int H_p^2)\le C_S(1+2\int(H_p-X_p)^2+2K_p(s))\)</span> and (BPP-3) + Proposition 5.2 give <span class="math display">\[
+\lim_{\delta\downarrow0}\,\limsup_{p\to1^+}\int_0^\delta|\mathfrak H_p(s)|\,ds=0.
+\tag{6.2}
+\]</span> For <span class="math inline">\(\psi\in C_c^\infty([0,S])\)</span>, choose a cutoff <span class="math inline">\(\chi_\delta\)</span> with <span class="math inline">\(\chi_\delta=0\)</span> on <span class="math inline">\([0,\delta/2]\)</span> and <span class="math inline">\(\chi_\delta=1\)</span> on <span class="math inline">\([\delta,S]\)</span>. Then <span class="math display">\[
+\langle\mathfrak H_p-m_H,\psi\rangle
+=\langle\mathfrak H_p-m_H,\chi_\delta\psi\rangle+\langle\mathfrak H_p-m_H,(1-\chi_\delta)\psi\rangle.
+\]</span> The first term tends to <span class="math inline">\(0\)</span> by Proposition 4.1. The second is bounded by <span class="math inline">\(\|\psi\|_\infty(\int_0^\delta|\mathfrak H_p|+\int_0^\delta|m_H|)\to0\)</span> by (6.2) and local integrability of <span class="math inline">\(m_H\)</span>. Hence <span class="math display">\[
+\mathfrak H_p\rightharpoonup m_H(\Gamma_s^{(1)})\quad\text{in }\mathcal D'([0,S]).
+\]</span></p>
+</section>
+<section id="step-4.-conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.-conclusion">Step 4. Conclusion</h3>
+<p>The bridge identity (Proposition 3.5) reads <span class="math inline">\(-\mathcal Z_{p,1}/(8\pi)=\mathfrak H_p-m_p^\sharp+\mathcal E_p^{(0)}+\mathcal E_p^{(1)}\)</span>. Steps 1–3 and <span class="math inline">\(m_p^\sharp\to m_0\)</span> yield <span class="math display">\[
+-\frac{\mathcal Z_{p,1}}{8\pi}\rightharpoonup m_H(\Gamma_s^{(1)})-m_0\qquad\text{in }\mathcal D'([0,S]).
+\]</span> This proves Theorem A. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">7. Concluding remarks</h2>
+<section id="summary-and-significance" class="level3">
+<h3 class="anchored" data-anchor-id="summary-and-significance">7.1. Summary and significance</h3>
+<p>The main result of this paper, Theorem A, completes the <span class="math inline">\(p\to1^+\)</span> bridge from the Xia–Yin–Zhou <span class="math inline">\(p\)</span>-capacitary monotone quantity <span class="math inline">\(\mathcal Z_{p,1}\)</span> to the Hawking mass of the weak inverse mean curvature flow. This was identified as Target 2 of the <span class="math inline">\(p\)</span>-capacitary level-set program in the preceding note, and it was the only target whose resolution required a genuinely new analytic ingredient beyond what was available from the existing literature.</p>
+<p>The only new ingredient is the initial-layer estimate (Proposition 5.2). The collar decomposition that underlies it is a soft argument — it uses only the uniform gradient bound (BPP-4), the strong interior convergence (BPP-2), and the dominated convergence theorem — but it is essential. The earlier attempt at the bridge implicitly applied the strong <span class="math inline">\(L^3\)</span> convergence of <span class="math inline">\(\nabla w_p\)</span> on sets that touch the boundary <span class="math inline">\(\Sigma\)</span>, which is not justified by the available BPP theory. The collar decomposition circumvents this gap by separating the region into a piece where convergence holds and a piece where the volume is small.</p>
+</section>
+<section id="relation-to-the-broader-program" class="level3">
+<h3 class="anchored" data-anchor-id="relation-to-the-broader-program">7.2. Relation to the broader program</h3>
+<p>Theorem A establishes that the <span class="math inline">\(p\)</span>-capacitary approach to the Penrose inequality is not merely an alternative to IMCF, but is in fact a continuous deformation of it: the capacitary monotonicity at finite <span class="math inline">\(p\)</span> deforms continuously into the Geroch monotonicity as <span class="math inline">\(p\to1^+\)</span>. This provides a conceptual unification of the two approaches and suggests that the <span class="math inline">\(p\)</span>-capacitary framework may serve as a regularization of IMCF in settings where the weak flow is difficult to construct directly.</p>
+<p>The exact Hawking-defect bridge identity (Proposition 3.5) gives a quantitative version of this relationship: the gap between the Hawking mass and the Penrose scale is decomposed into the monotone XYZ quantity and two error terms that are controlled by the Schwarzschild deviation. In the Schwarzschild geometry, all terms vanish, and the bridge identity becomes an identity between constants. In a general asymptotically flat manifold, the error terms measure how far the geometry departs from the model case.</p>
+</section>
+<section id="remaining-open-problems" class="level3">
+<h3 class="anchored" data-anchor-id="remaining-open-problems">7.3. Remaining open problems</h3>
+<p>Several natural questions remain open in the <span class="math inline">\(p\)</span>-capacitary level-set program.</p>
+<p>The first is <strong>quantitative stability</strong> (Target 3 of the preceding note). The gap decomposition <span class="math inline">\(8\pi a(m_{\mathrm{ADM}}/m_p^\sharp-1)=\mathfrak E_p+\mathfrak B_p\)</span>, proved in the preceding note, shows that the mass excess is controlled by the integrated defect and the boundary deficit. At <span class="math inline">\(p=2\)</span>, Dong’s mass-capacity stability theorem converts this into a full Schwarzschild stability statement: if the defect is small, the manifold is close to Schwarzschild in the pointed measured Gromov–Hausdorff topology. For general <span class="math inline">\(p\in(1,2)\)</span>, no analogous stability theorem is currently available. The difficulty is that the <span class="math inline">\(p\)</span>-capacitary radius <span class="math inline">\(c_p\)</span> is not as well understood as the harmonic capacity (<span class="math inline">\(p=2\)</span> case), and the existing rigidity and stability results do not extend to the nonlinear setting.</p>
+<p>The second is the <strong>extension beyond <span class="math inline">\(p\le2\)</span></strong>. The entire weak theory developed here and in the preceding note relies on the BPP framework, which currently requires <span class="math inline">\(1&lt;p\le2\)</span>. The restriction arises because the curvature-varifold regularity of the level sets, the <span class="math inline">\(W^{1,1}\)</span> monotonicity through critical values, and the weak Gauss–Bonnet theorem all use the range <span class="math inline">\(p\le2\)</span> in an essential way. Extending these results to <span class="math inline">\(2&lt;p&lt;3\)</span> would complete the program for all admissible exponents. One approach would be to develop a parallel weak theory using different function spaces; another would be to establish the bridge directly in the smooth regime and then use approximation arguments.</p>
+<p>The third is <strong>strengthening the mode of convergence</strong>. Theorem A establishes distributional convergence of <span class="math inline">\(-\mathcal Z_{p,1}/(8\pi)\)</span> to <span class="math inline">\(m_H(\Gamma_s^{(1)})-m_0\)</span>. It would be desirable to upgrade this to <span class="math inline">\(L^1\)</span> convergence or even pointwise convergence for a.e. <span class="math inline">\(s\)</span>, which would give a stronger quantitative bridge. Such an improvement would likely require pointwise control of the level-set areas <span class="math inline">\(|\Sigma_{p,s}|\)</span> and their convergence to <span class="math inline">\(|\Gamma_s^{(1)}|\)</span>, which is not currently available from the BPP theory.</p>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[AMMO] V. Agostiniani, C. Mantegazza, L. Mazzieri, F. Oronzio, <em>Riemannian Penrose inequality via nonlinear potential theory</em>, arXiv:2205.11642.</p>
+<p>[BPP] L. Benatti, A. Pluda, M. Pozzetta, <em>Fine properties of nonlinear potentials and a unified perspective on monotonicity formulas</em>, arXiv:2411.06462.</p>
+<p>[HI01] G. Huisken, T. Ilmanen, <em>The inverse mean curvature flow and the Riemannian Penrose inequality</em>, J. Differential Geom. 59 (2001), 353–437.</p>
+<p>[Or] F. Oronzio, <em>Area, volume and capacity in non-compact <span class="math inline">\(3\)</span>-manifolds with nonnegative scalar curvature</em>, arXiv:2504.04093.</p>
+<p>[XYZ] C. Xia, J. Yin, X. Zhou, <em>New monotonicity for <span class="math inline">\(p\)</span>-capacitary functions in <span class="math inline">\(3\)</span>-manifolds with nonnegative scalar curvature</em>, arXiv:2306.00744.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,11 @@
+---
+title: "A Math Reading Agent with Visualization"
+author: "Shengrong Wu"
+date: "2026-03-12"
+categories: [math, AI agent]
+description: "Vibe code a mathematical article reading agent."
+---
+
+GenAI can help mathematicians read articles. However, LLM can not generate good visualization between the text output. If readers ask AI to summarize the articles and generate images separately, the learning process will be disturbed. Therefore, I vibe coded the agentic AI workflow to do these simultaneously, with a refinement feature so that user can prompt a specialized summary.
+
+[The Github page](https://github.com/Shengrong-Wu/Math-Reading-Agent). [The streamlit app](https://math-reading-agent.streamlit.app/) 
