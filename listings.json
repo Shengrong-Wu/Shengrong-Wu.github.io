@@ -18,6 +18,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/math_article_pipeline/index.html",
+      "/posts/ai_for_geo_identity_verification/index.html",
       "/posts/math_reading_agent/index.html",
       "/posts/singular_wave_equation/index.html",
       "/posts/modern_proof_of_PMT/index.html"

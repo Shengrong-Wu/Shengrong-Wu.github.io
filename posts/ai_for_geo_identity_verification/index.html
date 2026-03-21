@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-03-21">
+<meta name="description" content="An example of using AI to do geometric computation and verification.">
+
+<title>AI on geometric computation and verification – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AI on geometric computation and verification</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">AI agent</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An example of using AI to do geometric computation and verification.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 21, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><span class="math inline">\(4\)</span>-dimensional double null equations of Lorentzian manifold is well-known for General Relaticity mathmaticians, but the computation is so complex that most of the mathematicians are using the schematical format because they don’t have enough energy and accuracy to do all of the computation and verify the equations.</p>
+<p>This time, I want to test if ChatGPT 5.4 Pro can handle all of the derivation and verification. So I asked it to derive the higher dimensional null equations based on notations in <a href="https://arxiv.org/pdf/1705.09674">this article</a>. The equations are schematical in the article but I require GPT to output the entire equations with complete derivation process. After it finished the equations derivation, which takes around 2.5 hours, I required Codex to verify all the equations. The results are shocking. Because the equations are symmetric, one equation has a twin equation. There are typos in few equations, but the twin equations are coprrect so the mistakes are completely ignorable. Except these, GPT finished all computation correctly.</p>
+<p>Below is the problem setting and some of the equations, so readers can have the concept of the difficulty.</p>
+</section>
+<section id="settings-and-equations" class="level1">
+<h1>Settings and equations</h1>
+<p>Let <span class="math inline">\((\mathcal M^{n+2},g)\)</span> be Lorentzian and suppose that, in double-null coordinates <span class="math inline">\((u,v,\theta^1,\dots,\theta^n)\)</span>, <span class="math display">\[\begin{equation}
+g
+=
+-2\Omega^2( d u\otimes  d v+ d v\otimes  d u)
++\gamma_{AB}( d\theta^A-b^A d u)( d\theta^B-b^B d u).
+\end{equation}\]</span> The null frame adapted to this gauge is <span class="math display">\[\begin{equation}
+e_4=\Omega^{-1}\partial_v,
+\qquad
+e_3=\Omega^{-1}\bigl(\partial_u+b^A\partial_A\bigr),
+\qquad
+e_A\in TS_{u,v},
+\end{equation}\]</span> with <span class="math display">\[\begin{equation}
+g(e_3,e_4)=-2,
+\qquad
+g(e_A,e_B)=\gamma_{AB},
+\qquad
+g(e_A,e_3)=g(e_A,e_4)=0.
+\end{equation}\]</span> All tangential indices are raised and lowered with <span class="math inline">\(\gamma\)</span>; all angular covariant derivatives are those of <span class="math inline">\((S_{u,v},\gamma)\)</span> and are denoted simply by <span class="math inline">\(\nabla_A\)</span>.</p>
+<p>We use the conventions <span class="math display">\[
+\begin{aligned}
+\chi_{AB}&amp;=g(D_A e_4,e_B),&amp;
+\underline\chi_{AB}&amp;=g(D_A e_3,e_B),\\
+\eta_A&amp;=-\frac12 g(D_3 e_A,e_4),&amp;
+\underline\eta_A&amp;=-\frac12 g(D_4 e_A,e_3),\\
+\omega&amp;=-\frac14 g(D_4 e_3,e_4),&amp;
+\underline\omega&amp;=-\frac14 g(D_3 e_4,e_3),\\
+\zeta_A&amp;=\frac14 g([e_3,e_4],e_A).
+\end{aligned}
+\]</span></p>
+<p>We write <span class="math display">\[
+\begin{align}
+\alpha_{AB}&amp;=R_{A4B4},&amp;
+\underline\alpha_{AB}&amp;=R_{A3B3},\\
+\beta_A&amp;=\frac12 R_{A434},&amp;
+\underline\beta_A&amp;=\frac12 R_{A334},\\
+\rho&amp;=\frac14 R_{3434},&amp;
+\sigma_{AB}&amp;=\frac12 R_{34AB},\\
+\tau_{AB}&amp;=\frac12(R_{3A4B}+R_{3B4A}),&amp;
+\nu_{ABC}&amp;=R_{AB C4},\qquad
+\underline\nu_{ABC}=R_{AB C3}.
+\end{align}
+\]</span> Thus <span class="math inline">\(\tau_{AB}\)</span> is symmetric, <span class="math inline">\(\sigma_{AB}\)</span> is antisymmetric, and <span class="math inline">\(\nu,\underline\nu\)</span> are antisymmetric in their first two indices.</p>
+<p>For a symmetric tangential <span class="math inline">\(2\)</span>-tensor <span class="math inline">\(k\)</span> we write <span class="math display">\[\begin{equation}
+k=\hat k+\frac1n( {\text{tr}} k)\,\gamma.
+\end{equation}\]</span> The symmetric tracefree part of a tangential tensor <span class="math inline">\(X_{AB}\)</span> is denoted by <span class="math inline">\(\widehat{X}_{AB}\)</span>.</p>
+<p>Below is part of the equations.</p>
+<p><span class="math display">\[
+\begin{align}
+\nabla_3\alpha_{AB}
+={}&amp;4\underline\omega\,\alpha_{AB}
+-2\underline\eta^C\nu_{C(AB)}
+-2\underline\eta_{(A}\beta_{B)}
+-\nabla_4\tau_{AB}
+\notag\\
+&amp;\quad
++2{\text{Sym}}_{AB}\Bigl[
+-\nabla^C\nu_{CAB}-\zeta^C\nu_{CAB}
+-\tfrac12{\text{tr}}\chi\,(\tau_{AB}+\sigma_{AB})
+-\tfrac12{\text{tr}}\underline\chi\,\alpha_{AB}
+\notag\\
+&amp;\qquad\qquad
++\tfrac12\chi_A{}^C(\tau_{CB}+\sigma_{CB})
++\tfrac12\underline\chi_A{}^C\alpha_{CB}
+-\chi^{CD}R_{CADB}
++\chi_B{}^C\sigma_{CA}
+\Bigr],
+\label{eq:b1}\\[0.8ex]
+\nabla_4\beta_A
+={}&amp;
+\nabla^B\alpha_{BA}
++(2\zeta^B+\eta^B)\alpha_{BA}
+-\hat\chi_A{}^B\beta_B
+-\hat\chi^{BC}\nu_{ABC}
+\notag\\
+&amp;\quad
+-\Bigl(1+\frac2n\Bigr){\text{tr}}\chi\,\beta_A
+-2\omega\,\beta_A,
+\label{eq:b2}\\[0.8ex]
+\nabla_4\nu_{ABC}
+={}&amp;-2\nabla_{[A}\alpha_{B]C}
+-(2\zeta_A+\eta_A)\alpha_{BC}
++(2\zeta_B+\eta_B)\alpha_{AC}
++\chi_{AC}\beta_B-\chi_{BC}\beta_A
+\notag\\
+&amp;\quad
++\chi_A{}^D(\nu_{BDC}+\nu_{CDB})
++\chi_B{}^D\nu_{DAC}
+-\chi_B{}^D\nu_{CDA}
+-2\omega\,\nu_{ABC},
+\label{eq:b3}\\[0.8ex]
+\nabla_3\nu_{ABC}
+={}&amp;-\nabla_A(\tau_{BC}+\sigma_{BC})
++\nabla_B(\tau_{AC}+\sigma_{AC})
+-\underline\eta_A(\tau_{BC}+\sigma_{BC})
++\underline\eta_B(\tau_{AC}+\sigma_{AC})
+\notag\\
+&amp;\quad
++2\underline\eta_C\sigma_{AB}
++2\underline\omega\,\nu_{ABC}
++2\underline\eta^D R_{ABCD}
++\chi_{AC}\underline\beta_B-\chi_{BC}\underline\beta_A
+\notag\\
+&amp;\quad
++\underline\chi_A{}^D\nu_{BDC}
++\underline\chi_B{}^D\nu_{DAC}
++\chi_A{}^D\underline\nu_{CDB}
+-\chi_B{}^D\underline\nu_{CDA},
+\label{eq:b4}\\[0.8ex]
+\nabla_4R_{ABCD}
+={}&amp;-\nabla_A\nu_{CDB}+\nabla_B\nu_{CDA}
+-(2\zeta_A+\eta_A)\nu_{CDB}
++(2\zeta_B+\eta_B)\nu_{CDA}
+-\eta_C\nu_{ABD}+\eta_D\nu_{ABC}
+\notag\\
+&amp;\quad
++\chi_A{}^E R_{BECD}+\chi_B{}^E R_{EACD}
+-\tfrac12\chi_{AC}(\tau_{DB}+\sigma_{DB})
++\tfrac12\chi_{AD}(\tau_{CB}+\sigma_{CB})
+\notag\\
+&amp;\quad
++\tfrac12\chi_{BC}(\tau_{DA}+\sigma_{DA})
+-\tfrac12\chi_{BD}(\tau_{CA}+\sigma_{CA})
+-\tfrac12\underline\chi_{AC}\alpha_{BD}
++\tfrac12\underline\chi_{AD}\alpha_{BC}
+\notag\\
+&amp;\quad
++\tfrac12\underline\chi_{BC}\alpha_{AD}
+-\tfrac12\underline\chi_{BD}\alpha_{AC},
+\label{eq:b5}\\[0.8ex]
+\nabla_4\sigma_{AB}
+={}&amp;\nabla^C\nu_{ABC}
++(\zeta^C+\eta^C)\nu_{ABC}
+-{\text{tr}}\chi\,\sigma_{AB}
++\eta_B\beta_A-\eta_A\beta_B
+\notag\\
+&amp;\quad
++\tfrac12\chi_A{}^C(\tau_{BC}+\sigma_{BC})
+-\tfrac12\chi_B{}^C(\tau_{AC}+\sigma_{AC})
++\tfrac12\underline\chi_A{}^C\alpha_{CB}
+-\tfrac12\underline\chi_B{}^C\alpha_{CA},
+\label{eq:b6}\\[0.8ex]
+\nabla_3R_{ABCD}
+={}&amp;-\nabla_A\underline\nu_{CDB}+\nabla_B\underline\nu_{CDA}
++(\zeta_A-\underline\eta_A)\underline\nu_{CDB}
+-(\zeta_B-\underline\eta_B)\underline\nu_{CDA}
+\notag\\
+&amp;\quad
+-\underline\eta_C\underline\nu_{ABD}+\underline\eta_D\underline\nu_{ABC}
++\underline\chi_A{}^E R_{BECD}+\underline\chi_B{}^E R_{EACD}
+-\tfrac12\chi_{AC}\underline\alpha_{BD}
+\notag\\
+&amp;\quad
++\tfrac12\chi_{AD}\underline\alpha_{BC}
++\tfrac12\chi_{BC}\underline\alpha_{AD}
+-\tfrac12\chi_{BD}\underline\alpha_{AC}
+-\tfrac12\underline\chi_{AC}(\tau_{BD}+\sigma_{BD})
+\notag\\
+&amp;\quad
++\tfrac12\underline\chi_{AD}(\tau_{BC}+\sigma_{BC})
++\tfrac12\underline\chi_{BC}(\tau_{AD}+\sigma_{AD})
+-\tfrac12\underline\chi_{BD}(\tau_{AC}+\sigma_{AC}),
+\label{eq:b7}\\[0.8ex]
+\nabla_3\tau_{AB}
+={}&amp;-2\underline\chi^{CD}R_{CADB}
++\gamma^{CD}\Bigl[
+-\nabla_C\underline\nu_{DBA}+\nabla_A\underline\nu_{DBC}
++(\zeta_C-\underline\eta_C)\underline\nu_{DBA}
+-(\zeta_A-\underline\eta_A)\underline\nu_{DBC}
+\notag\\
+&amp;\qquad\qquad
+-\underline\eta_D\underline\nu_{CAB}+\underline\eta_B\underline\nu_{CAD}
++\underline\chi_C{}^E R_{AEDB}+\underline\chi_A{}^E R_{ECDB}
+-\tfrac12\chi_{CD}\underline\alpha_{AB}
+\notag\\
+&amp;\qquad\qquad
++\tfrac12\chi_{CB}\underline\alpha_{AD}
++\tfrac12\chi_{AD}\underline\alpha_{BC}
+-\tfrac12\chi_{AB}\underline\alpha_{CD}
+-\tfrac12\underline\chi_{CD}(\tau_{AB}+\sigma_{AB})
+\notag\\
+&amp;\qquad\qquad
++\tfrac12\underline\chi_{CB}(\tau_{AD}+\sigma_{AD})
++\tfrac12\underline\chi_{AD}(\tau_{CB}+\sigma_{CB})
+-\tfrac12\underline\chi_{AB}(\tau_{CD}+\sigma_{CD})
+\Bigr],
+\label{eq:b8}\\[0.8ex]
+\nabla_3\rho
+={}&amp;-\frac12\gamma^{AB}\nabla_3\tau_{AB},
+\label{eq:b9}\\[0.8ex]
+\nabla_3\sigma_{AB}
+={}&amp;-\nabla^C\underline\nu_{ABC}
++(\zeta^C-\underline\eta^C)\underline\nu_{ABC}
+-{\text{tr}}\underline\chi\,\sigma_{AB}
+-\underline\eta_A\underline\beta_B+\underline\eta_B\underline\beta_A
+\notag\\
+&amp;\quad
+-\tfrac12\chi_A{}^C\underline\alpha_{CB}
++\tfrac12\chi_B{}^C\underline\alpha_{CA}
+-\tfrac12\underline\chi_A{}^C(\tau_{CB}+\sigma_{CB})
++\tfrac12\underline\chi_B{}^C(\tau_{CA}+\sigma_{CA}),
+\label{eq:b10}\\[0.8ex]
+\nabla_4\underline\nu_{ABC}
+={}&amp;-\nabla_A(\tau_{CB}+\sigma_{CB})
++\nabla_B(\tau_{CA}+\sigma_{CA})
+-\eta_A(\tau_{CB}+\sigma_{CB})
++\eta_B(\tau_{CA}+\sigma_{CA})
+\notag\\
+&amp;\quad
+-2\eta_C\sigma_{AB}
++2\omega\,\underline\nu_{ABC}
++2\eta^D R_{ABCD}
++\chi_A{}^D\underline\nu_{BDC}
++\chi_B{}^D\underline\nu_{DAC}
+\notag\\
+&amp;\quad
+-\underline\chi_{AC}\beta_B+\underline\chi_{BC}\beta_A
++\underline\chi_A{}^D\nu_{CDB}
+-\underline\chi_B{}^D\nu_{CDA},
+\label{eq:b11}\\[0.8ex]
+\nabla_3\underline\nu_{ABC}
+={}&amp;-2\nabla_{[A}\underline\alpha_{B]C}
++(2\zeta_A-\underline\eta_A)\underline\alpha_{BC}
+-(2\zeta_B-\underline\eta_B)\underline\alpha_{AC}
+-2\underline\omega\,\underline\nu_{ABC}
+\notag\\
+&amp;\quad
+-\underline\chi_{AC}\underline\beta_B+\underline\chi_{BC}\underline\beta_A
++\underline\chi_A{}^D(\underline\nu_{BDC}+\underline\nu_{CDB})
++\underline\chi_B{}^D\underline\nu_{DAC}
+-\underline\chi_B{}^D\underline\nu_{CDA},
+\label{eq:b12}\\[0.8ex]
+\nabla_3\underline\beta_A
+={}&amp;-\nabla^B\underline\alpha_{BA}
++(2\zeta^B-\underline\eta^B)\underline\alpha_{BA}
++\hat{\underline\chi}^{BC}\underline\nu_{ABC}
+-\hat{\underline\chi}_A{}^B\underline\beta_B
+\notag\\
+&amp;\quad
+-{\text{tr}}\underline\chi\,\underline\beta_A
+-2\underline\omega\,\underline\beta_A,
+\label{eq:b13}\\[0.8ex]
+\nabla_4\underline\alpha_{AB}
+={}&amp;4\omega\,\underline\alpha_{AB}
+-2\eta^C\underline\nu_{C(AB)}
+-2\eta_{(A}\underline\beta_{B)}
+-\nabla_3\tau_{AB}
+\notag\\
+&amp;\quad
++2{\text{Sym}}_{AB}\Bigl[
+-\nabla^C\underline\nu_{CAB}+\zeta^C\underline\nu_{CAB}
+-\tfrac12{\text{tr}}\chi\,\underline\alpha_{AB}
+-\tfrac12{\text{tr}}\underline\chi\,\tau_{AB}
+\notag\\
+&amp;\qquad\qquad
++\tfrac12\chi_A{}^C\underline\alpha_{CB}
++\tfrac12\underline\chi_A{}^C(\tau_{BC}+\sigma_{BC})
+-\underline\chi^{CD}R_{CADB}
+-\underline\chi_B{}^C\sigma_{CA}
+\Bigr].
+\label{eq:b14}
+\end{align}
+\]</span></p>
+<p>Below is the <code>mathematica</code> test for <span class="math inline">\(\nabla_4\beta,\nabla_3\underline\beta\)</span>, <span class="math inline">\(\nabla_4\nu,\nabla_3\nu\)</span>, <span class="math inline">\(\nabla_4\sigma,\nabla_4\tau\)</span>. It should be 100% success rate.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode mathematica code-with-copy"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ClearAll</span><span class="op">[</span><span class="st">"Global`*"</span><span class="op">]</span>;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>MakeVec<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Table</span><span class="op">[</span><span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">i</span><span class="op">]],</span> <span class="op">{</span><span class="fu">i</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>MakeSymMat<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Table</span><span class="op">[</span><span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">Min</span><span class="op">[</span><span class="fu">i</span><span class="op">,</span><span class="fu">j</span><span class="op">]]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">Max</span><span class="op">[</span><span class="fu">i</span><span class="op">,</span><span class="fu">j</span><span class="op">]]],</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="fu">i</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">j</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>MakeAntisymMat<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Which</span><span class="op">[</span><span class="fu">i</span> <span class="ex">==</span> <span class="fu">j</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">i</span> &lt; <span class="fu">j</span><span class="op">,</span>  <span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">i</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">j</span><span class="op">]],</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="cn">True</span><span class="op">,</span>  <span class="sc">-</span><span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">j</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">i</span><span class="op">]]</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">],</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fu">i</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">j</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">(* Generic matrix (no symmetry) *)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>MakeGenMat<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Table</span><span class="op">[</span><span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">i</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">j</span><span class="op">]],</span> <span class="op">{</span><span class="fu">i</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">j</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">(* 3-tensor nu_{ABC}: antisymmetric in first two indices, free in third *)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>MakeNu<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Which</span><span class="op">[</span><span class="fu">a</span> <span class="ex">==</span> <span class="fu">b</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">a</span> &lt; <span class="fu">b</span><span class="op">,</span>  <span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">a</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">b</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">c</span><span class="op">]],</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>      <span class="cn">True</span><span class="op">,</span>  <span class="sc">-</span><span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">b</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">a</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">],</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">(* 4-tensor R_{ABCD}: antisymmetric in (A,B), antisymmetric in (C,D),</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">   symmetric under pair swap (AB)&lt;-&gt;(CD).</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">   Independent components: (A&lt;B, C&lt;D) with (A,B) &lt;= (C,D) lexicographically,</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">   but for simplicity we just enforce antisymmetry in each pair</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">   and pair-swap symmetry. *)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>MakeRiem<span class="op">[</span><span class="at">d_</span>Integer<span class="op">,</span> <span class="at">prefix_</span>String<span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[{</span>symb<span class="op">,</span> tab<span class="op">},</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">a</span> &gt; <span class="fu">b</span> <span class="ex">:=</span> <span class="sc">-</span>symb<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">]</span>;</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">c</span> &gt; dd <span class="ex">:=</span> <span class="sc">-</span>symb<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">c</span><span class="op">]</span>;</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}</span> <span class="ex">==</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">}</span> &amp;&amp; <span class="fu">a</span> <span class="ex">==</span> <span class="fu">b</span> <span class="ex">:=</span> <span class="dv">0</span>;</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">a</span> <span class="ex">==</span> <span class="fu">b</span> <span class="ex">:=</span> <span class="dv">0</span>;</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">c</span> <span class="ex">==</span> dd <span class="ex">:=</span> <span class="dv">0</span>;</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* pair-swap: R_{abcd} = R_{cdab} *)</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">OrderedQ</span><span class="op">[{{</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">},</span> <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}}]</span> &amp;&amp; <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}</span> <span class="ex">=</span>!<span class="ex">=</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">}</span> <span class="ex">:=</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>      symb<span class="op">[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span>;</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* base case *)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    symb<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="sc">/</span>; <span class="fu">a</span> &lt; <span class="fu">b</span> &amp;&amp; <span class="fu">c</span> &lt; dd &amp;&amp; <span class="fu">OrderedQ</span><span class="op">[{{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">}}]</span> <span class="ex">:=</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Symbol</span><span class="op">[</span><span class="fu">prefix</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">a</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">b</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">c</span><span class="op">]</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span>dd<span class="op">]]</span>;</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Table</span><span class="op">[</span>symb<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">],</span> <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="op">]</span>;</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>TFPart<span class="op">[</span><span class="at">m_</span><span class="op">]</span> <span class="ex">:=</span> <span class="fu">Module</span><span class="op">[{</span><span class="fu">s</span> <span class="ex">=</span> (<span class="fu">m</span> <span class="sc">+</span> <span class="fu">Transpose</span><span class="op">[</span><span class="fu">m</span><span class="op">]</span>)<span class="sc">/</span><span class="dv">2</span><span class="op">,</span> nn <span class="ex">=</span> <span class="fu">Length</span><span class="op">[</span><span class="fu">m</span><span class="op">]},</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Simplify</span><span class="op">[</span><span class="fu">s</span> <span class="sc">-</span> <span class="fu">Tr</span><span class="op">[</span><span class="fu">s</span><span class="op">]</span><span class="sc">/</span>nn <span class="fu">IdentityMatrix</span><span class="op">[</span>nn<span class="op">]]</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>dims <span class="ex">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">}</span>;</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>betaHatTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiH"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuH"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>      chiHat<span class="op">,</span> trchi<span class="op">,</span> <span class="fu">beta</span><span class="op">,</span> rawTerms<span class="op">,</span> hatTerms</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    trchi <span class="ex">=</span> <span class="fu">Tr</span><span class="op">[</span>chi<span class="op">]</span>;</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    chiHat <span class="ex">=</span> TFPart<span class="op">[</span>chi<span class="op">]</span>;</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* beta_A = gamma^{BC} nu_{ABC} = Sum_B nu[[A,B,B]] *)</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">beta</span> <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span><span class="fu">Sum</span><span class="op">[</span>nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}],</span> <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Raw lower-order terms (without the minus signs and the leading terms): *)</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* chi_A^B beta_B + chi^{BC} nu_{ABC} + trchi beta_A *)</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    rawTerms <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> trchi <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span>;</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Hat form: hat_chi_A^B beta_B + hat_chi^{BC} nu_{ABC} + (1+2/n) trchi beta_A *)</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    hatTerms <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>chiHat<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chiHat<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">/</span><span class="fu">d</span>) <span class="sc">*</span> trchi <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span>;</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>      VerificationTest<span class="op">[</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Simplify</span><span class="op">[</span>rawTerms <span class="sc">-</span> hatTerms<span class="op">],</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ConstantArray</span><span class="op">[</span><span class="dv">0</span><span class="op">,</span> <span class="fu">d</span><span class="op">],</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        TestID <span class="ot">-&gt;</span> <span class="st">"beta4: raw-to-hat conversion, n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>betabarHatTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>      chib <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chibH"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>      nub <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nubH"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>      chibHat<span class="op">,</span> trchib<span class="op">,</span> betab<span class="op">,</span> rawTerms<span class="op">,</span> hatTerms</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>    trchib <span class="ex">=</span> <span class="fu">Tr</span><span class="op">[</span>chib<span class="op">]</span>;</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>    chibHat <span class="ex">=</span> TFPart<span class="op">[</span>chib<span class="op">]</span>;</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* betabar_A = gamma^{BC} nubar_{ABC} = Sum_B nub[[A,B,B]] *)</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    betab <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span><span class="fu">Sum</span><span class="op">[</span>nub<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}],</span> <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Raw: chibar^{BC} nubar_{ABC} - chibar_A^B betabar_B - trchibar betabar_A *)</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    rawTerms <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchib <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span>;</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Hat: hat_chibar^{BC} nubar_{ABC} - hat_chibar_A^B betabar_B - trchibar betabar_A *)</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>    hatTerms <span class="ex">=</span> <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>chibHat<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chibHat<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchib <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span>;</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>      VerificationTest<span class="op">[</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Simplify</span><span class="op">[</span>rawTerms <span class="sc">-</span> hatTerms<span class="op">],</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ConstantArray</span><span class="op">[</span><span class="dv">0</span><span class="op">,</span> <span class="fu">d</span><span class="op">],</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>        TestID <span class="ot">-&gt;</span> <span class="st">"betabar3: raw-to-hat conversion, n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>nu4DerivTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>      alpha <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"alN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>      <span class="fu">zeta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"zeN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>      eta <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>      om <span class="ex">=</span> <span class="fu">Symbol</span><span class="op">[</span><span class="st">"omN4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* The three D-terms expanded, with nabla_4 nu on the LHS *)</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* What remains on the RHS after moving nabla_4 nu_{ABC} to the left *)</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>      sumDADB<span class="op">,</span> stated</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_4 R_{ABC4} contributes (after moving nabla_4 nu to LHS):</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="co">       eta_A alpha_{BC} - eta_B alpha_{AC} + 2 omega nu_{ABC} *)</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_A R_{B4C4} contributes:</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="co">       nabla_A alpha_{BC} + 2 zeta_A alpha_{BC} - chi_{AB} beta_C - chi_{AC} beta_B</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="co">       - chi_A^D nu_{BDC} - chi_A^D nu_{CDB} *)</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_B R_{4AC4} contributes:</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="co">       -nabla_B alpha_{AC} - 2 zeta_B alpha_{AC} + chi_{BA} beta_C + chi_{BC} beta_A</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="co">       - chi_B^D nu_{DAC} + chi_B^D nu_{CDA} *)</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Bianchi: D_4 R + D_A R + D_B R = 0, so RHS = -(D_4 remainder + D_A + D_B) *)</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>    sumDADB<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* From D_4 R_{ABC4}: *)</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>      eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">-</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> <span class="dv">2</span> om <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* From D_A R_{B4C4}: *)</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">-</span> chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* From D_B R_{4AC4}: *)</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* The stated equation (eq nu4-explicit), RHS with nabla terms removed:</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="co">       -(2 zeta_A + eta_A) alpha_{BC} + (2 zeta_B + eta_B) alpha_{AC}</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="co">       + chi_{AC} beta_B - chi_{BC} beta_A</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="co">       + chi_A^D (nu_{BDC} + nu_{CDB}) + chi_B^D nu_{DAC} - chi_B^D nu_{CDA}</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="co">       - 2 omega nu_{ABC} *)</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>    stated<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span>(<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>) <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span>) <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">-</span> chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> (nu<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]]</span>)<span class="op">,</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> om <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>;</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* The Bianchi identity says D_4 R + D_A R + D_B R = 0,</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="co">       i.e., nabla_4 nu_{ABC} + (sumDADB) = 0.</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="co">       So nabla_4 nu_{ABC} = -(sumDADB).</span></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="co">       The stated equation says nabla_4 nu_{ABC} = (stated terms) + derivative terms.</span></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="co">       Ignoring the derivative terms (nabla_A alpha etc.) which pass through,</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="co">       we check: -(sumDADB) == stated, i.e., sumDADB + stated == 0. *)</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>      <span class="fu">If</span><span class="op">[</span><span class="fu">a</span> <span class="ex">==</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">Nothing</span><span class="op">,</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>        VerificationTest<span class="op">[</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>          <span class="fu">Simplify</span><span class="op">[</span>sumDADB<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span> <span class="sc">+</span> stated<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>          <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>          TestID <span class="ot">-&gt;</span> <span class="st">"nu4 derivation: sum matches stated ("</span> &lt;&gt;</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ToString</span><span class="op">[{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">}]</span> &lt;&gt; <span class="st">"), n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>        <span class="op">]</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>nu3DerivTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>      chib <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chibN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>      tau <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"tauN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>      sig <span class="ex">=</span> MakeAntisymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"sigN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>      nub <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nubN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>      Riem <span class="ex">=</span> MakeRiem<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"RN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>      betab <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"bebN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>      etab <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etbN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>      omb <span class="ex">=</span> <span class="fu">Symbol</span><span class="op">[</span><span class="st">"ombN3"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* tau+sigma combined *)</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>      tps<span class="op">,</span></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>      sumD3DADB<span class="op">,</span> stated</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>    tps<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span> tau<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span>;</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_3 R_{ABC4} contributes (with nabla_3 nu on LHS):</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="co">       etab_A (tau_{BC}+sig_{BC}) - etab_B (tau_{AC}+sig_{AC})</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="co">       - 2 etab_C sigma_{AB} - 2 omb nu_{ABC} - 2 etab^D R_{ABCD} *)</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_A R_{B3C4} contributes:</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="co">       chibar_{AB} beta_C - chi_{AC} betabar_B</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a><span class="co">       - chibar_A^D nu_{BDC} - chi_A^D nubar_{CDB} *)</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* D_B R_{3AC4} contributes:</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="co">       -chibar_{BA} beta_C + chi_{BC} betabar_A</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="co">       - chibar_B^D nu_{DAC} + chi_B^D nubar_{CDA} *)</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>    sumD3DADB<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>      etab<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span> <span class="sc">-</span> etab<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> etab<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> omb <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span>etab<span class="op">[[</span>dd<span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">-</span> chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* The stated eq (nu3-explicit), RHS without derivative terms:</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a><span class="co">       -etab_A (tau_{BC}+sig_{BC}) + etab_B (tau_{AC}+sig_{AC})</span></span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="co">       + 2 etab_C sigma_{AB} + 2 omb nu_{ABC} + 2 etab^D R_{ABCD}</span></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="co">       + chi_{AC} betab_B - chi_{BC} betab_A</span></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="co">       + chibar_A^D nu_{BDC} + chibar_B^D nu_{DAC}</span></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="co">       + chi_A^D nubar_{CDB} - chi_B^D nubar_{CDA} *)</span></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>    stated<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span>etab<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span> <span class="sc">+</span> etab<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="dv">2</span> etab<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="dv">2</span> omb <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span>etab<span class="op">[[</span>dd<span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">-</span> chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> betab<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> nub<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>      <span class="fu">If</span><span class="op">[</span><span class="fu">a</span> <span class="ex">==</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">Nothing</span><span class="op">,</span></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>        VerificationTest<span class="op">[</span></span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>          <span class="fu">Simplify</span><span class="op">[</span>sumD3DADB<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span> <span class="sc">+</span> stated<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>          <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>          TestID <span class="ot">-&gt;</span> <span class="st">"nu3 derivation: sum matches stated ("</span> &lt;&gt;</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ToString</span><span class="op">[{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">}]</span> &lt;&gt; <span class="st">"), n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>        <span class="op">]</span></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>sigma4DerivTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>      chib <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chibS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>      alpha <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"alS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>      tau <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"tauS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>      sig <span class="ex">=</span> MakeAntisymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"sigS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>      <span class="fu">zeta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"zeS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>      eta <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etS4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>      trchi<span class="op">,</span></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* D_4 R_{34AB} piece (without the nabla_4 sigma term) *)</span></span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>      d4piece<span class="op">,</span> tangpiece<span class="op">,</span> stated</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>    trchi <span class="ex">=</span> <span class="fu">Tr</span><span class="op">[</span>chi<span class="op">]</span>;</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* -(1/2) D_4 R_{34AB} = -(1/2)(2 nabla_4 sigma - 2 eta^C nu + 2 eta_A beta_B - 2 eta_B beta_A)</span></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a><span class="co">       = -nabla_4 sigma + eta^C nu - eta_A beta_B + eta_B beta_A</span></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="co">       After moving nabla_4 sigma to LHS, what remains from D_4 piece: *)</span></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>    d4piece<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>eta<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>;</span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* gamma^{CD} D_C R_{D4AB} *)</span></span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>    tangpiece<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span><span class="fu">zeta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchi <span class="sc">*</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> (tau<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> (tau<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* stated RHS of eq sigma4-explicit (without nabla^C nu and nabla_4 sigma): *)</span></span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>    stated<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>(<span class="fu">zeta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span>) <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchi <span class="sc">*</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">-</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> (tau<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> (tau<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>)<span class="op">,</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="fu">Sum</span><span class="op">[</span>chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Check: d4piece + tangpiece == stated *)</span></span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a>      <span class="fu">If</span><span class="op">[</span><span class="fu">a</span> &gt;<span class="ex">=</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">Nothing</span><span class="op">,</span></span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>        VerificationTest<span class="op">[</span></span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a>          <span class="fu">Simplify</span><span class="op">[</span>d4piece<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span> <span class="sc">+</span> tangpiece<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span> <span class="sc">-</span> stated<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a>          <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>          TestID <span class="ot">-&gt;</span> <span class="st">"sigma4 derivation: ("</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}]</span> &lt;&gt;</span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"), n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>        <span class="op">]</span></span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>beta4DerivTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a>      alpha <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"alB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>      <span class="fu">zeta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"zeB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a>      eta <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>      om <span class="ex">=</span> <span class="fu">Symbol</span><span class="op">[</span><span class="st">"omB4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>      trchi<span class="op">,</span></span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>      d4piece<span class="op">,</span> tangpiece<span class="op">,</span> stated</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a>    trchi <span class="ex">=</span> <span class="fu">Tr</span><span class="op">[</span>chi<span class="op">]</span>;</span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* -(1/2) D_4 R_{34A4} (with nabla_4 beta on LHS):</span></span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a><span class="co">       -2 omega beta_A + eta^B alpha_{BA} *)</span></span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a>    d4piece<span class="op">[</span><span class="at">a_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="dv">2</span> om <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* gamma^{BC} D_B R_{C4A4}: *)</span></span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a>    tangpiece<span class="op">[</span><span class="at">a_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a>      <span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span><span class="fu">zeta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchi <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Stated RHS of eq beta4-explicit-raw (without nabla^B alpha and nabla_4 beta): *)</span></span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>    stated<span class="op">[</span><span class="at">a_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>(<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span>) <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> trchi <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> om <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>;</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>      VerificationTest<span class="op">[</span></span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Simplify</span><span class="op">[</span>d4piece<span class="op">[</span><span class="fu">a</span><span class="op">]</span> <span class="sc">+</span> tangpiece<span class="op">[</span><span class="fu">a</span><span class="op">]</span> <span class="sc">-</span> stated<span class="op">[</span><span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>        TestID <span class="ot">-&gt;</span> <span class="st">"beta4 derivation: A="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">a</span><span class="op">]</span> &lt;&gt;</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a>                  <span class="st">", n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>d4SigmaAntisymTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuAS"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beAS"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>      eta <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etAS"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>      expr</span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a>    expr<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span>eta<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="dv">2</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">-</span> <span class="dv">2</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> <span class="fu">beta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>;</span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a>      <span class="fu">If</span><span class="op">[</span><span class="fu">a</span> &gt;<span class="ex">=</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">Nothing</span><span class="op">,</span></span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>        VerificationTest<span class="op">[</span></span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a>          <span class="fu">Simplify</span><span class="op">[</span>expr<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span> <span class="sc">+</span> expr<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]],</span></span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>          <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a>          TestID <span class="ot">-&gt;</span> <span class="st">"D4 sigma antisym: ("</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}]</span> &lt;&gt;</span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"), n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a>        <span class="op">]</span></span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> dims<span class="op">}</span></span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a>tau4TraceTests <span class="ex">=</span> <span class="fu">Flatten</span> @ <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Module</span><span class="op">[</span></span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a>      chi <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chiT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>      chib <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"chibT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a>      alpha <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"alT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a>      tau <span class="ex">=</span> MakeSymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"tauT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>      sig <span class="ex">=</span> MakeAntisymMat<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"sigT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a>      nu <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nuT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>      nub <span class="ex">=</span> MakeNu<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"nubT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a>      Riem <span class="ex">=</span> MakeRiem<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"RT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>      <span class="fu">beta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"beT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>      <span class="fu">zeta</span> <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"zeT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a>      eta <span class="ex">=</span> MakeVec<span class="op">[</span><span class="fu">d</span><span class="op">,</span> <span class="st">"etT4"</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]],</span></span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>      tps<span class="op">,</span></span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* Lower-order terms of R4-explicit for given (A,B,C,D) *)</span></span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a>      r4lo<span class="op">,</span></span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* Lower-order terms of tau4-raw for given (A,B) *)</span></span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a>      tau4lo<span class="op">,</span></span>
+<span id="cb1-438"><a href="#cb1-438" aria-hidden="true" tabindex="-1"></a>      <span class="co">(* gamma^{CD} r4lo(C,A,D,B) + (-2 chi^{CD} R_{CADB}) *)</span></span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true" tabindex="-1"></a>      traceOfR4<span class="op">,</span> directTau4</span>
+<span id="cb1-440"><a href="#cb1-440" aria-hidden="true" tabindex="-1"></a>    <span class="op">},</span></span>
+<span id="cb1-441"><a href="#cb1-441" aria-hidden="true" tabindex="-1"></a>    tps<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span> tau<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> sig<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span>;</span>
+<span id="cb1-442"><a href="#cb1-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-443"><a href="#cb1-443" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* R4-explicit lower-order terms (without nabla_A nu, nabla_B nu, nabla_4 R):</span></span>
+<span id="cb1-444"><a href="#cb1-444" aria-hidden="true" tabindex="-1"></a><span class="co">       -(2 zeta_A+eta_A) nu_{CDB} + (2 zeta_B+eta_B) nu_{CDA}</span></span>
+<span id="cb1-445"><a href="#cb1-445" aria-hidden="true" tabindex="-1"></a><span class="co">       -eta_C nu_{ABD} + eta_D nu_{ABC}</span></span>
+<span id="cb1-446"><a href="#cb1-446" aria-hidden="true" tabindex="-1"></a><span class="co">       + chi_A^E R_{BECD} + chi_B^E R_{EACD}</span></span>
+<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a><span class="co">       -(1/2) chi_{AC} tps_{DB} + (1/2) chi_{AD} tps_{CB}</span></span>
+<span id="cb1-448"><a href="#cb1-448" aria-hidden="true" tabindex="-1"></a><span class="co">       +(1/2) chi_{BC} tps_{DA} - (1/2) chi_{BD} tps_{CA}</span></span>
+<span id="cb1-449"><a href="#cb1-449" aria-hidden="true" tabindex="-1"></a><span class="co">       -(1/2) chibar_{AC} alpha_{BD} + (1/2) chibar_{AD} alpha_{BC}</span></span>
+<span id="cb1-450"><a href="#cb1-450" aria-hidden="true" tabindex="-1"></a><span class="co">       +(1/2) chibar_{BC} alpha_{AD} - (1/2) chibar_{BD} alpha_{AC} *)</span></span>
+<span id="cb1-451"><a href="#cb1-451" aria-hidden="true" tabindex="-1"></a>    r4lo<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">,</span> <span class="at">c_</span><span class="op">,</span> <span class="at">dd_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-452"><a href="#cb1-452" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span>(<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>) <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-453"><a href="#cb1-453" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span>) <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-454"><a href="#cb1-454" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> eta<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span>dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-455"><a href="#cb1-455" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">e</span><span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">e</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">]],</span> <span class="op">{</span><span class="fu">e</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-456"><a href="#cb1-456" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">e</span><span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">e</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">]],</span> <span class="op">{</span><span class="fu">e</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-457"><a href="#cb1-457" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span>dd<span class="op">,</span> <span class="fu">b</span><span class="op">]</span></span>
+<span id="cb1-458"><a href="#cb1-458" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span></span>
+<span id="cb1-459"><a href="#cb1-459" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">]</span></span>
+<span id="cb1-460"><a href="#cb1-460" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">]</span></span>
+<span id="cb1-461"><a href="#cb1-461" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span></span>
+<span id="cb1-462"><a href="#cb1-462" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-463"><a href="#cb1-463" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span></span>
+<span id="cb1-464"><a href="#cb1-464" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span>;</span>
+<span id="cb1-465"><a href="#cb1-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-466"><a href="#cb1-466" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* Trace of R4: gamma^{CD} r4lo(C, A, D, B) *)</span></span>
+<span id="cb1-467"><a href="#cb1-467" aria-hidden="true" tabindex="-1"></a>    traceOfR4<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-468"><a href="#cb1-468" aria-hidden="true" tabindex="-1"></a>      <span class="fu">Sum</span><span class="op">[</span>r4lo<span class="op">[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span> <span class="co">(* gamma^{CD} R4_{CADB} *)</span></span>
+<span id="cb1-469"><a href="#cb1-469" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span> <span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span>;</span>
+<span id="cb1-470"><a href="#cb1-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-471"><a href="#cb1-471" aria-hidden="true" tabindex="-1"></a>    <span class="co">(* tau4-raw lower-order terms (without nabla and nabla_4 tau):</span></span>
+<span id="cb1-472"><a href="#cb1-472" aria-hidden="true" tabindex="-1"></a><span class="co">       -2 chi^{CD} R_{CADB}</span></span>
+<span id="cb1-473"><a href="#cb1-473" aria-hidden="true" tabindex="-1"></a><span class="co">       + gamma^{CD}[</span></span>
+<span id="cb1-474"><a href="#cb1-474" aria-hidden="true" tabindex="-1"></a><span class="co">         -(2 zeta_C+eta_C) nu_{DBA} + (2 zeta_A+eta_A) nu_{DBC}</span></span>
+<span id="cb1-475"><a href="#cb1-475" aria-hidden="true" tabindex="-1"></a><span class="co">         -eta_D nu_{CAB} + eta_B nu_{CAD}</span></span>
+<span id="cb1-476"><a href="#cb1-476" aria-hidden="true" tabindex="-1"></a><span class="co">         +chi_C^E R_{AEDB} + chi_A^E R_{ECDB}</span></span>
+<span id="cb1-477"><a href="#cb1-477" aria-hidden="true" tabindex="-1"></a><span class="co">         -(1/2) chi_{CD} tps_{BA} + (1/2) chi_{CB} tps_{DA}</span></span>
+<span id="cb1-478"><a href="#cb1-478" aria-hidden="true" tabindex="-1"></a><span class="co">         +(1/2) chi_{AD} tps_{BC} - (1/2) chi_{AB} tps_{DC}</span></span>
+<span id="cb1-479"><a href="#cb1-479" aria-hidden="true" tabindex="-1"></a><span class="co">         -(1/2) chibar_{CD} alpha_{AB} + (1/2) chibar_{CB} alpha_{AD}</span></span>
+<span id="cb1-480"><a href="#cb1-480" aria-hidden="true" tabindex="-1"></a><span class="co">         +(1/2) chibar_{AD} alpha_{BC} - (1/2) chibar_{AB} alpha_{CD}</span></span>
+<span id="cb1-481"><a href="#cb1-481" aria-hidden="true" tabindex="-1"></a><span class="co">       ] *)</span></span>
+<span id="cb1-482"><a href="#cb1-482" aria-hidden="true" tabindex="-1"></a>    tau4lo<span class="op">[</span><span class="at">a_</span><span class="op">,</span> <span class="at">b_</span><span class="op">]</span> <span class="ex">:=</span></span>
+<span id="cb1-483"><a href="#cb1-483" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="dv">2</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-484"><a href="#cb1-484" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span></span>
+<span id="cb1-485"><a href="#cb1-485" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span>(<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">c</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">c</span><span class="op">]]</span>) <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]]</span></span>
+<span id="cb1-486"><a href="#cb1-486" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> (<span class="dv">2</span> <span class="fu">zeta</span><span class="op">[[</span><span class="fu">a</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">a</span><span class="op">]]</span>) <span class="sc">*</span> nu<span class="op">[[</span>dd<span class="op">,</span> <span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-487"><a href="#cb1-487" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span> eta<span class="op">[[</span>dd<span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">+</span> eta<span class="op">[[</span><span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> nu<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span></span>
+<span id="cb1-488"><a href="#cb1-488" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">e</span><span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">e</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">e</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-489"><a href="#cb1-489" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> <span class="fu">Sum</span><span class="op">[</span>chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">e</span><span class="op">]]</span> <span class="sc">*</span> Riem<span class="op">[[</span><span class="fu">e</span><span class="op">,</span> <span class="fu">c</span><span class="op">,</span> dd<span class="op">,</span> <span class="fu">b</span><span class="op">]],</span> <span class="op">{</span><span class="fu">e</span><span class="op">,</span> <span class="fu">d</span><span class="op">}]</span></span>
+<span id="cb1-490"><a href="#cb1-490" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">a</span><span class="op">]</span></span>
+<span id="cb1-491"><a href="#cb1-491" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span>dd<span class="op">,</span> <span class="fu">a</span><span class="op">]</span></span>
+<span id="cb1-492"><a href="#cb1-492" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]</span></span>
+<span id="cb1-493"><a href="#cb1-493" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chi<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> tps<span class="op">[</span>dd<span class="op">,</span> <span class="fu">c</span><span class="op">]</span></span>
+<span id="cb1-494"><a href="#cb1-494" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span></span>
+<span id="cb1-495"><a href="#cb1-495" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span></span>
+<span id="cb1-496"><a href="#cb1-496" aria-hidden="true" tabindex="-1"></a>          <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> dd<span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">b</span><span class="op">,</span> <span class="fu">c</span><span class="op">]]</span></span>
+<span id="cb1-497"><a href="#cb1-497" aria-hidden="true" tabindex="-1"></a>          <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) chib<span class="op">[[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]]</span> <span class="sc">*</span> alpha<span class="op">[[</span><span class="fu">c</span><span class="op">,</span> dd<span class="op">]],</span></span>
+<span id="cb1-498"><a href="#cb1-498" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="fu">c</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span>dd<span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-499"><a href="#cb1-499" aria-hidden="true" tabindex="-1"></a>      <span class="op">]</span>;</span>
+<span id="cb1-500"><a href="#cb1-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-501"><a href="#cb1-501" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Table</span><span class="op">[</span></span>
+<span id="cb1-502"><a href="#cb1-502" aria-hidden="true" tabindex="-1"></a>      VerificationTest<span class="op">[</span></span>
+<span id="cb1-503"><a href="#cb1-503" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Simplify</span><span class="op">[</span>traceOfR4<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]</span> <span class="sc">-</span> tau4lo<span class="op">[</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">]],</span></span>
+<span id="cb1-504"><a href="#cb1-504" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-505"><a href="#cb1-505" aria-hidden="true" tabindex="-1"></a>        TestID <span class="ot">-&gt;</span> <span class="st">"tau4 trace consistency: ("</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}]</span> &lt;&gt;</span>
+<span id="cb1-506"><a href="#cb1-506" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"), n="</span> &lt;&gt; <span class="fu">ToString</span><span class="op">[</span><span class="fu">d</span><span class="op">]</span></span>
+<span id="cb1-507"><a href="#cb1-507" aria-hidden="true" tabindex="-1"></a>      <span class="op">],</span></span>
+<span id="cb1-508"><a href="#cb1-508" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span><span class="fu">a</span><span class="op">,</span> <span class="fu">d</span><span class="op">},</span> <span class="op">{</span><span class="fu">b</span><span class="op">,</span> <span class="fu">d</span><span class="op">}</span></span>
+<span id="cb1-509"><a href="#cb1-509" aria-hidden="true" tabindex="-1"></a>    <span class="op">]</span></span>
+<span id="cb1-510"><a href="#cb1-510" aria-hidden="true" tabindex="-1"></a>  <span class="op">],</span></span>
+<span id="cb1-511"><a href="#cb1-511" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span><span class="fu">d</span><span class="op">,</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}}</span></span>
+<span id="cb1-512"><a href="#cb1-512" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-513"><a href="#cb1-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-514"><a href="#cb1-514" aria-hidden="true" tabindex="-1"></a>allTests <span class="ex">=</span> <span class="fu">Join</span><span class="op">[</span></span>
+<span id="cb1-515"><a href="#cb1-515" aria-hidden="true" tabindex="-1"></a>  betaHatTests<span class="op">,</span></span>
+<span id="cb1-516"><a href="#cb1-516" aria-hidden="true" tabindex="-1"></a>  betabarHatTests<span class="op">,</span></span>
+<span id="cb1-517"><a href="#cb1-517" aria-hidden="true" tabindex="-1"></a>  nu4DerivTests<span class="op">,</span></span>
+<span id="cb1-518"><a href="#cb1-518" aria-hidden="true" tabindex="-1"></a>  nu3DerivTests<span class="op">,</span></span>
+<span id="cb1-519"><a href="#cb1-519" aria-hidden="true" tabindex="-1"></a>  sigma4DerivTests<span class="op">,</span></span>
+<span id="cb1-520"><a href="#cb1-520" aria-hidden="true" tabindex="-1"></a>  beta4DerivTests<span class="op">,</span></span>
+<span id="cb1-521"><a href="#cb1-521" aria-hidden="true" tabindex="-1"></a>  d4SigmaAntisymTests<span class="op">,</span></span>
+<span id="cb1-522"><a href="#cb1-522" aria-hidden="true" tabindex="-1"></a>  tau4TraceTests</span>
+<span id="cb1-523"><a href="#cb1-523" aria-hidden="true" tabindex="-1"></a><span class="op">]</span>;</span>
+<span id="cb1-524"><a href="#cb1-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-525"><a href="#cb1-525" aria-hidden="true" tabindex="-1"></a>TestReport<span class="op">[</span>allTests<span class="op">]</span></span>
+<span id="cb1-526"><a href="#cb1-526" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
