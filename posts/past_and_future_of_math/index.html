@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-04-02">
+<meta name="description" content="My thoughts on AI for math.">
+
+<title>On the past and future of math – Shengrong_Wu_Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Shengrong_Wu_Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/"> <i class="bi bi-bluesky" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">On the past and future of math</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">opinion</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    My thoughts on AI for math.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 2, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="on-the-past-and-future-of-math" class="level1">
+<h1>On the past and future of math</h1>
+<p>Mathematics holds a peculiar status in modern culture. Students who excel at it earn a kind of reverence rarely extended to any other subject. Parents enroll children in olympiad preparation programs. Mathematicians are popularly imagined as solitary geniuses engaged in uncovering the hidden architecture of the universe. The subject has acquired, over centuries, a quality that can only be described as sacred.</p>
+<p>This essay begins by taking that sacred status seriously enough to ask where it came from. The historical answer turns out to be both clear and somewhat surprising: mathematics did not become revered because of what modern research actually produces. It became revered through a long chain of symbolic associations — Greek cosmology, medieval university curricula, the Scientific Revolution, the gatekeeping functions of mass education — each of which deposited new layers of meaning onto the subject until it became inseparable from the ideas of intelligence, truth, and cosmic order. Understanding this history exposes a significant tension. The prestige was largely earned at the level of foundational mathematical concepts — conic sections, calculus, group theory, Boolean algebra — ideas that genuinely transformed physics, engineering, and computing. But that earned prestige then gets projected uncritically upward onto all contemporary research, most of which is puzzle-solving inside an existing framework rather than revolutionary breakthrough.[26] The two are not the same thing.</p>
+<p>That gap between historical mythology and current practice is the concern of the first two sections. The third section turns to something genuinely new: artificial intelligence is beginning to alter what is scarce and what is abundant in mathematical work, with capital markets already treating formal proof verification as infrastructure for reliable AI systems rather than as academic curiosity.[28] The fourth section then tempers that long-run picture with a sociological argument. Academic institutions change more slowly than their tools, and the near term is likely to be defined by an asymmetry — technically accelerated in method, but institutionally conservative in norm — before any deeper reordering of mathematics takes hold.</p>
+<section id="historical-reason-why-math-is-sacred-to-public" class="level2">
+<h2 class="anchored" data-anchor-id="historical-reason-why-math-is-sacred-to-public">Historical Reason: Why math is sacred to public</h2>
+<p>Math acquired prestige very early because it looked like the clearest form of <strong>certain knowledge</strong>. In Greek traditions associated with Pythagoreanism and later Platonism, number and proportion were not just practical tools; they were tied to harmony, order, and the structure of reality itself.[1] That already gave mathematics a status above ordinary craft knowledge.</p>
+<p>That elevation was not left to philosophy alone. Medieval and early university culture institutionalized the prestige directly into the structure of higher learning, where arithmetic, geometry, astronomy, and music theory formed the quadrivium.[2] So mathematics was not just useful knowledge; it became part of what counted as a properly educated mind. Once a subject is embedded in <strong>elite education</strong> for centuries, it gains symbolic authority far beyond its day-to-day applications.</p>
+<p>Beyond the curriculum, mathematics was also bound up with <strong>religion and metaphysics</strong>. In late antique and early modern thought, many intellectuals treated mathematical truth as unusually close to divine order. Augustine integrated mathematical objects into a Christian-Platonist framework, and later early modern thinkers often treated the world as a divinely ordered system legible through mathematics.[3] That theological residue matters: even in secular societies, math still inherits some of the aura of timeless, impersonal truth.</p>
+<p>The Scientific Revolution then massively amplified this accumulated aura. Galileo’s “book of nature” metaphor[4] and Newton’s <em>Principia</em>[5] made mathematics look like the language in which the universe itself could be read. Once mathematics became visibly connected to accurate prediction of motion, astronomy, mechanics, and later physics, it no longer seemed like just one intellectual game among others. It became the benchmark for what “<strong>real knowledge</strong>” looks like.</p>
+<p>That intellectual authority soon generated concrete material rewards as well. Modern states, economies, and militaries <strong>rewarded numeracy</strong>: navigation, surveying, engineering, accounting, ballistics, finance, statistics, and later computing all depended on mathematical competence. So even when the average piece of frontier pure math had no immediate worldly impact, society kept seeing mathematics as adjacent to power, control, prediction, and technological competence. That practical prestige then fed back into the symbolic prestige.</p>
+<p>As mathematical competence became economically indispensable, mass education absorbed and intensified that signal. In the modern school system, mathematics became a <strong>sorting device</strong> — and this is perhaps the largest single driver of the contemporary “sacred” feeling. Math is widely used as a gatekeeper for access to advanced classes, university pathways, and high-status careers. Research literature explicitly describes school math and especially algebra as functioning in this gatekeeping role.[6] So people do not merely learn that math is useful; they learn that math judges who is “smart.” That converts a subject into a social symbol.</p>
+<p>Underlying all of these historical layers is a final structural feature that makes the whole arrangement self-reinforcing: math is unusually <strong>opaque</strong> to outsiders. Most people can at least form an opinion about a poem, a painting, or a historical argument. But they cannot easily evaluate a proof, a theorem, or a research paper in PDE or algebraic geometry. When a field is hard to inspect from the outside, prestige often rises because non-specialists substitute mystery for evaluation. In that setting, mathematics becomes a public emblem of “pure intelligence,” not just a discipline. This is partly why good math students are admired even by people who do not care about math itself.</p>
+</section>
+<section id="will-the-research-be-useful-100-years-later" class="level2">
+<h2 class="anchored" data-anchor-id="will-the-research-be-useful-100-years-later">Will the research be useful “100 years later”?</h2>
+<p>There is a common saying in pure math academia, that “even the research isn’t useful today, it will make a difference 100 years later.” Is it true that math research will be applied eventually? Or just an excuse for protecting their interest?</p>
+<p>Below is the examples of math concepts used in physical world.</p>
+<ul>
+<li><p><strong>Modular arithmetic to public-key cryptography</strong></p>
+<p>In <strong>1801</strong>, Gauss’s <em>Disquisitiones Arithmeticae</em> gave the first systematic account of modular arithmetic and congruence notation, introducing the triple-bar symbol (≡) that remains standard today.[7] RSA was created in <strong>1977</strong> and became a foundational public-key system for secure digital communication.[8]</p></li>
+<li><p><strong>Elliptic-curve theory to elliptic-curve cryptography and Bitcoin</strong></p>
+<p>A foundational milestone for elliptic-function theory is <strong>1829</strong>, when Jacobi published <em>Fundamenta Nova Theoriae Functionum Ellipticarum</em>, with Abel independently developing the theory in parallel — the mature 19th-century theory is placed in this Abel–Jacobi period.[9] The use of elliptic curves in cryptography was proposed independently in <strong>1985</strong> by Koblitz and Miller.[10] Bitcoin’s transaction machinery uses ECDSA-based signatures, and the Bitcoin white paper was published in <strong>2008</strong>.[11]</p></li>
+<li><p><strong>Non-Euclidean geometry to general relativity</strong></p>
+<p>Lobachevsky’s first publication on non-Euclidean geometry dates to <strong>1829</strong>.[12] Einstein’s general relativity, published in <strong>1915</strong>, required Riemannian geometry — a form of non-Euclidean geometry — as its mathematical foundation.[13] This is a classic case where a concept first looked purely theoretical and later became part of the geometry of spacetime in physics.</p></li>
+<li><p><strong>Boolean algebra to digital circuits and computers</strong></p>
+<p>The basic rules of Boolean algebra were formulated by George Boole in <strong>1847</strong>.[14] Claude Shannon’s master’s thesis, published in <strong>1938</strong>, used Boolean algebra to establish the theoretical basis of digital circuits.[15]</p></li>
+<li><p><strong>Conic sections to planetary orbits</strong></p>
+<p>Apollonius of Perga, around the <strong>3rd century BCE</strong>, systematized conic sections and introduced the terms ellipse, parabola, and hyperbola.[16] Kepler published in <strong>1609</strong> the result that Mars moves in an ellipse, making conic sections the geometry of planetary motion.[17]</p></li>
+<li><p><strong>Group theory to symmetry methods in modern physics</strong></p>
+<p>The founding of group-theoretic ideas traces to Galois in the early <strong>1830s</strong>.[18] Group theory later became invaluable in theoretical physics for classifying subatomic particles and studying atomic and molecular symmetries — applications that belong to the quantum and particle-physics era of the 20th century.</p></li>
+</ul>
+<p>Although there are several successful application, the real cases are the applications are all “conceptual” level. This is the core conflict of the debate. And once you separate them, a lot of the inflated rhetoric around pure math collapses.</p>
+<p>For example, in cryptography, what matters operationally is often things like modular arithmetic, finite fields, elliptic curves at the conceptual and algorithmic level, complexity assumptions, and implementation details. That is the undergraduate student level knowledge and does not imply that a very deep current paper on, say, some refined arithmetic geometry phenomenon has practical importance.</p>
+<p>The conceptual level contributions are real. Mathematicians invented the ideas, then hundred years later physicists and engineers would apply the core conception in the projects. After entering theorem level, the applications become much narrower. A specific theorem may become important if it enters a usable pipeline: theorem→algorithm/model→implementation. But this is much rarer. Finally, when it goes to research level problems, the applications collapse. Most frontier work is more like paper A→paper B→paper C, inside a research community, with no bridge to the physical world at all.</p>
+<p>A rough picture is:</p>
+<p><span class="math display">\[\text{Mathematics} =\underbrace{\text{foundational toolkit}}_{\text{often useful}}+\underbrace{\text{classical developed theory}}_{\text{sometimes useful}}+\underbrace{\text{frontier specialization}}_{\text{always internally useful only}}.\]</span></p>
+<p>That is why public rhetoric can feel misleading. People hear “mathematics is fundamental to science and technology,” which is true at the level of the toolkit, and then project that truth upward onto every niche research program, which is not true. So the more precise conclusion is: Mathematics as a civilizational infrastructure is crucial, but most frontier pure math research is not crucial to the physical world. Those two statements are compatible.</p>
+<p>Someone may debate, “the yield rate is low, flood of meaningless research is necessary to ensure there are core conceptual innovation.” The core conflict lies on the research philosophical difference: “explore math, then apply it to science when needed” vs “explore science, then use math to explain the phenomenon”.</p>
+<p>The claim “more useless math⇒higher chance of later useful math” is a portfolio argument. As a matter of logic, it is plausible: if applications are rare and unpredictable, then a larger exploratory base can increase the chance that some line later becomes important. History does contain cases where abstract mathematics later became central, such as non-Euclidean geometry for relativity, group theory for symmetry in physics and chemistry, and older arithmetic/algebraic ideas for cryptography.</p>
+<p>But that argument is much weaker than people often pretend. It does <strong>not</strong> show that most niche research is important. At best it shows “expected value of exploration&gt;0” for some broad research ecosystem. That is different from saying “this particular narrow paper matters.” And history suggests the strong “theory first, then application” story is too simple anyway. Innovation scholars and policy institutions explicitly note that the old <strong>linear model</strong>—basic research to applied research to product—is an oversimplification that misses feedback loops between science, engineering, markets, and institutions.[19]</p>
+<p>One pathway is the one you prefer: world / nature / technical problem→mathematical formulation→theory. This is how a lot of major mathematics grew. Mathematics historically evolved from counting, measuring, and describing shapes,[20] and Newton developed calculus as a tool to push forward the study of nature, with strong interaction between mathematics, physics, and astronomy.[21] Probability theory also originated in practical problems of gambling and insurance, before becoming foundational in science.[22] Fourier’s analysis grew out of the theory of heat conduction.[23] So some of the most consequential mathematics did not begin as free-floating abstraction. It began from contact with reality.</p>
+<p>The other pathway is: internal mathematical development→later scientific or technical use. That also happens. Conic sections were studied long before Kepler used ellipses in astronomy; non-Euclidean geometry long preceded general relativity; Fourier series outgrew the original heat problem and became central for signal analysis.</p>
+<p>So history does <strong>not</strong> support either extreme: not “all important math comes from physical problems,” and not “just let pure math grow randomly and applications will take care of themselves.”</p>
+<p>Even if most pure research never matters externally, there is still a serious defense of it: future bridgeability is hard to predict ex ante. People in 1850 could not reliably know which abstractions would matter in 1915 or 1985. That unpredictability is real. So a society that supports <strong>some</strong> amount of free mathematical exploration is probably rational. But this only justifies a moderate claim: maintain exploratory capacity.</p>
+</section>
+<section id="new-variable-ai" class="level2">
+<h2 class="anchored" data-anchor-id="new-variable-ai">New variable: AI</h2>
+<p>Artificial intelligence may change pure mathematics more deeply than most of academia currently expects. The old image of mathematical research is still built around a world in which the main bottlenecks are technical training, symbolic manipulation, proof construction, and verification. But the current AI market is already signaling a different view. Investors are not just funding “math” as an intellectual pursuit; they are funding mathematics as a foundation for reliable reasoning systems.[28] In March 2026, Axiom announced a $200 million Series A at a valuation above $1.6 billion, explicitly framing its mission as extending formal mathematics into “Verified AI.”[24] Harmonic likewise announced a $120 million Series C at a $1.45 billion valuation in late 2025, built around formally verified mathematical reasoning with Lean.[25]</p>
+<p>This matters because it shows that capital markets do not currently view AI-for-math mainly as an academic niche. They view it as infrastructure for trustworthy AI. The investment thesis is not simply that theorem proving is interesting. It is that formal reasoning, proof verification, and theorem extraction may become crucial layers in software reliability, scientific automation, and model safety. Axiom’s public product positioning around proof verification and theorem extraction, and Harmonic’s repeated emphasis on formally verified reasoning, both fit that pattern.</p>
+<p>If that trajectory continues, then the deepest change to pure mathematics is not just that AI will help prove theorems. It is that correctness may become cheap while significance remains scarce. In the traditional model, the central question is often “Can this theorem be proved?” In an AI-rich world, the harder question becomes “Why is this theorem worth proving at all?” That shift is exactly what the funding environment implies. Venture investors are rewarding systems that can formalize, verify, and operationalize reasoning at scale. If those capabilities become abundant, then theorem production itself loses scarcity value. What remains scarce is problem selection, problem formulation, and judgment about what kinds of formal questions open genuinely important possibilities. The market is, in effect, betting that verification will become infrastructure rather than the main bottleneck.</p>
+<p>This has serious consequences for pure mathematics. Much of contemporary pure math is organized around niche specialization. Researchers spend years learning the language, literature, and techniques of a narrow domain. That creates depth, but it also creates a structural weakness: specialists often become very good at advancing local frontiers while becoming worse at judging whether those frontiers matter. If AI can increasingly formalize definitions, search proof paths, and verify correctness, then the value of narrow technical fluency declines relative to the value of identifying fertile questions. In that world, the human comparative advantage moves upward, away from symbolic labor and toward framing, taste, and bridge-building.</p>
+<p>The capital-markets perspective reinforces this. Investors are not paying billion-dollar valuations because they want a faster version of conventional academic theorem production. They are paying for a pipeline that looks more like “formal reasoning→verified software/science→commercial and strategic value.” That means the financially legible future of mathematics is not “more papers in narrower niches,” but mathematics as a reliability layer for AI systems and scientific workflows. In other words, capital is already selecting for parts of mathematics that connect to proof infrastructure, automation, and trustworthy computation.</p>
+<p>This also weakens the old prestige structure of pure mathematics. For a long time, mathematics drew symbolic authority from opacity: most people could not inspect advanced mathematics, so mathematicians inherited status from the subject’s difficulty. But if AI lowers the barrier to formalization and proof production, then mathematics may become less like a closed priesthood and more like an open creative medium.[27] The public, engineers, scientists, and domain users may increasingly contribute valuable problem sources, while AI handles more of the formal execution. The scarce good is no longer the ability to survive inside a narrow literature. The scarce good is the ability to see what matters.</p>
+<p>In that sense, AI may push mathematics back toward a more fundamental role. Instead of treating mathematics as an autonomous machine for generating increasingly refined internal abstractions, it may force a renewed emphasis on exploration: what in science, technology, and human life is worth formalizing in the first place? If that happens, then the future of mathematics will not belong simply to those who know the most. It will belong to those who can best identify what is worth knowing.</p>
+<p>The public may become far more important to mathematics than the current academic system assumes. Ordinary people encounter real constraints long before they are turned into formal research problems: bottlenecks in logistics, scheduling, pricing, coordination, design, navigation, resource allocation, accessibility, education, and everyday decision-making. In many cases, they can see the friction of the world more clearly than specialists trained inside narrow mathematical literatures. Their comparative advantage is not usually in writing proofs, but in noticing which patterns, failures, and inefficiencies are actually worth formalizing. If AI increasingly lowers the cost of translation from lived experience to mathematical structure, then the public can contribute not only as consumers of mathematical knowledge, but as a major source of new conjectures, optimization problems, geometric questions, and combinatorial structures rooted in reality.</p>
+</section>
+<section id="near-term-inertia-why-mathematics-may-look-socially-stable-even-if-the-technology-changes-fast" class="level2">
+<h2 class="anchored" data-anchor-id="near-term-inertia-why-mathematics-may-look-socially-stable-even-if-the-technology-changes-fast">Near-term inertia: why mathematics may look socially stable even if the technology changes fast</h2>
+<p>The historical forces examined at the start of this essay — elite institutionalization, opacity, the gatekeeping functions of education — do not dissolve the moment technology changes. The social structures built on top of mathematics’s prestige have their own momentum, and understanding them is essential to calibrating how fast the AI-driven changes described above will actually arrive. In the long run, the social meaning of mathematics may change dramatically: if formalization, proof search, and verification become cheap, the public image of mathematics as a domain governed mainly by scarce human symbolic labor could weaken considerably. But the near future will likely look much more conservative. The main reason is not that the technology will be too weak. It is that academic systems usually change more slowly than their tools.</p>
+<p>Mathematics is not only a body of results; it is also a social institution. Journals, hiring committees, graduate training, grant systems, seminar culture, and informal prestige networks all help determine what counts as valuable work. These structures are designed to stabilize judgment under uncertainty, and for that reason they do not respond instantly even when a new technology clearly improves what is technically possible. More likely, the first effect of AI will be to increase productivity inside the existing structure rather than to replace the structure itself. Researchers may use AI to read papers faster, explore examples, draft formal proofs, or check arguments more effectively, while still publishing, refereeing, and evaluating work through familiar institutions. The OECD’s <em>Science, Technology and Innovation Outlook 2025</em> makes a similar point more broadly: AI is increasing researchers’ capabilities in analysis, simulation, and hypothesis generation, but human scientists remain central, and science systems must still adapt institutionally to make transformative use of these tools.[30] Recent work on LLMs in scientific research reaches a consistent conclusion — that AI is already reshaping workflows and productivity, but its role in deeper scientific discovery remains limited and contingent on alignment with human goals.[31]</p>
+<p>There is also a specifically sociological reason to expect inertia. The certification of mathematical truth has never depended only on deduction in the abstract; it depends on communities deciding when an argument is trustworthy enough to count as established. A recent sociological study of mathematical peer review shows that mathematicians do not treat publication as a guarantee of correctness: peer review in practice only “adds a bit of certainty,” and results gain or lose trust over time as the community reads, uses, and tests them.[29] The same study documents severe stress on the existing system from an explosion of submitted papers and growing difficulty finding qualified referees.[29] That is directly relevant to the AI era: if AI increases output further, the short-run result may not be a clean transition to formal certainty, but rather even more pressure on already strained mechanisms of certification.</p>
+<p>Prestige systems also slow adoption. The sociology of science has long emphasized the “Matthew effect”: recognition and attention accumulate disproportionately around already prestigious people and institutions, while contributions from less prominent researchers receive systematically less visibility.[32] More recent science-of-science work confirms that reputation signaling remains a structural feature of scientific success, including in review and evaluation settings.[33] This suggests that even if formal verification becomes technically available, social judgment will not instantly become reputation-neutral. Formalization may reduce uncertainty about whether a proof is correct, but it does not by itself settle whether a problem is important, whether a result changes the field, or which directions deserve scarce attention. Those judgments will remain partly social, and therefore partly unequal, for some time.</p>
+<p>For that reason, the first phase of strong AI in mathematics may be defined by an asymmetry: methods change faster than norms. Researchers will likely adopt AI privately before institutions fully reorganize around it. Some journals may begin to expect stronger correctness checks in certain areas, and formalization may become increasingly desirable for foundational or high-dependence results, but it is unlikely that the profession as a whole will immediately require every paper to be formally verified. The transition will probably be uneven. Fields that already have mature proof libraries, clearer symbolic interfaces, or high downstream reuse may move first, while areas with heavier tacit reasoning, weaker library support, or less immediate reuse may continue to rely mainly on traditional forms of trust. In that sense, the near future of mathematics is likely to be hybrid: technically accelerated, but institutionally conservative.</p>
+<p>This near-term conservatism should not be mistaken for evidence that nothing fundamental is changing. It may instead be the calm phase before a deeper reordering. If AI continues to raise the rate of theorem production, then the demand for reliable certification will rise with it. At some point, communities may conclude that informal trust, reputation, and traditional peer review are no longer sufficient to manage the volume. But that shift will happen not simply because the tools exist. It will happen when social institutions are forced to admit that older mechanisms of validation no longer scale.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The sacred image of mathematics rests on a real foundation, but draws the wrong lesson from it. History shows that a handful of foundational mathematical concepts — conic sections, calculus, group theory, Boolean algebra — have been genuinely indispensable to physics, engineering, and computation. That record is what generates the prestige. But prestige, once institutionalized through centuries of elite education, theological association, and the gatekeeping functions of modern schooling, does not calibrate itself against ongoing research output. It becomes self-reinforcing and self-referential, attributing to all of mathematics the significance that belongs only to a fraction of it. The common defense — that even useless research will matter in a hundred years — is partly true at the level of conceptual foundations, but becomes increasingly implausible the deeper into frontier specialization one looks. The honest conclusion is a narrower one: mathematics as a civilizational toolkit is indispensable; most contemporary frontier research is not.</p>
+<p>Artificial intelligence introduces a genuinely new element into this picture, and not simply by accelerating proof production. If correctness and formal verification become cheap, the scarcity that has long structured mathematical prestige — the difficulty of constructing arguments that very few others could construct — weakens. What remains scarce is judgment: knowing which questions are worth asking, which formalizations are worth building, which abstractions might eventually bridge to reality. That is a different kind of intelligence from what traditional mathematical training selects for, and one that may be more widely distributed than the current academic structure assumes. In that sense, AI does not just change how mathematics is done. It challenges the implicit theory of what mathematics is fundamentally for.</p>
+<p>Yet the sociological reality examined in the final section should temper any expectation of rapid transformation. Institutions designed to stabilize judgment under uncertainty do not reorganize the moment better tools arrive. Journals, hiring committees, and prestige hierarchies will absorb new AI capabilities gradually, unevenly, and partly on their own terms. The near term will probably look hybrid: researchers adopting AI privately while norms lag behind, formalization spreading in fields with strong library infrastructure while tacit-reasoning fields hold to older forms of trust. What this means is that the pace of change will be determined less by what the technology can do than by when social institutions are forced to admit that their older mechanisms of validation no longer scale. That forcing moment has not yet arrived. Whether it will, and what mathematics looks like on the other side, remains genuinely open.</p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[1] Huffman, C.A. (2018). “Pythagoreanism.” <em>Stanford Encyclopedia of Philosophy</em> (Fall 2018 ed.), ed.&nbsp;E.N. Zalta. https://plato.stanford.edu/entries/pythagoreanism/</p>
+<p>[2] “Quadrivium.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/topic/quadrivium; “Quadrivium.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Quadrivium</p>
+<p>[3] Davenport, A.A. (2011). “Mathematical Knowledge and Divine Mystery: Augustine and his Contemporary Challengers.” <em>Christian Scholar’s Review</em>, 40(3). https://christianscholars.com/mathematical-knowledge-and-divine-mystery-augustine-and-his-contemporary-challengers/; Gilson, E. (1960). <em>The Christian Philosophy of Saint Augustine</em>. Random House.</p>
+<p>[4] Galilei, G. (1623). <em>Il Saggiatore</em> [The Assayer]. Rome: Accademia dei Lincei. The “book of nature” passage: <em>“Philosophy is written in this grand book—the Universe—which stands continually open to our gaze… It is written in the language of mathematics, and its characters are triangles, circles, and other geometrical figures.”</em> See: “The Assayer.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/The_Assayer</p>
+<p>[5] Newton, I. (1687). <em>Philosophiae Naturalis Principia Mathematica</em>. London: Royal Society.</p>
+<p>[6] Martin, D.B. (2000). “Mathematics as ‘Gate-Keeper’ (?).” <em>Journal for Research in Mathematics Education</em> (ERIC). https://files.eric.ed.gov/fulltext/EJ848490.pdf; Moses, R.P., &amp; Cobb, C.E. (2001). <em>Radical Equations: Math Literacy and Civil Rights</em>. Boston: Beacon Press; Boaler, J. (2016). <em>Mathematical Mindsets</em>. San Francisco: Jossey-Bass.</p>
+<p>[7] Gauss, C.F. (1801). <em>Disquisitiones Arithmeticae</em>. Leipzig: Gerh. Fleischer. English translation: Clarke, A.A., trans. (1965). Yale University Press. See also: “Disquisitiones Arithmeticae.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/topic/Disquisitiones-Arithmeticae</p>
+<p>[8] Rivest, R.L., Shamir, A., &amp; Adleman, L. (1978). “A Method for Obtaining Digital Signatures and Public-Key Cryptosystems.” <em>Communications of the ACM</em>, 21(2), 120–126. https://people.csail.mit.edu/rivest/Rsapaper.pdf (Received by journal April 4, 1977; published February 1978.)</p>
+<p>[9] Jacobi, C.G.J. (1829). <em>Fundamenta Nova Theoriae Functionum Ellipticarum</em>. Königsberg: Borntraeger. See also: “Carl Jacobi.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/biography/Carl-Jacobi; MacTutor History of Mathematics biography: https://mathshistory.st-andrews.ac.uk/Biographies/Jacobi/</p>
+<p>[10] Miller, V.S. (1985). “Use of Elliptic Curves in Cryptography.” In <em>Advances in Cryptology — CRYPTO ’85</em>, Lecture Notes in Computer Science, vol.&nbsp;218, pp.&nbsp;417–426. Springer; Koblitz, N. (1987). “Elliptic Curve Cryptosystems.” <em>Mathematics of Computation</em>, 48(177), 203–209. https://www.ams.org/journals/mcom/1987-48-177/S0025-5718-1987-0866109-5/</p>
+<p>[11] Nakamoto, S. (2008). “Bitcoin: A Peer-to-Peer Electronic Cash System.” https://bitcoin.org/bitcoin.pdf (Published on the Cryptography Mailing List, October 31, 2008.); “Elliptic Curve Digital Signature Algorithm.” <em>Bitcoin Wiki</em>. https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm</p>
+<p>[12] Lobachevsky, N.I. (1829–30). “O nachalakh geometrii” [On the Principles of Geometry]. <em>Kazanskii vestnik</em> [Kazan Messenger], nos. 25–28. See also: “Nikolay Ivanovich Lobachevsky.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/biography/Nikolay-Ivanovich-Lobachevsky</p>
+<p>[13] Einstein, A. (1915). “Die Feldgleichungen der Gravitation” [The Field Equations of Gravitation]. <em>Sitzungsberichte der Preussischen Akademie der Wissenschaften</em>, 25 November 1915, 844–847. See also: “General relativity.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/General_relativity</p>
+<p>[14] Boole, G. (1847). <em>The Mathematical Analysis of Logic: Being an Essay towards a Calculus of Deductive Reasoning</em>. Cambridge: Macmillan. See also: “George Boole.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/biography/George-Boole; “George Boole.” <em>Stanford Encyclopedia of Philosophy</em>. https://plato.stanford.edu/entries/boole/</p>
+<p>[15] Shannon, C.E. (1938). “A Symbolic Analysis of Relay and Switching Circuits.” <em>Transactions of the American Institute of Electrical Engineers</em>, 57(12), 713–723. https://www.cs.virginia.edu/~evans/greatworks/shannon38.pdf; MIT thesis repository: https://dspace.mit.edu/handle/1721.1/11173. <em>Note: The thesis was submitted to MIT in 1937 and published in 1938; it received the Alfred Noble Prize in 1940, which is the common source of the misattributed 1940 publication date.</em></p>
+<p>[16] Apollonius of Perga (c.&nbsp;200 BCE). <em>Conics</em> (<em>Konika</em>). (Books I–IV survive in Greek; Books V–VII in medieval Arabic translation.) See also: “Apollonius of Perga.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/biography/Apollonius-of-Perga</p>
+<p>[17] Kepler, J. (1609). <em>Astronomia Nova</em>. Prague. Modern edition: Donahue, W.H., trans. (1992). <em>New Astronomy</em>. Cambridge University Press. See also: “Astronomia nova.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Astronomia_nova</p>
+<p>[18] Galois’s manuscripts date to 1831; he was killed in 1832. Published posthumously: Galois, É. (1846). “Œuvres mathématiques d’Évariste Galois.” <em>Journal de Mathématiques Pures et Appliquées</em>, 11, 381–444. See also: “Galois theory.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Galois_theory</p>
+<p>[19] Stokes, D.E. (1997). <em>Pasteur’s Quadrant: Basic Science and Technological Innovation</em>. Washington, D.C.: Brookings Institution Press. https://www.brookings.edu/books/pasteurs-quadrant/; see also Bush, V. (1945). <em>Science, the Endless Frontier</em>. United States Government Printing Office (the foundational statement of the linear model that Stokes critiques).</p>
+<p>[20] Boyer, C.B., &amp; Merzbach, U.C. (1991). <em>A History of Mathematics</em> (2nd ed.). New York: Wiley. (Standard scholarly history documenting mathematics’ origins in measurement, counting, and geometry.)</p>
+<p>[21] Newton, I. (1736). <em>The Method of Fluxions and Infinite Series</em> [composed c.&nbsp;1671]. London: Henry Woodfall. See also: “Method of Fluxions.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/Method_of_Fluxions</p>
+<p>[22] David, F.N. (1962). <em>Games, Gods and Gambling: A History of Probability and Statistical Ideas</em>. London: Griffin. The Pascal–Fermat correspondence (1654) on the “problem of points” is the canonical founding moment; see also: “History of probability.” <em>Wikipedia</em>. https://en.wikipedia.org/wiki/History_of_probability</p>
+<p>[23] Fourier, J.B.J. (1822). <em>Théorie analytique de la chaleur</em> [The Analytical Theory of Heat]. Paris: Firmin Didot. English translation: Freeman, A., trans. (1878). Cambridge University Press. See also: “The Analytical Theory of Heat.” <em>Encyclopædia Britannica</em>. https://www.britannica.com/topic/The-Analytical-Theory-of-Heat</p>
+<p>[24] “Verifiable AI Startup Axiom Raises $200M to Prove AI-Generated Code Is Safe to Use.” <em>SiliconAngle</em>, March 12, 2026. https://siliconangle.com/2026/03/12/verifiable-ai-startup-axiom-raises-200m-prove-ai-generated-code-safe-use/; Axiom Series A announcement on X: https://x.com/axiommathai/status/2032095751875231822; Axiom on LinkedIn (mission framing): https://www.linkedin.com/posts/axiommath_axiom-came-out-of-stealth-last-october-sharing-activity-7437871128997601280-Atar</p>
+<p>[25] “Harmonic Builds Momentum Towards Mathematical Superintelligence with $120 Million Series C.” <em>BusinessWire</em>, November 25, 2025. https://www.businesswire.com/news/home/20251125727962/en/Harmonic-Builds-Momentum-Towards-Mathematical-Superintelligence-with-$120-Million-Series-C; see also: “Harmonic AI Raises $120M at $1.45B Valuation to Advance Mathematical Reasoning.” <em>SiliconAngle</em>, November 25, 2025. https://siliconangle.com/2025/11/25/harmonic-ai-raises-120m-1-45b-valuation-advance-mathematical-reasoning/</p>
+<p>[26] Bird, A. (2022). “Thomas Kuhn.” <em>Stanford Encyclopedia of Philosophy</em> (Spring 2022 ed.), ed.&nbsp;E.N. Zalta. https://plato.stanford.edu/entries/thomas-kuhn/. Primary source: Kuhn, T.S. (1962). <em>The Structure of Scientific Revolutions</em>. Chicago: University of Chicago Press. The SEP article summarizes Kuhn’s core argument: in “normal science,” a paradigm “supply[ies] puzzles for scientists to solve and … the tools for their solution,” with revolutionary science being the exception rather than the rule.</p>
+<p>[27] Gowers, T., &amp; Nielsen, M. (2009). “Massively collaborative mathematics.” <em>Nature</em>, 461, 879–881. https://www.nature.com/articles/461879a. Reports on the Polymath Project — initiated in January 2009 on Gowers’s blog — in which many mathematicians collaborated openly online to solve a hard combinatorial problem (the density Hales–Jewett theorem). The article argues that open, distributed collaboration can succeed in mathematics, demonstrating that the field need not be organised exclusively around isolated specialists.</p>
+<p>[28] Casado, M., &amp; McCormick, M. (2026). “AI Will Write All the Code. Mathematics Will Prove It Works.” <em>Menlo Ventures Perspective</em>. https://menlovc.com/perspective/ai-will-write-all-the-code-mathematics-will-prove-it-works/. A lead investor in Axiom’s Series A articulates the capital-markets thesis: formal mathematics and proof verification are emerging as infrastructure for trustworthy AI, not merely as academic pursuits.</p>
+<p>[29] Greiffenhagen, C. (2024). “Judging Importance before Checking Correctness: Quick Opinions in Mathematical Peer Review.” <em>Social Studies of Science</em>, 54(1), 3–32. https://journals.sagepub.com/doi/10.1177/01622439231203445. A sociological study of how mathematicians evaluate submitted work, finding that peer review in practice adds only incremental certainty about correctness, that trust in results accumulates communally over time, and that the system faces mounting strain from submission volume and referee scarcity.</p>
+<p>[30] OECD. (2025). <em>Science, Technology and Innovation Outlook 2025</em>. OECD Publishing. https://www.oecd.org/en/publications/oecd-science-technology-and-innovation-outlook-2025_5fe57b90-en.html. See especially the chapter “How science systems need to adapt to support transformative change,” which argues that AI raises researcher capabilities but that realizing transformative benefit requires deliberate institutional adaptation — not just the presence of new tools.</p>
+<p>[31] Zhang, Y., Khan, S.A., Mahmud, A., et al.&nbsp;(2025). “Exploring the role of large language models in the scientific method: from hypothesis to discovery.” <em>npj Artificial Intelligence</em>. https://www.nature.com/articles/s44387-025-00019-5. Reviews LLM applications across the scientific cycle and concludes that deep integration requires alignment with human scientific goals; AI enhances productivity and reshapes workflows, but does not currently displace human agency at the level of problem selection and discovery.</p>
+<p>[32] Merton, R.K. (1968). “The Matthew Effect in Science.” <em>Science</em>, 159(3810), 56–63. https://www.science.org/doi/10.1126/science.159.3810.56. The original formulation: eminent scientists receive disproportionate credit in cases of collaboration or simultaneous discovery, while less-established researchers receive systematically less recognition — a cumulative-advantage dynamic that shapes how attention and resources are distributed across the field.</p>
+<p>[33] Wang, D., &amp; Barabási, A.-L. (2021). <em>The Science of Science</em>. Cambridge: Cambridge University Press. https://www.cambridge.org/core/books/science-of-science/572A745A6F97B55A263F5E86225E3F70. A comprehensive quantitative treatment of how scientific careers, collaboration, and impact actually work; documents the persistence of the Matthew effect and reputation signaling as structural features of science, including in review and evaluation contexts.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/shengrong-wu\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
