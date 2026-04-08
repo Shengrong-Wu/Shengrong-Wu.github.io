@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Shengrong Wu">
+<meta name="dcterms.date" content="2026-04-08">
+<meta name="description" content="Draw a agentic workflow from scratch, then build the agent.">
 
-<title>Shengrong Wu’s Blog – Shengrong_Wu_Blog</title>
+<title>Stop Writing Agent Pipelines From Scratch — Design Them Visually – Shengrong_Wu_Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +29,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,67 +73,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-description','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -142,7 +85,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Shengrong_Wu_Blog</span>
     </a>
   </div>
@@ -153,7 +96,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item compact">
@@ -183,14 +126,36 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Shengrong Wu’s Blog</h1>
-</div>
+<h1 class="title">Stop Writing Agent Pipelines From Scratch — Design Them Visually</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Agents</div>
+    <div class="quarto-category">Agentic workflow</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Draw a agentic workflow from scratch, then build the agent.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shengrong Wu </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 8, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -200,244 +165,43 @@ window.Quarto = {
 </header>
 
 
-<p>In this page, I will post some small projects which I complete with AI. More information about me can be found in my <a href="https://sites.google.com/view/shengrongwu">Google site</a>.</p>
+<p>Building multi-step AI agent workflows usually means writing a lot of boilerplate: chaining LLM calls, wiring outputs to inputs, handling retries and recovery, managing state. You spend more time on plumbing than on the actual logic.</p>
+<p>I built Agentic Workflow Design Tool to fix this. You design agent workflows as visual graphs in a browser, then let a CLI agent (Claude Code, Codex, etc.) turn your sketch into a production-ready pipeline. No frameworks, no dependencies — just Python stdlib. GitHub: <a href="https://github.com/Shengrong-Wu/agentic-workflow-design-tool">github.com/Shengrong-Wu/agentic-workflow-design-tool</a></p>
+<p><strong>How It Works</strong></p>
+<p>The workflow has two phases. In the design phase, you open a simplified web editor and draw your agent graph: nodes for each step, edges for the flow. You write system prompts, task prompts, and describe expected outputs in plain English — no JSON Schema required. The editor auto-saves your work as <code>simplified-workflow.json</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="example.png" class="img-fluid figure-img"></p>
+<figcaption>Web design interface</figcaption>
+</figure>
+</div>
+<p>In the improvement phase, you hand the file to a CLI agent. It reads your plain-text output descriptions and converts them to proper JSON Schema, infers input bindings from <code>{variable}</code> references in your prompts, configures tools and permissions, and adds guard expressions to decision edges. The result is a separate <code>workflow.json</code> that the runtime can execute directly. Your original design is never overwritten, so you can iterate freely.</p>
+<pre class="text"><code>You (human)                    CLI Agent                     Runtime
+    │                              │                            │
+    ├── Draw nodes &amp; edges         │                            │
+    ├── Write prompts              │                            │
+    ├── Describe outputs           │                            │
+    │   in plain text              │                            │
+    │                              │                            │
+    └── Save ─────────────────────&gt;│                            │
+         simplified-workflow.json  ├── Add output_schema        │
+                                   ├── Add input bindings       │
+                                   ├── Configure tools          │
+                                   ├── Add guard expressions    │
+                                   │                            │
+                                   └── Save ───────────────────&gt;│
+                                        workflow.json           ├── Execute
+                                                                ├── Produce results
+                                                                └── Save artifacts
+</code></pre>
+<p><strong>What the Runtime Does</strong></p>
+<p>The runtime is an event-sourced execution engine. It walks your graph, calls LLMs (Claude, GPT, Gemini, or DeepSeek), evaluates edge guards, handles tool calls, and checkpoints state after every node. If something fails, you can inspect, rewind, and resume. It also supports git worktree and Docker container isolation for safe execution.</p>
+<p><strong>A Real Example</strong></p>
+<p>The repo includes a math-agent — an 18-node proof pipeline translated from my <a href="https://github.com/Shengrong-Wu/Math-Research-Agent">Math-Research-Agent</a> project, without the LEAN formal verification nodes. It generates multiple proof roadmaps, selects the best one, iterates through solve/verify cycles, and automatically recovers when a step fails verification.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1773814607749" data-listing-reading-time-sort="4" data-listing-word-count-sort="690">
-<div class="thumbnail"><a href="./posts/math_article_pipeline/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/math_article_pipeline/index.html" class="no-external">Math article pipeline</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/math_article_pipeline/index.html" class="no-external">
-Collect the articles automatically generated by AI.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/math_article_pipeline/index.html" class="no-external">
-<div class="listing-reading-time">4 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="QUklMkNBZ2VudHMlMkNBZ2VudGljJTIwd29ya2Zsb3c=" data-listing-date-sort="1775577600000" data-listing-file-modified-sort="1775658744334" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1193">
-<div class="thumbnail"><a href="./posts/agent_workflow_design_tool/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/agent_workflow_design_tool/example.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/agent_workflow_design_tool/index.html" class="no-external">Stop Writing Agent Pipelines From Scratch — Design Them Visually</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/agent_workflow_design_tool/index.html" class="no-external">
-<p>Draw a agentic workflow from scratch, then build the agent.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/agent_workflow_design_tool/index.html" class="no-external">
-<div class="listing-date">
-Apr 8, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">6 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ0FJJTJDQWdlbnRz" data-listing-date-sort="1775491200000" data-listing-file-modified-sort="1775521044336" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2428">
-<div class="thumbnail"><a href="./posts/math_agent_and_RMM_P6/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/math_agent_and_RMM_P6/architecture.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/math_agent_and_RMM_P6/index.html" class="no-external">Math Agent and Solution to RMM P6</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/math_agent_and_RMM_P6/index.html" class="no-external">
-<p>My project on math agents and solution to Romanian Master of Mathematics P6.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/math_agent_and_RMM_P6/index.html" class="no-external">
-<div class="listing-date">
-Apr 7, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">13 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ0FJJTJDb3Bpbmlvbg==" data-listing-date-sort="1775059200000" data-listing-file-modified-sort="1775106327286" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5252">
-<div class="thumbnail"><a href="./posts/past_and_future_of_math/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/past_and_future_of_math/index.html" class="no-external">On the past and future of math</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/past_and_future_of_math/index.html" class="no-external">
-<p>My thoughts on AI for math.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/past_and_future_of_math/index.html" class="no-external">
-<div class="listing-date">
-Apr 2, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">27 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWF0aCUyQ0FJJTIwYWdlbnQlMkNhbGdlYnJhJTJDTEVBTg==" data-listing-date-sort="1774108800000" data-listing-file-modified-sort="1774192163136" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1854">
-<div class="thumbnail"><a href="./posts/rees_defects_lean/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/rees_defects_lean/index.html" class="no-external">Rees Algebras Decomposition with LEAN Verification</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/rees_defects_lean/index.html" class="no-external">
-<p>An example of using AI to do math research and verification.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/rees_defects_lean/index.html" class="no-external">
-<div class="listing-date">
-Mar 22, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">10 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ0FJJTIwYWdlbnQ=" data-listing-date-sort="1774022400000" data-listing-file-modified-sort="1774268468022" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5125">
-<div class="thumbnail"><a href="./posts/ai_for_geo_identity_verification/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ai_for_geo_identity_verification/index.html" class="no-external">AI on geometric computation and verification</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/ai_for_geo_identity_verification/index.html" class="no-external">
-<p>An example of using AI to do geometric computation and verification.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/ai_for_geo_identity_verification/index.html" class="no-external">
-<div class="listing-date">
-Mar 21, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">26 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWF0aCUyQ0FJJTIwYWdlbnQ=" data-listing-date-sort="1773244800000" data-listing-file-modified-sort="1773306465084" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="65">
-<div class="thumbnail"><a href="./posts/math_reading_agent/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/math_reading_agent/index.html" class="no-external">A Math Reading Agent with Visualization</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/math_reading_agent/index.html" class="no-external">
-<p>Vibe code a mathematical article reading agent.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/math_reading_agent/index.html" class="no-external">
-<div class="listing-date">
-Mar 12, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWF0aCUyQ2FuYWx5c2lz" data-listing-date-sort="1773158400000" data-listing-file-modified-sort="1773306964724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2059">
-<div class="thumbnail"><a href="./posts/singular_wave_equation/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/singular_wave_equation/index.html" class="no-external">Analysis of Singular Wave Equation</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/singular_wave_equation/index.html" class="no-external">
-<p>Solve a quasi-linear singular wave equation within self-similarity and spherical symmetry, and the stability of the solution.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/singular_wave_equation/index.html" class="no-external">
-<div class="listing-date">
-Mar 11, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">11 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWF0aCUyQ2FuYWx5c2lz" data-listing-date-sort="1773072000000" data-listing-file-modified-sort="1773222499561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1592">
-<div class="thumbnail"><a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/modern_proof_of_PMT/image.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/modern_proof_of_PMT/index.html" class="no-external">A Modern Proof of PMT</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
-<p>Use AI to rewrite proof of positive mass theorem using modern geometric measure theory.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/modern_proof_of_PMT/index.html" class="no-external">
-<div class="listing-date">
-Mar 10, 2026
-</div>
-<div class="listing-author">
-Shengrong Wu
-</div>
-<div class="listing-reading-time">8 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
