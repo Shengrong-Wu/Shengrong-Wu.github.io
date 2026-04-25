@@ -1159,7 +1159,7 @@
     "href": "posts/erdos696/index.html",
     "title": "Erdős Problem 696 Proof",
     "section": "",
-    "text": "I used the agentic workflow designed by myself, with codex backend, succesfully proved Erdős Problem 696 and formalized the proof logic. See here for the proof formalization. The thinking model is codex gpt-5.5 xhigh. The natural language proof was completely automated with no external prompt. The formalization was implemented separately."
+    "text": "I used the agentic workflow designed by myself, with codex backend, succesfully proved Erdős Problem 696 and formalized the proof logic. See Github repo for the proof formalization. The thinking model is codex gpt-5.5 xhigh. The natural language proof was completely automated with no external prompt. The formalization was implemented separately. As of now (2026 Apr 25, Singapore time 9am), the problem is open."
   },
   {
     "objectID": "posts/erdos696/index.html#problem-statement",
